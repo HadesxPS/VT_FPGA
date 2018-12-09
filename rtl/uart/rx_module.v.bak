@@ -1,0 +1,91 @@
+module tx_module(clk,txd,tx_data,rx_flag,tx_rdy,rst_n);
+input clk,rx_flag,rst_n;
+output reg txd,tx_rdy;
+input [7:0] tx_data;
+reg tx_flag;
+reg [3:0]tx_bit;
+reg [7:0]temp_data;
+reg [15:0] bps_cnt;
+reg bps_clk=0;
+reg rx_flag_test0,rx_flag_test1,rx_flag_test2;
+wire rx_flagneg;
+
+
+always@(posedge clk)
+begin
+	rx_flag_test0<=rx_flag;
+	rx_flag_test1<=rx_flag_test0;
+	rx_flag_test2<=rx_flag_test1;
+end
+assign rx_flagneg=~rx_flag_test2 & rx_flag_test1;//侦测RX上升沿
+always@(posedge clk)//115200bps
+begin
+	if(!rst_n)
+	begin
+		bps_cnt<=0;
+		bps_clk<=0;
+	end
+	else
+	begin
+		if(tx_flag)//tx处于空闲状态
+			begin
+				if(bps_cnt==582)//434	50M	( 9600/108M----bps_cnt=108,000,000/9600=11250 )
+						bps_cnt<=0;
+				else
+						bps_cnt<=bps_cnt+1'b1;
+			end
+		else	bps_cnt<=0;
+		if(bps_cnt==291)
+				bps_clk<=1;
+		else
+				bps_clk<=0;
+	end
+end
+reg [19:0] rxd_rst_cnt;
+reg rxd_rst;
+always@(posedge clk)
+begin
+	if(!rst_n)
+	begin
+		rxd_rst_cnt<=0;
+		rxd_rst<=0;
+		tx_rdy<=1;
+		temp_data<=8'd0;
+		tx_flag<=0;
+		tx_bit<=0;
+		txd <=1'b1;
+	end
+	else
+	begin
+		if(!tx_flag)//tx处于空闲状态即tx已经将数据丢出去了
+			begin
+				if(rx_flagneg)
+				begin
+					tx_flag<=1;
+					tx_rdy<=0;
+					temp_data<=tx_data;
+				end
+				else
+				begin
+					tx_rdy<=tx_rdy;
+					tx_flag<=tx_flag;
+				end
+			end
+		else //if(tx_flag)
+			begin
+			    
+				if(bps_clk)
+				begin
+					tx_bit<=tx_bit+1;
+					case(tx_bit)
+								0			:	txd<=0;
+						1,2,3,4,5,6,7,8:	txd<=temp_data[tx_bit-1];
+								9			:	begin txd<=1;	end
+								10			:	begin	tx_flag<=0;tx_bit<=0;tx_rdy<=1;end
+						default :;
+					endcase
+				end
+			end
+	end
+end
+endmodule

@@ -1,0 +1,44 @@
+
+State Machine - |VT_Demo|lcd_display:u_lcd_display|p_back
+Name p_back.disp_char p_back.set_xy p_back.idle p_back.clear_screen 
+p_back.idle 0 0 0 0 
+p_back.clear_screen 0 0 1 1 
+p_back.set_xy 0 1 1 0 
+p_back.disp_char 1 0 1 0 
+
+State Machine - |VT_Demo|lcd_display:u_lcd_display|p2
+Name p2.disp_char p2.set_xy p2.clear_screen p2.shift_data1 p2.shift_data p2.idle 
+p2.idle 0 0 0 0 0 0 
+p2.shift_data 0 0 0 0 1 1 
+p2.shift_data1 0 0 0 1 0 1 
+p2.clear_screen 0 0 1 0 0 1 
+p2.set_xy 0 1 0 0 0 1 
+p2.disp_char 1 0 0 0 0 1 
+
+State Machine - |VT_Demo|lcd_display:u_lcd_display|p
+Name p.clk_falling_edge p.clk_rising_edge p.clk_h p.00 
+p.00 0 0 0 0 
+p.clk_h 0 0 1 1 
+p.clk_rising_edge 0 1 0 1 
+p.clk_falling_edge 1 0 0 1 
+
+State Machine - |VT_Demo|tgen:u_tgen|cs_ctrl
+Name cs_ctrl.VFP cs_ctrl.DISPLAY cs_ctrl.PCH cs_ctrl.VBP cs_ctrl.GRST cs_ctrl.IDLE 
+cs_ctrl.IDLE 0 0 0 0 0 0 
+cs_ctrl.GRST 0 0 0 0 1 1 
+cs_ctrl.VBP 0 0 0 1 0 1 
+cs_ctrl.PCH 0 0 1 0 0 1 
+cs_ctrl.DISPLAY 0 1 0 0 0 1 
+cs_ctrl.VFP 1 0 0 0 0 1 
+
+State Machine - |VT_Demo|uart:u_uart|cstate
+Name cstate.WAIT_TX_TEST5 cstate.WAIT_TX_TEST4 cstate.WAIT_TX_TEST3 cstate.WAIT_TX_TEST2 cstate.WAIT_TX_TEST1 cstate.SENDDELAY cstate.DATADIVE cstate.RECIEVE cstate.IDLE 
+cstate.IDLE 0 0 0 0 0 0 0 0 0 
+cstate.RECIEVE 0 0 0 0 0 0 0 1 1 
+cstate.DATADIVE 0 0 0 0 0 0 1 0 1 
+cstate.SENDDELAY 0 0 0 0 0 1 0 0 1 
+cstate.WAIT_TX_TEST1 0 0 0 0 1 0 0 0 1 
+cstate.WAIT_TX_TEST2 0 0 0 1 0 0 0 0 1 
+cstate.WAIT_TX_TEST3 0 0 1 0 0 0 0 0 1 
+cstate.WAIT_TX_TEST4 0 1 0 0 0 0 0 0 1 
+cstate.WAIT_TX_TEST5 1 0 0 0 0 0 0 0 1 

@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="VT_Demo">
+		<CBX_INST_ENTRY INSTANCE_NAME="|VT_Demo|clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component" CBX_FILE_NAME="mypll_altpll.v"/>
+	</PROJECT>
+</LOG_ROOT>

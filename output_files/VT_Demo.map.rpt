@@ -1,0 +1,1806 @@
+Analysis & Synthesis report for VT_Demo
+Sun Dec 09 19:53:03 2018
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis IP Cores Summary
+  9. State Machine - |VT_Demo|lcd_display:u_lcd_display|p_back
+ 10. State Machine - |VT_Demo|lcd_display:u_lcd_display|p2
+ 11. State Machine - |VT_Demo|lcd_display:u_lcd_display|p
+ 12. State Machine - |VT_Demo|tgen:u_tgen|cs_ctrl
+ 13. State Machine - |VT_Demo|uart:u_uart|cstate
+ 14. Logic Cells Representing Combinational Loops
+ 15. Registers Removed During Synthesis
+ 16. Removed Registers Triggering Further Register Optimizations
+ 17. General Register Statistics
+ 18. Inverted Register Statistics
+ 19. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 20. Parameter Settings for User Entity Instance: Top-level Entity: |VT_Demo
+ 21. Parameter Settings for User Entity Instance: clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component
+ 22. Parameter Settings for User Entity Instance: switch:u_switch
+ 23. Parameter Settings for User Entity Instance: switch:u_switch|glf:u0_glf
+ 24. Parameter Settings for User Entity Instance: switch:u_switch|glf:u0_glf|timer:u1_timer
+ 25. Parameter Settings for User Entity Instance: switch:u_switch|glf:u1_glf
+ 26. Parameter Settings for User Entity Instance: switch:u_switch|glf:u1_glf|timer:u1_timer
+ 27. Parameter Settings for User Entity Instance: switch:u_switch|glf:u2_glf
+ 28. Parameter Settings for User Entity Instance: switch:u_switch|glf:u2_glf|timer:u1_timer
+ 29. Parameter Settings for User Entity Instance: switch:u_switch|glf:u3_glf
+ 30. Parameter Settings for User Entity Instance: switch:u_switch|glf:u3_glf|timer:u1_timer
+ 31. Parameter Settings for User Entity Instance: switch:u_switch|timer:u0_timer
+ 32. Parameter Settings for User Entity Instance: switch:u_switch|timer:u1_timer
+ 33. Parameter Settings for User Entity Instance: uart:u_uart
+ 34. Parameter Settings for User Entity Instance: uart:u_uart|glf:u1_glf
+ 35. Parameter Settings for User Entity Instance: uart:u_uart|glf:u1_glf|timer:u1_timer
+ 36. Parameter Settings for User Entity Instance: rx_module:u_rx_module
+ 37. Parameter Settings for User Entity Instance: tgen:u_tgen
+ 38. Parameter Settings for User Entity Instance: lcd_display:u_lcd_display
+ 39. altpll Parameter Settings by Entity Instance
+ 40. Port Connectivity Checks: "mux_decode:u16_mux_decode"
+ 41. Port Connectivity Checks: "mux_decode:u15_mux_decode"
+ 42. Port Connectivity Checks: "mux_decode:u14_mux_decode"
+ 43. Port Connectivity Checks: "mux_decode:u13_mux_decode"
+ 44. Port Connectivity Checks: "mux_decode:u12_mux_decode"
+ 45. Port Connectivity Checks: "mux_decode:u8_mux_decode"
+ 46. Port Connectivity Checks: "mux_decode:u7_mux_decode"
+ 47. Port Connectivity Checks: "mux_decode:u6_mux_decode"
+ 48. Port Connectivity Checks: "rx_module:u_rx_module"
+ 49. Port Connectivity Checks: "uart:u_uart|glf:u1_glf|timer:u1_timer"
+ 50. Port Connectivity Checks: "uart:u_uart|glf:u1_glf"
+ 51. Port Connectivity Checks: "uart:u_uart"
+ 52. Port Connectivity Checks: "switch:u_switch|timer:u1_timer"
+ 53. Port Connectivity Checks: "switch:u_switch|timer:u0_timer"
+ 54. Port Connectivity Checks: "switch:u_switch|glf:u3_glf"
+ 55. Port Connectivity Checks: "switch:u_switch|glf:u2_glf"
+ 56. Port Connectivity Checks: "switch:u_switch|glf:u0_glf|timer:u1_timer"
+ 57. Port Connectivity Checks: "switch:u_switch"
+ 58. Port Connectivity Checks: "clkrst:u_clkrst|mypll:u_mypll"
+ 59. Elapsed Time Per Partition
+ 60. Analysis & Synthesis Messages
+ 61. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                         ;
++------------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sun Dec 09 19:53:03 2018           ;
+; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
+; Revision Name                      ; VT_Demo                                         ;
+; Top-level Entity Name              ; VT_Demo                                         ;
+; Family                             ; Cyclone III                                     ;
+; Total logic elements               ; 1,804                                           ;
+;     Total combinational functions  ; 1,743                                           ;
+;     Dedicated logic registers      ; 664                                             ;
+; Total registers                    ; 664                                             ;
+; Total pins                         ; 103                                             ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 0                                               ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total PLLs                         ; 1                                               ;
++------------------------------------+-------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP3C16Q240C8       ;                    ;
+; Top-level entity name                                                      ; VT_Demo            ; VT_Demo            ;
+; Family name                                                                ; Cyclone III        ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 4      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                            ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                        ; Library ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------+---------+
+; rtl/tgen/tgen.v                  ; yes             ; User Verilog HDL File        ; M:/G6 NMOS(TL055VDMS50)_UART_VT2/rtl/tgen/tgen.v                    ;         ;
+; rtl/uart/rx_module.v             ; yes             ; User Verilog HDL File        ; M:/G6 NMOS(TL055VDMS50)_UART_VT2/rtl/uart/rx_module.v               ;         ;
+; rtl/uart/uart.v                  ; yes             ; User Verilog HDL File        ; M:/G6 NMOS(TL055VDMS50)_UART_VT2/rtl/uart/uart.v                    ;         ;
+; rtl/uart/tx_module.v             ; yes             ; User Verilog HDL File        ; M:/G6 NMOS(TL055VDMS50)_UART_VT2/rtl/uart/tx_module.v               ;         ;
+; rtl/lcd_display/lcd_display.v    ; yes             ; User Verilog HDL File        ; M:/G6 NMOS(TL055VDMS50)_UART_VT2/rtl/lcd_display/lcd_display.v      ;         ;
+; rtl/mux_decode/mux_decode.v      ; yes             ; User Verilog HDL File        ; M:/G6 NMOS(TL055VDMS50)_UART_VT2/rtl/mux_decode/mux_decode.v        ;         ;
+; rtl/switch/timer.v               ; yes             ; User Verilog HDL File        ; M:/G6 NMOS(TL055VDMS50)_UART_VT2/rtl/switch/timer.v                 ;         ;
+; rtl/switch/switch.v              ; yes             ; User Verilog HDL File        ; M:/G6 NMOS(TL055VDMS50)_UART_VT2/rtl/switch/switch.v                ;         ;
+; rtl/switch/glf.v                 ; yes             ; User Verilog HDL File        ; M:/G6 NMOS(TL055VDMS50)_UART_VT2/rtl/switch/glf.v                   ;         ;
+; rtl/clkrst/clkrst.v              ; yes             ; User Verilog HDL File        ; M:/G6 NMOS(TL055VDMS50)_UART_VT2/rtl/clkrst/clkrst.v                ;         ;
+; rtl/VT_Demo.v                    ; yes             ; User Verilog HDL File        ; M:/G6 NMOS(TL055VDMS50)_UART_VT2/rtl/VT_Demo.v                      ;         ;
+; rtl/megafunc/mypll.v             ; yes             ; User Wizard-Generated File   ; M:/G6 NMOS(TL055VDMS50)_UART_VT2/rtl/megafunc/mypll.v               ;         ;
+; altpll.tdf                       ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altpll.tdf        ;         ;
+; aglobal130.inc                   ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/aglobal130.inc    ;         ;
+; stratix_pll.inc                  ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/stratix_pll.inc   ;         ;
+; stratixii_pll.inc                ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/stratixii_pll.inc ;         ;
+; cycloneii_pll.inc                ; yes             ; Megafunction                 ; c:/altera/13.0sp1/quartus/libraries/megafunctions/cycloneii_pll.inc ;         ;
+; db/mypll_altpll.v                ; yes             ; Auto-Generated Megafunction  ; M:/G6 NMOS(TL055VDMS50)_UART_VT2/db/mypll_altpll.v                  ;         ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------+---------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                                                                                      ;
++---------------------------------------------+----------------------------------------------------------------------------------------------------+
+; Resource                                    ; Usage                                                                                              ;
++---------------------------------------------+----------------------------------------------------------------------------------------------------+
+; Estimated Total logic elements              ; 1,804                                                                                              ;
+;                                             ;                                                                                                    ;
+; Total combinational functions               ; 1743                                                                                               ;
+; Logic element usage by number of LUT inputs ;                                                                                                    ;
+;     -- 4 input functions                    ; 954                                                                                                ;
+;     -- 3 input functions                    ; 208                                                                                                ;
+;     -- <=2 input functions                  ; 581                                                                                                ;
+;                                             ;                                                                                                    ;
+; Logic elements by mode                      ;                                                                                                    ;
+;     -- normal mode                          ; 1301                                                                                               ;
+;     -- arithmetic mode                      ; 442                                                                                                ;
+;                                             ;                                                                                                    ;
+; Total registers                             ; 664                                                                                                ;
+;     -- Dedicated logic registers            ; 664                                                                                                ;
+;     -- I/O registers                        ; 0                                                                                                  ;
+;                                             ;                                                                                                    ;
+; I/O pins                                    ; 103                                                                                                ;
+; Embedded Multiplier 9-bit elements          ; 0                                                                                                  ;
+; Total PLLs                                  ; 1                                                                                                  ;
+;     -- PLLs                                 ; 1                                                                                                  ;
+;                                             ;                                                                                                    ;
+; Maximum fan-out node                        ; clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypll_altpll:auto_generated|wire_pll1_clk[0] ;
+; Maximum fan-out                             ; 664                                                                                                ;
+; Total fan-out                               ; 8374                                                                                               ;
+; Average fan-out                             ; 3.20                                                                                               ;
++---------------------------------------------+----------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                               ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                        ; Library Name ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
+; |VT_Demo                                  ; 1743 (1)          ; 664 (0)      ; 0           ; 0            ; 0       ; 0         ; 103  ; 0            ; |VT_Demo                                                                                   ; work         ;
+;    |clkrst:u_clkrst|                      ; 0 (0)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst                                                                   ; work         ;
+;       |mypll:u_mypll|                     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst|mypll:u_mypll                                                     ; work         ;
+;          |altpll:altpll_component|        ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component                             ; work         ;
+;             |mypll_altpll:auto_generated| ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypll_altpll:auto_generated ; work         ;
+;    |lcd_display:u_lcd_display|            ; 550 (550)         ; 71 (71)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|lcd_display:u_lcd_display                                                         ; work         ;
+;    |mux_decode:u11_mux_decode|            ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u11_mux_decode                                                         ; work         ;
+;    |mux_decode:u1_mux_decode|             ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u1_mux_decode                                                          ; work         ;
+;    |mux_decode:u2_mux_decode|             ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u2_mux_decode                                                          ; work         ;
+;    |mux_decode:u3_mux_decode|             ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u3_mux_decode                                                          ; work         ;
+;    |mux_decode:u4_mux_decode|             ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u4_mux_decode                                                          ; work         ;
+;    |mux_decode:u5_mux_decode|             ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u5_mux_decode                                                          ; work         ;
+;    |mux_decode:u6_mux_decode|             ; 1 (1)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u6_mux_decode                                                          ; work         ;
+;    |mux_decode:u7_mux_decode|             ; 1 (1)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u7_mux_decode                                                          ; work         ;
+;    |mux_decode:u8_mux_decode|             ; 1 (1)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u8_mux_decode                                                          ; work         ;
+;    |switch:u_switch|                      ; 614 (56)          ; 363 (35)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch                                                                   ; work         ;
+;       |glf:u0_glf|                        ; 93 (1)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u0_glf                                                        ; work         ;
+;          |timer:u1_timer|                 ; 92 (92)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer                                         ; work         ;
+;       |glf:u1_glf|                        ; 93 (1)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u1_glf                                                        ; work         ;
+;          |timer:u1_timer|                 ; 92 (92)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer                                         ; work         ;
+;       |glf:u2_glf|                        ; 95 (2)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u2_glf                                                        ; work         ;
+;          |timer:u1_timer|                 ; 93 (93)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer                                         ; work         ;
+;       |glf:u3_glf|                        ; 93 (1)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u3_glf                                                        ; work         ;
+;          |timer:u1_timer|                 ; 92 (92)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer                                         ; work         ;
+;       |timer:u0_timer|                    ; 94 (94)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|timer:u0_timer                                                    ; work         ;
+;       |timer:u1_timer|                    ; 90 (90)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|timer:u1_timer                                                    ; work         ;
+;    |tgen:u_tgen|                          ; 378 (378)         ; 148 (148)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|tgen:u_tgen                                                                       ; work         ;
+;    |tx_module:u_tx_module|                ; 58 (58)           ; 35 (35)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|tx_module:u_tx_module                                                             ; work         ;
+;    |uart:u_uart|                          ; 132 (132)         ; 31 (31)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|uart:u_uart                                                                       ; work         ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis IP Cores Summary                                                                                                                          ;
++--------+--------------+---------+--------------+--------------+----------------------------------------+-------------------------------------------------------+
+; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance                        ; IP Include File                                       ;
++--------+--------------+---------+--------------+--------------+----------------------------------------+-------------------------------------------------------+
+; Altera ; ALTPLL       ; 13.0    ; N/A          ; N/A          ; |VT_Demo|clkrst:u_clkrst|mypll:u_mypll ; M:/G6 NMOS(TL055VDMS50)_UART_VT2/rtl/megafunc/mypll.v ;
++--------+--------------+---------+--------------+--------------+----------------------------------------+-------------------------------------------------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------+
+; State Machine - |VT_Demo|lcd_display:u_lcd_display|p_back                                  ;
++---------------------+------------------+---------------+-------------+---------------------+
+; Name                ; p_back.disp_char ; p_back.set_xy ; p_back.idle ; p_back.clear_screen ;
++---------------------+------------------+---------------+-------------+---------------------+
+; p_back.idle         ; 0                ; 0             ; 0           ; 0                   ;
+; p_back.clear_screen ; 0                ; 0             ; 1           ; 1                   ;
+; p_back.set_xy       ; 0                ; 1             ; 1           ; 0                   ;
+; p_back.disp_char    ; 1                ; 0             ; 1           ; 0                   ;
++---------------------+------------------+---------------+-------------+---------------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------+
+; State Machine - |VT_Demo|lcd_display:u_lcd_display|p2                                                   ;
++-----------------+--------------+-----------+-----------------+----------------+---------------+---------+
+; Name            ; p2.disp_char ; p2.set_xy ; p2.clear_screen ; p2.shift_data1 ; p2.shift_data ; p2.idle ;
++-----------------+--------------+-----------+-----------------+----------------+---------------+---------+
+; p2.idle         ; 0            ; 0         ; 0               ; 0              ; 0             ; 0       ;
+; p2.shift_data   ; 0            ; 0         ; 0               ; 0              ; 1             ; 1       ;
+; p2.shift_data1  ; 0            ; 0         ; 0               ; 1              ; 0             ; 1       ;
+; p2.clear_screen ; 0            ; 0         ; 1               ; 0              ; 0             ; 1       ;
+; p2.set_xy       ; 0            ; 1         ; 0               ; 0              ; 0             ; 1       ;
+; p2.disp_char    ; 1            ; 0         ; 0               ; 0              ; 0             ; 1       ;
++-----------------+--------------+-----------+-----------------+----------------+---------------+---------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------+
+; State Machine - |VT_Demo|lcd_display:u_lcd_display|p                         ;
++--------------------+--------------------+-------------------+---------+------+
+; Name               ; p.clk_falling_edge ; p.clk_rising_edge ; p.clk_h ; p.00 ;
++--------------------+--------------------+-------------------+---------+------+
+; p.00               ; 0                  ; 0                 ; 0       ; 0    ;
+; p.clk_h            ; 0                  ; 0                 ; 1       ; 1    ;
+; p.clk_rising_edge  ; 0                  ; 1                 ; 0       ; 1    ;
+; p.clk_falling_edge ; 1                  ; 0                 ; 0       ; 1    ;
++--------------------+--------------------+-------------------+---------+------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------+
+; State Machine - |VT_Demo|tgen:u_tgen|cs_ctrl                                                              ;
++-----------------+-------------+-----------------+-------------+-------------+--------------+--------------+
+; Name            ; cs_ctrl.VFP ; cs_ctrl.DISPLAY ; cs_ctrl.PCH ; cs_ctrl.VBP ; cs_ctrl.GRST ; cs_ctrl.IDLE ;
++-----------------+-------------+-----------------+-------------+-------------+--------------+--------------+
+; cs_ctrl.IDLE    ; 0           ; 0               ; 0           ; 0           ; 0            ; 0            ;
+; cs_ctrl.GRST    ; 0           ; 0               ; 0           ; 0           ; 1            ; 1            ;
+; cs_ctrl.VBP     ; 0           ; 0               ; 0           ; 1           ; 0            ; 1            ;
+; cs_ctrl.PCH     ; 0           ; 0               ; 1           ; 0           ; 0            ; 1            ;
+; cs_ctrl.DISPLAY ; 0           ; 1               ; 0           ; 0           ; 0            ; 1            ;
+; cs_ctrl.VFP     ; 1           ; 0               ; 0           ; 0           ; 0            ; 1            ;
++-----------------+-------------+-----------------+-------------+-------------+--------------+--------------+
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |VT_Demo|uart:u_uart|cstate                                                                                                                                                                 ;
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+------------------+-----------------+----------------+-------------+
+; Name                 ; cstate.WAIT_TX_TEST5 ; cstate.WAIT_TX_TEST4 ; cstate.WAIT_TX_TEST3 ; cstate.WAIT_TX_TEST2 ; cstate.WAIT_TX_TEST1 ; cstate.SENDDELAY ; cstate.DATADIVE ; cstate.RECIEVE ; cstate.IDLE ;
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+------------------+-----------------+----------------+-------------+
+; cstate.IDLE          ; 0                    ; 0                    ; 0                    ; 0                    ; 0                    ; 0                ; 0               ; 0              ; 0           ;
+; cstate.RECIEVE       ; 0                    ; 0                    ; 0                    ; 0                    ; 0                    ; 0                ; 0               ; 1              ; 1           ;
+; cstate.DATADIVE      ; 0                    ; 0                    ; 0                    ; 0                    ; 0                    ; 0                ; 1               ; 0              ; 1           ;
+; cstate.SENDDELAY     ; 0                    ; 0                    ; 0                    ; 0                    ; 0                    ; 1                ; 0               ; 0              ; 1           ;
+; cstate.WAIT_TX_TEST1 ; 0                    ; 0                    ; 0                    ; 0                    ; 1                    ; 0                ; 0               ; 0              ; 1           ;
+; cstate.WAIT_TX_TEST2 ; 0                    ; 0                    ; 0                    ; 1                    ; 0                    ; 0                ; 0               ; 0              ; 1           ;
+; cstate.WAIT_TX_TEST3 ; 0                    ; 0                    ; 1                    ; 0                    ; 0                    ; 0                ; 0               ; 0              ; 1           ;
+; cstate.WAIT_TX_TEST4 ; 0                    ; 1                    ; 0                    ; 0                    ; 0                    ; 0                ; 0               ; 0              ; 1           ;
+; cstate.WAIT_TX_TEST5 ; 1                    ; 0                    ; 0                    ; 0                    ; 0                    ; 0                ; 0               ; 0              ; 1           ;
++----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+------------------+-----------------+----------------+-------------+
+
+
++------------------------------------------------------------+
+; Logic Cells Representing Combinational Loops               ;
++--------------------------------------------------------+---+
+; Logic Cell Name                                        ;   ;
++--------------------------------------------------------+---+
+; tgen:u_tgen|Add11~0                                    ;   ;
+; Number of logic cells representing combinational loops ; 1 ;
++--------------------------------------------------------+---+
+Note: All cells listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++--------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                           ;
++-------------------------------------------------------------+------------------------------------------------+
+; Register name                                               ; Reason for Removal                             ;
++-------------------------------------------------------------+------------------------------------------------+
+; mux_decode:u16_mux_decode|a[0]                              ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u15_mux_decode|a[0]                              ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u14_mux_decode|a[0]                              ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u13_mux_decode|a[0]                              ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u12_mux_decode|a[0]                              ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|u2d                                             ; Stuck at VCC due to stuck port data_in         ;
+; tgen:u_tgen|d2u                                             ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|pat_blc_wht_h[3,11,19]                          ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|pat_wht_blc_h[3,11,19]                          ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u16_mux_decode|a[1]                              ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u15_mux_decode|a[1]                              ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u14_mux_decode|a[1]                              ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u13_mux_decode|a[1]                              ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u12_mux_decode|a[1]                              ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u10_mux_decode|a[0]                              ; Stuck at VCC due to stuck port data_in         ;
+; mux_decode:u9_mux_decode|a[0]                               ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u10_mux_decode|a[1]                              ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u9_mux_decode|a[1]                               ; Stuck at GND due to stuck port data_in         ;
+; switch:u_switch|timer:u1_timer|cnt_s[0]                     ; Lost fanout                                    ;
+; switch:u_switch|timer:u1_timer|pulse_1s                     ; Lost fanout                                    ;
+; switch:u_switch|timer:u1_timer|cnt_s[1..15]                 ; Lost fanout                                    ;
+; switch:u_switch|timer:u0_timer|cnt_s[0]                     ; Lost fanout                                    ;
+; switch:u_switch|timer:u0_timer|pulse_1s                     ; Lost fanout                                    ;
+; switch:u_switch|timer:u0_timer|cnt_s[1..15]                 ; Lost fanout                                    ;
+; switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_s[0]          ; Lost fanout                                    ;
+; switch:u_switch|glf:u3_glf|timer:u1_timer|pulse_1s          ; Lost fanout                                    ;
+; switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_s[1..15]      ; Lost fanout                                    ;
+; switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_s[0]          ; Lost fanout                                    ;
+; switch:u_switch|glf:u2_glf|timer:u1_timer|pulse_1s          ; Lost fanout                                    ;
+; switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_s[1..15]      ; Lost fanout                                    ;
+; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[0]          ; Lost fanout                                    ;
+; switch:u_switch|glf:u1_glf|timer:u1_timer|pulse_1s          ; Lost fanout                                    ;
+; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[1..15]      ; Lost fanout                                    ;
+; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[0]          ; Lost fanout                                    ;
+; switch:u_switch|glf:u0_glf|timer:u1_timer|pulse_1s          ; Lost fanout                                    ;
+; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[1..15]      ; Lost fanout                                    ;
+; lcd_display:u_lcd_display|y_reg[2]                          ; Stuck at GND due to stuck port data_in         ;
+; lcd_display:u_lcd_display|x_reg[3..6]                       ; Stuck at GND due to stuck port data_in         ;
+; lcd_display:u_lcd_display|x_reg[1,2]                        ; Stuck at VCC due to stuck port data_in         ;
+; tgen:u_tgen|da2_a[0,1]                                      ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|da2_din[0,1]                                    ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|da3_a[0,1]                                      ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|da3_din[0,1]                                    ; Stuck at GND due to stuck port data_in         ;
+; switch:u_switch|len_lock_timer[12..15]                      ; Stuck at GND due to stuck port data_in         ;
+; switch:u_switch|len_lock_timer[8]                           ; Stuck at VCC due to stuck port data_in         ;
+; switch:u_switch|len_lock_timer[0,1]                         ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|pat_blc_wht_h[1,4..6,9,12..14,17,20,21]         ; Merged with tgen:u_tgen|pat_blc_wht_h[22]      ;
+; tgen:u_tgen|pat_wht_blc_h[0,2,8,10,16,18]                   ; Merged with tgen:u_tgen|pat_blc_wht_h[22]      ;
+; tgen:u_tgen|pat_wht_blc_h[1,4..6,9,12..14,17,20..22]        ; Merged with tgen:u_tgen|pat_blc_wht_h[18]      ;
+; tgen:u_tgen|pat_blc_wht_h[0,2,8,10,16]                      ; Merged with tgen:u_tgen|pat_blc_wht_h[18]      ;
+; switch:u_switch|len_lock_timer[3,5]                         ; Merged with switch:u_switch|len_lock_timer[10] ;
+; switch:u_switch|len_lock_timer[2,7]                         ; Merged with switch:u_switch|len_lock_timer[9]  ;
+; switch:u_switch|nummax[2]                                   ; Merged with switch:u_switch|data_rty[79]       ;
+; switch:u_switch|data_rty[3,7,9,11,15,49,59,67,69,71]        ; Merged with switch:u_switch|data_rty[79]       ;
+; switch:u_switch|nummax[4]                                   ; Merged with switch:u_switch|data_rty[79]       ;
+; switch:u_switch|data_rty[2,4,6,14,31,76]                    ; Merged with switch:u_switch|data_rty[78]       ;
+; switch:u_switch|nummax[5]                                   ; Merged with switch:u_switch|data_rty[78]       ;
+; switch:u_switch|data_rty[29,57,62,63,65,68,72,74]           ; Merged with switch:u_switch|data_rty[78]       ;
+; switch:u_switch|data_rty[26,28,45,53,61,73,75]              ; Merged with switch:u_switch|data_rty[77]       ;
+; switch:u_switch|data_rty[20,30,33,37,43,51,60,64]           ; Merged with switch:u_switch|data_rty[70]       ;
+; switch:u_switch|data_rty[16,32,34,35,39,41,47,55,58]        ; Merged with switch:u_switch|data_rty[66]       ;
+; switch:u_switch|data_rty[23,38,44,46,48,50,54]              ; Merged with switch:u_switch|data_rty[56]       ;
+; switch:u_switch|data_rty[22,24,25,40,42]                    ; Merged with switch:u_switch|data_rty[52]       ;
+; switch:u_switch|data_rty[10,18]                             ; Merged with switch:u_switch|data_rty[36]       ;
+; switch:u_switch|nummax[3]                                   ; Merged with switch:u_switch|data_rty[36]       ;
+; switch:u_switch|data_rty[27]                                ; Merged with switch:u_switch|data_rty[36]       ;
+; switch:u_switch|nummax[0]                                   ; Merged with switch:u_switch|data_rty[19]       ;
+; switch:u_switch|data_rty[1,5,13]                            ; Merged with switch:u_switch|data_rty[17]       ;
+; switch:u_switch|nummax[1]                                   ; Merged with switch:u_switch|data_rty[12]       ;
+; switch:u_switch|data_rty[0]                                 ; Merged with switch:u_switch|data_rty[12]       ;
+; switch:u_switch|len_pwr_timer[0,9..14]                      ; Merged with switch:u_switch|len_pwr_timer[15]  ;
+; switch:u_switch|len_pwr_timer[2,4..7]                       ; Merged with switch:u_switch|len_pwr_timer[8]   ;
+; switch:u_switch|len_pwr_timer[1]                            ; Merged with switch:u_switch|len_pwr_timer[3]   ;
+; switch:u_switch|en_n14v                                     ; Merged with switch:u_switch|en_p14v            ;
+; switch:u_switch|en_gvddn                                    ; Merged with switch:u_switch|en_gvddp           ;
+; switch:u_switch|en_vgh                                      ; Merged with switch:u_switch|en_gvddp           ;
+; switch:u_switch|en_vgl                                      ; Merged with switch:u_switch|en_gvddp           ;
+; switch:u_switch|mux_en2                                     ; Merged with switch:u_switch|mux_en1            ;
+; switch:u_switch|mux_en3                                     ; Merged with switch:u_switch|mux_en1            ;
+; switch:u_switch|mux_en4                                     ; Merged with switch:u_switch|mux_en1            ;
+; switch:u_switch|mux_en_Test1                                ; Merged with switch:u_switch|mux_en1            ;
+; switch:u_switch|mux_en_Test2                                ; Merged with switch:u_switch|mux_en1            ;
+; uart:u_uart|recdata[3,7,9,11,15,49,59,67,69,71]             ; Merged with uart:u_uart|recdata[79]            ;
+; uart:u_uart|recdata[2,4,6,14,29,31,57,62,63,65,68,72,74,76] ; Merged with uart:u_uart|recdata[78]            ;
+; uart:u_uart|recdata[26,28,45,53,61,73,75]                   ; Merged with uart:u_uart|recdata[77]            ;
+; uart:u_uart|recdata[20,30,33,37,43,51,60,64]                ; Merged with uart:u_uart|recdata[70]            ;
+; uart:u_uart|recdata[16,32,34,35,39,41,47,55,58]             ; Merged with uart:u_uart|recdata[66]            ;
+; uart:u_uart|recdata[23,38,44,46,48,50,54]                   ; Merged with uart:u_uart|recdata[56]            ;
+; uart:u_uart|recdata[22,24,25,40,42]                         ; Merged with uart:u_uart|recdata[52]            ;
+; uart:u_uart|recdata[10,18,27]                               ; Merged with uart:u_uart|recdata[36]            ;
+; uart:u_uart|recdata[1,5,13]                                 ; Merged with uart:u_uart|recdata[17]            ;
+; uart:u_uart|recdata[0]                                      ; Merged with uart:u_uart|recdata[12]            ;
+; switch:u_switch|data_rty[66]                                ; Merged with switch:u_switch|data_rty[79]       ;
+; switch:u_switch|data_rty[56]                                ; Merged with switch:u_switch|data_rty[78]       ;
+; switch:u_switch|data_rty[52]                                ; Merged with switch:u_switch|data_rty[77]       ;
+; switch:u_switch|data_rty[36]                                ; Merged with switch:u_switch|data_rty[70]       ;
+; uart:u_uart|recdata[66]                                     ; Merged with uart:u_uart|recdata[79]            ;
+; uart:u_uart|recdata[56]                                     ; Merged with uart:u_uart|recdata[78]            ;
+; uart:u_uart|recdata[52]                                     ; Merged with uart:u_uart|recdata[77]            ;
+; uart:u_uart|recdata[36]                                     ; Merged with uart:u_uart|recdata[70]            ;
+; lcd_display:u_lcd_display|y_reg[0,1]                        ; Merged with lcd_display:u_lcd_display|x_reg[0] ;
+; tgen:u_tgen|pat_blc_wht_h[7,23]                             ; Merged with tgen:u_tgen|pat_blc_wht_h[15]      ;
+; tgen:u_tgen|pat_wht_blc_h[7,15,23]                          ; Merged with tgen:u_tgen|pat_blc_wht_h[15]      ;
+; tgen:u_tgen|r_data[7]                                       ; Merged with tgen:u_tgen|g_data[7]              ;
+; tgen:u_tgen|r_data[5]                                       ; Merged with tgen:u_tgen|r_data[4]              ;
+; tgen:u_tgen|g_data[3]                                       ; Merged with tgen:u_tgen|b_data[3]              ;
+; tgen:u_tgen|r_data[3]                                       ; Merged with tgen:u_tgen|b_data[3]              ;
+; tgen:u_tgen|g_data[5]                                       ; Merged with tgen:u_tgen|g_data[4]              ;
+; tgen:u_tgen|b_data[5]                                       ; Merged with tgen:u_tgen|b_data[4]              ;
+; uart:u_uart|recdata[79]                                     ; Merged with uart:u_uart|recdata[78]            ;
+; uart:u_uart|recdata[77]                                     ; Merged with uart:u_uart|recdata[70]            ;
+; uart:u_uart|recdata[21]                                     ; Merged with uart:u_uart|recdata[19]            ;
+; uart:u_uart|recdata[17]                                     ; Merged with uart:u_uart|recdata[12]            ;
+; switch:u_switch|data_rty[79]                                ; Merged with switch:u_switch|data_rty[78]       ;
+; switch:u_switch|data_rty[77]                                ; Merged with switch:u_switch|data_rty[70]       ;
+; switch:u_switch|data_rty[21]                                ; Merged with switch:u_switch|data_rty[19]       ;
+; switch:u_switch|data_rty[17]                                ; Merged with switch:u_switch|data_rty[12]       ;
+; switch:u_switch|len_pwr_timer[15]                           ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u11_mux_decode|a[1]                              ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u5_mux_decode|a[1]                               ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u4_mux_decode|a[1]                               ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u3_mux_decode|a[1]                               ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u2_mux_decode|a[1]                               ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|b_data[3]                                       ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|b_data[7]                                       ; Merged with tgen:u_tgen|g_data[7]              ;
+; switch:u_switch|data_rty[78]                                ; Stuck at GND due to stuck port data_in         ;
+; uart:u_uart|recdata[78]                                     ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|da1_a[1]                                        ; Stuck at GND due to stuck port data_in         ;
+; lcd_display:u_lcd_display|p_back~2                          ; Lost fanout                                    ;
+; lcd_display:u_lcd_display|p_back~4                          ; Lost fanout                                    ;
+; lcd_display:u_lcd_display|p2~4                              ; Lost fanout                                    ;
+; lcd_display:u_lcd_display|p2~5                              ; Lost fanout                                    ;
+; lcd_display:u_lcd_display|p2~6                              ; Lost fanout                                    ;
+; lcd_display:u_lcd_display|p~4                               ; Lost fanout                                    ;
+; lcd_display:u_lcd_display|p~5                               ; Lost fanout                                    ;
+; tgen:u_tgen|cs_ctrl~4                                       ; Lost fanout                                    ;
+; tgen:u_tgen|cs_ctrl~5                                       ; Lost fanout                                    ;
+; tgen:u_tgen|cs_ctrl~6                                       ; Lost fanout                                    ;
+; uart:u_uart|cstate~4                                        ; Lost fanout                                    ;
+; uart:u_uart|cstate~5                                        ; Lost fanout                                    ;
+; uart:u_uart|cstate~6                                        ; Lost fanout                                    ;
+; uart:u_uart|cstate~7                                        ; Lost fanout                                    ;
+; tgen:u_tgen|pat_blc_wht_h[15]                               ; Merged with tgen:u_tgen|cs_ctrl.IDLE           ;
+; tgen:u_tgen|cnt_vdiv64[0]                                   ; Merged with tgen:u_tgen|cnt_vact[0]            ;
+; Total Number of Removed Registers = 402                     ;                                                ;
++-------------------------------------------------------------+------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                     ;
++----------------------------------------------------+---------------------------+----------------------------------------------------------------+
+; Register name                                      ; Reason for Removal        ; Registers Removed due to This Register                         ;
++----------------------------------------------------+---------------------------+----------------------------------------------------------------+
+; tgen:u_tgen|u2d                                    ; Stuck at VCC              ; mux_decode:u9_mux_decode|a[0], mux_decode:u9_mux_decode|a[1]   ;
+;                                                    ; due to stuck port data_in ;                                                                ;
+; tgen:u_tgen|d2u                                    ; Stuck at GND              ; mux_decode:u10_mux_decode|a[0], mux_decode:u10_mux_decode|a[1] ;
+;                                                    ; due to stuck port data_in ;                                                                ;
+; tgen:u_tgen|pat_blc_wht_h[3]                       ; Stuck at GND              ; tgen:u_tgen|b_data[3]                                          ;
+;                                                    ; due to stuck port data_in ;                                                                ;
+; switch:u_switch|timer:u1_timer|cnt_s[0]            ; Lost Fanouts              ; switch:u_switch|timer:u1_timer|pulse_1s                        ;
+; switch:u_switch|timer:u0_timer|cnt_s[0]            ; Lost Fanouts              ; switch:u_switch|timer:u0_timer|pulse_1s                        ;
+; switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_s[0] ; Lost Fanouts              ; switch:u_switch|glf:u3_glf|timer:u1_timer|pulse_1s             ;
+; switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_s[0] ; Lost Fanouts              ; switch:u_switch|glf:u2_glf|timer:u1_timer|pulse_1s             ;
+; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[0] ; Lost Fanouts              ; switch:u_switch|glf:u1_glf|timer:u1_timer|pulse_1s             ;
+; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[0] ; Lost Fanouts              ; switch:u_switch|glf:u0_glf|timer:u1_timer|pulse_1s             ;
+; switch:u_switch|data_rty[78]                       ; Stuck at GND              ; uart:u_uart|recdata[78]                                        ;
+;                                                    ; due to stuck port data_in ;                                                                ;
++----------------------------------------------------+---------------------------+----------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 664   ;
+; Number of registers using Synchronous Clear  ; 309   ;
+; Number of registers using Synchronous Load   ; 37    ;
+; Number of registers using Asynchronous Clear ; 527   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 451   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------+
+; Inverted Register Statistics                      ;
++-----------------------------------------+---------+
+; Inverted Register                       ; Fan out ;
++-----------------------------------------+---------+
+; switch:u_switch|FPGA_LED_Test           ; 2       ;
+; switch:u_switch|en_p14v                 ; 3       ;
+; switch:u_switch|en_gvddp                ; 5       ;
+; tgen:u_tgen|da1_wr                      ; 1       ;
+; tgen:u_tgen|da2_wr                      ; 1       ;
+; tgen:u_tgen|da3_wr                      ; 1       ;
+; tgen:u_tgen|da4_wr                      ; 1       ;
+; tgen:u_tgen|da2_din[7]                  ; 1       ;
+; tgen:u_tgen|da3_din[7]                  ; 1       ;
+; switch:u_switch|dis_sn_d1[1]            ; 1       ;
+; switch:u_switch|dis_sn_d1[3]            ; 1       ;
+; switch:u_switch|len_pwr_timer[8]        ; 9       ;
+; switch:u_switch|glf:u2_glf|s_out        ; 2       ;
+; switch:u_switch|glf:u3_glf|s_out        ; 3       ;
+; switch:u_switch|glf:u0_glf|s_out        ; 12      ;
+; switch:u_switch|glf:u1_glf|s_out        ; 1       ;
+; uart:u_uart|send24bitend                ; 3       ;
+; Total number of inverted registers = 17 ;         ;
++-----------------------------------------+---------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|hcnt[11]                                  ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt[5]                      ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt3[4]                     ;
+; 4:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|cnt_vblank[5]                             ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |VT_Demo|tx_module:u_tx_module|temp_data[4]                    ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |VT_Demo|switch:u_switch|len_pwr_timer[3]                      ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|tx_module:u_tx_module|bps_cnt[3]                      ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u0_timer|cnt_clk[13]            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u1_timer|cnt_clk[4]             ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_clk[5]  ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[6]  ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[5]  ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_clk[10] ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |VT_Demo|tx_module:u_tx_module|tx_bit[3]                       ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u0_timer|cnt_ms[15]             ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u0_timer|cnt_us[12]             ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u1_timer|cnt_ms[3]              ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u1_timer|cnt_us[9]              ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_ms[10]  ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_us[5]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[0]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[0]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[13]  ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[7]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_ms[6]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_us[14]  ;
+; 5:1                ; 5 bits    ; 15 LEs        ; 10 LEs               ; 5 LEs                  ; Yes        ; |VT_Demo|switch:u_switch|data_rty[70]                          ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |VT_Demo|tx_module:u_tx_module|tx_rdy                          ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt2[0]                     ;
+; 7:1                ; 7 bits    ; 28 LEs        ; 21 LEs               ; 7 LEs                  ; Yes        ; |VT_Demo|switch:u_switch|dis_sn[5]                             ;
+; 7:1                ; 9 bits    ; 36 LEs        ; 9 LEs                ; 27 LEs                 ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt4[0]                     ;
+; 12:1               ; 10 bits   ; 80 LEs        ; 20 LEs               ; 60 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|b_data[2]                                 ;
+; 20:1               ; 5 bits    ; 65 LEs        ; 10 LEs               ; 55 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|r_data[6]                                 ;
+; 12:1               ; 2 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |VT_Demo|tgen:u_tgen|da1_a[0]                                  ;
+; 519:1              ; 3 bits    ; 1038 LEs      ; 18 LEs               ; 1020 LEs               ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|data_reg[4]                 ;
+; 20:1               ; 6 bits    ; 78 LEs        ; 24 LEs               ; 54 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|da1_din[6]                                ;
+; 28:1               ; 3 bits    ; 54 LEs        ; 18 LEs               ; 36 LEs                 ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|data_reg[7]                 ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |VT_Demo|lcd_display:u_lcd_display|p_back                      ;
+; 8:1                ; 3 bits    ; 15 LEs        ; 12 LEs               ; 3 LEs                  ; No         ; |VT_Demo|lcd_display:u_lcd_display|p2                          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |VT_Demo ;
++----------------+---------+----------------------------------------------+
+; Parameter Name ; Value   ; Type                                         ;
++----------------+---------+----------------------------------------------+
+; PATMIN         ; 0000000 ; Unsigned Binary                              ;
+; PATNUM         ; 0001011 ; Unsigned Binary                              ;
++----------------+---------+----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component ;
++-------------------------------+-------------------------+------------------------------------------+
+; Parameter Name                ; Value                   ; Type                                     ;
++-------------------------------+-------------------------+------------------------------------------+
+; OPERATION_MODE                ; NORMAL                  ; Untyped                                  ;
+; PLL_TYPE                      ; AUTO                    ; Untyped                                  ;
+; LPM_HINT                      ; CBX_MODULE_PREFIX=mypll ; Untyped                                  ;
+; QUALIFY_CONF_DONE             ; OFF                     ; Untyped                                  ;
+; COMPENSATE_CLOCK              ; CLK0                    ; Untyped                                  ;
+; SCAN_CHAIN                    ; LONG                    ; Untyped                                  ;
+; PRIMARY_CLOCK                 ; INCLK0                  ; Untyped                                  ;
+; INCLK0_INPUT_FREQUENCY        ; 37037                   ; Signed Integer                           ;
+; INCLK1_INPUT_FREQUENCY        ; 0                       ; Untyped                                  ;
+; GATE_LOCK_SIGNAL              ; NO                      ; Untyped                                  ;
+; GATE_LOCK_COUNTER             ; 0                       ; Untyped                                  ;
+; LOCK_HIGH                     ; 1                       ; Untyped                                  ;
+; LOCK_LOW                      ; 1                       ; Untyped                                  ;
+; VALID_LOCK_MULTIPLIER         ; 1                       ; Untyped                                  ;
+; INVALID_LOCK_MULTIPLIER       ; 5                       ; Untyped                                  ;
+; SWITCH_OVER_ON_LOSSCLK        ; OFF                     ; Untyped                                  ;
+; SWITCH_OVER_ON_GATED_LOCK     ; OFF                     ; Untyped                                  ;
+; ENABLE_SWITCH_OVER_COUNTER    ; OFF                     ; Untyped                                  ;
+; SKIP_VCO                      ; OFF                     ; Untyped                                  ;
+; SWITCH_OVER_COUNTER           ; 0                       ; Untyped                                  ;
+; SWITCH_OVER_TYPE              ; AUTO                    ; Untyped                                  ;
+; FEEDBACK_SOURCE               ; EXTCLK0                 ; Untyped                                  ;
+; BANDWIDTH                     ; 0                       ; Untyped                                  ;
+; BANDWIDTH_TYPE                ; AUTO                    ; Untyped                                  ;
+; SPREAD_FREQUENCY              ; 0                       ; Untyped                                  ;
+; DOWN_SPREAD                   ; 0                       ; Untyped                                  ;
+; SELF_RESET_ON_GATED_LOSS_LOCK ; OFF                     ; Untyped                                  ;
+; SELF_RESET_ON_LOSS_LOCK       ; OFF                     ; Untyped                                  ;
+; CLK9_MULTIPLY_BY              ; 0                       ; Untyped                                  ;
+; CLK8_MULTIPLY_BY              ; 0                       ; Untyped                                  ;
+; CLK7_MULTIPLY_BY              ; 0                       ; Untyped                                  ;
+; CLK6_MULTIPLY_BY              ; 0                       ; Untyped                                  ;
+; CLK5_MULTIPLY_BY              ; 1                       ; Untyped                                  ;
+; CLK4_MULTIPLY_BY              ; 1                       ; Untyped                                  ;
+; CLK3_MULTIPLY_BY              ; 1                       ; Untyped                                  ;
+; CLK2_MULTIPLY_BY              ; 1                       ; Untyped                                  ;
+; CLK1_MULTIPLY_BY              ; 1                       ; Signed Integer                           ;
+; CLK0_MULTIPLY_BY              ; 140                     ; Signed Integer                           ;
+; CLK9_DIVIDE_BY                ; 0                       ; Untyped                                  ;
+; CLK8_DIVIDE_BY                ; 0                       ; Untyped                                  ;
+; CLK7_DIVIDE_BY                ; 0                       ; Untyped                                  ;
+; CLK6_DIVIDE_BY                ; 0                       ; Untyped                                  ;
+; CLK5_DIVIDE_BY                ; 1                       ; Untyped                                  ;
+; CLK4_DIVIDE_BY                ; 1                       ; Untyped                                  ;
+; CLK3_DIVIDE_BY                ; 1                       ; Untyped                                  ;
+; CLK2_DIVIDE_BY                ; 1                       ; Untyped                                  ;
+; CLK1_DIVIDE_BY                ; 27                      ; Signed Integer                           ;
+; CLK0_DIVIDE_BY                ; 27                      ; Signed Integer                           ;
+; CLK9_PHASE_SHIFT              ; 0                       ; Untyped                                  ;
+; CLK8_PHASE_SHIFT              ; 0                       ; Untyped                                  ;
+; CLK7_PHASE_SHIFT              ; 0                       ; Untyped                                  ;
+; CLK6_PHASE_SHIFT              ; 0                       ; Untyped                                  ;
+; CLK5_PHASE_SHIFT              ; 0                       ; Untyped                                  ;
+; CLK4_PHASE_SHIFT              ; 0                       ; Untyped                                  ;
+; CLK3_PHASE_SHIFT              ; 0                       ; Untyped                                  ;
+; CLK2_PHASE_SHIFT              ; 0                       ; Untyped                                  ;
+; CLK1_PHASE_SHIFT              ; 0                       ; Untyped                                  ;
+; CLK0_PHASE_SHIFT              ; 0                       ; Untyped                                  ;
+; CLK5_TIME_DELAY               ; 0                       ; Untyped                                  ;
+; CLK4_TIME_DELAY               ; 0                       ; Untyped                                  ;
+; CLK3_TIME_DELAY               ; 0                       ; Untyped                                  ;
+; CLK2_TIME_DELAY               ; 0                       ; Untyped                                  ;
+; CLK1_TIME_DELAY               ; 0                       ; Untyped                                  ;
+; CLK0_TIME_DELAY               ; 0                       ; Untyped                                  ;
+; CLK9_DUTY_CYCLE               ; 50                      ; Untyped                                  ;
+; CLK8_DUTY_CYCLE               ; 50                      ; Untyped                                  ;
+; CLK7_DUTY_CYCLE               ; 50                      ; Untyped                                  ;
+; CLK6_DUTY_CYCLE               ; 50                      ; Untyped                                  ;
+; CLK5_DUTY_CYCLE               ; 50                      ; Untyped                                  ;
+; CLK4_DUTY_CYCLE               ; 50                      ; Untyped                                  ;
+; CLK3_DUTY_CYCLE               ; 50                      ; Untyped                                  ;
+; CLK2_DUTY_CYCLE               ; 50                      ; Untyped                                  ;
+; CLK1_DUTY_CYCLE               ; 50                      ; Signed Integer                           ;
+; CLK0_DUTY_CYCLE               ; 50                      ; Signed Integer                           ;
+; CLK9_USE_EVEN_COUNTER_MODE    ; OFF                     ; Untyped                                  ;
+; CLK8_USE_EVEN_COUNTER_MODE    ; OFF                     ; Untyped                                  ;
+; CLK7_USE_EVEN_COUNTER_MODE    ; OFF                     ; Untyped                                  ;
+; CLK6_USE_EVEN_COUNTER_MODE    ; OFF                     ; Untyped                                  ;
+; CLK5_USE_EVEN_COUNTER_MODE    ; OFF                     ; Untyped                                  ;
+; CLK4_USE_EVEN_COUNTER_MODE    ; OFF                     ; Untyped                                  ;
+; CLK3_USE_EVEN_COUNTER_MODE    ; OFF                     ; Untyped                                  ;
+; CLK2_USE_EVEN_COUNTER_MODE    ; OFF                     ; Untyped                                  ;
+; CLK1_USE_EVEN_COUNTER_MODE    ; OFF                     ; Untyped                                  ;
+; CLK0_USE_EVEN_COUNTER_MODE    ; OFF                     ; Untyped                                  ;
+; CLK9_USE_EVEN_COUNTER_VALUE   ; OFF                     ; Untyped                                  ;
+; CLK8_USE_EVEN_COUNTER_VALUE   ; OFF                     ; Untyped                                  ;
+; CLK7_USE_EVEN_COUNTER_VALUE   ; OFF                     ; Untyped                                  ;
+; CLK6_USE_EVEN_COUNTER_VALUE   ; OFF                     ; Untyped                                  ;
+; CLK5_USE_EVEN_COUNTER_VALUE   ; OFF                     ; Untyped                                  ;
+; CLK4_USE_EVEN_COUNTER_VALUE   ; OFF                     ; Untyped                                  ;
+; CLK3_USE_EVEN_COUNTER_VALUE   ; OFF                     ; Untyped                                  ;
+; CLK2_USE_EVEN_COUNTER_VALUE   ; OFF                     ; Untyped                                  ;
+; CLK1_USE_EVEN_COUNTER_VALUE   ; OFF                     ; Untyped                                  ;
+; CLK0_USE_EVEN_COUNTER_VALUE   ; OFF                     ; Untyped                                  ;
+; LOCK_WINDOW_UI                ;  0.05                   ; Untyped                                  ;
+; LOCK_WINDOW_UI_BITS           ; UNUSED                  ; Untyped                                  ;
+; VCO_RANGE_DETECTOR_LOW_BITS   ; UNUSED                  ; Untyped                                  ;
+; VCO_RANGE_DETECTOR_HIGH_BITS  ; UNUSED                  ; Untyped                                  ;
+; DPA_MULTIPLY_BY               ; 0                       ; Untyped                                  ;
+; DPA_DIVIDE_BY                 ; 1                       ; Untyped                                  ;
+; DPA_DIVIDER                   ; 0                       ; Untyped                                  ;
+; EXTCLK3_MULTIPLY_BY           ; 1                       ; Untyped                                  ;
+; EXTCLK2_MULTIPLY_BY           ; 1                       ; Untyped                                  ;
+; EXTCLK1_MULTIPLY_BY           ; 1                       ; Untyped                                  ;
+; EXTCLK0_MULTIPLY_BY           ; 1                       ; Untyped                                  ;
+; EXTCLK3_DIVIDE_BY             ; 1                       ; Untyped                                  ;
+; EXTCLK2_DIVIDE_BY             ; 1                       ; Untyped                                  ;
+; EXTCLK1_DIVIDE_BY             ; 1                       ; Untyped                                  ;
+; EXTCLK0_DIVIDE_BY             ; 1                       ; Untyped                                  ;
+; EXTCLK3_PHASE_SHIFT           ; 0                       ; Untyped                                  ;
+; EXTCLK2_PHASE_SHIFT           ; 0                       ; Untyped                                  ;
+; EXTCLK1_PHASE_SHIFT           ; 0                       ; Untyped                                  ;
+; EXTCLK0_PHASE_SHIFT           ; 0                       ; Untyped                                  ;
+; EXTCLK3_TIME_DELAY            ; 0                       ; Untyped                                  ;
+; EXTCLK2_TIME_DELAY            ; 0                       ; Untyped                                  ;
+; EXTCLK1_TIME_DELAY            ; 0                       ; Untyped                                  ;
+; EXTCLK0_TIME_DELAY            ; 0                       ; Untyped                                  ;
+; EXTCLK3_DUTY_CYCLE            ; 50                      ; Untyped                                  ;
+; EXTCLK2_DUTY_CYCLE            ; 50                      ; Untyped                                  ;
+; EXTCLK1_DUTY_CYCLE            ; 50                      ; Untyped                                  ;
+; EXTCLK0_DUTY_CYCLE            ; 50                      ; Untyped                                  ;
+; VCO_MULTIPLY_BY               ; 0                       ; Untyped                                  ;
+; VCO_DIVIDE_BY                 ; 0                       ; Untyped                                  ;
+; SCLKOUT0_PHASE_SHIFT          ; 0                       ; Untyped                                  ;
+; SCLKOUT1_PHASE_SHIFT          ; 0                       ; Untyped                                  ;
+; VCO_MIN                       ; 0                       ; Untyped                                  ;
+; VCO_MAX                       ; 0                       ; Untyped                                  ;
+; VCO_CENTER                    ; 0                       ; Untyped                                  ;
+; PFD_MIN                       ; 0                       ; Untyped                                  ;
+; PFD_MAX                       ; 0                       ; Untyped                                  ;
+; M_INITIAL                     ; 0                       ; Untyped                                  ;
+; M                             ; 0                       ; Untyped                                  ;
+; N                             ; 1                       ; Untyped                                  ;
+; M2                            ; 1                       ; Untyped                                  ;
+; N2                            ; 1                       ; Untyped                                  ;
+; SS                            ; 1                       ; Untyped                                  ;
+; C0_HIGH                       ; 0                       ; Untyped                                  ;
+; C1_HIGH                       ; 0                       ; Untyped                                  ;
+; C2_HIGH                       ; 0                       ; Untyped                                  ;
+; C3_HIGH                       ; 0                       ; Untyped                                  ;
+; C4_HIGH                       ; 0                       ; Untyped                                  ;
+; C5_HIGH                       ; 0                       ; Untyped                                  ;
+; C6_HIGH                       ; 0                       ; Untyped                                  ;
+; C7_HIGH                       ; 0                       ; Untyped                                  ;
+; C8_HIGH                       ; 0                       ; Untyped                                  ;
+; C9_HIGH                       ; 0                       ; Untyped                                  ;
+; C0_LOW                        ; 0                       ; Untyped                                  ;
+; C1_LOW                        ; 0                       ; Untyped                                  ;
+; C2_LOW                        ; 0                       ; Untyped                                  ;
+; C3_LOW                        ; 0                       ; Untyped                                  ;
+; C4_LOW                        ; 0                       ; Untyped                                  ;
+; C5_LOW                        ; 0                       ; Untyped                                  ;
+; C6_LOW                        ; 0                       ; Untyped                                  ;
+; C7_LOW                        ; 0                       ; Untyped                                  ;
+; C8_LOW                        ; 0                       ; Untyped                                  ;
+; C9_LOW                        ; 0                       ; Untyped                                  ;
+; C0_INITIAL                    ; 0                       ; Untyped                                  ;
+; C1_INITIAL                    ; 0                       ; Untyped                                  ;
+; C2_INITIAL                    ; 0                       ; Untyped                                  ;
+; C3_INITIAL                    ; 0                       ; Untyped                                  ;
+; C4_INITIAL                    ; 0                       ; Untyped                                  ;
+; C5_INITIAL                    ; 0                       ; Untyped                                  ;
+; C6_INITIAL                    ; 0                       ; Untyped                                  ;
+; C7_INITIAL                    ; 0                       ; Untyped                                  ;
+; C8_INITIAL                    ; 0                       ; Untyped                                  ;
+; C9_INITIAL                    ; 0                       ; Untyped                                  ;
+; C0_MODE                       ; BYPASS                  ; Untyped                                  ;
+; C1_MODE                       ; BYPASS                  ; Untyped                                  ;
+; C2_MODE                       ; BYPASS                  ; Untyped                                  ;
+; C3_MODE                       ; BYPASS                  ; Untyped                                  ;
+; C4_MODE                       ; BYPASS                  ; Untyped                                  ;
+; C5_MODE                       ; BYPASS                  ; Untyped                                  ;
+; C6_MODE                       ; BYPASS                  ; Untyped                                  ;
+; C7_MODE                       ; BYPASS                  ; Untyped                                  ;
+; C8_MODE                       ; BYPASS                  ; Untyped                                  ;
+; C9_MODE                       ; BYPASS                  ; Untyped                                  ;
+; C0_PH                         ; 0                       ; Untyped                                  ;
+; C1_PH                         ; 0                       ; Untyped                                  ;
+; C2_PH                         ; 0                       ; Untyped                                  ;
+; C3_PH                         ; 0                       ; Untyped                                  ;
+; C4_PH                         ; 0                       ; Untyped                                  ;
+; C5_PH                         ; 0                       ; Untyped                                  ;
+; C6_PH                         ; 0                       ; Untyped                                  ;
+; C7_PH                         ; 0                       ; Untyped                                  ;
+; C8_PH                         ; 0                       ; Untyped                                  ;
+; C9_PH                         ; 0                       ; Untyped                                  ;
+; L0_HIGH                       ; 1                       ; Untyped                                  ;
+; L1_HIGH                       ; 1                       ; Untyped                                  ;
+; G0_HIGH                       ; 1                       ; Untyped                                  ;
+; G1_HIGH                       ; 1                       ; Untyped                                  ;
+; G2_HIGH                       ; 1                       ; Untyped                                  ;
+; G3_HIGH                       ; 1                       ; Untyped                                  ;
+; E0_HIGH                       ; 1                       ; Untyped                                  ;
+; E1_HIGH                       ; 1                       ; Untyped                                  ;
+; E2_HIGH                       ; 1                       ; Untyped                                  ;
+; E3_HIGH                       ; 1                       ; Untyped                                  ;
+; L0_LOW                        ; 1                       ; Untyped                                  ;
+; L1_LOW                        ; 1                       ; Untyped                                  ;
+; G0_LOW                        ; 1                       ; Untyped                                  ;
+; G1_LOW                        ; 1                       ; Untyped                                  ;
+; G2_LOW                        ; 1                       ; Untyped                                  ;
+; G3_LOW                        ; 1                       ; Untyped                                  ;
+; E0_LOW                        ; 1                       ; Untyped                                  ;
+; E1_LOW                        ; 1                       ; Untyped                                  ;
+; E2_LOW                        ; 1                       ; Untyped                                  ;
+; E3_LOW                        ; 1                       ; Untyped                                  ;
+; L0_INITIAL                    ; 1                       ; Untyped                                  ;
+; L1_INITIAL                    ; 1                       ; Untyped                                  ;
+; G0_INITIAL                    ; 1                       ; Untyped                                  ;
+; G1_INITIAL                    ; 1                       ; Untyped                                  ;
+; G2_INITIAL                    ; 1                       ; Untyped                                  ;
+; G3_INITIAL                    ; 1                       ; Untyped                                  ;
+; E0_INITIAL                    ; 1                       ; Untyped                                  ;
+; E1_INITIAL                    ; 1                       ; Untyped                                  ;
+; E2_INITIAL                    ; 1                       ; Untyped                                  ;
+; E3_INITIAL                    ; 1                       ; Untyped                                  ;
+; L0_MODE                       ; BYPASS                  ; Untyped                                  ;
+; L1_MODE                       ; BYPASS                  ; Untyped                                  ;
+; G0_MODE                       ; BYPASS                  ; Untyped                                  ;
+; G1_MODE                       ; BYPASS                  ; Untyped                                  ;
+; G2_MODE                       ; BYPASS                  ; Untyped                                  ;
+; G3_MODE                       ; BYPASS                  ; Untyped                                  ;
+; E0_MODE                       ; BYPASS                  ; Untyped                                  ;
+; E1_MODE                       ; BYPASS                  ; Untyped                                  ;
+; E2_MODE                       ; BYPASS                  ; Untyped                                  ;
+; E3_MODE                       ; BYPASS                  ; Untyped                                  ;
+; L0_PH                         ; 0                       ; Untyped                                  ;
+; L1_PH                         ; 0                       ; Untyped                                  ;
+; G0_PH                         ; 0                       ; Untyped                                  ;
+; G1_PH                         ; 0                       ; Untyped                                  ;
+; G2_PH                         ; 0                       ; Untyped                                  ;
+; G3_PH                         ; 0                       ; Untyped                                  ;
+; E0_PH                         ; 0                       ; Untyped                                  ;
+; E1_PH                         ; 0                       ; Untyped                                  ;
+; E2_PH                         ; 0                       ; Untyped                                  ;
+; E3_PH                         ; 0                       ; Untyped                                  ;
+; M_PH                          ; 0                       ; Untyped                                  ;
+; C1_USE_CASC_IN                ; OFF                     ; Untyped                                  ;
+; C2_USE_CASC_IN                ; OFF                     ; Untyped                                  ;
+; C3_USE_CASC_IN                ; OFF                     ; Untyped                                  ;
+; C4_USE_CASC_IN                ; OFF                     ; Untyped                                  ;
+; C5_USE_CASC_IN                ; OFF                     ; Untyped                                  ;
+; C6_USE_CASC_IN                ; OFF                     ; Untyped                                  ;
+; C7_USE_CASC_IN                ; OFF                     ; Untyped                                  ;
+; C8_USE_CASC_IN                ; OFF                     ; Untyped                                  ;
+; C9_USE_CASC_IN                ; OFF                     ; Untyped                                  ;
+; CLK0_COUNTER                  ; G0                      ; Untyped                                  ;
+; CLK1_COUNTER                  ; G0                      ; Untyped                                  ;
+; CLK2_COUNTER                  ; G0                      ; Untyped                                  ;
+; CLK3_COUNTER                  ; G0                      ; Untyped                                  ;
+; CLK4_COUNTER                  ; G0                      ; Untyped                                  ;
+; CLK5_COUNTER                  ; G0                      ; Untyped                                  ;
+; CLK6_COUNTER                  ; E0                      ; Untyped                                  ;
+; CLK7_COUNTER                  ; E1                      ; Untyped                                  ;
+; CLK8_COUNTER                  ; E2                      ; Untyped                                  ;
+; CLK9_COUNTER                  ; E3                      ; Untyped                                  ;
+; L0_TIME_DELAY                 ; 0                       ; Untyped                                  ;
+; L1_TIME_DELAY                 ; 0                       ; Untyped                                  ;
+; G0_TIME_DELAY                 ; 0                       ; Untyped                                  ;
+; G1_TIME_DELAY                 ; 0                       ; Untyped                                  ;
+; G2_TIME_DELAY                 ; 0                       ; Untyped                                  ;
+; G3_TIME_DELAY                 ; 0                       ; Untyped                                  ;
+; E0_TIME_DELAY                 ; 0                       ; Untyped                                  ;
+; E1_TIME_DELAY                 ; 0                       ; Untyped                                  ;
+; E2_TIME_DELAY                 ; 0                       ; Untyped                                  ;
+; E3_TIME_DELAY                 ; 0                       ; Untyped                                  ;
+; M_TIME_DELAY                  ; 0                       ; Untyped                                  ;
+; N_TIME_DELAY                  ; 0                       ; Untyped                                  ;
+; EXTCLK3_COUNTER               ; E3                      ; Untyped                                  ;
+; EXTCLK2_COUNTER               ; E2                      ; Untyped                                  ;
+; EXTCLK1_COUNTER               ; E1                      ; Untyped                                  ;
+; EXTCLK0_COUNTER               ; E0                      ; Untyped                                  ;
+; ENABLE0_COUNTER               ; L0                      ; Untyped                                  ;
+; ENABLE1_COUNTER               ; L0                      ; Untyped                                  ;
+; CHARGE_PUMP_CURRENT           ; 2                       ; Untyped                                  ;
+; LOOP_FILTER_R                 ;  1.000000               ; Untyped                                  ;
+; LOOP_FILTER_C                 ; 5                       ; Untyped                                  ;
+; CHARGE_PUMP_CURRENT_BITS      ; 9999                    ; Untyped                                  ;
+; LOOP_FILTER_R_BITS            ; 9999                    ; Untyped                                  ;
+; LOOP_FILTER_C_BITS            ; 9999                    ; Untyped                                  ;
+; VCO_POST_SCALE                ; 0                       ; Untyped                                  ;
+; CLK2_OUTPUT_FREQUENCY         ; 0                       ; Untyped                                  ;
+; CLK1_OUTPUT_FREQUENCY         ; 0                       ; Untyped                                  ;
+; CLK0_OUTPUT_FREQUENCY         ; 0                       ; Untyped                                  ;
+; INTENDED_DEVICE_FAMILY        ; Cyclone III             ; Untyped                                  ;
+; PORT_CLKENA0                  ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLKENA1                  ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLKENA2                  ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLKENA3                  ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLKENA4                  ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLKENA5                  ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_EXTCLKENA0               ; PORT_CONNECTIVITY       ; Untyped                                  ;
+; PORT_EXTCLKENA1               ; PORT_CONNECTIVITY       ; Untyped                                  ;
+; PORT_EXTCLKENA2               ; PORT_CONNECTIVITY       ; Untyped                                  ;
+; PORT_EXTCLKENA3               ; PORT_CONNECTIVITY       ; Untyped                                  ;
+; PORT_EXTCLK0                  ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_EXTCLK1                  ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_EXTCLK2                  ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_EXTCLK3                  ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLKBAD0                  ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLKBAD1                  ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLK0                     ; PORT_USED               ; Untyped                                  ;
+; PORT_CLK1                     ; PORT_USED               ; Untyped                                  ;
+; PORT_CLK2                     ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLK3                     ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLK4                     ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLK5                     ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLK6                     ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLK7                     ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLK8                     ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLK9                     ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_SCANDATA                 ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_SCANDATAOUT              ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_SCANDONE                 ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_SCLKOUT1                 ; PORT_CONNECTIVITY       ; Untyped                                  ;
+; PORT_SCLKOUT0                 ; PORT_CONNECTIVITY       ; Untyped                                  ;
+; PORT_ACTIVECLOCK              ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLKLOSS                  ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_INCLK1                   ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_INCLK0                   ; PORT_USED               ; Untyped                                  ;
+; PORT_FBIN                     ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_PLLENA                   ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CLKSWITCH                ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_ARESET                   ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_PFDENA                   ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_SCANCLK                  ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_SCANACLR                 ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_SCANREAD                 ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_SCANWRITE                ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_ENABLE0                  ; PORT_CONNECTIVITY       ; Untyped                                  ;
+; PORT_ENABLE1                  ; PORT_CONNECTIVITY       ; Untyped                                  ;
+; PORT_LOCKED                   ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_CONFIGUPDATE             ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_FBOUT                    ; PORT_CONNECTIVITY       ; Untyped                                  ;
+; PORT_PHASEDONE                ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_PHASESTEP                ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_PHASEUPDOWN              ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_SCANCLKENA               ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_PHASECOUNTERSELECT       ; PORT_UNUSED             ; Untyped                                  ;
+; PORT_VCOOVERRANGE             ; PORT_CONNECTIVITY       ; Untyped                                  ;
+; PORT_VCOUNDERRANGE            ; PORT_CONNECTIVITY       ; Untyped                                  ;
+; M_TEST_SOURCE                 ; 5                       ; Untyped                                  ;
+; C0_TEST_SOURCE                ; 5                       ; Untyped                                  ;
+; C1_TEST_SOURCE                ; 5                       ; Untyped                                  ;
+; C2_TEST_SOURCE                ; 5                       ; Untyped                                  ;
+; C3_TEST_SOURCE                ; 5                       ; Untyped                                  ;
+; C4_TEST_SOURCE                ; 5                       ; Untyped                                  ;
+; C5_TEST_SOURCE                ; 5                       ; Untyped                                  ;
+; C6_TEST_SOURCE                ; 5                       ; Untyped                                  ;
+; C7_TEST_SOURCE                ; 5                       ; Untyped                                  ;
+; C8_TEST_SOURCE                ; 5                       ; Untyped                                  ;
+; C9_TEST_SOURCE                ; 5                       ; Untyped                                  ;
+; CBXI_PARAMETER                ; mypll_altpll            ; Untyped                                  ;
+; VCO_FREQUENCY_CONTROL         ; AUTO                    ; Untyped                                  ;
+; VCO_PHASE_SHIFT_STEP          ; 0                       ; Untyped                                  ;
+; WIDTH_CLOCK                   ; 5                       ; Signed Integer                           ;
+; WIDTH_PHASECOUNTERSELECT      ; 4                       ; Untyped                                  ;
+; USING_FBMIMICBIDIR_PORT       ; OFF                     ; Untyped                                  ;
+; DEVICE_FAMILY                 ; Cyclone III             ; Untyped                                  ;
+; SCAN_CHAIN_MIF_FILE           ; UNUSED                  ; Untyped                                  ;
+; SIM_GATE_LOCK_DEVICE_BEHAVIOR ; OFF                     ; Untyped                                  ;
+; AUTO_CARRY_CHAINS             ; ON                      ; AUTO_CARRY                               ;
+; IGNORE_CARRY_BUFFERS          ; OFF                     ; IGNORE_CARRY                             ;
+; AUTO_CASCADE_CHAINS           ; ON                      ; AUTO_CASCADE                             ;
+; IGNORE_CASCADE_BUFFERS        ; OFF                     ; IGNORE_CASCADE                           ;
++-------------------------------+-------------------------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: switch:u_switch ;
++----------------+------------------+--------------------------+
+; Parameter Name ; Value            ; Type                     ;
++----------------+------------------+--------------------------+
+; CNT1US         ; 0000000010000010 ; Unsigned Binary          ;
+; CNT1MS         ; 1000             ; Signed Integer           ;
+; CNT1S          ; 1000             ; Signed Integer           ;
+; PATMIN         ; 0000000          ; Unsigned Binary          ;
+; PATNUM         ; 0001011          ; Unsigned Binary          ;
+; PATMAX         ; 0001010          ; Unsigned Binary          ;
++----------------+------------------+--------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: switch:u_switch|glf:u0_glf ;
++----------------+------------------+-------------------------------------+
+; Parameter Name ; Value            ; Type                                ;
++----------------+------------------+-------------------------------------+
+; CNT1US         ; 0000000010000010 ; Unsigned Binary                     ;
+; CNT1MS         ; 1000             ; Signed Integer                      ;
+; CNT1S          ; 1000             ; Signed Integer                      ;
++----------------+------------------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: switch:u_switch|glf:u0_glf|timer:u1_timer ;
++----------------+------------------+----------------------------------------------------+
+; Parameter Name ; Value            ; Type                                               ;
++----------------+------------------+----------------------------------------------------+
+; CNT1US         ; 0000000010000010 ; Unsigned Binary                                    ;
+; CNT1MS         ; 1000             ; Signed Integer                                     ;
+; CNT1S          ; 1000             ; Signed Integer                                     ;
++----------------+------------------+----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: switch:u_switch|glf:u1_glf ;
++----------------+------------------+-------------------------------------+
+; Parameter Name ; Value            ; Type                                ;
++----------------+------------------+-------------------------------------+
+; CNT1US         ; 0000000010000010 ; Unsigned Binary                     ;
+; CNT1MS         ; 1000             ; Signed Integer                      ;
+; CNT1S          ; 1000             ; Signed Integer                      ;
++----------------+------------------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: switch:u_switch|glf:u1_glf|timer:u1_timer ;
++----------------+------------------+----------------------------------------------------+
+; Parameter Name ; Value            ; Type                                               ;
++----------------+------------------+----------------------------------------------------+
+; CNT1US         ; 0000000010000010 ; Unsigned Binary                                    ;
+; CNT1MS         ; 1000             ; Signed Integer                                     ;
+; CNT1S          ; 1000             ; Signed Integer                                     ;
++----------------+------------------+----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: switch:u_switch|glf:u2_glf ;
++----------------+------------------+-------------------------------------+
+; Parameter Name ; Value            ; Type                                ;
++----------------+------------------+-------------------------------------+
+; CNT1US         ; 0000000010000010 ; Unsigned Binary                     ;
+; CNT1MS         ; 1000             ; Signed Integer                      ;
+; CNT1S          ; 1000             ; Signed Integer                      ;
++----------------+------------------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: switch:u_switch|glf:u2_glf|timer:u1_timer ;
++----------------+------------------+----------------------------------------------------+
+; Parameter Name ; Value            ; Type                                               ;
++----------------+------------------+----------------------------------------------------+
+; CNT1US         ; 0000000010000010 ; Unsigned Binary                                    ;
+; CNT1MS         ; 1000             ; Signed Integer                                     ;
+; CNT1S          ; 1000             ; Signed Integer                                     ;
++----------------+------------------+----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: switch:u_switch|glf:u3_glf ;
++----------------+------------------+-------------------------------------+
+; Parameter Name ; Value            ; Type                                ;
++----------------+------------------+-------------------------------------+
+; CNT1US         ; 0000000010000010 ; Unsigned Binary                     ;
+; CNT1MS         ; 1000             ; Signed Integer                      ;
+; CNT1S          ; 1000             ; Signed Integer                      ;
++----------------+------------------+-------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: switch:u_switch|glf:u3_glf|timer:u1_timer ;
++----------------+------------------+----------------------------------------------------+
+; Parameter Name ; Value            ; Type                                               ;
++----------------+------------------+----------------------------------------------------+
+; CNT1US         ; 0000000010000010 ; Unsigned Binary                                    ;
+; CNT1MS         ; 1000             ; Signed Integer                                     ;
+; CNT1S          ; 1000             ; Signed Integer                                     ;
++----------------+------------------+----------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: switch:u_switch|timer:u0_timer ;
++----------------+------------------+-----------------------------------------+
+; Parameter Name ; Value            ; Type                                    ;
++----------------+------------------+-----------------------------------------+
+; CNT1US         ; 0000000010000010 ; Unsigned Binary                         ;
+; CNT1MS         ; 1000             ; Signed Integer                          ;
+; CNT1S          ; 1000             ; Signed Integer                          ;
++----------------+------------------+-----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: switch:u_switch|timer:u1_timer ;
++----------------+------------------+-----------------------------------------+
+; Parameter Name ; Value            ; Type                                    ;
++----------------+------------------+-----------------------------------------+
+; CNT1US         ; 0000000010000010 ; Unsigned Binary                         ;
+; CNT1MS         ; 1000             ; Signed Integer                          ;
+; CNT1S          ; 1000             ; Signed Integer                          ;
++----------------+------------------+-----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------+
+; Parameter Settings for User Entity Instance: uart:u_uart ;
++----------------+-------+---------------------------------+
+; Parameter Name ; Value ; Type                            ;
++----------------+-------+---------------------------------+
+; IDLE           ; 0000  ; Unsigned Binary                 ;
+; RECIEVE        ; 0001  ; Unsigned Binary                 ;
+; DATADIVE       ; 0010  ; Unsigned Binary                 ;
+; SEND           ; 0011  ; Unsigned Binary                 ;
+; SENDDELAY      ; 0100  ; Unsigned Binary                 ;
+; WAIT_TX_TEST1  ; 0101  ; Unsigned Binary                 ;
+; WAIT_TX_TEST2  ; 0110  ; Unsigned Binary                 ;
+; WAIT_TX_TEST3  ; 0111  ; Unsigned Binary                 ;
+; WAIT_TX_TEST4  ; 1000  ; Unsigned Binary                 ;
+; WAIT_TX_TEST5  ; 1001  ; Unsigned Binary                 ;
++----------------+-------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: uart:u_uart|glf:u1_glf ;
++----------------+-------+--------------------------------------------+
+; Parameter Name ; Value ; Type                                       ;
++----------------+-------+--------------------------------------------+
+; CNT1US         ; 107   ; Signed Integer                             ;
+; CNT1MS         ; 1000  ; Signed Integer                             ;
+; CNT1S          ; 1000  ; Signed Integer                             ;
++----------------+-------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: uart:u_uart|glf:u1_glf|timer:u1_timer ;
++----------------+-------+-----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                      ;
++----------------+-------+-----------------------------------------------------------+
+; CNT1US         ; 107   ; Signed Integer                                            ;
+; CNT1MS         ; 1000  ; Signed Integer                                            ;
+; CNT1S          ; 1000  ; Signed Integer                                            ;
++----------------+-------+-----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: rx_module:u_rx_module ;
++-----------------+-------+------------------------------------------+
+; Parameter Name  ; Value ; Type                                     ;
++-----------------+-------+------------------------------------------+
+; DATASENDTIME_rx ; 001   ; Unsigned Binary                          ;
++-----------------+-------+------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: tgen:u_tgen              ;
++------------------+----------------------------------+-----------------+
+; Parameter Name   ; Value                            ; Type            ;
++------------------+----------------------------------+-----------------+
+; IDLE             ; 000                              ; Unsigned Binary ;
+; GRST             ; 001                              ; Unsigned Binary ;
+; VBP              ; 010                              ; Unsigned Binary ;
+; PCH              ; 011                              ; Unsigned Binary ;
+; DISPLAY          ; 100                              ; Unsigned Binary ;
+; VFP              ; 101                              ; Unsigned Binary ;
+; NUM_CLK_GRST     ; 00000000000000000000000000000101 ; Unsigned Binary ;
+; H_ACT            ; 010000111000                     ; Unsigned Binary ;
+; H_BP             ; 000000101101                     ; Unsigned Binary ;
+; H_FP             ; 000000101101                     ; Unsigned Binary ;
+; V_BP             ; 000000001100                     ; Unsigned Binary ;
+; V_FP             ; 000000000111                     ; Unsigned Binary ;
+; V_ACT            ; 011110000000                     ; Unsigned Binary ;
+; V_PCH            ; 000000010100                     ; Unsigned Binary ;
+; H_ABGN           ; 000000101101                     ; Unsigned Binary ;
+; H_AEND           ; 010001100101                     ; Unsigned Binary ;
+; H_TOTAL          ; 010010010010                     ; Unsigned Binary ;
+; GAP_VDIV64       ; 00011110                         ; Unsigned Binary ;
+; STV1_WIDTH       ; 000000000001                     ; Unsigned Binary ;
+; STV1_TOTAL_DIRE  ; 1                                ; Unsigned Binary ;
+; STV1_TOTAL_SHIFT ; 000000000010                     ; Unsigned Binary ;
+; STV1_RISE_DIRE   ; 1                                ; Unsigned Binary ;
+; STV1_RISE_SHIFT  ; 000001001100                     ; Unsigned Binary ;
+; STV1_FALL_DIRE   ; 1                                ; Unsigned Binary ;
+; STV1_FALL_SHIFT  ; 000000000001                     ; Unsigned Binary ;
+; STV2_WIDTH       ; 000000000001                     ; Unsigned Binary ;
+; STV2_TOTAL_DIRE  ; 1                                ; Unsigned Binary ;
+; STV2_TOTAL_SHIFT ; 000000000001                     ; Unsigned Binary ;
+; STV2_RISE_DIRE   ; 1                                ; Unsigned Binary ;
+; STV2_RISE_SHIFT  ; 000001001100                     ; Unsigned Binary ;
+; STV2_FALL_DIRE   ; 1                                ; Unsigned Binary ;
+; STV2_FALL_SHIFT  ; 000000000001                     ; Unsigned Binary ;
+; CKV_RISE_SHIFT   ; 000000111001                     ; Unsigned Binary ;
+; CKV_FALL_SHIFT   ; 000000111001                     ; Unsigned Binary ;
+; CKH_PRE_GAP      ; 000000001010                     ; Unsigned Binary ;
+; CKH_WIDTH        ; 000100001001                     ; Unsigned Binary ;
+; CKH_RISE_SHIFT   ; 000000101101                     ; Unsigned Binary ;
+; CKH_FALL_SHIFT   ; 000000101101                     ; Unsigned Binary ;
+; DCODE_WHITE      ; 11110010                         ; Unsigned Binary ;
+; DCODE_BLACK      ; 10000101                         ; Unsigned Binary ;
+; DCODE_VCOM       ; 01111100                         ; Unsigned Binary ;
+; DCODE_GND        ; 10000000                         ; Unsigned Binary ;
+; DCODE_GRAY128    ; 11000011                         ; Unsigned Binary ;
+; DCODE_GRAY64     ; 10110110                         ; Unsigned Binary ;
+; DCODE_VCOMA      ; 10000100                         ; Unsigned Binary ;
+; DCODE_VCOMB      ; 10101010                         ; Unsigned Binary ;
+; SRC_PCH_SHIFT    ; 01010000                         ; Unsigned Binary ;
+; ODD_EVEN_TGAP    ; 00000101                         ; Unsigned Binary ;
++------------------+----------------------------------+-----------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: lcd_display:u_lcd_display ;
++------------------+-------+---------------------------------------------+
+; Parameter Name   ; Value ; Type                                        ;
++------------------+-------+---------------------------------------------+
+; clk_l            ; 00    ; Unsigned Binary                             ;
+; clk_h            ; 01    ; Unsigned Binary                             ;
+; clk_rising_edge  ; 10    ; Unsigned Binary                             ;
+; clk_falling_edge ; 11    ; Unsigned Binary                             ;
+; idle             ; 000   ; Unsigned Binary                             ;
+; shift_data       ; 001   ; Unsigned Binary                             ;
+; shift_data1      ; 010   ; Unsigned Binary                             ;
+; clear_screen     ; 011   ; Unsigned Binary                             ;
+; set_xy           ; 100   ; Unsigned Binary                             ;
+; disp_char        ; 101   ; Unsigned Binary                             ;
+; ONN              ; 0     ; Unsigned Binary                             ;
+; OFF              ; 1     ; Unsigned Binary                             ;
+; CMD              ; 0     ; Unsigned Binary                             ;
+; DATA             ; 1     ; Unsigned Binary                             ;
++------------------+-------+---------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------+
+; altpll Parameter Settings by Entity Instance                                          ;
++-------------------------------+-------------------------------------------------------+
+; Name                          ; Value                                                 ;
++-------------------------------+-------------------------------------------------------+
+; Number of entity instances    ; 1                                                     ;
+; Entity Instance               ; clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component ;
+;     -- OPERATION_MODE         ; NORMAL                                                ;
+;     -- PLL_TYPE               ; AUTO                                                  ;
+;     -- PRIMARY_CLOCK          ; INCLK0                                                ;
+;     -- INCLK0_INPUT_FREQUENCY ; 37037                                                 ;
+;     -- INCLK1_INPUT_FREQUENCY ; 0                                                     ;
+;     -- VCO_MULTIPLY_BY        ; 0                                                     ;
+;     -- VCO_DIVIDE_BY          ; 0                                                     ;
++-------------------------------+-------------------------------------------------------+
+
+
++-------------------------------------------------------+
+; Port Connectivity Checks: "mux_decode:u16_mux_decode" ;
++------+-------+----------+-----------------------------+
+; Port ; Type  ; Severity ; Details                     ;
++------+-------+----------+-----------------------------+
+; da   ; Input ; Info     ; Stuck at VCC                ;
+; db   ; Input ; Info     ; Stuck at VCC                ;
++------+-------+----------+-----------------------------+
+
+
++-------------------------------------------------------+
+; Port Connectivity Checks: "mux_decode:u15_mux_decode" ;
++------+-------+----------+-----------------------------+
+; Port ; Type  ; Severity ; Details                     ;
++------+-------+----------+-----------------------------+
+; da   ; Input ; Info     ; Stuck at VCC                ;
+; db   ; Input ; Info     ; Stuck at VCC                ;
++------+-------+----------+-----------------------------+
+
+
++-------------------------------------------------------+
+; Port Connectivity Checks: "mux_decode:u14_mux_decode" ;
++------+-------+----------+-----------------------------+
+; Port ; Type  ; Severity ; Details                     ;
++------+-------+----------+-----------------------------+
+; da   ; Input ; Info     ; Stuck at VCC                ;
+; db   ; Input ; Info     ; Stuck at VCC                ;
++------+-------+----------+-----------------------------+
+
+
++-------------------------------------------------------+
+; Port Connectivity Checks: "mux_decode:u13_mux_decode" ;
++------+-------+----------+-----------------------------+
+; Port ; Type  ; Severity ; Details                     ;
++------+-------+----------+-----------------------------+
+; da   ; Input ; Info     ; Stuck at VCC                ;
+; db   ; Input ; Info     ; Stuck at VCC                ;
++------+-------+----------+-----------------------------+
+
+
++-------------------------------------------------------+
+; Port Connectivity Checks: "mux_decode:u12_mux_decode" ;
++------+-------+----------+-----------------------------+
+; Port ; Type  ; Severity ; Details                     ;
++------+-------+----------+-----------------------------+
+; da   ; Input ; Info     ; Stuck at VCC                ;
+; db   ; Input ; Info     ; Stuck at VCC                ;
++------+-------+----------+-----------------------------+
+
+
++------------------------------------------------------+
+; Port Connectivity Checks: "mux_decode:u8_mux_decode" ;
++------+-------+----------+----------------------------+
+; Port ; Type  ; Severity ; Details                    ;
++------+-------+----------+----------------------------+
+; db   ; Input ; Info     ; Stuck at GND               ;
++------+-------+----------+----------------------------+
+
+
++------------------------------------------------------+
+; Port Connectivity Checks: "mux_decode:u7_mux_decode" ;
++------+-------+----------+----------------------------+
+; Port ; Type  ; Severity ; Details                    ;
++------+-------+----------+----------------------------+
+; db   ; Input ; Info     ; Stuck at GND               ;
++------+-------+----------+----------------------------+
+
+
++------------------------------------------------------+
+; Port Connectivity Checks: "mux_decode:u6_mux_decode" ;
++------+-------+----------+----------------------------+
+; Port ; Type  ; Severity ; Details                    ;
++------+-------+----------+----------------------------+
+; db   ; Input ; Info     ; Stuck at GND               ;
++------+-------+----------+----------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "rx_module:u_rx_module"                                                                                                                                                         ;
++------------+--------+----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port       ; Type   ; Severity ; Details                                                                                                                                                                  ;
++------------+--------+----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Rx_data    ; Output ; Warning  ; Output or bidir port (48 bits) is smaller than the port expression (80 bits) it drives.  The 32 most-significant bit(s) in the port expression will be connected to GND. ;
+; Rx_Donesig ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                                                      ;
+; BPS_clk    ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                                                 ;
++------------+--------+----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------+
+; Port Connectivity Checks: "uart:u_uart|glf:u1_glf|timer:u1_timer" ;
++-------------+-------+----------+----------------------------------+
+; Port        ; Type  ; Severity ; Details                          ;
++-------------+-------+----------+----------------------------------+
+; tunit[1]    ; Input ; Info     ; Stuck at GND                     ;
+; tunit[0]    ; Input ; Info     ; Stuck at VCC                     ;
+; tlen[15..4] ; Input ; Info     ; Stuck at GND                     ;
+; tlen[3]     ; Input ; Info     ; Stuck at VCC                     ;
+; tlen[2]     ; Input ; Info     ; Stuck at GND                     ;
+; tlen[1]     ; Input ; Info     ; Stuck at VCC                     ;
+; tlen[0]     ; Input ; Info     ; Stuck at GND                     ;
++-------------+-------+----------+----------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "uart:u_uart|glf:u1_glf"                                                              ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; en    ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; s_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "uart:u_uart"                                                                                                                                          ;
++---------------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; Port          ; Type   ; Severity ; Details                                                                                                                                      ;
++---------------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; sw1           ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
+; FPGA_LED_Test ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                     ;
++---------------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------+
+; Port Connectivity Checks: "switch:u_switch|timer:u1_timer" ;
++----------+-------+----------+------------------------------+
+; Port     ; Type  ; Severity ; Details                      ;
++----------+-------+----------+------------------------------+
+; tunit[1] ; Input ; Info     ; Stuck at GND                 ;
+; tunit[0] ; Input ; Info     ; Stuck at VCC                 ;
++----------+-------+----------+------------------------------+
+
+
++------------------------------------------------------------+
+; Port Connectivity Checks: "switch:u_switch|timer:u0_timer" ;
++----------+-------+----------+------------------------------+
+; Port     ; Type  ; Severity ; Details                      ;
++----------+-------+----------+------------------------------+
+; tunit[1] ; Input ; Info     ; Stuck at GND                 ;
+; tunit[0] ; Input ; Info     ; Stuck at VCC                 ;
++----------+-------+----------+------------------------------+
+
+
++--------------------------------------------------------+
+; Port Connectivity Checks: "switch:u_switch|glf:u3_glf" ;
++------+-------+----------+------------------------------+
+; Port ; Type  ; Severity ; Details                      ;
++------+-------+----------+------------------------------+
+; en   ; Input ; Info     ; Stuck at VCC                 ;
++------+-------+----------+------------------------------+
+
+
++--------------------------------------------------------+
+; Port Connectivity Checks: "switch:u_switch|glf:u2_glf" ;
++------+-------+----------+------------------------------+
+; Port ; Type  ; Severity ; Details                      ;
++------+-------+----------+------------------------------+
+; en   ; Input ; Info     ; Stuck at VCC                 ;
++------+-------+----------+------------------------------+
+
+
++-----------------------------------------------------------------------+
+; Port Connectivity Checks: "switch:u_switch|glf:u0_glf|timer:u1_timer" ;
++-------------+-------+----------+--------------------------------------+
+; Port        ; Type  ; Severity ; Details                              ;
++-------------+-------+----------+--------------------------------------+
+; tunit[1]    ; Input ; Info     ; Stuck at GND                         ;
+; tunit[0]    ; Input ; Info     ; Stuck at VCC                         ;
+; tlen[15..4] ; Input ; Info     ; Stuck at GND                         ;
+; tlen[3]     ; Input ; Info     ; Stuck at VCC                         ;
+; tlen[2]     ; Input ; Info     ; Stuck at GND                         ;
+; tlen[1]     ; Input ; Info     ; Stuck at VCC                         ;
+; tlen[0]     ; Input ; Info     ; Stuck at GND                         ;
++-------------+-------+----------+--------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "switch:u_switch"                                                                                                                                                                      ;
++---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port    ; Type  ; Severity ; Details                                                                                                                                                                             ;
++---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Rx_data ; Input ; Warning  ; Input port expression (80 bits) is wider than the input port (48 bits) it drives.  The 32 most-significant bit(s) in the expression will be dangling if they have no other fanouts. ;
++---------+-------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "clkrst:u_clkrst|mypll:u_mypll"                                                                           ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                                                  ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; c1   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:12     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+    Info: Processing started: Sun Dec 09 19:52:46 2018
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off VT_Demo -c VT_Demo
+Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/tgen/tgen.v
+    Info (12023): Found entity 1: tgen
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/uart/rx_module.v
+    Info (12023): Found entity 1: rx_module
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/uart/uart.v
+    Info (12023): Found entity 1: uart
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/uart/tx_module.v
+    Info (12023): Found entity 1: tx_module
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/lcd_display/lcd_display.v
+    Info (12023): Found entity 1: lcd_display
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/mux_decode/mux_decode.v
+    Info (12023): Found entity 1: mux_decode
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/switch/timer.v
+    Info (12023): Found entity 1: timer
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/switch/switch.v
+    Info (12023): Found entity 1: switch
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/switch/glf.v
+    Info (12023): Found entity 1: glf
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/clkrst/clkrst.v
+    Info (12023): Found entity 1: clkrst
+Warning (10275): Verilog HDL Module Instantiation warning at VT_Demo.v(207): ignored dangling comma in List of Port Connections
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/vt_demo.v
+    Info (12023): Found entity 1: VT_Demo
+Info (12021): Found 1 design units, including 1 entities, in source file rtl/megafunc/mypll.v
+    Info (12023): Found entity 1: mypll
+Warning (10236): Verilog HDL Implicit Net warning at uart.v(58): created implicit net for "sw1_f"
+Warning (10236): Verilog HDL Implicit Net warning at VT_Demo.v(163): created implicit net for "Rx_Donesig_pos"
+Warning (10236): Verilog HDL Implicit Net warning at VT_Demo.v(232): created implicit net for "stv1"
+Warning (10236): Verilog HDL Implicit Net warning at VT_Demo.v(233): created implicit net for "stv2"
+Info (12127): Elaborating entity "VT_Demo" for the top level hierarchy
+Info (12128): Elaborating entity "clkrst" for hierarchy "clkrst:u_clkrst"
+Info (12128): Elaborating entity "mypll" for hierarchy "clkrst:u_clkrst|mypll:u_mypll"
+Info (12128): Elaborating entity "altpll" for hierarchy "clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component"
+Info (12130): Elaborated megafunction instantiation "clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component"
+Info (12133): Instantiated megafunction "clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component" with the following parameter:
+    Info (12134): Parameter "bandwidth_type" = "AUTO"
+    Info (12134): Parameter "clk0_divide_by" = "27"
+    Info (12134): Parameter "clk0_duty_cycle" = "50"
+    Info (12134): Parameter "clk0_multiply_by" = "140"
+    Info (12134): Parameter "clk0_phase_shift" = "0"
+    Info (12134): Parameter "clk1_divide_by" = "27"
+    Info (12134): Parameter "clk1_duty_cycle" = "50"
+    Info (12134): Parameter "clk1_multiply_by" = "1"
+    Info (12134): Parameter "clk1_phase_shift" = "0"
+    Info (12134): Parameter "compensate_clock" = "CLK0"
+    Info (12134): Parameter "inclk0_input_frequency" = "37037"
+    Info (12134): Parameter "intended_device_family" = "Cyclone III"
+    Info (12134): Parameter "lpm_hint" = "CBX_MODULE_PREFIX=mypll"
+    Info (12134): Parameter "lpm_type" = "altpll"
+    Info (12134): Parameter "operation_mode" = "NORMAL"
+    Info (12134): Parameter "pll_type" = "AUTO"
+    Info (12134): Parameter "port_activeclock" = "PORT_UNUSED"
+    Info (12134): Parameter "port_areset" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkbad0" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkbad1" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkloss" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkswitch" = "PORT_UNUSED"
+    Info (12134): Parameter "port_configupdate" = "PORT_UNUSED"
+    Info (12134): Parameter "port_fbin" = "PORT_UNUSED"
+    Info (12134): Parameter "port_inclk0" = "PORT_USED"
+    Info (12134): Parameter "port_inclk1" = "PORT_UNUSED"
+    Info (12134): Parameter "port_locked" = "PORT_UNUSED"
+    Info (12134): Parameter "port_pfdena" = "PORT_UNUSED"
+    Info (12134): Parameter "port_phasecounterselect" = "PORT_UNUSED"
+    Info (12134): Parameter "port_phasedone" = "PORT_UNUSED"
+    Info (12134): Parameter "port_phasestep" = "PORT_UNUSED"
+    Info (12134): Parameter "port_phaseupdown" = "PORT_UNUSED"
+    Info (12134): Parameter "port_pllena" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scanaclr" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scanclk" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scanclkena" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scandata" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scandataout" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scandone" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scanread" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scanwrite" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clk0" = "PORT_USED"
+    Info (12134): Parameter "port_clk1" = "PORT_USED"
+    Info (12134): Parameter "port_clk2" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clk3" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clk4" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clk5" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena0" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena1" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena2" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena3" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena4" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena5" = "PORT_UNUSED"
+    Info (12134): Parameter "port_extclk0" = "PORT_UNUSED"
+    Info (12134): Parameter "port_extclk1" = "PORT_UNUSED"
+    Info (12134): Parameter "port_extclk2" = "PORT_UNUSED"
+    Info (12134): Parameter "port_extclk3" = "PORT_UNUSED"
+    Info (12134): Parameter "width_clock" = "5"
+Info (12021): Found 1 design units, including 1 entities, in source file db/mypll_altpll.v
+    Info (12023): Found entity 1: mypll_altpll
+Info (12128): Elaborating entity "mypll_altpll" for hierarchy "clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypll_altpll:auto_generated"
+Info (12128): Elaborating entity "switch" for hierarchy "switch:u_switch"
+Warning (10240): Verilog HDL Always Construct warning at switch.v(365): inferring latch(es) for variable "flag_ng", which holds its previous value in one or more paths through the always construct
+Info (10041): Inferred latch for "flag_ng" at switch.v(365)
+Info (12128): Elaborating entity "glf" for hierarchy "switch:u_switch|glf:u0_glf"
+Info (12128): Elaborating entity "timer" for hierarchy "switch:u_switch|glf:u0_glf|timer:u1_timer"
+Info (12128): Elaborating entity "tx_module" for hierarchy "tx_module:u_tx_module"
+Warning (10036): Verilog HDL or VHDL warning at tx_module.v(45): object "rxd_rst_cnt" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at tx_module.v(46): object "rxd_rst" assigned a value but never read
+Warning (10230): Verilog HDL assignment warning at tx_module.v(79): truncated value with size 32 to match size of target (4)
+Info (12128): Elaborating entity "uart" for hierarchy "uart:u_uart"
+Info (12128): Elaborating entity "glf" for hierarchy "uart:u_uart|glf:u1_glf"
+Info (12128): Elaborating entity "timer" for hierarchy "uart:u_uart|glf:u1_glf|timer:u1_timer"
+Info (12128): Elaborating entity "rx_module" for hierarchy "rx_module:u_rx_module"
+Warning (10230): Verilog HDL assignment warning at rx_module.v(158): truncated value with size 32 to match size of target (4)
+Info (12128): Elaborating entity "tgen" for hierarchy "tgen:u_tgen"
+Warning (10858): Verilog HDL warning at tgen.v(175): object flag_TP_test_a used but never assigned
+Warning (10858): Verilog HDL warning at tgen.v(176): object flag_TP_test_b used but never assigned
+Info (10264): Verilog HDL Case Statement information at tgen.v(361): all case item expressions in this case statement are onehot
+Warning (10030): Net "flag_TP_test_a" at tgen.v(175) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "flag_TP_test_b" at tgen.v(176) has no driver or initial value, using a default initial value '0'
+Warning (10034): Output port "da4_a" at tgen.v(50) has no driver
+Warning (10034): Output port "da4_din" at tgen.v(55) has no driver
+Info (12128): Elaborating entity "mux_decode" for hierarchy "mux_decode:u1_mux_decode"
+Info (12128): Elaborating entity "lcd_display" for hierarchy "lcd_display:u_lcd_display"
+Warning (10030): Net "mem.data_a" at lcd_display.v(59) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "mem.waddr_a" at lcd_display.v(59) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "mem.we_a" at lcd_display.v(59) has no driver or initial value, using a default initial value '0'
+Warning (12011): Net is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[79]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[78]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[77]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[76]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[75]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[74]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[73]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[72]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[71]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[70]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[69]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[68]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[67]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[66]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[65]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[64]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[63]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[62]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[61]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[60]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[59]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[58]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[57]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[56]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[55]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[54]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[53]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[52]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[51]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[50]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[49]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[48]" is missing source, defaulting to GND
+Warning (12011): Net is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[79]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[78]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[77]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[76]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[75]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[74]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[73]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[72]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[71]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[70]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[69]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[68]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[67]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[66]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[65]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[64]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[63]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[62]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[61]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[60]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[59]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[58]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[57]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[56]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[55]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[54]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[53]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[52]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[51]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[50]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[49]" is missing source, defaulting to GND
+    Warning (12110): Net "Rx_data[48]" is missing source, defaulting to GND
+Critical Warning (127005): Memory depth (128) in the design file differs from memory depth (123) in the Memory Initialization File "M:/G6 NMOS(TL055VDMS50)_UART_VT2/db/VT_Demo.ram0_lcd_display_c049df81.hdl.mif" -- setting initial value for remaining addresses to 0
+Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "M:/G6 NMOS(TL055VDMS50)_UART_VT2/db/VT_Demo.ram0_lcd_display_c049df81.hdl.mif" contains "don't care" values -- overwriting them with 0s
+Warning (12241): 4 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Info (13000): Registers with preset signals will power-up high
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "mux_2[1]" is stuck at GND
+    Warning (13410): Pin "mux_3[1]" is stuck at GND
+    Warning (13410): Pin "mux_4[1]" is stuck at GND
+    Warning (13410): Pin "mux_5[1]" is stuck at GND
+    Warning (13410): Pin "mux_9[0]" is stuck at GND
+    Warning (13410): Pin "mux_9[1]" is stuck at GND
+    Warning (13410): Pin "mux_10[0]" is stuck at VCC
+    Warning (13410): Pin "mux_10[1]" is stuck at GND
+    Warning (13410): Pin "mux_11[1]" is stuck at GND
+    Warning (13410): Pin "mux_12[0]" is stuck at GND
+    Warning (13410): Pin "mux_12[1]" is stuck at GND
+    Warning (13410): Pin "mux_13[0]" is stuck at GND
+    Warning (13410): Pin "mux_13[1]" is stuck at GND
+    Warning (13410): Pin "mux_14[0]" is stuck at GND
+    Warning (13410): Pin "mux_14[1]" is stuck at GND
+    Warning (13410): Pin "mux_Test1[0]" is stuck at GND
+    Warning (13410): Pin "mux_Test1[1]" is stuck at GND
+    Warning (13410): Pin "mux_Test2[0]" is stuck at GND
+    Warning (13410): Pin "mux_Test2[1]" is stuck at GND
+    Warning (13410): Pin "da1_a[1]" is stuck at GND
+    Warning (13410): Pin "da2_a[0]" is stuck at GND
+    Warning (13410): Pin "da2_a[1]" is stuck at GND
+    Warning (13410): Pin "da3_a[0]" is stuck at GND
+    Warning (13410): Pin "da3_a[1]" is stuck at GND
+    Warning (13410): Pin "da4_a[0]" is stuck at GND
+    Warning (13410): Pin "da4_a[1]" is stuck at GND
+    Warning (13410): Pin "da2_din[0]" is stuck at GND
+    Warning (13410): Pin "da2_din[1]" is stuck at GND
+    Warning (13410): Pin "da3_din[0]" is stuck at GND
+    Warning (13410): Pin "da3_din[1]" is stuck at GND
+    Warning (13410): Pin "da4_din[0]" is stuck at GND
+    Warning (13410): Pin "da4_din[1]" is stuck at GND
+    Warning (13410): Pin "da4_din[2]" is stuck at GND
+    Warning (13410): Pin "da4_din[3]" is stuck at GND
+    Warning (13410): Pin "da4_din[4]" is stuck at GND
+    Warning (13410): Pin "da4_din[5]" is stuck at GND
+    Warning (13410): Pin "da4_din[6]" is stuck at GND
+    Warning (13410): Pin "da4_din[7]" is stuck at GND
+    Warning (13410): Pin "L_RST" is stuck at VCC
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 116 registers lost all their fanouts during netlist optimizations.
+Info (144001): Generated suppressed messages file M:/G6 NMOS(TL055VDMS50)_UART_VT2/output_files/VT_Demo.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
+Warning (15899): PLL "clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypll_altpll:auto_generated|pll1" has parameters clk1_multiply_by and clk1_divide_by specified but port CLK[1] is not connected
+Warning (21074): Design contains 2 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "sw5"
+    Warning (15610): No output dependent on input pin "rxd"
+Info (21057): Implemented 1924 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 8 input pins
+    Info (21059): Implemented 95 output pins
+    Info (21061): Implemented 1820 logic cells
+    Info (21065): Implemented 1 PLLs
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 133 warnings
+    Info: Peak virtual memory: 458 megabytes
+    Info: Processing ended: Sun Dec 09 19:53:03 2018
+    Info: Elapsed time: 00:00:17
+    Info: Total CPU time (on all processors): 00:00:15
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in M:/G6 NMOS(TL055VDMS50)_UART_VT2/output_files/VT_Demo.map.smsg.
+
+
