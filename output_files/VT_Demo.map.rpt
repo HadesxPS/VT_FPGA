@@ -1,5 +1,5 @@
 Analysis & Synthesis report for VT_Demo
-Sun Dec 09 19:53:03 2018
+Sun Dec 09 21:23:51 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -92,15 +92,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Dec 09 19:53:03 2018           ;
+; Analysis & Synthesis Status        ; Successful - Sun Dec 09 21:23:51 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; VT_Demo                                         ;
 ; Top-level Entity Name              ; VT_Demo                                         ;
 ; Family                             ; Cyclone III                                     ;
-; Total logic elements               ; 1,804                                           ;
-;     Total combinational functions  ; 1,743                                           ;
-;     Dedicated logic registers      ; 664                                             ;
-; Total registers                    ; 664                                             ;
+; Total logic elements               ; 1,871                                           ;
+;     Total combinational functions  ; 1,800                                           ;
+;     Dedicated logic registers      ; 709                                             ;
+; Total registers                    ; 709                                             ;
 ; Total pins                         ; 103                                             ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
@@ -238,20 +238,20 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+----------------------------------------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                                              ;
 +---------------------------------------------+----------------------------------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 1,804                                                                                              ;
+; Estimated Total logic elements              ; 1,871                                                                                              ;
 ;                                             ;                                                                                                    ;
-; Total combinational functions               ; 1743                                                                                               ;
+; Total combinational functions               ; 1800                                                                                               ;
 ; Logic element usage by number of LUT inputs ;                                                                                                    ;
-;     -- 4 input functions                    ; 954                                                                                                ;
-;     -- 3 input functions                    ; 208                                                                                                ;
-;     -- <=2 input functions                  ; 581                                                                                                ;
+;     -- 4 input functions                    ; 979                                                                                                ;
+;     -- 3 input functions                    ; 219                                                                                                ;
+;     -- <=2 input functions                  ; 602                                                                                                ;
 ;                                             ;                                                                                                    ;
 ; Logic elements by mode                      ;                                                                                                    ;
-;     -- normal mode                          ; 1301                                                                                               ;
-;     -- arithmetic mode                      ; 442                                                                                                ;
+;     -- normal mode                          ; 1343                                                                                               ;
+;     -- arithmetic mode                      ; 457                                                                                                ;
 ;                                             ;                                                                                                    ;
-; Total registers                             ; 664                                                                                                ;
-;     -- Dedicated logic registers            ; 664                                                                                                ;
+; Total registers                             ; 709                                                                                                ;
+;     -- Dedicated logic registers            ; 709                                                                                                ;
 ;     -- I/O registers                        ; 0                                                                                                  ;
 ;                                             ;                                                                                                    ;
 ; I/O pins                                    ; 103                                                                                                ;
@@ -260,9 +260,9 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;     -- PLLs                                 ; 1                                                                                                  ;
 ;                                             ;                                                                                                    ;
 ; Maximum fan-out node                        ; clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypll_altpll:auto_generated|wire_pll1_clk[0] ;
-; Maximum fan-out                             ; 664                                                                                                ;
-; Total fan-out                               ; 8374                                                                                               ;
-; Average fan-out                             ; 3.20                                                                                               ;
+; Maximum fan-out                             ; 709                                                                                                ;
+; Total fan-out                               ; 8727                                                                                               ;
+; Average fan-out                             ; 3.21                                                                                               ;
 +---------------------------------------------+----------------------------------------------------------------------------------------------------+
 
 
@@ -271,12 +271,12 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                        ; Library Name ;
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
-; |VT_Demo                                  ; 1743 (1)          ; 664 (0)      ; 0           ; 0            ; 0       ; 0         ; 103  ; 0            ; |VT_Demo                                                                                   ; work         ;
+; |VT_Demo                                  ; 1800 (1)          ; 709 (0)      ; 0           ; 0            ; 0       ; 0         ; 103  ; 0            ; |VT_Demo                                                                                   ; work         ;
 ;    |clkrst:u_clkrst|                      ; 0 (0)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst                                                                   ; work         ;
 ;       |mypll:u_mypll|                     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst|mypll:u_mypll                                                     ; work         ;
 ;          |altpll:altpll_component|        ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component                             ; work         ;
 ;             |mypll_altpll:auto_generated| ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypll_altpll:auto_generated ; work         ;
-;    |lcd_display:u_lcd_display|            ; 550 (550)         ; 71 (71)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|lcd_display:u_lcd_display                                                         ; work         ;
+;    |lcd_display:u_lcd_display|            ; 545 (545)         ; 71 (71)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|lcd_display:u_lcd_display                                                         ; work         ;
 ;    |mux_decode:u11_mux_decode|            ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u11_mux_decode                                                         ; work         ;
 ;    |mux_decode:u1_mux_decode|             ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u1_mux_decode                                                          ; work         ;
 ;    |mux_decode:u2_mux_decode|             ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u2_mux_decode                                                          ; work         ;
@@ -286,20 +286,21 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;    |mux_decode:u6_mux_decode|             ; 1 (1)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u6_mux_decode                                                          ; work         ;
 ;    |mux_decode:u7_mux_decode|             ; 1 (1)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u7_mux_decode                                                          ; work         ;
 ;    |mux_decode:u8_mux_decode|             ; 1 (1)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u8_mux_decode                                                          ; work         ;
-;    |switch:u_switch|                      ; 614 (56)          ; 363 (35)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch                                                                   ; work         ;
+;    |rx_module:u_rx_module|                ; 49 (49)           ; 33 (33)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|rx_module:u_rx_module                                                             ; work         ;
+;    |switch:u_switch|                      ; 631 (74)          ; 370 (42)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch                                                                   ; work         ;
 ;       |glf:u0_glf|                        ; 93 (1)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u0_glf                                                        ; work         ;
 ;          |timer:u1_timer|                 ; 92 (92)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer                                         ; work         ;
-;       |glf:u1_glf|                        ; 93 (1)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u1_glf                                                        ; work         ;
-;          |timer:u1_timer|                 ; 92 (92)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer                                         ; work         ;
-;       |glf:u2_glf|                        ; 95 (2)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u2_glf                                                        ; work         ;
-;          |timer:u1_timer|                 ; 93 (93)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer                                         ; work         ;
+;       |glf:u1_glf|                        ; 94 (1)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u1_glf                                                        ; work         ;
+;          |timer:u1_timer|                 ; 93 (93)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer                                         ; work         ;
+;       |glf:u2_glf|                        ; 94 (2)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u2_glf                                                        ; work         ;
+;          |timer:u1_timer|                 ; 92 (92)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer                                         ; work         ;
 ;       |glf:u3_glf|                        ; 93 (1)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u3_glf                                                        ; work         ;
 ;          |timer:u1_timer|                 ; 92 (92)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer                                         ; work         ;
-;       |timer:u0_timer|                    ; 94 (94)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|timer:u0_timer                                                    ; work         ;
+;       |timer:u0_timer|                    ; 93 (93)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|timer:u0_timer                                                    ; work         ;
 ;       |timer:u1_timer|                    ; 90 (90)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|timer:u1_timer                                                    ; work         ;
-;    |tgen:u_tgen|                          ; 378 (378)         ; 148 (148)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|tgen:u_tgen                                                                       ; work         ;
-;    |tx_module:u_tx_module|                ; 58 (58)           ; 35 (35)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|tx_module:u_tx_module                                                             ; work         ;
-;    |uart:u_uart|                          ; 132 (132)         ; 31 (31)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|uart:u_uart                                                                       ; work         ;
+;    |tgen:u_tgen|                          ; 379 (379)         ; 148 (148)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|tgen:u_tgen                                                                       ; work         ;
+;    |tx_module:u_tx_module|                ; 59 (59)           ; 35 (35)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|tx_module:u_tx_module                                                             ; work         ;
+;    |uart:u_uart|                          ; 126 (126)         ; 36 (36)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|uart:u_uart                                                                       ; work         ;
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -398,157 +399,151 @@ Encoding Type:  One-Hot
 Note: All cells listed above may not be present at the end of synthesis due to various synthesis optimizations.
 
 
-+--------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                           ;
-+-------------------------------------------------------------+------------------------------------------------+
-; Register name                                               ; Reason for Removal                             ;
-+-------------------------------------------------------------+------------------------------------------------+
-; mux_decode:u16_mux_decode|a[0]                              ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u15_mux_decode|a[0]                              ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u14_mux_decode|a[0]                              ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u13_mux_decode|a[0]                              ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u12_mux_decode|a[0]                              ; Stuck at GND due to stuck port data_in         ;
-; tgen:u_tgen|u2d                                             ; Stuck at VCC due to stuck port data_in         ;
-; tgen:u_tgen|d2u                                             ; Stuck at GND due to stuck port data_in         ;
-; tgen:u_tgen|pat_blc_wht_h[3,11,19]                          ; Stuck at GND due to stuck port data_in         ;
-; tgen:u_tgen|pat_wht_blc_h[3,11,19]                          ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u16_mux_decode|a[1]                              ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u15_mux_decode|a[1]                              ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u14_mux_decode|a[1]                              ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u13_mux_decode|a[1]                              ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u12_mux_decode|a[1]                              ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u10_mux_decode|a[0]                              ; Stuck at VCC due to stuck port data_in         ;
-; mux_decode:u9_mux_decode|a[0]                               ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u10_mux_decode|a[1]                              ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u9_mux_decode|a[1]                               ; Stuck at GND due to stuck port data_in         ;
-; switch:u_switch|timer:u1_timer|cnt_s[0]                     ; Lost fanout                                    ;
-; switch:u_switch|timer:u1_timer|pulse_1s                     ; Lost fanout                                    ;
-; switch:u_switch|timer:u1_timer|cnt_s[1..15]                 ; Lost fanout                                    ;
-; switch:u_switch|timer:u0_timer|cnt_s[0]                     ; Lost fanout                                    ;
-; switch:u_switch|timer:u0_timer|pulse_1s                     ; Lost fanout                                    ;
-; switch:u_switch|timer:u0_timer|cnt_s[1..15]                 ; Lost fanout                                    ;
-; switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_s[0]          ; Lost fanout                                    ;
-; switch:u_switch|glf:u3_glf|timer:u1_timer|pulse_1s          ; Lost fanout                                    ;
-; switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_s[1..15]      ; Lost fanout                                    ;
-; switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_s[0]          ; Lost fanout                                    ;
-; switch:u_switch|glf:u2_glf|timer:u1_timer|pulse_1s          ; Lost fanout                                    ;
-; switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_s[1..15]      ; Lost fanout                                    ;
-; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[0]          ; Lost fanout                                    ;
-; switch:u_switch|glf:u1_glf|timer:u1_timer|pulse_1s          ; Lost fanout                                    ;
-; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[1..15]      ; Lost fanout                                    ;
-; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[0]          ; Lost fanout                                    ;
-; switch:u_switch|glf:u0_glf|timer:u1_timer|pulse_1s          ; Lost fanout                                    ;
-; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[1..15]      ; Lost fanout                                    ;
-; lcd_display:u_lcd_display|y_reg[2]                          ; Stuck at GND due to stuck port data_in         ;
-; lcd_display:u_lcd_display|x_reg[3..6]                       ; Stuck at GND due to stuck port data_in         ;
-; lcd_display:u_lcd_display|x_reg[1,2]                        ; Stuck at VCC due to stuck port data_in         ;
-; tgen:u_tgen|da2_a[0,1]                                      ; Stuck at GND due to stuck port data_in         ;
-; tgen:u_tgen|da2_din[0,1]                                    ; Stuck at GND due to stuck port data_in         ;
-; tgen:u_tgen|da3_a[0,1]                                      ; Stuck at GND due to stuck port data_in         ;
-; tgen:u_tgen|da3_din[0,1]                                    ; Stuck at GND due to stuck port data_in         ;
-; switch:u_switch|len_lock_timer[12..15]                      ; Stuck at GND due to stuck port data_in         ;
-; switch:u_switch|len_lock_timer[8]                           ; Stuck at VCC due to stuck port data_in         ;
-; switch:u_switch|len_lock_timer[0,1]                         ; Stuck at GND due to stuck port data_in         ;
-; tgen:u_tgen|pat_blc_wht_h[1,4..6,9,12..14,17,20,21]         ; Merged with tgen:u_tgen|pat_blc_wht_h[22]      ;
-; tgen:u_tgen|pat_wht_blc_h[0,2,8,10,16,18]                   ; Merged with tgen:u_tgen|pat_blc_wht_h[22]      ;
-; tgen:u_tgen|pat_wht_blc_h[1,4..6,9,12..14,17,20..22]        ; Merged with tgen:u_tgen|pat_blc_wht_h[18]      ;
-; tgen:u_tgen|pat_blc_wht_h[0,2,8,10,16]                      ; Merged with tgen:u_tgen|pat_blc_wht_h[18]      ;
-; switch:u_switch|len_lock_timer[3,5]                         ; Merged with switch:u_switch|len_lock_timer[10] ;
-; switch:u_switch|len_lock_timer[2,7]                         ; Merged with switch:u_switch|len_lock_timer[9]  ;
-; switch:u_switch|nummax[2]                                   ; Merged with switch:u_switch|data_rty[79]       ;
-; switch:u_switch|data_rty[3,7,9,11,15,49,59,67,69,71]        ; Merged with switch:u_switch|data_rty[79]       ;
-; switch:u_switch|nummax[4]                                   ; Merged with switch:u_switch|data_rty[79]       ;
-; switch:u_switch|data_rty[2,4,6,14,31,76]                    ; Merged with switch:u_switch|data_rty[78]       ;
-; switch:u_switch|nummax[5]                                   ; Merged with switch:u_switch|data_rty[78]       ;
-; switch:u_switch|data_rty[29,57,62,63,65,68,72,74]           ; Merged with switch:u_switch|data_rty[78]       ;
-; switch:u_switch|data_rty[26,28,45,53,61,73,75]              ; Merged with switch:u_switch|data_rty[77]       ;
-; switch:u_switch|data_rty[20,30,33,37,43,51,60,64]           ; Merged with switch:u_switch|data_rty[70]       ;
-; switch:u_switch|data_rty[16,32,34,35,39,41,47,55,58]        ; Merged with switch:u_switch|data_rty[66]       ;
-; switch:u_switch|data_rty[23,38,44,46,48,50,54]              ; Merged with switch:u_switch|data_rty[56]       ;
-; switch:u_switch|data_rty[22,24,25,40,42]                    ; Merged with switch:u_switch|data_rty[52]       ;
-; switch:u_switch|data_rty[10,18]                             ; Merged with switch:u_switch|data_rty[36]       ;
-; switch:u_switch|nummax[3]                                   ; Merged with switch:u_switch|data_rty[36]       ;
-; switch:u_switch|data_rty[27]                                ; Merged with switch:u_switch|data_rty[36]       ;
-; switch:u_switch|nummax[0]                                   ; Merged with switch:u_switch|data_rty[19]       ;
-; switch:u_switch|data_rty[1,5,13]                            ; Merged with switch:u_switch|data_rty[17]       ;
-; switch:u_switch|nummax[1]                                   ; Merged with switch:u_switch|data_rty[12]       ;
-; switch:u_switch|data_rty[0]                                 ; Merged with switch:u_switch|data_rty[12]       ;
-; switch:u_switch|len_pwr_timer[0,9..14]                      ; Merged with switch:u_switch|len_pwr_timer[15]  ;
-; switch:u_switch|len_pwr_timer[2,4..7]                       ; Merged with switch:u_switch|len_pwr_timer[8]   ;
-; switch:u_switch|len_pwr_timer[1]                            ; Merged with switch:u_switch|len_pwr_timer[3]   ;
-; switch:u_switch|en_n14v                                     ; Merged with switch:u_switch|en_p14v            ;
-; switch:u_switch|en_gvddn                                    ; Merged with switch:u_switch|en_gvddp           ;
-; switch:u_switch|en_vgh                                      ; Merged with switch:u_switch|en_gvddp           ;
-; switch:u_switch|en_vgl                                      ; Merged with switch:u_switch|en_gvddp           ;
-; switch:u_switch|mux_en2                                     ; Merged with switch:u_switch|mux_en1            ;
-; switch:u_switch|mux_en3                                     ; Merged with switch:u_switch|mux_en1            ;
-; switch:u_switch|mux_en4                                     ; Merged with switch:u_switch|mux_en1            ;
-; switch:u_switch|mux_en_Test1                                ; Merged with switch:u_switch|mux_en1            ;
-; switch:u_switch|mux_en_Test2                                ; Merged with switch:u_switch|mux_en1            ;
-; uart:u_uart|recdata[3,7,9,11,15,49,59,67,69,71]             ; Merged with uart:u_uart|recdata[79]            ;
-; uart:u_uart|recdata[2,4,6,14,29,31,57,62,63,65,68,72,74,76] ; Merged with uart:u_uart|recdata[78]            ;
-; uart:u_uart|recdata[26,28,45,53,61,73,75]                   ; Merged with uart:u_uart|recdata[77]            ;
-; uart:u_uart|recdata[20,30,33,37,43,51,60,64]                ; Merged with uart:u_uart|recdata[70]            ;
-; uart:u_uart|recdata[16,32,34,35,39,41,47,55,58]             ; Merged with uart:u_uart|recdata[66]            ;
-; uart:u_uart|recdata[23,38,44,46,48,50,54]                   ; Merged with uart:u_uart|recdata[56]            ;
-; uart:u_uart|recdata[22,24,25,40,42]                         ; Merged with uart:u_uart|recdata[52]            ;
-; uart:u_uart|recdata[10,18,27]                               ; Merged with uart:u_uart|recdata[36]            ;
-; uart:u_uart|recdata[1,5,13]                                 ; Merged with uart:u_uart|recdata[17]            ;
-; uart:u_uart|recdata[0]                                      ; Merged with uart:u_uart|recdata[12]            ;
-; switch:u_switch|data_rty[66]                                ; Merged with switch:u_switch|data_rty[79]       ;
-; switch:u_switch|data_rty[56]                                ; Merged with switch:u_switch|data_rty[78]       ;
-; switch:u_switch|data_rty[52]                                ; Merged with switch:u_switch|data_rty[77]       ;
-; switch:u_switch|data_rty[36]                                ; Merged with switch:u_switch|data_rty[70]       ;
-; uart:u_uart|recdata[66]                                     ; Merged with uart:u_uart|recdata[79]            ;
-; uart:u_uart|recdata[56]                                     ; Merged with uart:u_uart|recdata[78]            ;
-; uart:u_uart|recdata[52]                                     ; Merged with uart:u_uart|recdata[77]            ;
-; uart:u_uart|recdata[36]                                     ; Merged with uart:u_uart|recdata[70]            ;
-; lcd_display:u_lcd_display|y_reg[0,1]                        ; Merged with lcd_display:u_lcd_display|x_reg[0] ;
-; tgen:u_tgen|pat_blc_wht_h[7,23]                             ; Merged with tgen:u_tgen|pat_blc_wht_h[15]      ;
-; tgen:u_tgen|pat_wht_blc_h[7,15,23]                          ; Merged with tgen:u_tgen|pat_blc_wht_h[15]      ;
-; tgen:u_tgen|r_data[7]                                       ; Merged with tgen:u_tgen|g_data[7]              ;
-; tgen:u_tgen|r_data[5]                                       ; Merged with tgen:u_tgen|r_data[4]              ;
-; tgen:u_tgen|g_data[3]                                       ; Merged with tgen:u_tgen|b_data[3]              ;
-; tgen:u_tgen|r_data[3]                                       ; Merged with tgen:u_tgen|b_data[3]              ;
-; tgen:u_tgen|g_data[5]                                       ; Merged with tgen:u_tgen|g_data[4]              ;
-; tgen:u_tgen|b_data[5]                                       ; Merged with tgen:u_tgen|b_data[4]              ;
-; uart:u_uart|recdata[79]                                     ; Merged with uart:u_uart|recdata[78]            ;
-; uart:u_uart|recdata[77]                                     ; Merged with uart:u_uart|recdata[70]            ;
-; uart:u_uart|recdata[21]                                     ; Merged with uart:u_uart|recdata[19]            ;
-; uart:u_uart|recdata[17]                                     ; Merged with uart:u_uart|recdata[12]            ;
-; switch:u_switch|data_rty[79]                                ; Merged with switch:u_switch|data_rty[78]       ;
-; switch:u_switch|data_rty[77]                                ; Merged with switch:u_switch|data_rty[70]       ;
-; switch:u_switch|data_rty[21]                                ; Merged with switch:u_switch|data_rty[19]       ;
-; switch:u_switch|data_rty[17]                                ; Merged with switch:u_switch|data_rty[12]       ;
-; switch:u_switch|len_pwr_timer[15]                           ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u11_mux_decode|a[1]                              ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u5_mux_decode|a[1]                               ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u4_mux_decode|a[1]                               ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u3_mux_decode|a[1]                               ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u2_mux_decode|a[1]                               ; Stuck at GND due to stuck port data_in         ;
-; tgen:u_tgen|b_data[3]                                       ; Stuck at GND due to stuck port data_in         ;
-; tgen:u_tgen|b_data[7]                                       ; Merged with tgen:u_tgen|g_data[7]              ;
-; switch:u_switch|data_rty[78]                                ; Stuck at GND due to stuck port data_in         ;
-; uart:u_uart|recdata[78]                                     ; Stuck at GND due to stuck port data_in         ;
-; tgen:u_tgen|da1_a[1]                                        ; Stuck at GND due to stuck port data_in         ;
-; lcd_display:u_lcd_display|p_back~2                          ; Lost fanout                                    ;
-; lcd_display:u_lcd_display|p_back~4                          ; Lost fanout                                    ;
-; lcd_display:u_lcd_display|p2~4                              ; Lost fanout                                    ;
-; lcd_display:u_lcd_display|p2~5                              ; Lost fanout                                    ;
-; lcd_display:u_lcd_display|p2~6                              ; Lost fanout                                    ;
-; lcd_display:u_lcd_display|p~4                               ; Lost fanout                                    ;
-; lcd_display:u_lcd_display|p~5                               ; Lost fanout                                    ;
-; tgen:u_tgen|cs_ctrl~4                                       ; Lost fanout                                    ;
-; tgen:u_tgen|cs_ctrl~5                                       ; Lost fanout                                    ;
-; tgen:u_tgen|cs_ctrl~6                                       ; Lost fanout                                    ;
-; uart:u_uart|cstate~4                                        ; Lost fanout                                    ;
-; uart:u_uart|cstate~5                                        ; Lost fanout                                    ;
-; uart:u_uart|cstate~6                                        ; Lost fanout                                    ;
-; uart:u_uart|cstate~7                                        ; Lost fanout                                    ;
-; tgen:u_tgen|pat_blc_wht_h[15]                               ; Merged with tgen:u_tgen|cs_ctrl.IDLE           ;
-; tgen:u_tgen|cnt_vdiv64[0]                                   ; Merged with tgen:u_tgen|cnt_vact[0]            ;
-; Total Number of Removed Registers = 402                     ;                                                ;
-+-------------------------------------------------------------+------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                ;
++------------------------------------------------------------------+------------------------------------------------+
+; Register name                                                    ; Reason for Removal                             ;
++------------------------------------------------------------------+------------------------------------------------+
+; mux_decode:u16_mux_decode|a[0]                                   ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u15_mux_decode|a[0]                                   ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u14_mux_decode|a[0]                                   ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u13_mux_decode|a[0]                                   ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u12_mux_decode|a[0]                                   ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|u2d                                                  ; Stuck at VCC due to stuck port data_in         ;
+; tgen:u_tgen|d2u                                                  ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|pat_blc_wht_h[3,11,19]                               ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|pat_wht_blc_h[3,11,19]                               ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u16_mux_decode|a[1]                                   ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u15_mux_decode|a[1]                                   ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u14_mux_decode|a[1]                                   ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u13_mux_decode|a[1]                                   ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u12_mux_decode|a[1]                                   ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u10_mux_decode|a[0]                                   ; Stuck at VCC due to stuck port data_in         ;
+; mux_decode:u9_mux_decode|a[0]                                    ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u10_mux_decode|a[1]                                   ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u9_mux_decode|a[1]                                    ; Stuck at GND due to stuck port data_in         ;
+; switch:u_switch|timer:u1_timer|cnt_s[0]                          ; Lost fanout                                    ;
+; switch:u_switch|timer:u1_timer|pulse_1s                          ; Lost fanout                                    ;
+; switch:u_switch|timer:u1_timer|cnt_s[1..15]                      ; Lost fanout                                    ;
+; switch:u_switch|timer:u0_timer|cnt_s[0]                          ; Lost fanout                                    ;
+; switch:u_switch|timer:u0_timer|pulse_1s                          ; Lost fanout                                    ;
+; switch:u_switch|timer:u0_timer|cnt_s[1..15]                      ; Lost fanout                                    ;
+; switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_s[0]               ; Lost fanout                                    ;
+; switch:u_switch|glf:u3_glf|timer:u1_timer|pulse_1s               ; Lost fanout                                    ;
+; switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_s[1..15]           ; Lost fanout                                    ;
+; switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_s[0]               ; Lost fanout                                    ;
+; switch:u_switch|glf:u2_glf|timer:u1_timer|pulse_1s               ; Lost fanout                                    ;
+; switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_s[1..15]           ; Lost fanout                                    ;
+; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[0]               ; Lost fanout                                    ;
+; switch:u_switch|glf:u1_glf|timer:u1_timer|pulse_1s               ; Lost fanout                                    ;
+; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[1..15]           ; Lost fanout                                    ;
+; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[0]               ; Lost fanout                                    ;
+; switch:u_switch|glf:u0_glf|timer:u1_timer|pulse_1s               ; Lost fanout                                    ;
+; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[1..15]           ; Lost fanout                                    ;
+; lcd_display:u_lcd_display|y_reg[2]                               ; Stuck at GND due to stuck port data_in         ;
+; lcd_display:u_lcd_display|x_reg[3..6]                            ; Stuck at GND due to stuck port data_in         ;
+; lcd_display:u_lcd_display|x_reg[1,2]                             ; Stuck at VCC due to stuck port data_in         ;
+; tgen:u_tgen|da2_a[0,1]                                           ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|da2_din[0,1]                                         ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|da3_a[0,1]                                           ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|da3_din[0,1]                                         ; Stuck at GND due to stuck port data_in         ;
+; switch:u_switch|len_lock_timer[12..15]                           ; Stuck at GND due to stuck port data_in         ;
+; switch:u_switch|len_lock_timer[8]                                ; Stuck at VCC due to stuck port data_in         ;
+; switch:u_switch|len_lock_timer[0,1]                              ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|pat_blc_wht_h[1,4..6,9,12..14,17,20,21]              ; Merged with tgen:u_tgen|pat_blc_wht_h[22]      ;
+; tgen:u_tgen|pat_wht_blc_h[0,2,8,10,16,18]                        ; Merged with tgen:u_tgen|pat_blc_wht_h[22]      ;
+; tgen:u_tgen|pat_wht_blc_h[1,4..6,9,12..14,17,20..22]             ; Merged with tgen:u_tgen|pat_blc_wht_h[18]      ;
+; tgen:u_tgen|pat_blc_wht_h[0,2,8,10,16]                           ; Merged with tgen:u_tgen|pat_blc_wht_h[18]      ;
+; switch:u_switch|len_lock_timer[3,5]                              ; Merged with switch:u_switch|len_lock_timer[10] ;
+; switch:u_switch|len_lock_timer[2,7]                              ; Merged with switch:u_switch|len_lock_timer[9]  ;
+; switch:u_switch|data_rty[5,7,15,21,29,32,77]                     ; Merged with switch:u_switch|data_rty[79]       ;
+; switch:u_switch|data_rty[2,4,6,14,31,50,54,58,62,66,68,72,74,76] ; Merged with switch:u_switch|data_rty[78]       ;
+; switch:u_switch|data_rty[36,40,42,52]                            ; Merged with switch:u_switch|data_rty[75]       ;
+; switch:u_switch|data_rty[28,33,37,51,53,61]                      ; Merged with switch:u_switch|data_rty[73]       ;
+; switch:u_switch|data_rty[0,34,35,38,44,46,48,56,59,63,65,67,69]  ; Merged with switch:u_switch|data_rty[71]       ;
+; switch:u_switch|data_rty[20,60,64]                               ; Merged with switch:u_switch|data_rty[70]       ;
+; switch:u_switch|data_rty[23,39,41,47,49,55]                      ; Merged with switch:u_switch|data_rty[57]       ;
+; switch:u_switch|data_rty[24,43]                                  ; Merged with switch:u_switch|data_rty[45]       ;
+; switch:u_switch|data_rty[25..27]                                 ; Merged with switch:u_switch|data_rty[30]       ;
+; switch:u_switch|data_rty[1,3,13]                                 ; Merged with switch:u_switch|data_rty[17]       ;
+; switch:u_switch|nummax[4]                                        ; Merged with switch:u_switch|nummax[5]          ;
+; switch:u_switch|len_pwr_timer[0,9..14]                           ; Merged with switch:u_switch|len_pwr_timer[15]  ;
+; switch:u_switch|len_pwr_timer[2,4..7]                            ; Merged with switch:u_switch|len_pwr_timer[8]   ;
+; switch:u_switch|len_pwr_timer[1]                                 ; Merged with switch:u_switch|len_pwr_timer[3]   ;
+; switch:u_switch|en_n14v                                          ; Merged with switch:u_switch|en_p14v            ;
+; switch:u_switch|en_vgh                                           ; Merged with switch:u_switch|en_gvddp           ;
+; switch:u_switch|en_gvddn                                         ; Merged with switch:u_switch|en_gvddp           ;
+; switch:u_switch|en_vgl                                           ; Merged with switch:u_switch|en_gvddp           ;
+; switch:u_switch|mux_en2                                          ; Merged with switch:u_switch|mux_en1            ;
+; switch:u_switch|mux_en3                                          ; Merged with switch:u_switch|mux_en1            ;
+; switch:u_switch|mux_en4                                          ; Merged with switch:u_switch|mux_en1            ;
+; switch:u_switch|mux_en_Test1                                     ; Merged with switch:u_switch|mux_en1            ;
+; switch:u_switch|mux_en_Test2                                     ; Merged with switch:u_switch|mux_en1            ;
+; uart:u_uart|recdata[5,7,15,21,29,32,77]                          ; Merged with uart:u_uart|recdata[79]            ;
+; uart:u_uart|recdata[2,4,6,14,31,50,54,58,62,66,68,72,74,76]      ; Merged with uart:u_uart|recdata[78]            ;
+; uart:u_uart|recdata[36,40,42,52]                                 ; Merged with uart:u_uart|recdata[75]            ;
+; uart:u_uart|recdata[28,33,37,51,53,61]                           ; Merged with uart:u_uart|recdata[73]            ;
+; uart:u_uart|recdata[0,34,35,38,44,46,48,56,59,63,65,67,69]       ; Merged with uart:u_uart|recdata[71]            ;
+; uart:u_uart|recdata[20,60,64]                                    ; Merged with uart:u_uart|recdata[70]            ;
+; uart:u_uart|recdata[23,39,41,47,49,55]                           ; Merged with uart:u_uart|recdata[57]            ;
+; uart:u_uart|recdata[24,43]                                       ; Merged with uart:u_uart|recdata[45]            ;
+; uart:u_uart|recdata[25..27]                                      ; Merged with uart:u_uart|recdata[30]            ;
+; uart:u_uart|recdata[1,3,13]                                      ; Merged with uart:u_uart|recdata[17]            ;
+; switch:u_switch|data_rty[57,71]                                  ; Merged with switch:u_switch|data_rty[79]       ;
+; switch:u_switch|data_rty[45,70]                                  ; Merged with switch:u_switch|data_rty[73]       ;
+; switch:u_switch|data_rty[12]                                     ; Merged with switch:u_switch|data_rty[17]       ;
+; uart:u_uart|recdata[57,71]                                       ; Merged with uart:u_uart|recdata[79]            ;
+; uart:u_uart|recdata[45,70]                                       ; Merged with uart:u_uart|recdata[73]            ;
+; uart:u_uart|recdata[12]                                          ; Merged with uart:u_uart|recdata[17]            ;
+; switch:u_switch|data_rty[18]                                     ; Merged with switch:u_switch|data_rty[22]       ;
+; uart:u_uart|recdata[18]                                          ; Merged with uart:u_uart|recdata[22]            ;
+; lcd_display:u_lcd_display|y_reg[0,1]                             ; Merged with lcd_display:u_lcd_display|x_reg[0] ;
+; tgen:u_tgen|pat_blc_wht_h[7,23]                                  ; Merged with tgen:u_tgen|pat_blc_wht_h[15]      ;
+; tgen:u_tgen|pat_wht_blc_h[7,15,23]                               ; Merged with tgen:u_tgen|pat_blc_wht_h[15]      ;
+; tgen:u_tgen|r_data[7]                                            ; Merged with tgen:u_tgen|g_data[7]              ;
+; tgen:u_tgen|r_data[5]                                            ; Merged with tgen:u_tgen|r_data[4]              ;
+; tgen:u_tgen|g_data[3]                                            ; Merged with tgen:u_tgen|b_data[3]              ;
+; tgen:u_tgen|r_data[3]                                            ; Merged with tgen:u_tgen|b_data[3]              ;
+; tgen:u_tgen|g_data[5]                                            ; Merged with tgen:u_tgen|g_data[4]              ;
+; tgen:u_tgen|b_data[5]                                            ; Merged with tgen:u_tgen|b_data[4]              ;
+; uart:u_uart|recdata[79]                                          ; Merged with uart:u_uart|recdata[78]            ;
+; uart:u_uart|recdata[75]                                          ; Merged with uart:u_uart|recdata[73]            ;
+; uart:u_uart|recdata[30]                                          ; Merged with uart:u_uart|recdata[22]            ;
+; switch:u_switch|data_rty[79]                                     ; Merged with switch:u_switch|data_rty[78]       ;
+; switch:u_switch|data_rty[75]                                     ; Merged with switch:u_switch|data_rty[73]       ;
+; switch:u_switch|data_rty[30]                                     ; Merged with switch:u_switch|data_rty[22]       ;
+; switch:u_switch|len_pwr_timer[15]                                ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u11_mux_decode|a[1]                                   ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u5_mux_decode|a[1]                                    ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u4_mux_decode|a[1]                                    ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u3_mux_decode|a[1]                                    ; Stuck at GND due to stuck port data_in         ;
+; mux_decode:u2_mux_decode|a[1]                                    ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|b_data[3]                                            ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|b_data[7]                                            ; Merged with tgen:u_tgen|g_data[7]              ;
+; switch:u_switch|nummax[1]                                        ; Stuck at VCC due to stuck port data_in         ;
+; switch:u_switch|nummax[5]                                        ; Stuck at GND due to stuck port data_in         ;
+; switch:u_switch|data_rty[78]                                     ; Stuck at GND due to stuck port data_in         ;
+; tgen:u_tgen|da1_a[1]                                             ; Stuck at GND due to stuck port data_in         ;
+; uart:u_uart|recdata[78]                                          ; Stuck at GND due to stuck port data_in         ;
+; lcd_display:u_lcd_display|p_back~2                               ; Lost fanout                                    ;
+; lcd_display:u_lcd_display|p_back~4                               ; Lost fanout                                    ;
+; lcd_display:u_lcd_display|p2~4                                   ; Lost fanout                                    ;
+; lcd_display:u_lcd_display|p2~5                                   ; Lost fanout                                    ;
+; lcd_display:u_lcd_display|p2~6                                   ; Lost fanout                                    ;
+; lcd_display:u_lcd_display|p~4                                    ; Lost fanout                                    ;
+; lcd_display:u_lcd_display|p~5                                    ; Lost fanout                                    ;
+; tgen:u_tgen|cs_ctrl~4                                            ; Lost fanout                                    ;
+; tgen:u_tgen|cs_ctrl~5                                            ; Lost fanout                                    ;
+; tgen:u_tgen|cs_ctrl~6                                            ; Lost fanout                                    ;
+; uart:u_uart|cstate~4                                             ; Lost fanout                                    ;
+; uart:u_uart|cstate~5                                             ; Lost fanout                                    ;
+; uart:u_uart|cstate~6                                             ; Lost fanout                                    ;
+; uart:u_uart|cstate~7                                             ; Lost fanout                                    ;
+; tgen:u_tgen|pat_blc_wht_h[15]                                    ; Merged with tgen:u_tgen|cs_ctrl.IDLE           ;
+; tgen:u_tgen|cnt_vdiv64[0]                                        ; Merged with tgen:u_tgen|cnt_vact[0]            ;
+; switch:u_switch|nummax[0]                                        ; Merged with switch:u_switch|nummax[3]          ;
+; Total Number of Removed Registers = 390                          ;                                                ;
++------------------------------------------------------------------+------------------------------------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -578,12 +573,12 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 664   ;
-; Number of registers using Synchronous Clear  ; 309   ;
-; Number of registers using Synchronous Load   ; 37    ;
-; Number of registers using Asynchronous Clear ; 527   ;
+; Total registers                              ; 709   ;
+; Number of registers using Synchronous Clear  ; 328   ;
+; Number of registers using Synchronous Load   ; 44    ;
+; Number of registers using Asynchronous Clear ; 570   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 451   ;
+; Number of registers using Clock Enable       ; 466   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -605,10 +600,10 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 ; switch:u_switch|dis_sn_d1[1]            ; 1       ;
 ; switch:u_switch|dis_sn_d1[3]            ; 1       ;
 ; switch:u_switch|len_pwr_timer[8]        ; 9       ;
-; switch:u_switch|glf:u2_glf|s_out        ; 2       ;
-; switch:u_switch|glf:u3_glf|s_out        ; 3       ;
-; switch:u_switch|glf:u0_glf|s_out        ; 12      ;
-; switch:u_switch|glf:u1_glf|s_out        ; 1       ;
+; switch:u_switch|glf:u2_glf|s_out        ; 3       ;
+; switch:u_switch|glf:u3_glf|s_out        ; 5       ;
+; switch:u_switch|glf:u1_glf|s_out        ; 9       ;
+; switch:u_switch|glf:u0_glf|s_out        ; 24      ;
 ; uart:u_uart|send24bitend                ; 3       ;
 ; Total number of inverted registers = 17 ;         ;
 +-----------------------------------------+---------+
@@ -619,44 +614,46 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|hcnt[11]                                  ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|hcnt[2]                                   ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt[5]                      ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt3[4]                     ;
-; 4:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|cnt_vblank[5]                             ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |VT_Demo|tx_module:u_tx_module|temp_data[4]                    ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt3[14]                    ;
+; 4:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|cnt_vblank[6]                             ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |VT_Demo|tx_module:u_tx_module|temp_data[5]                    ;
 ; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |VT_Demo|switch:u_switch|len_pwr_timer[3]                      ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|tx_module:u_tx_module|bps_cnt[3]                      ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u0_timer|cnt_clk[13]            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u1_timer|cnt_clk[4]             ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_clk[5]  ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[6]  ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[5]  ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_clk[10] ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|tx_module:u_tx_module|bps_cnt[14]                     ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u0_timer|cnt_clk[12]            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u1_timer|cnt_clk[13]            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_clk[3]  ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[9]  ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[10] ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_clk[14] ;
 ; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |VT_Demo|tx_module:u_tx_module|tx_bit[3]                       ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u0_timer|cnt_ms[15]             ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u0_timer|cnt_us[12]             ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u1_timer|cnt_ms[3]              ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u1_timer|cnt_us[9]              ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u0_timer|cnt_ms[1]              ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u0_timer|cnt_us[4]              ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u1_timer|cnt_ms[15]             ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u1_timer|cnt_us[14]             ;
 ; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_ms[10]  ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_us[5]   ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[0]   ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[0]   ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[13]  ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[7]   ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_ms[6]   ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_us[14]  ;
-; 5:1                ; 5 bits    ; 15 LEs        ; 10 LEs               ; 5 LEs                  ; Yes        ; |VT_Demo|switch:u_switch|data_rty[70]                          ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |VT_Demo|tx_module:u_tx_module|tx_rdy                          ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_us[7]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[13]  ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[3]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[9]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[15]  ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_ms[8]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_us[7]   ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |VT_Demo|tx_module:u_tx_module|tx_flag                         ;
+; 6:1                ; 11 bits   ; 44 LEs        ; 22 LEs               ; 22 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|data_rty[16]                          ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |VT_Demo|switch:u_switch|data_rty[9]                           ;
 ; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt2[0]                     ;
-; 7:1                ; 7 bits    ; 28 LEs        ; 21 LEs               ; 7 LEs                  ; Yes        ; |VT_Demo|switch:u_switch|dis_sn[5]                             ;
-; 7:1                ; 9 bits    ; 36 LEs        ; 9 LEs                ; 27 LEs                 ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt4[0]                     ;
-; 12:1               ; 10 bits   ; 80 LEs        ; 20 LEs               ; 60 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|b_data[2]                                 ;
+; 7:1                ; 9 bits    ; 36 LEs        ; 9 LEs                ; 27 LEs                 ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt4[3]                     ;
+; 12:1               ; 10 bits   ; 80 LEs        ; 20 LEs               ; 60 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|b_data[0]                                 ;
+; 8:1                ; 7 bits    ; 35 LEs        ; 28 LEs               ; 7 LEs                  ; Yes        ; |VT_Demo|switch:u_switch|dis_sn[0]                             ;
 ; 20:1               ; 5 bits    ; 65 LEs        ; 10 LEs               ; 55 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|r_data[6]                                 ;
 ; 12:1               ; 2 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |VT_Demo|tgen:u_tgen|da1_a[0]                                  ;
 ; 519:1              ; 3 bits    ; 1038 LEs      ; 18 LEs               ; 1020 LEs               ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|data_reg[4]                 ;
-; 20:1               ; 6 bits    ; 78 LEs        ; 24 LEs               ; 54 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|da1_din[6]                                ;
-; 28:1               ; 3 bits    ; 54 LEs        ; 18 LEs               ; 36 LEs                 ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|data_reg[7]                 ;
+; 20:1               ; 6 bits    ; 78 LEs        ; 24 LEs               ; 54 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|da1_din[4]                                ;
+; 28:1               ; 3 bits    ; 54 LEs        ; 18 LEs               ; 36 LEs                 ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|data_reg[2]                 ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |VT_Demo|lcd_display:u_lcd_display|p_back                      ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |VT_Demo|uart:u_uart|rData                                     ;
 ; 8:1                ; 3 bits    ; 15 LEs        ; 12 LEs               ; 3 LEs                  ; No         ; |VT_Demo|lcd_display:u_lcd_display|p2                          ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
 
@@ -1540,7 +1537,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun Dec 09 19:52:46 2018
+    Info: Processing started: Sun Dec 09 21:23:34 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off VT_Demo -c VT_Demo
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/tgen/tgen.v
@@ -1640,8 +1637,8 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/mypl
     Info (12023): Found entity 1: mypll_altpll
 Info (12128): Elaborating entity "mypll_altpll" for hierarchy "clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypll_altpll:auto_generated"
 Info (12128): Elaborating entity "switch" for hierarchy "switch:u_switch"
-Warning (10240): Verilog HDL Always Construct warning at switch.v(365): inferring latch(es) for variable "flag_ng", which holds its previous value in one or more paths through the always construct
-Info (10041): Inferred latch for "flag_ng" at switch.v(365)
+Warning (10240): Verilog HDL Always Construct warning at switch.v(326): inferring latch(es) for variable "flag_ng", which holds its previous value in one or more paths through the always construct
+Info (10041): Inferred latch for "flag_ng" at switch.v(326)
 Info (12128): Elaborating entity "glf" for hierarchy "switch:u_switch|glf:u0_glf"
 Info (12128): Elaborating entity "timer" for hierarchy "switch:u_switch|glf:u0_glf|timer:u1_timer"
 Info (12128): Elaborating entity "tx_module" for hierarchy "tx_module:u_tx_module"
@@ -1652,7 +1649,7 @@ Info (12128): Elaborating entity "uart" for hierarchy "uart:u_uart"
 Info (12128): Elaborating entity "glf" for hierarchy "uart:u_uart|glf:u1_glf"
 Info (12128): Elaborating entity "timer" for hierarchy "uart:u_uart|glf:u1_glf|timer:u1_timer"
 Info (12128): Elaborating entity "rx_module" for hierarchy "rx_module:u_rx_module"
-Warning (10230): Verilog HDL assignment warning at rx_module.v(158): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at rx_module.v(135): truncated value with size 32 to match size of target (4)
 Info (12128): Elaborating entity "tgen" for hierarchy "tgen:u_tgen"
 Warning (10858): Verilog HDL warning at tgen.v(175): object flag_TP_test_a used but never assigned
 Warning (10858): Verilog HDL warning at tgen.v(176): object flag_TP_test_b used but never assigned
@@ -1783,17 +1780,16 @@ Info (144001): Generated suppressed messages file M:/G6 NMOS(TL055VDMS50)_UART_V
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
 Warning (15899): PLL "clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypll_altpll:auto_generated|pll1" has parameters clk1_multiply_by and clk1_divide_by specified but port CLK[1] is not connected
-Warning (21074): Design contains 2 input pin(s) that do not drive logic
+Warning (21074): Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "sw5"
-    Warning (15610): No output dependent on input pin "rxd"
-Info (21057): Implemented 1924 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 1992 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 8 input pins
     Info (21059): Implemented 95 output pins
-    Info (21061): Implemented 1820 logic cells
+    Info (21061): Implemented 1888 logic cells
     Info (21065): Implemented 1 PLLs
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 133 warnings
-    Info: Peak virtual memory: 458 megabytes
-    Info: Processing ended: Sun Dec 09 19:53:03 2018
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 132 warnings
+    Info: Peak virtual memory: 451 megabytes
+    Info: Processing ended: Sun Dec 09 21:23:51 2018
     Info: Elapsed time: 00:00:17
     Info: Total CPU time (on all processors): 00:00:15
 

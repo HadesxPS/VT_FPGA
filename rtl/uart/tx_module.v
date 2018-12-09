@@ -36,7 +36,7 @@ begin
 						bps_cnt<=bps_cnt+1'b1;
 			end
 		else	bps_cnt<=0;
-		if(bps_cnt==291)
+		if(bps_cnt==608)
 				bps_clk<=1;
 		else
 				bps_clk<=0;

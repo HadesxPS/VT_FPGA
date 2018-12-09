@@ -44,7 +44,7 @@ module switch(
 	 output wire   [79:0]  read_data         ,
 	 output reg 	[5:0]	  nummax				  ,
 	 
-    output reg            flag_black_on
+	 output reg            flag_black_on
 );
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -61,31 +61,25 @@ parameter       PATMAX                      = PATMIN + PATNUM - 7'd1;
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // variable declaration
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-wire                            sw1_f                           ;
-wire                            sw2_f                           ;
-wire                            sw3_f                           ;
-wire                            sw4_f                           ;
-wire                            flag_up                         ;
-wire                            flag_down                       ;
+wire										sw1_f									;
+wire										sw2_f									;
+wire										sw3_f                         ;
+wire                            	sw4_f                         ;
+wire										flag_up                       ;
+wire										flag_down                     ;
+wire										flag_lock_timer					;
+wire										flag_dis_chg						;	//display content change
+wire										flag_pwr_timer						;
 
-//reg                             flag_up_d1                      ;
-//reg                             flag_up_d2                      ;
-//reg                             flag_down_d1                    ;
-//reg                             flag_down_d2                    ;
-wire                            flag_dis_chg                    ;  //display content change
-reg                             igr_sw                          ;  //when display content lock, ignore button sw1/sw2
-reg                             trig_lock_timer                 ;
-wire                            flag_lock_timer                 ;
-reg     [15:0]                  len_lock_timer                  ;
-reg                             trig_pwr_timer                  ;
-wire                            flag_pwr_timer                  ;
-reg     [15:0]                  len_pwr_timer                   ;
-reg                             flag_pwr                        ;  //1'b0 - power off; 1'b1 - power on
-reg     [6:0]                   dis_sn_d1                       ;
-reg    [79:0]                   data_rty                        ;
-reg                             flag_ng                         ;
-
-
+reg										igr_sw								;	//when display content lock, ignore button sw1/sw2
+reg										trig_lock_timer					;
+reg										flag_ng								;
+reg										trig_pwr_timer						;
+reg										flag_pwr								;	//1'b0 - power off; 1'b1 - power on
+reg	[6:0]								dis_sn_d1							;
+reg	[15:0]							len_lock_timer						;
+reg	[15:0]							len_pwr_timer						;
+reg	[79:0]							data_rty								;
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // continuous assignment
@@ -95,7 +89,6 @@ assign flag_down = (sw2_f == 1'b0);
 //assign flag_dis_chg = ((flag_up_d2 == 1'b1) || (flag_down_d2 == 1'b1));
 assign flag_dis_chg = (dis_sn != dis_sn_d1);
 assign read_data = data_rty ;
-
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // module instantiation
@@ -192,47 +185,56 @@ end
 
 always @(posedge clk or negedge rst_n)
 begin
-    if (rst_n == 1'b0)
-    begin
-        dis_sn <= 7'd0;
-    end
-    else
-    begin
-        if (sw3_f == 1'b0)
-        begin
-            dis_sn <= PATMIN;
-        end
-        else if ((sw4_f == 1'b0) || (flag_ng==1'b1) )
-        begin
-            dis_sn <= PATMAX;
-        end
-        else if (flag_up == 1'b1)
-        begin
-            if (dis_sn == PATMAX)
-            begin
-                dis_sn <= PATMAX;
-            end
-            else
-            begin
-                dis_sn <= dis_sn + 7'd1;
-            end
-        end
-        else if (flag_down == 1'b1)
-        begin
-            if ((dis_sn == PATMIN) || (dis_sn == PATMAX))
-            begin
-                dis_sn <= dis_sn;
-            end
-            else
-            begin
-                dis_sn <= dis_sn - 7'd1;
-            end
-        end
-        else
-        begin
-            dis_sn <= dis_sn;
-        end
-    end
+	if (rst_n == 1'b0)
+	begin
+		dis_sn <= 7'd0;
+	end
+	else
+	begin
+		if ((sw3_f == 1'b0))
+		begin
+			dis_sn <= PATMIN;
+		end
+		else if((sw4_f == 1'b0)||(flag_ng==1'b1))
+		begin
+			dis_sn <= PATMAX;
+		end
+		else if(flag_up==1'b1)
+		begin
+			if (dis_sn == PATMAX)
+			begin
+				dis_sn <= PATMAX;
+			end
+			else
+			begin
+				dis_sn <= dis_sn + 7'd1;
+			end
+		end
+		else if(flag_down==1'b1)
+		begin
+			if ((dis_sn == PATMIN) || (dis_sn == PATMAX))
+			begin
+				dis_sn <= dis_sn;
+			end
+			else
+			begin
+				dis_sn <= dis_sn - 7'd1;
+			end
+		end
+		else
+		begin
+			//tested by LHB
+			if((Rx_data[7:0]<8'b01001011)&&(Rx_data[7:0]>8'b01000000))
+			begin
+				dis_sn<=Rx_data[3:0]-1'b1;
+			end
+			//tested by LHB
+			else
+			begin
+				dis_sn<=dis_sn;
+			end
+		end
+	end
 end
 
 //button filter process: when button is pressed, ignore button status until time T is reached
@@ -263,11 +265,11 @@ begin
     end
     else
     begin
-        if (flag_lock_timer == 1'b1)
+        if (flag_lock_timer==1'b1)
         begin
             igr_sw <= 1'b0;
         end
-        else if (trig_lock_timer == 1'b1)
+        else if(trig_lock_timer==1'b1)
         begin
             igr_sw <= 1'b1;
         end
@@ -277,47 +279,6 @@ begin
         end
     end
 end
-
-//lock time length
-//always @(posedge clk or negedge rst_n)
-//begin
-//    if (rst_n == 1'b0)
-//    begin
-//        len_lock_timer <= 16'd300;
-//    end
-//    else
-//    begin
-//        if (flag_dis_chg == 1'b1)
-//        begin
-//            case (dis_sn[6:0])
-//                7'd0:
-//                begin
-//                    len_lock_timer <= 16'd300;
-//                end
-//                7'd1:
-//                begin
-//                    len_lock_timer <= 16'd2000;
-//                end
-//                7'd6, 7'd7, 7'd8:
-//                begin
-//                    len_lock_timer <= 16'd1000;
-//                end
-//					 7'd3, 7'd4, 7'd2, 7'd5:
-//                begin
-//                    len_lock_timer <= 16'd1000;
-//                end
-//                7'd9,7'd10:
-//                begin
-//                    len_lock_timer <= 16'd1000;
-//                end
-//                default:
-//                begin
-//                    len_lock_timer <= 16'd1000;
-//                end
-//            endcase
-//        end
-//    end
-//end
 
 //lock time length
 always @(posedge clk or negedge rst_n)
@@ -365,48 +326,53 @@ end
 always @(posedge clk or negedge rst_n)
 begin
 	if (rst_n == 1'b0)
-		begin
+	begin
 		en_uart <= 0;
 		data_rty <=0;
 		flag_ng<=0;
-		nummax<=5'd0;
-		end
+	end
 	else
-		begin		    
-		  if (sw1_f == 1'b0)
-		  begin		  
-			  if(dis_sn==0)
-			  begin
-			  en_uart <= 1;
-			  data_rty <= "*A08-2_V4#";     //传输的数据
-			  nummax<=5'd10; 			   	  //传输的数据位数 
-			  end
-			  else if(dis_sn== PATMAX-1)
-		     begin
-			  nummax<=5'd3;
-		     en_uart <= 1;
-			  data_rty <= "*1#";			  
-		     end
-			  else
-			  begin
-			  en_uart <= 0;
-			  data_rty <= data_rty;
-			  end
-		 end			
-		 else if(sw4_f == 1'b0)
-		 begin
-		     en_uart <= 1;
-			  nummax<=5'd3;
-			  data_rty <= "*0#";
-			  
-		 end
-		 else
-	     begin
-		  en_uart <= 0;
-		  data_rty <= data_rty;
-       end		 
-		end		
+	begin
+		if (sw1_f == 1'b0)
+		begin
+			if(dis_sn==0)
+			begin
+				nummax<=5'd10;
+				en_uart <= 1;
+				data_rty <= "\nA08-2_V4\n";     //传输的数据
+			end
+			else if(dis_sn== PATMAX-1)
+			begin
+				nummax<=5'd3;
+				en_uart <= 1;
+				data_rty <= "\n1\n";
+			end
+			else if((dis_sn>0))
+			begin
+				nummax<=5'd7; 
+				en_uart <= 1;
+				data_rty <= {"NO",{4'b11,dis_sn[3:0]},"\n"};     //传输的数据
+			end
+			else
+			begin
+				en_uart <= 0;
+				data_rty <= data_rty;
+			end
+		end
+		else if(sw4_f == 1'b0)
+		begin
+			nummax<=5'd3;
+			en_uart <= 1;
+			data_rty <= "\n0\n";
+		end
+		else
+		begin
+			en_uart <= 0;
+			data_rty <= data_rty;
+		end		 
+	end		
 end
+
 //power on/off control
 always @(posedge clk or negedge rst_n)
 begin
