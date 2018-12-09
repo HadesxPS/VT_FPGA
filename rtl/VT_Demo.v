@@ -93,7 +93,7 @@ module VT_Demo(
 // parameters
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 parameter       PATMIN                      = 7'd0              ;  //minimum pattern number
-parameter       PATNUM                      = 7'd11             ;
+parameter       PATNUM                      = 7'd12             ;
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // variable declaration
@@ -104,6 +104,14 @@ wire                            rst_n_sys                       ;
 wire    [6:0]                   dis_sn                          ;
 
 wire                            grst                            ;
+
+
+
+wire                            VTCOMSW1                            ;
+wire                            VTCOMSW2                            ;
+
+
+
 wire                            u2d                             ;
 wire                            d2u                             ;
 wire                            stv                             ;
@@ -226,6 +234,11 @@ tgen u_tgen(
     .rst_n                      ( rst_n_sys                     ),  //input
 	
     .grst                       ( grst                          ),  //output
+	 
+	 
+	 .VTCOMSW1                       ( VTCOMSW1                          ),  //output
+	 .VTCOMSW2                       ( VTCOMSW2                          ),  //output
+	 
     .u2d                        ( u2d                           ),  //output
     .d2u                        ( d2u                           ),  //output
 
@@ -272,29 +285,29 @@ mux_decode u1_mux_decode(
 
 mux_decode u2_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv3                          ),  //input
-    .db                         ( ckv3                          ),  //input
+    .da                         ( ckv1                          ),  //input
+    .db                         ( ckv1                          ),  //input
     .a                          ( mux_2                         )   //output
 );
 
 mux_decode u3_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv4                          ),  //input
-    .db                         ( ckv4                          ),  //input
+    .da                         ( ckv2                          ),  //input
+    .db                         ( ckv2                          ),  //input
     .a                          ( mux_3                         )   //output
 );
 
 mux_decode u4_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv1                          ),  //input
-    .db                         ( ckv1                          ),  //input
+    .da                         ( ckv3                          ),  //input
+    .db                         ( ckv3                          ),  //input
     .a                          ( mux_4                         )   //output
 );
 
 mux_decode u5_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv2                          ),  //input
-    .db                         ( ckv2                          ),  //input
+    .da                         ( ckv4                          ),  //input
+    .db                         ( ckv4                          ),  //input
     .a                          ( mux_5                         )   //output
 );
 
@@ -347,16 +360,24 @@ mux_decode u12_mux_decode(
     .a                          ( mux_12                        )   //output
 );
 
+//mux_decode u13_mux_decode(
+//    .clk                        ( clk_sys                       ),  //input
+//    .da                         ( 1'b1                          ),  //input
+//    .db                         ( 1'b0                          ),  //input
+//    .a                          ( mux_13                        )   //output
+//);
+
 mux_decode u13_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( 1'b1                          ),  //input
-    .db                         ( 1'b1                          ),  //input
+    .da                         ( VTCOMSW1                      ),  //input
+	 .db                         ( 1'b1                          ),  //input
+//    .db                         ( VTCOMSW2                          ),  //input
     .a                          ( mux_13                        )   //output
 );
 
 mux_decode u14_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( 1'b1                          ),  //input
+    .da                         ( 1'b1                         ),  //input
     .db                         ( 1'b1                          ),  //input
     .a                          ( mux_14                        )   //output
 );
