@@ -107,13 +107,17 @@ wire                            grst                            ;
 wire                            u2d                             ;
 wire                            d2u                             ;
 wire                            stv                             ;
-wire                            ckv1                            ;
-wire                            ckv2                            ;
-wire                            ckv3                            ;
-wire                            ckv4                            ;
-wire                            ckhr                            ;
-wire                            ckhg                            ;
-wire                            ckhb                            ;
+wire                            ckv1_L                          ;
+wire                            ckv2_L                          ;
+wire                            ckv3_L                          ;
+wire                            ckv4_L                          ;
+wire                            ckv1_R                          ;
+wire                            ckv2_R                          ;
+wire                            ckv3_R                          ;
+wire                            ckv4_R                          ;
+wire                            ckh1                            ;
+wire                            ckh2                            ;
+wire                            ckh3                            ;
 //wire                            xckhr                           ;
 //wire                            xckhg                           ;
 //wire                            xckhb                           ;
@@ -225,6 +229,7 @@ tgen u_tgen(
     .clk                        ( clk_sys                       ),  //input
     .rst_n                      ( rst_n_sys                     ),  //input
 	
+	 .gas                        ( gas                           ),
     .grst                       ( grst                          ),  //output
     .u2d                        ( u2d                           ),  //output
     .d2u                        ( d2u                           ),  //output
@@ -232,23 +237,24 @@ tgen u_tgen(
 	 .stv1                       ( stv1                          ),  //output
     .stv2                       ( stv2                          ),  //output
 	 
-    .ckv1                       ( ckv1                          ),  //output
-    .ckv2                       ( ckv2                          ),  //output
-    .ckv3                       ( ckv3                          ),  //output
-    .ckv4                       ( ckv4                          ),  //output
-    .ckhr                       ( ckhr                          ),  //output
-    .ckhg                       ( ckhg                          ),  //output
-    .ckhb                       ( ckhb                          ),  //output
-//    .xckhr                      ( xckhr                         ),  //output
-//    .xckhg                      ( xckhg                         ),  //output
-//    .xckhb                      ( xckhb                         ),  //output
+    .ckv1_L                     ( ckv1_L                        ),  //output
+    .ckv1_R                     ( ckv1_R                        ),  //output
+    .ckv2_L                     ( ckv2_L                        ),  //output
+    .ckv2_R                     ( ckv2_R                        ),  //output
+    .ckv3_L                     ( ckv3_L                        ),  //output
+    .ckv3_R                     ( ckv3_R                        ),  //output
+    .ckv4_L                     ( ckv4_L                        ),  //output
+    .ckv4_R                     ( ckv4_R                        ),  //output
+    .ckh1                       ( ckh1                          ),  //output
+    .ckh2                       ( ckh2                          ),  //output
+    .ckh3                       ( ckh3                          ),  //output
+	 
     .dis_sn                     ( dis_sn                        ),  //input
 	 
     .da1_wr                     ( da1_wr                        ),  //output reg
     .da2_wr                     ( da2_wr                        ),  //output reg
 	 .da3_wr                     ( da3_wr                        ),  //output reg
 	 .da4_wr                     ( da4_wr                        ),  //output reg
-//	 .en_uart                    ( en_uart                        ),  //output reg
 	 
 	 .da1_a                      ( da1_a                         ),  //output reg [1:0]
 	 .da2_a                      ( da2_a                         ),  //output reg [1:0]
@@ -265,78 +271,78 @@ tgen u_tgen(
 
 mux_decode u1_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( stv1                           ),  //input
-    .db                         ( stv2                           ),  //input
+    .da                         ( stv1                          ),  //input
+    .db                         ( stv1                          ),  //input
     .a                          ( mux_1                         )   //output
 );
 
 mux_decode u2_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv3                          ),  //input
-    .db                         ( ckv3                          ),  //input
+    .da                         ( ckv1_L                        ),  //input
+    .db                         ( ckv1_R                        ),  //input
     .a                          ( mux_2                         )   //output
 );
 
 mux_decode u3_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv4                          ),  //input
-    .db                         ( ckv4                          ),  //input
+    .da                         ( ckv2_L                        ),  //input
+    .db                         ( ckv2_R                        ),  //input
     .a                          ( mux_3                         )   //output
 );
 
 mux_decode u4_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv1                          ),  //input
-    .db                         ( ckv1                          ),  //input
+    .da                         ( ckv3_L                        ),  //input
+    .db                         ( ckv3_R                        ),  //input
     .a                          ( mux_4                         )   //output
 );
 
 mux_decode u5_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv2                          ),  //input
-    .db                         ( ckv2                          ),  //input
+    .da                         ( ckv4_L                        ),  //input
+    .db                         ( ckv4_R                        ),  //input
     .a                          ( mux_5                         )   //output
 );
 
 mux_decode u6_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckhr                          ),  //input
-    .db                         ( 1'b0                          ),  //input
+    .da                         ( ckh1                          ),  //input
+    .db                         ( ckh1                          ),  //input
     .a                          ( mux_6                         )   //output
 );
 
 mux_decode u7_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckhg                          ),  //input
-    .db                         ( 1'b0                          ),  //input
+    .da                         ( ckh2                          ),  //input
+    .db                         ( ckh2                          ),  //input
     .a                          ( mux_7                         )   //output
 );
 
 mux_decode u8_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckhb                          ),  //input
-    .db                         ( 1'b0                          ),  //input
+    .da                         ( ckh3                          ),  //input
+    .db                         ( ckh3                          ),  //input
     .a                          ( mux_8                         )   //output
 );
 
 mux_decode u9_mux_decode(
     .clk                        ( clk_sys                       ),  //input
     .da                         ( u2d                           ),  //input
-    .db                         ( u2d                           ),  //input
+    .db                         ( d2u                           ),  //input
     .a                          ( mux_9                         )   //output
 );
 
 mux_decode u10_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( d2u                           ),  //input
-    .db                         ( d2u                           ),  //input
+    .da                         ( grst                          ),  //input
+    .db                         ( grst                          ),  //input
     .a                          ( mux_10                        )   //output
 );
 
 mux_decode u11_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( grst                          ),  //input
-    .db                         ( grst                          ),  //input
+    .da                         ( gas                           ),  //input
+    .db                         ( gas                           ),  //input
     .a                          ( mux_11                        )   //output
 );
 
