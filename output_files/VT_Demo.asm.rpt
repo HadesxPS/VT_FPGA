@@ -1,5 +1,5 @@
 Assembler report for VT_Demo
-Sun Dec 09 19:53:30 2018
+Sun Dec 09 21:09:25 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -10,8 +10,8 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: M:/G6 NMOS(TL055VDMS50)_UART_VT2/output_files/VT_Demo.sof
-  6. Assembler Device Options: M:/G6 NMOS(TL055VDMS50)_UART_VT2/output_files/VT_Demo.pof
+  5. Assembler Device Options: M:/TE087XDXP01-00/output_files/VT_Demo.sof
+  6. Assembler Device Options: M:/TE087XDXP01-00/output_files/VT_Demo.pof
   7. Assembler Messages
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sun Dec 09 19:53:30 2018 ;
+; Assembler Status      ; Successful - Sun Dec 09 21:09:25 2018 ;
 ; Revision Name         ; VT_Demo                               ;
 ; Top-level Entity Name ; VT_Demo                               ;
 ; Family                ; Cyclone III                           ;
@@ -78,37 +78,37 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+-----------------------------------------------------------+
-; Assembler Generated Files                                 ;
-+-----------------------------------------------------------+
-; File Name                                                 ;
-+-----------------------------------------------------------+
-; M:/G6 NMOS(TL055VDMS50)_UART_VT2/output_files/VT_Demo.sof ;
-; M:/G6 NMOS(TL055VDMS50)_UART_VT2/output_files/VT_Demo.pof ;
-+-----------------------------------------------------------+
++--------------------------------------------+
+; Assembler Generated Files                  ;
++--------------------------------------------+
+; File Name                                  ;
++--------------------------------------------+
+; M:/TE087XDXP01-00/output_files/VT_Demo.sof ;
+; M:/TE087XDXP01-00/output_files/VT_Demo.pof ;
++--------------------------------------------+
 
 
-+-------------------------------------------------------------------------------------+
-; Assembler Device Options: M:/G6 NMOS(TL055VDMS50)_UART_VT2/output_files/VT_Demo.sof ;
-+----------------+--------------------------------------------------------------------+
-; Option         ; Setting                                                            ;
-+----------------+--------------------------------------------------------------------+
-; Device         ; EP3C16Q240C8                                                       ;
-; JTAG usercode  ; 0x001E1B14                                                         ;
-; Checksum       ; 0x001E1B14                                                         ;
-+----------------+--------------------------------------------------------------------+
++----------------------------------------------------------------------+
+; Assembler Device Options: M:/TE087XDXP01-00/output_files/VT_Demo.sof ;
++----------------+-----------------------------------------------------+
+; Option         ; Setting                                             ;
++----------------+-----------------------------------------------------+
+; Device         ; EP3C16Q240C8                                        ;
+; JTAG usercode  ; 0x001BC444                                          ;
+; Checksum       ; 0x001BC444                                          ;
++----------------+-----------------------------------------------------+
 
 
-+-------------------------------------------------------------------------------------+
-; Assembler Device Options: M:/G6 NMOS(TL055VDMS50)_UART_VT2/output_files/VT_Demo.pof ;
-+--------------------+----------------------------------------------------------------+
-; Option             ; Setting                                                        ;
-+--------------------+----------------------------------------------------------------+
-; Device             ; EPCS4                                                          ;
-; JTAG usercode      ; 0x00000000                                                     ;
-; Checksum           ; 0x05C36784                                                     ;
-; Compression Ratio  ; 3                                                              ;
-+--------------------+----------------------------------------------------------------+
++----------------------------------------------------------------------+
+; Assembler Device Options: M:/TE087XDXP01-00/output_files/VT_Demo.pof ;
++--------------------+-------------------------------------------------+
+; Option             ; Setting                                         ;
++--------------------+-------------------------------------------------+
+; Device             ; EPCS4                                           ;
+; JTAG usercode      ; 0x00000000                                      ;
+; Checksum           ; 0x05C31625                                      ;
+; Compression Ratio  ; 3                                               ;
++--------------------+-------------------------------------------------+
 
 
 +--------------------+
@@ -117,13 +117,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun Dec 09 19:53:28 2018
+    Info: Processing started: Sun Dec 09 21:09:23 2018
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off VT_Demo -c VT_Demo
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 404 megabytes
-    Info: Processing ended: Sun Dec 09 19:53:30 2018
+    Info: Peak virtual memory: 413 megabytes
+    Info: Processing ended: Sun Dec 09 21:09:25 2018
     Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:02
 

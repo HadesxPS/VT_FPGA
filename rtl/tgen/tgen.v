@@ -18,25 +18,25 @@
 // ----------------------------------------------------------------------------
 // Revison
 // 2014-08-01    :  create file
+// 2015-11-17    :  modified for TED
 //*****************************************************************************
 module tgen(
-    input                 clk               ,
-    input                 rst_n             ,
-    output reg            grst              ,
+	input                 clk               ,
+	input                 rst_n             ,
+	output reg            grst              ,
+    output reg            gas              ,
+	 output reg            jdqi              ,
     output reg            u2d               ,
     output reg            d2u               ,
-    output reg            stv1              ,
-	 output reg            stv2              ,
+    output reg            stv               ,
     output                ckv1              ,
     output                ckv2              ,
-    output                ckv3              ,
-    output                ckv4              ,
-    output reg            ckhr              ,
-    output reg            ckhg              ,
-    output reg            ckhb              ,
-//    output reg            xckhr             ,
-//    output reg            xckhg             ,
-//    output reg            xckhb             ,
+    output reg            ckh1              ,
+    output reg            ckh2              ,
+    output reg            ckh3              ,
+    output reg            ckh4             ,
+    output reg            ckh5             ,
+    output reg            ckh6             ,
     input      [6:0]      dis_sn            ,
 	 
     output reg            da1_wr            ,
@@ -71,61 +71,50 @@ parameter       VFP                 = 3'd5                      ;
 //for timing control
 parameter       NUM_CLK_GRST        = 32'd5                     ;  //number of clocks during reset
 
-parameter       H_ACT               = 12'd1080                  ;
-//parameter       H_ACT               = 12'd900                  ;
+parameter       H_ACT               = 12'd1440                  ;
 parameter       H_BP                = 12'd45                    ;  //including HPW  95
 parameter       H_FP                = 12'd45                    ;  //               50
 
 parameter       V_BP                = 12'd12                    ;  //including VPW
 parameter       V_FP                = 12'd7                     ;
-parameter       V_ACT               = 12'd1920                   ;
-//parameter       V_ACT               = 12'd960                   ;//fxl
+parameter       V_ACT               = 12'd320                   ;
 parameter       V_PCH               = 12'd20                    ;//10
 
 parameter       H_ABGN              = H_BP                      ;
 parameter       H_AEND              = H_BP + H_ACT              ;
 parameter       H_TOTAL             = H_BP + H_ACT + H_FP       ;
 
-parameter       GAP_VDIV64          = 8'd30                     ;
-//parameter       GAP_VDIV64          = 8'd15                     ;//fxl
+parameter       GAP_VDIV64          = 8'd15                     ;
 
-parameter       STV1_WIDTH           = 12'd1                     ;   //stv width. unit: line
-parameter       STV1_TOTAL_DIRE      = 1'b1                      ;   //1'b1 - stv shift left; 1'b0 - stv shift right
-parameter       STV1_TOTAL_SHIFT     = 12'd2                     ;   //stv shift offset, unit: lines
-parameter       STV1_RISE_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
-parameter       STV1_RISE_SHIFT      = 12'd76                    ;   //stv rising edge shift offset. unit: pclk
-parameter       STV1_FALL_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
-parameter       STV1_FALL_SHIFT      = 12'd1                     ;   //stv rising edge shift offset. unit: pclk
+parameter       STV_WIDTH           = 12'd1                     ;   //stv width. unit: line
+parameter       STV_TOTAL_DIRE      = 1'b1                      ;   //1'b1 - stv shift left; 1'b0 - stv shift right
+parameter       STV_TOTAL_SHIFT     = 12'd2                     ;   //stv shift offset, unit: lines
+parameter       STV_RISE_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
+parameter       STV_RISE_SHIFT      = 12'd76                    ;   //stv rising edge shift offset. unit: pclk
+parameter       STV_FALL_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
+parameter       STV_FALL_SHIFT      = 12'd1                     ;   //stv rising edge shift offset. unit: pclk
 
-parameter       STV2_WIDTH           = 12'd1                     ;   //stv width. unit: line
-parameter       STV2_TOTAL_DIRE      = 1'b1                      ;   //1'b1 - stv shift left; 1'b0 - stv shift right
-parameter       STV2_TOTAL_SHIFT     = 12'd1                     ;   //stv shift offset, unit: lines
-parameter       STV2_RISE_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
-parameter       STV2_RISE_SHIFT      = 12'd76                    ;   //stv rising edge shift offset. unit: pclk
-parameter       STV2_FALL_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
-parameter       STV2_FALL_SHIFT      = 12'd1                     ;   //stv rising edge shift offset. unit: pclk
 
-parameter       CKV_RISE_SHIFT     = 12'd57                     ;   //ckv rising edge shift offset. unit: pclk. shift right
-parameter       CKV_FALL_SHIFT     = 12'd57                     ;   //ckv falling edge shift offset. unit: pclk. shift left
+parameter       CKV_RISE_SHIFT	    = 12'd57                     ;   //ckv rising edge shift offset. unit: pclk. shift right
+parameter       CKV_FALL_SHIFT      = 12'd57                     ;   //ckv falling edge shift offset. unit: pclk. shift left
 
 parameter       CKH_PRE_GAP         = 12'd10                    ;   //gap befor CKH processing.
-parameter       CKH_WIDTH           = 12'd265                   ;   //ckh width. unit: pclk
-//parameter       CKH_WIDTH           = 12'd130                   ;   //ckh width. unit: pclk
-parameter       CKH_RISE_SHIFT      = 12'd45                    ;   //gap before rising edge of ckh. reference point: rising edge of ckv
-parameter       CKH_FALL_SHIFT      = 12'd45                    ;   //gap after falling edge of ckh
+parameter       CKH_WIDTH           = 12'd170                   ;   //ckh width. unit: pclk
+parameter       CKH_RISE_SHIFT      = 12'd35                    ;   //gap before rising edge of ckh. reference point: rising edge of ckv
+parameter       CKH_FALL_SHIFT      = 12'd35                    ;   //gap after falling edge of ckh
 
 //for pattern generation
-parameter       DCODE_WHITE         = 8'd242                    ;   //DA input for white (grayscale=255)
+parameter       DCODE_WHITE         = 8'd245                    ;   //DA input for white (grayscale=255)
 parameter       DCODE_BLACK         = 8'd133                    ;   //DA input for black (grayscale=0)
 parameter       DCODE_VCOM          = 8'd124                    ;   //DA input for vcom
 parameter       DCODE_GND           = 8'd128                    ;   //DA input for GND
-parameter       DCODE_GRAY128       = 8'd195                    ;   //DA input for gray pattern
-parameter       DCODE_GRAY64        = 8'd182                    ;   //DA input for gray pattern
+parameter       DCODE_GRAY128       = 8'd187                    ;   //DA input for gray pattern  //PLC：184 ， NLC：195
+parameter       DCODE_GRAY64        = 8'd170                    ;   //DA input for gray pattern
 
-parameter       DCODE_VCOMA       	= 8'd132                    ;   //DA input for VCOMA
-parameter       DCODE_VCOMB        	= 8'd170                    ;   //DA input for VCOMB
+parameter       DCODE_VCOMA       	= 8'd124                    ;   //DA input for VCOMA
+parameter       DCODE_VCOMB        	= 8'd124                    ;   //DA input for VCOMB
 
-parameter       SRC_PCH_SHIFT       = 8'd80                    ;   //source precharge time
+parameter       SRC_PCH_SHIFT       = 8'd80                     ;   //source precharge time
                                                                     //DA output tansition time: 1.4us, about 120 clk_sys period
                                                                     //constraint: 
                                                                     //1. (CKV1_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT) > SRC_PCH_SHIFT
@@ -155,8 +144,6 @@ reg     [5:0]                   num_vdiv64                      ;  //960/64=15  
 
 reg                             ckv1_pre                        ;
 reg                             ckv2_pre                        ;
-reg                             ckv3_pre                        ;
-reg                             ckv4_pre                        ;
 
 //for pattern generation
 reg     [6:0]                   smp_dis_sn                      ;
@@ -171,17 +158,10 @@ reg     [7:0]                   b_data                          ;
 reg                             flag_frm_pol                    ;  //frame is odd or even. 1'b0 - odd; 1'b1 - even
 
 
-wire                            flag_rev_scan                   ;  //1'b1 - reverse scan ;  1'b0 - normal scan 
-wire                            flag_TP_test_a                    ;  //1'b1 - TP_test_pattern ;  1'b0 - normal pattern
-wire                            flag_TP_test_b                    ;  //1'b1 - TP_test_pattern ;  1'b0 - normal pattern
-wire                            flag_inversion                  ;  //1'b1 - frame inversion ;  1'b0 - column inversion         
-
-wire                            is_demux_all_on                 ;
+wire                            flag_rev_scan                   ;  //1'b1 - reverse scan ;  1'b0 - normal scan      
 wire                            is_sof_vblank                   ;
 
-//wire                            flag_pat_r                      ;
-//wire                            flag_pat_g                      ;
-//wire                            flag_pat_b                      ;
+
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // continuous assignment
@@ -193,30 +173,14 @@ assign en_hcnt = (cs_ctrl == VBP) || (cs_ctrl == PCH) || (cs_ctrl == DISPLAY) ||
 assign en_vblank = (cs_ctrl == VBP) || (cs_ctrl == PCH) || (cs_ctrl == VFP);
 assign en_vact = (cs_ctrl == DISPLAY);
 assign flag_hend = (hcnt == H_TOTAL - 12'd1);
-assign flag_pch = (((smp_dis_sn == 7'd4) || (smp_dis_sn == 7'd5)) && (num_vdiv64 == 6'd31)&& (cnt_vdiv64 == GAP_VDIV64 - 8'd1) && (flag_hend == 1'b1));
-
-//assign flag_pch = 1'b0;
 assign is_sof_vblank = (cs_ctrl == PCH) && (cnt_vact == 12'd0);
-
-//assign is_demux_all_on = (smp_dis_sn == 7'd2);
-assign is_demux_all_on = 1'b0;
-
-//assign flag_rev_scan = (smp_dis_sn == 7'd2) ;  //1'b1 - reverse scan ;  1'b0 - normal scan
+assign flag_pch = (((smp_dis_sn == 7'd3) || (smp_dis_sn == 7'd4)) && (cnt_vact == 160)); //for LG 6.2 COF
 assign flag_rev_scan = 1'b0; 
-//assign flag_TP_test_a = (smp_dis_sn == 7'd10) ;  //1'b1 - TP_test_pattern ;  1'b0 - normal pattern
-//assign flag_TP_test_b = (smp_dis_sn == 7'd11) ;  //1'b1 - TP_test_pattern ;  1'b0 - normal pattern
-//assign flag_inversion = (smp_dis_sn == 7'd9);  //1'b1 - frame inversion ;  1'b0 - column inversion           
-assign flag_inversion = 1'b0;  
-
-assign ckv1 = (flag_rev_scan == 1'b0) ? ckv1_pre : ckv1_pre;
-assign ckv3 = (flag_rev_scan == 1'b0) ? ckv3_pre : ckv3_pre;
-assign ckv2 = (flag_rev_scan == 1'b0) ? ckv2_pre : ckv2_pre;
-assign ckv4 = (flag_rev_scan == 1'b0) ? ckv4_pre : ckv4_pre;
+assign ckv1 = (flag_rev_scan == 1'b0) ? ckv2_pre : ckv1_pre;
+assign ckv2 = (flag_rev_scan == 1'b0) ? ckv1_pre : ckv2_pre;
 
 
-//assign flag_pat_r = (smp_dis_sn == 7'd7);
-//assign flag_pat_g = (smp_dis_sn == 7'd8);
-//assign flag_pat_b = (smp_dis_sn == 7'd9);
+
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // module instantiation
@@ -494,29 +458,58 @@ begin
     begin
         grst <= 1'b0;
     end
-	 
-	// for NMOS
-	 else if ((flag_black_on == 1'b1)|| (is_demux_all_on == 1'b1))
-    begin
-       // stv1 <= 1'b1;
-		  grst <= 1'b1;
-    end
-	 
-	 
     else
     begin
-        if (cs_ctrl == GRST)
+        if ((cs_ctrl == GRST)||(flag_black_on == 1'b1))
         begin
             grst <= 1'b1;
         end
         else
         begin
-            grst <= 1'b0;
+            grst <= 1'b1;
         end
     end
 end
 
+//gas
+always @(posedge clk or negedge rst_n)
+begin
+    if (rst_n == 1'b0)
+    begin
+        gas <= 1'b0;
+    end
+    else
+    begin
+      if ((flag_black_on == 1'b1)||(smp_dis_sn == 7'd7))
+        begin
+            gas <= 1'b1;
+        end
+        else
+        begin
+            gas <= 1'b0;
+        end
+    end
+end
 
+// jdqi
+always @(posedge clk or negedge rst_n)
+begin
+    if (rst_n == 1'b0)
+    begin
+        jdqi <= 1'b0;
+    end
+    else
+    begin
+        if (smp_dis_sn >= 7'd11)
+        begin
+            jdqi <= 1'b1;
+        end
+        else
+        begin
+            jdqi <= 1'b0;
+        end
+    end
+end
 //u2d
 always @(posedge clk or negedge rst_n)
 begin
@@ -558,486 +551,122 @@ begin
 end
 
 
-////stv1
-////referce point: end of VBP (start of DISPLAY)
-//always @(posedge clk or negedge rst_n)
-//begin
-//    if (rst_n == 1'b0)
-//    begin
-//        stv1 <= 1'b0;
-//    end
-//    else if ((flag_black_on == 1'b1)|| (is_demux_all_on == 1'b1))
-//    begin
-//       // stv1 <= 1'b1;
-//		  stv1 <= 1'b0;
-//    end
-//    else
-//    begin
-//        if ((STV1_TOTAL_DIRE == 1'b1)&&(smp_dis_sn != 7'd2))  //stv shift left
-//        begin
-//            if (STV1_RISE_DIRE == 1'b1)  //rising edge shift left
-//            begin
-//                if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV1_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV1_RISE_SHIFT))
-//                begin
-//                    stv1 <= 1'b1;
-//                end
-//            end
-//            else  //rising edge shift right
-//            begin
-//                if (STV1_TOTAL_SHIFT == 0)
-//                begin
-//                    if ((cs_ctrl == DISPLAY) && (cnt_vact == 12'd0) && (hcnt == STV1_RISE_SHIFT))
-//                    begin
-//                        stv1 <= 1'b1;
-//                    end
-//                end
-//                else
-//                begin
-//                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV1_TOTAL_SHIFT) && (hcnt == STV1_RISE_SHIFT))
-//                    begin
-//                        stv1 <= 1'b1;
-//                    end
-//                end
-//            end
-//            
-//            if (STV1_FALL_DIRE == 1'b1)  //falling edge shift left
-//            begin
-//                if (STV1_WIDTH <= STV1_TOTAL_SHIFT)
-//                begin
-//                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV1_TOTAL_SHIFT - 12'd1 + STV1_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV1_FALL_SHIFT))
-//                    begin
-//                        stv1 <= 1'b0;
-//                    end
-//                end
-//                else
-//                begin
-//                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_WIDTH - STV1_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV1_FALL_SHIFT))
-//                    begin
-//                        stv1 <= 1'b1;
-//                    end
-//                end
-//            end
-//            else  //falling edge shift right
-//            begin
-//                if (STV1_WIDTH < STV1_TOTAL_SHIFT)
-//                begin
-//                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV1_TOTAL_SHIFT + STV1_WIDTH) && (hcnt == STV1_FALL_SHIFT))
-//                    begin
-//                        stv1 <= 1'b0;
-//                    end
-//                end
-//                else
-//                begin
-//                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_WIDTH - STV1_TOTAL_SHIFT) && (hcnt == STV1_FALL_SHIFT))
-//                    begin
-//                        stv1 <= 1'b0;
-//                    end
-//                end
-//            end
-//        end
-//
-//        else  //stv shift right
-//        begin
-//            if (STV1_RISE_DIRE == 1'b1)  //rising edge shift left
-//            begin
-//                if (STV1_TOTAL_SHIFT == 0)
-//                begin
-//                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank -12'd1) && (hcnt == H_TOTAL - 12'd1 - STV1_RISE_SHIFT))
-//                    begin
-//                        stv1 <= 1'b1;
-//                    end
-//                end
-//                else
-//                begin
-//                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV1_RISE_SHIFT))
-//                    begin
-//                        stv1 <= 1'b1;
-//                    end
-//                end
-//            end
-//            else  //rising edge shift right
-//            begin
-//                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_TOTAL_SHIFT) && (hcnt == STV1_RISE_SHIFT))
-//                begin
-//                    stv1 <= 1'b1;
-//                end
-//            end
-//            
-//            if (STV1_FALL_DIRE == 1'b1)  //falling edge shift left
-//            begin
-//                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_TOTAL_SHIFT - 12'd1 + STV1_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV1_FALL_SHIFT))
-//                begin
-//                    stv1 <= 1'b0;
-//                end
-//            end
-//            else  //falling edge shift right
-//            begin
-//                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_TOTAL_SHIFT - 12'd1 + STV1_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV1_FALL_SHIFT))
-//                begin
-//                    stv1 <= 1'b0;
-//                end
-//            end
-//        end
-//    end
-//end
-//
-////stv2
-////referce point: end of VBP (start of DISPLAY)
-//always @(posedge clk or negedge rst_n)
-//begin
-//    if (rst_n == 1'b0)
-//    begin
-//        stv2 <= 1'b0;
-//    end
-//    else if ((flag_black_on == 1'b1)|| (is_demux_all_on == 1'b1))
-//    begin
-//        //stv2 <= 1'b1;
-//		  stv2 <= 1'b0;
-//    end
-//    else
-//    begin
-//        if ((STV2_TOTAL_DIRE == 1'b1)&&(smp_dis_sn != 7'd2))  //stv shift left
-//        begin
-//            if (STV2_RISE_DIRE == 1'b1)  //rising edge shift left
-//            begin
-//                if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV2_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV2_RISE_SHIFT))
-//                begin
-//                    stv2 <= 1'b1;
-//                end
-//            end
-//            else  //rising edge shift right
-//            begin
-//                if (STV2_TOTAL_SHIFT == 0)
-//                begin
-//                    if ((cs_ctrl == DISPLAY) && (cnt_vact == 12'd0) && (hcnt == STV2_RISE_SHIFT))
-//                    begin
-//                        stv2 <= 1'b1;
-//                    end
-//                end
-//                else
-//                begin
-//                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV2_TOTAL_SHIFT) && (hcnt == STV2_RISE_SHIFT))
-//                    begin
-//                        stv2 <= 1'b1;
-//                    end
-//                end
-//            end
-//            
-//            if (STV2_FALL_DIRE == 1'b1)  //falling edge shift left
-//            begin
-//                if (STV2_WIDTH <= STV2_TOTAL_SHIFT)
-//                begin
-//                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV2_TOTAL_SHIFT - 12'd1 + STV2_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV2_FALL_SHIFT))
-//                    begin
-//                        stv2 <= 1'b0;
-//                    end
-//                end
-//                else
-//                begin
-//                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_WIDTH - STV2_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV2_FALL_SHIFT))
-//                    begin
-//                        stv2 <= 1'b1;
-//                    end
-//                end
-//            end
-//            else  //falling edge shift right
-//            begin
-//                if (STV2_WIDTH < STV2_TOTAL_SHIFT)
-//                begin
-//                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV2_TOTAL_SHIFT + STV2_WIDTH) && (hcnt == STV2_FALL_SHIFT))
-//                    begin
-//                        stv2 <= 1'b0;
-//                    end
-//                end
-//                else
-//                begin
-//                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_WIDTH - STV2_TOTAL_SHIFT) && (hcnt == STV2_FALL_SHIFT))
-//                    begin
-//                        stv2 <= 1'b0;
-//                    end
-//                end
-//            end
-//        end
-//        else  //stv shift right
-//        begin
-//            if (STV2_RISE_DIRE == 1'b1)  //rising edge shift left
-//            begin
-//                if (STV2_TOTAL_SHIFT == 0)
-//                begin
-//                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank -12'd1) && (hcnt == H_TOTAL - 12'd1 - STV2_RISE_SHIFT))
-//                    begin
-//                        stv2 <= 1'b1;
-//                    end
-//                end
-//                else
-//                begin
-//                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV2_RISE_SHIFT))
-//                    begin
-//                        stv2 <= 1'b1;
-//                    end
-//                end
-//            end
-//            else  //rising edge shift right
-//            begin
-//                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_TOTAL_SHIFT) && (hcnt == STV2_RISE_SHIFT))
-//                begin
-//                    stv2 <= 1'b1;
-//                end
-//            end
-//            
-//            if (STV2_FALL_DIRE == 1'b1)  //falling edge shift left
-//            begin
-//                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_TOTAL_SHIFT - 12'd1 + STV2_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV2_FALL_SHIFT))
-//                begin
-//                    stv2 <= 1'b0;
-//                end
-//            end
-//            else  //falling edge shift right
-//            begin
-//                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_TOTAL_SHIFT - 12'd1 + STV2_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV2_FALL_SHIFT))
-//                begin
-//                    stv2 <= 1'b0;
-//                end
-//            end
-//        end
-//    end
-//end
-//stv1
+//stv
 //referce point: end of VBP (start of DISPLAY)
 always @(posedge clk or negedge rst_n)
 begin
     if (rst_n == 1'b0)
     begin
-        stv1 <= 1'b0;
+        stv <= 1'b0;
     end
-    else if ((flag_black_on == 1'b1)|| (is_demux_all_on == 1'b1))
-    begin
-        stv1 <= 1'b0;
-    end
-    else
-    begin
-        if (STV1_TOTAL_DIRE == 1'b1)  //stv shift left
-        begin
-            if (STV1_RISE_DIRE == 1'b1)  //rising edge shift left
-            begin
-                if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV1_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV1_RISE_SHIFT))
-                begin
-                    stv1 <= 1'b1;
-                end
-            end
-            else  //rising edge shift right
-            begin
-                if (STV1_TOTAL_SHIFT == 0)
-                begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == 12'd0) && (hcnt == STV1_RISE_SHIFT))
-                    begin
-                        stv1 <= 1'b1;
-                    end
-                end
-                else
-                begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV1_TOTAL_SHIFT) && (hcnt == STV1_RISE_SHIFT))
-                    begin
-                        stv1 <= 1'b1;
-                    end
-                end
-            end
-            
-            if (STV1_FALL_DIRE == 1'b1)  //falling edge shift left
-            begin
-                if (STV1_WIDTH <= STV1_TOTAL_SHIFT)
-                begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV1_TOTAL_SHIFT - 12'd1 + STV1_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV1_FALL_SHIFT))
-                    begin
-                        stv1 <= 1'b0;
-                    end
-                end
-                else
-                begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_WIDTH - STV1_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV1_FALL_SHIFT))
-                    begin
-                        stv1 <= 1'b1;
-                    end
-                end
-            end
-            else  //falling edge shift right
-            begin
-                if (STV1_WIDTH < STV1_TOTAL_SHIFT)
-                begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV1_TOTAL_SHIFT + STV1_WIDTH) && (hcnt == STV1_FALL_SHIFT))
-                    begin
-                        stv1 <= 1'b0;
-                    end
-                end
-                else
-                begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_WIDTH - STV1_TOTAL_SHIFT) && (hcnt == STV1_FALL_SHIFT))
-                    begin
-                        stv1 <= 1'b0;
-                    end
-                end
-            end
-        end
-        else  //stv shift right
-        begin
-            if (STV1_RISE_DIRE == 1'b1)  //rising edge shift left
-            begin
-                if (STV1_TOTAL_SHIFT == 0)
-                begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank -12'd1) && (hcnt == H_TOTAL - 12'd1 - STV1_RISE_SHIFT))
-                    begin
-                        stv1 <= 1'b1;
-                    end
-                end
-                else
-                begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV1_RISE_SHIFT))
-                    begin
-                        stv1 <= 1'b1;
-                    end
-                end
-            end
-            else  //rising edge shift right
-            begin
-                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_TOTAL_SHIFT) && (hcnt == STV1_RISE_SHIFT))
-                begin
-                    stv1 <= 1'b1;
-                end
-            end
-            
-            if (STV1_FALL_DIRE == 1'b1)  //falling edge shift left
-            begin
-                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_TOTAL_SHIFT - 12'd1 + STV1_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV1_FALL_SHIFT))
-                begin
-                    stv1 <= 1'b0;
-                end
-            end
-            else  //falling edge shift right
-            begin
-                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_TOTAL_SHIFT - 12'd1 + STV1_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV1_FALL_SHIFT))
-                begin
-                    stv1 <= 1'b0;
-                end
-            end
-        end
-    end
-end
 
-//stv2
-//referce point: end of VBP (start of DISPLAY)
-always @(posedge clk or negedge rst_n)
-begin
-    if (rst_n == 1'b0)
+    else if ((flag_black_on == 1'b1)||(smp_dis_sn == 7'd7))
     begin
-        stv2 <= 1'b0;
-    end
-    else if ((flag_black_on == 1'b1)|| (is_demux_all_on == 1'b1))
-    begin
-        stv2 <= 1'b0;
+        stv <= 1'b1;
     end
     else
     begin
-        if (STV2_TOTAL_DIRE == 1'b1)  //stv shift left
+        if (STV_TOTAL_DIRE == 1'b1)  //stv shift left
         begin
-            if (STV2_RISE_DIRE == 1'b1)  //rising edge shift left
+            if (STV_RISE_DIRE == 1'b1)  //rising edge shift left
             begin
-                if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV2_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV2_RISE_SHIFT))
+                if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV_RISE_SHIFT))
                 begin
-                    stv2 <= 1'b1;
+                    stv <= 1'b1;
                 end
             end
             else  //rising edge shift right
             begin
-                if (STV2_TOTAL_SHIFT == 0)
+                if (STV_TOTAL_SHIFT == 0)
                 begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == 12'd0) && (hcnt == STV2_RISE_SHIFT))
+                    if ((cs_ctrl == DISPLAY) && (cnt_vact == 12'd0) && (hcnt == STV_RISE_SHIFT))
                     begin
-                        stv2 <= 1'b1;
+                        stv <= 1'b1;
                     end
                 end
                 else
                 begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV2_TOTAL_SHIFT) && (hcnt == STV2_RISE_SHIFT))
+                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV_TOTAL_SHIFT) && (hcnt == STV_RISE_SHIFT))
                     begin
-                        stv2 <= 1'b1;
+                        stv <= 1'b1;
                     end
                 end
             end
             
-            if (STV2_FALL_DIRE == 1'b1)  //falling edge shift left
+            if (STV_FALL_DIRE == 1'b1)  //falling edge shift left
             begin
-                if (STV2_WIDTH <= STV2_TOTAL_SHIFT)
+                if (STV_WIDTH <= STV_TOTAL_SHIFT)
                 begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV2_TOTAL_SHIFT - 12'd1 + STV2_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV2_FALL_SHIFT))
+                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV_TOTAL_SHIFT - 12'd1 + STV_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV_FALL_SHIFT))
                     begin
-                        stv2 <= 1'b0;
+                        stv <= 1'b0;
                     end
                 end
                 else
                 begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_WIDTH - STV2_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV2_FALL_SHIFT))
+                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV_WIDTH - STV_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV_FALL_SHIFT))
                     begin
-                        stv2 <= 1'b1;
+                        stv <= 1'b1;
                     end
                 end
             end
             else  //falling edge shift right
             begin
-                if (STV2_WIDTH < STV2_TOTAL_SHIFT)
+                if (STV_WIDTH < STV_TOTAL_SHIFT)
                 begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV2_TOTAL_SHIFT + STV2_WIDTH) && (hcnt == STV2_FALL_SHIFT))
+                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV_TOTAL_SHIFT + STV_WIDTH) && (hcnt == STV_FALL_SHIFT))
                     begin
-                        stv2 <= 1'b0;
+                        stv <= 1'b0;
                     end
                 end
                 else
                 begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_WIDTH - STV2_TOTAL_SHIFT) && (hcnt == STV2_FALL_SHIFT))
+                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV_WIDTH - STV_TOTAL_SHIFT) && (hcnt == STV_FALL_SHIFT))
                     begin
-                        stv2 <= 1'b0;
+                        stv <= 1'b0;
                     end
                 end
             end
         end
         else  //stv shift right
         begin
-            if (STV2_RISE_DIRE == 1'b1)  //rising edge shift left
+            if (STV_RISE_DIRE == 1'b1)  //rising edge shift left
             begin
-                if (STV2_TOTAL_SHIFT == 0)
+                if (STV_TOTAL_SHIFT == 0)
                 begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank -12'd1) && (hcnt == H_TOTAL - 12'd1 - STV2_RISE_SHIFT))
+                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank -12'd1) && (hcnt == H_TOTAL - 12'd1 - STV_RISE_SHIFT))
                     begin
-                        stv2 <= 1'b1;
+                        stv <= 1'b1;
                     end
                 end
                 else
                 begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV2_RISE_SHIFT))
+                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV_RISE_SHIFT))
                     begin
-                        stv2 <= 1'b1;
+                        stv <= 1'b1;
                     end
                 end
             end
             else  //rising edge shift right
             begin
-                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_TOTAL_SHIFT) && (hcnt == STV2_RISE_SHIFT))
+                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV_TOTAL_SHIFT) && (hcnt == STV_RISE_SHIFT))
                 begin
-                    stv2 <= 1'b1;
+                    stv <= 1'b1;
                 end
             end
             
-            if (STV2_FALL_DIRE == 1'b1)  //falling edge shift left
+            if (STV_FALL_DIRE == 1'b1)  //falling edge shift left
             begin
-                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_TOTAL_SHIFT - 12'd1 + STV2_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV2_FALL_SHIFT))
+                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV_TOTAL_SHIFT - 12'd1 + STV_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV_FALL_SHIFT))
                 begin
-                    stv2 <= 1'b0;
+                    stv <= 1'b0;
                 end
             end
             else  //falling edge shift right
             begin
-                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_TOTAL_SHIFT - 12'd1 + STV2_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV2_FALL_SHIFT))
+                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV_TOTAL_SHIFT - 12'd1 + STV_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV_FALL_SHIFT))
                 begin
-                    stv2 <= 1'b0;
+                    stv <= 1'b0;
                 end
             end
         end
@@ -1047,315 +676,251 @@ end
 //ckv1
 always @(posedge clk or negedge rst_n)
 begin
-    if (rst_n == 1'b0)
-    begin
-        ckv1_pre <= 1'b0;
-    end
-    else if ((flag_black_on == 1'b1)|| (is_demux_all_on == 1'b1))
-    begin
-       // ckv1_pre <= 1'b1;
-		  ckv1_pre <= 1'b0;
-    end
-    else
-    begin
-        if ((hcnt >= CKV_RISE_SHIFT) && (hcnt <= H_TOTAL - 12'd1 - CKV_FALL_SHIFT))
-        begin
-//            if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd2) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[0] == 1'b0))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd0)))
-//            if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd2) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact%4 == 12'd0))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd0)))
-           if (smp_dis_sn != 7'd3)
-			  begin
-				if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b00))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd0)))
-				begin
-                ckv1_pre <= 1'b1;
-            end
-				
-            else
-            begin
-                ckv1_pre <= 1'b0;
-            end
-        //end
-        end
-		  
-		  else//fxl
-		  if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b00))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd0)))
-		  // if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank) && (cnt_vact == 12'd2)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b11))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd4)))
-				begin
-                ckv1_pre <= 1'b1;
-            end
-		  end
-		  
-		  
-		  
-		  else
-        begin
-            ckv1_pre <= 1'b0;
-        end
-    end
+	if (rst_n == 1'b0)
+	begin
+		ckv1_pre <= 1'b0;
+	end
+	else if (flag_black_on == 1'b1)
+	begin
+		ckv1_pre <= 1'b1;
+	end
+	else
+	begin
+		if ((hcnt >= CKV_RISE_SHIFT) && (hcnt <= H_TOTAL - 12'd1 - CKV_FALL_SHIFT))
+		begin
+//		if (smp_dis_sn != 7'd3)
+//		begin
+            		if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd2) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[0] == 1'b0))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd0)))
+			//if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b00))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd0)))
+			begin
+				ckv1_pre <= 1'b1;
+			end
+			else
+			begin
+				ckv1_pre <= 1'b0;
+			end
+//		end
+//		else
+//		begin
+//			if(((cs_ctrl == PCH) && (cnt_vblank == num_vblank) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b00))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd0)))
+//			begin
+//				ckv1_pre <= 1'b1;
+//			end
+//		end
+		end
+		else
+		begin
+			ckv1_pre <= 1'b0;
+		end
+	end
 end
-
 
 //ckv2
 always @(posedge clk or negedge rst_n)
 begin
-    if (rst_n == 1'b0)
-    begin
-        ckv2_pre <= 1'b0;
-    end
-    else if ((flag_black_on == 1'b1)|| (is_demux_all_on == 1'b1))
-    begin
-        //ckv2_pre <= 1'b1;
-		  ckv2_pre <= 1'b0;
-    end
-    else
-    begin
-        if ((hcnt >= CKV_RISE_SHIFT) && (hcnt <= H_TOTAL - 12'd1 - CKV_FALL_SHIFT))
-        begin
-		  
-		  if (smp_dis_sn != 7'd3)
-		  begin
-//            if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd2) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[0] == 1'b0))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd0)))
-//            if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd2) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact%4 == 12'd1))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd0)))
-            if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank+12'd1) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b01))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd1)))
-				begin
-                ckv2_pre <= 1'b1;
-            end
-            else
-            begin
-                ckv2_pre <= 1'b0;
-            end
-       // end
-		  end
-		  else//fxl
-		   if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank+12'd1) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b01))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd1)))
-		  //if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd1) && (cnt_vact == 12'd2)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b10))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd3)))
-				begin
-                ckv2_pre <= 1'b1;
-            end
-        end
-		  
-		  
-		  
-		  else
-        begin
-            ckv2_pre <= 1'b0;
-        end
-    end
+	if (rst_n == 1'b0)
+	begin
+		ckv2_pre <= 1'b0;
+	end
+	else if (flag_black_on == 1'b1)
+	begin
+		ckv2_pre <= 1'b1;
+	end
+	else
+	begin
+		if ((hcnt >= CKV_RISE_SHIFT) && (hcnt <= H_TOTAL - 12'd1 - CKV_FALL_SHIFT))
+		begin
+		//if (smp_dis_sn != 7'd3)
+		//begin
+			if ( (cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd1) || ((cs_ctrl == DISPLAY) && (cnt_vact[0] == 1'b1)) || ((cs_ctrl == VFP) && (cnt_vblank == 12'd1)))
+			//if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank+12'd1) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b01))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd1)))
+			begin
+				ckv2_pre <= 1'b1;
+			end
+			else
+			begin
+				ckv2_pre <= 1'b0;
+			end
+		//end
+		//else
+		//begin
+			//if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank+12'd1) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b01))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd1)))
+			//begin
+				//ckv2_pre <= 1'b1;
+			//end
+		//end
+		end
+		else
+		begin
+			ckv2_pre <= 1'b0;
+		end
+	end
 end
 
-//ckv3
+//ckh1
 always @(posedge clk or negedge rst_n)
 begin
     if (rst_n == 1'b0)
     begin
-        ckv3_pre <= 1'b0;
-    end
-    else if ((flag_black_on == 1'b1)|| (is_demux_all_on == 1'b1))
-    begin
-        //ckv3_pre <= 1'b1;
-		  ckv3_pre <= 1'b0;
+        ckh1 <= 1'b0;
     end
     else
     begin
-        if ((hcnt >= CKV_RISE_SHIFT) && (hcnt <= H_TOTAL - 12'd1 - CKV_FALL_SHIFT))
+        if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
         begin
-		  
-		  if (smp_dis_sn != 7'd3)
-		  begin
-//            if ( (cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd1) || ((cs_ctrl == DISPLAY) && (cnt_vact[0] == 1'b1)) || ((cs_ctrl == VFP) && (cnt_vblank == 12'd1)))
-//            if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd2) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact%4 == 12'd2))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd0)))
-            //if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd4) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b10))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd0)))
-				
-				
-				if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd2) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b10))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd2)))
-				begin
-                ckv3_pre <= 1'b1;
-            end
-				
-				
-            else
+            if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) 
+				&& (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_WIDTH)))
             begin
-                ckv3_pre <= 1'b0;
-            end
-        //end
-		  end
-		  else
-		  if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd2) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b10))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd2)))
-				//if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank+12'd2) && (cnt_vact == 12'd5)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b01))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd2)))
-				begin
-                ckv3_pre <= 1'b1;
-            end
-		  end
-		  
-		  
-		  
-        else	  
-		  
-        begin
-            ckv3_pre <= 1'b0;
-        end
-    end
-end
-
-
-//ckv4
-always @(posedge clk or negedge rst_n)
-begin
-    if (rst_n == 1'b0)
-    begin
-        ckv4_pre <= 1'b0;
-    end
-    else if ((flag_black_on == 1'b1)|| (is_demux_all_on == 1'b1))
-    begin
-       // ckv4_pre <= 1'b1;
-		  ckv4_pre <= 1'b0;
-    end
-    else
-    begin
-        if ((hcnt >= CKV_RISE_SHIFT) && (hcnt <= H_TOTAL - 12'd1 - CKV_FALL_SHIFT))
-        begin
-		  
-		  
-		if (smp_dis_sn != 7'd3)
-       begin		
-//            if ( (cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd1) || ((cs_ctrl == DISPLAY) && (cnt_vact[0] == 1'b1)) || ((cs_ctrl == VFP) && (cnt_vblank == 12'd1)))
-//            if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd2) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact%4 == 12'd3))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd0)))
-            if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd1) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b11))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd3)))
-				begin
-                ckv4_pre <= 1'b1;
+                ckh1 <= 1'b1;
             end
             else
             begin
-                ckv4_pre <= 1'b0;
-            end
-        //end
-		  end
-		  else//fxl
-		  if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank - 12'd1) && (cnt_vact == 12'd0)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b11))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd3)))
-		 // if (((cs_ctrl == PCH) && (cnt_vblank == num_vblank + 12'd2) && (cnt_vact == 12'd3)) || ((cs_ctrl == DISPLAY) && (cnt_vact[1:0] == 2'b00))|| ((cs_ctrl == VFP) && (cnt_vblank == 12'd1)))
-				begin
-                ckv4_pre <= 1'b1;
-            end
-		  end
-		  
-		  
-        else
-        begin
-            ckv4_pre <= 1'b0;
-        end
-    end
-end
-
-
-//ckhr, xckhr
-always @(posedge clk or negedge rst_n)
-begin
-    if (rst_n == 1'b0)
-    begin
-        ckhr <= 1'b0;
-//        xckhr <= 1'b1;
-    end
-    else
-    begin
-        if (is_demux_all_on == 1'b1)
-        begin
-           // ckhr <= 1'b1;
-				ckhr <= 1'b0;
-//            xckhr <= 1'b0;
-        end
-        else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
-        begin
-            
-            if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_WIDTH)))
-            begin
-                ckhr <= 1'b1;
-//                xckhr <= 1'b0;
-            end
-            else
-            begin
-                ckhr <= 1'b0;
-//                xckhr <= 1'b1;
+                ckh1 <= 1'b0;
             end
         end
         else
         begin
-            ckhr <= 1'b0;
-//            xckhr <= 1'b1;
+            ckh1 <= 1'b0;
         end
     end
 end
 
-//ckhg, xckhg
+//ckh2
 always @(posedge clk or negedge rst_n)
 begin
     if (rst_n == 1'b0)
     begin
-        ckhg <= 1'b0;
-//        xckhg <= 1'b1;
+        ckh2 <= 1'b0;
     end
     else
     begin
-        if (is_demux_all_on == 1'b1)
+        if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
         begin
-           // ckhg <= 1'b1;
-				ckhg <= 1'b0;
-//            xckhg <= 1'b0;
-        end
-        else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
-        begin
-            if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT))
-             && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + CKH_FALL_SHIFT)))
+            if	((hcnt>= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_WIDTH + 1 * CKH_FALL_SHIFT))
+				 && (hcnt<= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 1 * CKH_FALL_SHIFT)))
             begin
-                ckhg <= 1'b1;
-//                xckhg <= 1'b0;
+                ckh2 <= 1'b1;
             end
             else
             begin
-                ckhg <= 1'b0;
-//                xckhg <= 1'b1;
+                ckh2 <= 1'b0;
             end
         end
         else
         begin
-            ckhg <= 1'b0;
-//            xckhg <= 1'b1;
+            ckh2 <= 1'b0;
         end
     end
 end
 
-//ckhb, xckhb
+//ckh3
 always @(posedge clk or negedge rst_n)
 begin
     if (rst_n == 1'b0)
     begin
-        ckhb <= 1'b0;
-//        xckhb <= 1'b1;
+        ckh3 <= 1'b0;
     end
     else
     begin
-        if (is_demux_all_on == 1'b1)
-        begin
-            //ckhb <= 1'b1;
-				ckhb <= 1'b0;
-//            xckhb <= 1'b0;
-        end
-        else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
+        if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
         begin
             if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT))
              && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 3 * CKH_WIDTH + 2 * CKH_FALL_SHIFT)))
             begin
-                ckhb <= 1'b1;
-//                xckhb <= 1'b0;
+                ckh3 <= 1'b1;
             end
             else
             begin
-                ckhb <= 1'b0;
-//                xckhb <= 1'b1;
+                ckh3 <= 1'b0;
             end
         end
         else
         begin
-            ckhb <= 1'b0;
-//            xckhb <= 1'b1;
+            ckh3 <= 1'b0;
+        end
+    end
+end
+
+//ckh4
+always @(posedge clk or negedge rst_n)
+begin
+    if (rst_n == 1'b0)
+    begin
+        ckh4 <= 1'b0;
+    end
+    else
+    begin
+        if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
+        begin
+            if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 4 * CKH_RISE_SHIFT + 3 * CKH_WIDTH + 3 * CKH_FALL_SHIFT))
+             && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 4 * CKH_RISE_SHIFT + 4 * CKH_WIDTH + 3 * CKH_FALL_SHIFT)))
+            begin
+                ckh4 <= 1'b1;
+            end
+            else
+            begin
+                ckh4 <= 1'b0;
+            end
+        end
+        else
+        begin
+            ckh4 <= 1'b0;
+        end
+    end
+end
+
+//ckh5
+always @(posedge clk or negedge rst_n)
+begin
+    if (rst_n == 1'b0)
+    begin
+        ckh5 <= 1'b0;
+    end
+    else
+    begin
+        if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
+        begin
+            if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5 * CKH_RISE_SHIFT + 4 * CKH_WIDTH + 4 * CKH_FALL_SHIFT))
+             && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5 * CKH_RISE_SHIFT + 5 * CKH_WIDTH + 4 * CKH_FALL_SHIFT)))
+            begin
+                ckh5 <= 1'b1;
+            end
+            else
+            begin
+                ckh5 <= 1'b0;
+            end
+        end
+        else
+        begin
+            ckh5 <= 1'b0;
+        end
+    end
+end
+
+//ckh6
+always @(posedge clk or negedge rst_n)
+begin
+	if (rst_n == 1'b0)
+	begin
+		ckh6 <= 1'b0;
+	end
+	else
+	begin
+		if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
+		begin
+            if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 6 * CKH_RISE_SHIFT + 5 * CKH_WIDTH + 5 * CKH_FALL_SHIFT))
+             && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 6 * CKH_RISE_SHIFT + 6 * CKH_WIDTH + 5 * CKH_FALL_SHIFT)))
+            begin
+                ckh6 <= 1'b1;
+            end
+            else
+            begin
+                ckh6 <= 1'b0;
+            end
+        end
+        else
+        begin
+            ckh6 <= 1'b0;
         end
     end
 end
@@ -1386,7 +951,7 @@ begin
     end
     else
     begin
-        if (num_vdiv64[5] == 1'b0)  //top half
+        if (cnt_vact>=0&&cnt_vact<=160)  //top half
         begin
             pat_blc_wht_h <= {DCODE_BLACK, DCODE_BLACK, DCODE_BLACK};
         end
@@ -1405,7 +970,7 @@ begin
     end
     else
     begin
-        if (num_vdiv64[5] == 1'b0)  //top half
+        if (cnt_vact>=0&&cnt_vact<=160) //top half
         begin
             pat_wht_blc_h <= {DCODE_WHITE, DCODE_WHITE, DCODE_WHITE};
         end
@@ -1415,106 +980,92 @@ begin
         end
     end
 end
-
+////*******************************for 8.7**************************//////
 always @(posedge clk or negedge rst_n)
 begin
-    if (rst_n == 1'b0)
-    begin
-		  r_data <= 8'd0;
-        g_data <= 8'd0;
-        b_data <= 8'd0;
-    end
-    else
-    begin
-        case (smp_dis_sn)
-            7'd0:
-            begin
-					 r_data <= 8'd128;
-                g_data <= 8'd128;
-                b_data <= 8'd128;
-            end
-            7'd1:  //black
-            begin
-                r_data <= DCODE_BLACK;
-                g_data <= DCODE_BLACK;
-                b_data <= DCODE_BLACK;
-            end
-            7'd2:  //gray
-            begin
-                r_data <= DCODE_GRAY64;
-                g_data <= DCODE_GRAY64;
-                b_data <= DCODE_GRAY64;
-            end
-				
-				7'd3:  //gray
-            begin
-                r_data <= DCODE_GRAY128;
-                g_data <= DCODE_GRAY128;
-                b_data <= DCODE_GRAY128;
-            end
-				
-            7'd4:
-            begin
-                r_data <= pat_blc_wht_h[23:16];
-                g_data <= pat_blc_wht_h[15:8];
-                b_data <= pat_blc_wht_h[7:0];
-            end
-            7'd5:
-            begin
-                r_data <= pat_wht_blc_h[23:16];
-                g_data <= pat_wht_blc_h[15:8];
-                b_data <= pat_wht_blc_h[7:0];
-            end
-            7'd6:  //white
-            begin
-                r_data <= DCODE_WHITE;
-                g_data <= DCODE_WHITE;
-                b_data <= DCODE_WHITE;
-            end
-            7'd7:  //red
-            begin
-                r_data <= DCODE_WHITE;
-                g_data <= DCODE_BLACK;
-                b_data <= DCODE_BLACK;
-            end
-            7'd8:  //green
-            begin
-                r_data <= DCODE_BLACK;
-                g_data <= DCODE_WHITE;
-                b_data <= DCODE_BLACK;
-            end
-            7'd9:  //blue
-            begin
-                r_data <= DCODE_BLACK;
-                g_data <= DCODE_BLACK;
-                b_data <= DCODE_WHITE;
-            end
-//				7'd9:  //frame inversion 
-//            begin
-//                r_data <= DCODE_GRAY128;
-//                g_data <= DCODE_GRAY128;
-//                b_data <= DCODE_GRAY128;
-//            end
-//				7'd10:  //TP senson short test VCOMA
-//            begin
-//                r_data <= DCODE_GND;
-//                g_data <= DCODE_GND;
-//                b_data <= DCODE_GND;
-//            end
-//				7'd11:  //TP senson short test VCOMB
-//            begin
-//                r_data <= DCODE_GND;
-//                g_data <= DCODE_GND;
-//                b_data <= DCODE_GND;
-//            end
-            7'd10:
-            begin
-                r_data <= 8'd128;
-                g_data <= 8'd128;
-                b_data <= 8'd128;
-            end
-        endcase
-    end
+	if (rst_n == 1'b0)
+	begin
+		r_data <= 8'd0;
+		g_data <= 8'd0;
+		b_data <= 8'd0;
+	end
+	else
+	begin
+		case (smp_dis_sn)
+			7'd0:
+			begin
+				r_data <= 8'd128;
+				g_data <= 8'd128;
+				b_data <= 8'd128;
+			end
+			7'd1:
+			begin
+				r_data <= DCODE_WHITE;
+				g_data <= DCODE_BLACK;
+				b_data <= DCODE_BLACK;
+			end
+			7'd2:
+			begin
+				r_data <= DCODE_BLACK;
+				g_data <= DCODE_WHITE;
+				b_data <= DCODE_BLACK;
+			end
+			7'd3:
+			begin
+				r_data <= DCODE_BLACK;
+				g_data <= DCODE_BLACK;
+				b_data <= DCODE_WHITE;
+			end
+			7'd4:
+			begin
+				r_data <= DCODE_WHITE;
+				g_data <= DCODE_WHITE;
+				b_data <= DCODE_BLACK;
+			end
+			7'd5:
+			begin
+				r_data <= DCODE_BLACK;
+				g_data <= DCODE_WHITE;
+				b_data <= DCODE_WHITE;
+			end
+			7'd6:
+			begin
+				r_data <= DCODE_WHITE;
+				g_data <= DCODE_BLACK;
+				b_data <= DCODE_WHITE;
+			end
+			7'd7:
+			begin
+				r_data <= DCODE_WHITE;
+				g_data <= DCODE_WHITE;
+				b_data <= DCODE_WHITE;
+			end
+			7'd8:
+			begin
+				r_data <= DCODE_GRAY128;
+				g_data <= DCODE_GRAY128;
+				b_data <= DCODE_GRAY128;
+			end
+			7'd9:
+			begin
+				r_data <= DCODE_GRAY64;
+				g_data <= DCODE_GRAY64;
+				b_data <= DCODE_GRAY64;
+			end
+			7'd10:
+			begin
+				r_data <= DCODE_BLACK;
+				g_data <= DCODE_BLACK;
+				b_data <= DCODE_BLACK;
+			end
+			7'd11:
+			begin
+				r_data <= DCODE_WHITE;
+				g_data <= DCODE_WHITE;
+				b_data <= DCODE_WHITE;
+			end
+		endcase
+	end
 end
 
 //-----------------------------------------------------------------------------
@@ -1522,320 +1073,197 @@ end
 //-----------------------------------------------------------------------------
 always @(posedge clk or negedge rst_n)
 begin
-    if (rst_n == 1'b0)
-    begin
-        flag_frm_pol <= 1'b0;
-    end
-    else
-    begin
-        if ((cs_ctrl == VFP) && ((flag_hend == 1'b1) && (cnt_vblank == V_FP - 12'd1)))
-        begin
-            flag_frm_pol <= ~ flag_frm_pol;
-        end
-    end
+	if (rst_n == 1'b0)
+	begin
+	        flag_frm_pol <= 1'b0;
+	end
+	else
+	begin
+		if ((cs_ctrl == VFP) && ((flag_hend == 1'b1) && (cnt_vblank == V_FP - 12'd1)))
+		begin
+			flag_frm_pol <= ~ flag_frm_pol;
+		end
+	end
 end
 
 always @(posedge clk or negedge rst_n)
 begin
-    if (rst_n == 1'b0)
-    begin
-		  da1_wr <= 1'b1;
-        da2_wr <= 1'b1;
-		  da3_wr <= 1'b1;
-		  da4_wr <= 1'b1;
-    end
-    else
-    begin
-		  da1_wr <= 1'b0;
-        da2_wr <= 1'b0;
-		  da3_wr <= 1'b0;
-		  da4_wr <= 1'b0;
-    end
+	if (rst_n == 1'b0)
+	begin
+		da1_wr <= 1'b1;
+		da2_wr <= 1'b1;
+		da3_wr <= 1'b1;
+		da4_wr <= 1'b1;
+	end
+	else
+	begin
+		da1_wr <= 1'b0;
+		da2_wr <= 1'b0;
+		da3_wr <= 1'b0;
+		da4_wr <= 1'b0;
+	end
 end
-
-
 always @(posedge clk or negedge rst_n)
 begin
-    if (rst_n == 1'b0)
-    begin
-		  da2_a <= 2'b00;
-        da2_din <= DCODE_GND;
-		  da3_a <= 2'b00;
-        da3_din <= DCODE_GND;
-    end
-    else
-    begin
-        if (is_demux_all_on == 1'b1)
-        begin
-            if (flag_frm_pol == 1'b0)  //odd frame
-            begin
-					 if (hcnt == 1)
-					 begin
-						if((flag_TP_test_a == 1'b0)&&(flag_TP_test_b == 1'b0))//normal pattern VCOM
+	if (rst_n == 1'b0)
+	begin
+		da1_a <= 2'b00;
+		da1_din <= DCODE_GND;
+		da2_a <= 2'b00;
+		da2_din <= DCODE_GND;
+		//da4_a <= 2'b00;
+		//da4_din <= DCODE_GND;
+	end
+	else
+	begin
+		if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
+		begin
+					if (flag_frm_pol == 1'b0)  //odd frame
+					begin
+						if (hcnt == 1)
 						begin
-							da2_a <= 2'b00;
-							da2_din <= DCODE_VCOM;
-							da3_a <= 2'b00;
-							da3_din <= DCODE_VCOM;
-						 end
-						 else if(flag_TP_test_a == 1'b1)//TP_test_pattern VCOMA 
-						 begin
-							da2_a <= 2'b00;
-							da2_din <= DCODE_VCOMA;//VCOMA
-							da3_a <= 2'b00;
-							da3_din <= DCODE_VCOMB;//VCOMB
-						 end
-						else if(flag_TP_test_b == 1'b1)//TP_test_pattern VCOMB 
-						 begin
-							da2_a <= 2'b00;
-							da2_din <= DCODE_VCOMB;//VCOMB
-							da3_a <= 2'b00;
-							da3_din <= DCODE_VCOMA;//VCOMA
-						 end		 
-					 end 
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT))
-                begin
-                    da1_a <= 2'b00;
-                    da1_din <= r_data;
-                end
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
-                begin
-							if(flag_inversion == 1'b0) //column inversion  
-							begin
-								da1_a <= 2'b01;
-								da1_din <= ~r_data[7:0] + 8'd1;
-							end
-							else if(flag_inversion == 1'b1) //frame inversion
-							begin
-								da1_a <= 2'b01;
-								da1_din <= r_data;
-							end
-                end
-            end
-            else  //even frame
-            begin
-					 if (hcnt == 1)
-					 begin
-						if((flag_TP_test_a == 1'b0)&&(flag_TP_test_b == 1'b0))//normal pattern VCOM
+							da4_a <= 2'b00;
+							da4_din <= DCODE_VCOM;			 		 
+						end
+						else if ((hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT))
+						       ||(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 4 * CKH_RISE_SHIFT + 3 * CKH_WIDTH + 3 * CKH_FALL_SHIFT- SRC_PCH_SHIFT)))
 						begin
-							da2_a <= 2'b00;
-							da2_din <= DCODE_VCOM;
-							da3_a <= 2'b00;
-							da3_din <= DCODE_VCOM;
-						 end
-						 else if(flag_TP_test_a == 1'b1)//TP_test_pattern VCOMA 
-						 begin
-							da2_a <= 2'b00;
-							da2_din <= ~DCODE_VCOMA[7:0]+8'd1;//~VCOMA
-							da3_a <= 2'b00;
-							da3_din <= ~DCODE_VCOMB[7:0]+8'd1;//~VCOMB
-						 end	
-						 else if(flag_TP_test_b == 1'b1)//TP_test_pattern VCOMB 
-						 begin
-							da2_a <= 2'b00;
-							da2_din <= ~DCODE_VCOMB[7:0]+8'd1;//~VCOMB
-							da3_a <= 2'b00;
-							da3_din <= ~DCODE_VCOMA[7:0]+8'd1;//~VCOMA
-						 end	
-					 end 
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT))
-                begin
-                    da1_a <= 2'b00;
-                    da1_din <= ~r_data[7:0] + 8'd1;
-                end
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
-                begin
-						  if(flag_inversion == 1'b0) //column inversion  
+							if(cnt_vact%2== 12'd0)
 							begin
-								da1_a <= 2'b01;
-								da1_din <= r_data;
+							   da1_a <= 2'b00;
+							   da1_din <= r_data;
+							   da2_a <= 2'b00;
+							   da2_din <= ~r_data[7:0]+8'd1;
 							end
-							else if(flag_inversion == 1'b1) //frame inversion
+							else
 							begin
-								da1_a <= 2'b01;
-								da1_din <= ~r_data[7:0] + 8'd1;
+							   da1_a <= 2'b00;
+							   da1_din <= g_data;
+							   da2_a <= 2'b00;
+							   da2_din <= ~g_data[7:00]+8'd1;
 							end
-                end
-            end
-        end
-        else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
-        begin
-            if (flag_frm_pol == 1'b0)  //odd frame
-            begin
-					if (hcnt == 1)
-						 begin
-							if((flag_TP_test_a == 1'b0)&&(flag_TP_test_b == 1'b0))//normal pattern VCOM
+						end
+						
+						else if ((hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT- SRC_PCH_SHIFT))
+						       ||(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 5 * CKH_RISE_SHIFT + 4 * CKH_WIDTH + 4 * CKH_FALL_SHIFT- SRC_PCH_SHIFT)))
+						begin
+							if(cnt_vact%2== 12'd0)
 							begin
-								da2_a <= 2'b00;
-								da2_din <= DCODE_VCOM;
-								da3_a <= 2'b00;
-								da3_din <= DCODE_VCOM;
+							   da1_a <= 2'b00;
+							   da1_din <= g_data;
+							   da2_a <= 2'b00;
+							   da2_din <= ~g_data[7:00]+8'd1;
 							end
-							else if(flag_TP_test_a == 1'b1)//TP_test_pattern VCOMA 
+							else
 							begin
-								da2_a <= 2'b00;
-								da2_din <= DCODE_VCOMA;//VCOMA
-								da3_a <= 2'b00;
-								da3_din <= DCODE_VCOMB;//VCOMB
+							   da1_a <= 2'b00;
+							   da1_din <= b_data;
+							   da2_a <= 2'b00;
+							   da2_din <= ~b_data[7:00]+8'd1;
 							end
-							else if(flag_TP_test_b == 1'b1)//TP_test_pattern VCOMB 
+						end
+						
+						else if ((hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 3 * CKH_FALL_SHIFT- SRC_PCH_SHIFT))
+						       ||(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 6 * CKH_RISE_SHIFT + 5 * CKH_WIDTH + 5 * CKH_FALL_SHIFT- SRC_PCH_SHIFT)))
+						begin
+							if(cnt_vact%2== 12'd0)
 							begin
-								da2_a <= 2'b00;
-								da2_din <= DCODE_VCOMB;//VCOMB
-								da3_a <= 2'b00;
-								da3_din <= DCODE_VCOMA;//VCOMA
-							end	
-						 end 
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT))
-                begin
-                    da1_a <= 2'b00;
-                    da1_din <= r_data;
-                end
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
-                begin
-						  if(flag_inversion == 1'b0) //column inversion  
-							begin
-								da1_a <= 2'b01;
-								da1_din <= ~r_data[7:0] + 8'd1;
+							   da1_a <= 2'b00;
+							   da1_din <= b_data;
+							   da2_a <= 2'b00;
+							   da2_din <= ~b_data[7:00]+8'd1;
 							end
-							else if(flag_inversion == 1'b1) //frame inversion
+							else
 							begin
-								da1_a <= 2'b01;
-								da1_din <= r_data;
+							   da1_a <= 2'b00;
+							   da1_din <= r_data;
+							   da2_a <= 2'b00;
+							   da2_din <= ~r_data[7:0]+8'd1;
 							end
-                end
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT - SRC_PCH_SHIFT))
-                begin
-                    da1_a <= 2'b00;
-                    da1_din <= g_data;
-                end
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
-                begin
-						  if(flag_inversion == 1'b0) //column inversion  
+						end
+						
+					end
+					
+					else//even frame
+					begin
+						if (hcnt == 1)
+						begin
+							da4_a <= 2'b00;
+							da4_din <= DCODE_VCOM;			 		 
+						end
+						
+						else if ((hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT))
+						       ||(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 4 * CKH_RISE_SHIFT + 3 * CKH_WIDTH + 3 * CKH_FALL_SHIFT- SRC_PCH_SHIFT)))
+						begin
+							if(cnt_vact%2== 12'd0)
 							begin
-								da1_a <= 2'b01;
-								da1_din <= ~g_data[7:0] + 8'd1;
+							   da1_a <= 2'b00;
+							   da1_din <= ~r_data[7:0]+8'd1;
+							   da2_a <= 2'b00;
+							   da2_din <= r_data;
 							end
-							else if(flag_inversion == 1'b1) //frame inversion
+							else
 							begin
-								da1_a <= 2'b01;
-								da1_din <= g_data;
+							   da1_a <= 2'b00;
+							   da1_din <= ~g_data[7:0]+8'd1;
+							   da2_a <= 2'b00;
+							   da2_din <= g_data;
 							end
-                end
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
-                begin
-                    da1_a <= 2'b00;
-                    da1_din <= b_data;
-                end
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
-                begin
-						  if(flag_inversion == 1'b0) //column inversion  
+						end
+						else if ((hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT- SRC_PCH_SHIFT))
+						       ||(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 5 * CKH_RISE_SHIFT + 4 * CKH_WIDTH + 4 * CKH_FALL_SHIFT- SRC_PCH_SHIFT)))
+						begin
+							if(cnt_vact%2== 12'd0)
 							begin
-								da1_a <= 2'b01;
-								da1_din <= ~b_data[7:0] + 8'd1;
+							   da1_a <= 2'b00;
+							   da1_din <= ~g_data[7:0]+8'd1;
+							   da2_a <= 2'b00;
+							   da2_din <= g_data;
 							end
-							else if(flag_inversion == 1'b1) //frame inversion
+							else
 							begin
-								da1_a <= 2'b01;
-								da1_din <= b_data;
+							   da1_a <= 2'b00;
+							   da1_din <= ~b_data[7:0]+8'd1;
+							   da2_a <= 2'b00;
+							   da2_din <= b_data;
 							end
-                end
-            end
-            else  //even frame
-            begin
-					if (hcnt == 1)
-						 begin
-							if((flag_TP_test_a == 1'b0)&&(flag_TP_test_b == 1'b0))//normal pattern VCOM
+						end
+						else if ((hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 3 * CKH_FALL_SHIFT- SRC_PCH_SHIFT))
+						       ||(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 6 * CKH_RISE_SHIFT + 5 * CKH_WIDTH + 5 * CKH_FALL_SHIFT- SRC_PCH_SHIFT)))
+						begin
+							if(cnt_vact%2== 12'd0)
 							begin
-								da2_a <= 2'b00;
-								da2_din <= DCODE_VCOM;
-								da3_a <= 2'b00;
-								da3_din <= DCODE_VCOM;
+							   da1_a <= 2'b00;
+							   da1_din <= ~b_data[7:0]+8'd1;
+							   da2_a <= 2'b00;
+							   da2_din <= b_data;
 							end
-							else if(flag_TP_test_a == 1'b1)//TP_test_pattern VCOMA 
+							else
 							begin
-								da2_a <= 2'b00;
-								da2_din <= ~DCODE_VCOMA[7:0]+8'd1;//~VCOMA
-								da3_a <= 2'b00;
-								da3_din <= ~DCODE_VCOMB[7:0]+8'd1;//~VCOMB
+							   da1_a <= 2'b00;
+							   da1_din <= ~r_data[7:0]+8'd1;
+							   da2_a <= 2'b00;
+							   da2_din <= r_data;
 							end
-							else if(flag_TP_test_b == 1'b1)//TP_test_pattern VCOMB 
-							begin
-								da2_a <= 2'b00;
-								da2_din <= ~DCODE_VCOMB[7:0]+8'd1;//~VCOMB
-								da3_a <= 2'b00;
-								da3_din <= ~DCODE_VCOMA[7:0]+8'd1;//~VCOMA
-							end
-						 end 
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT))
-                begin
-                    da1_a <= 2'b00;
-                    da1_din <= ~r_data[7:0] + 8'd1;
-                end
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
-                begin
-						  if(flag_inversion == 1'b0) //column inversion  
-							begin
-								da1_a <= 2'b01;
-								da1_din <= r_data;
-							end
-							else if(flag_inversion == 1'b1) //frame inversion
-							begin
-								da1_a <= 2'b01;
-								da1_din <= ~r_data[7:0] + 8'd1;
-							end
-                end
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT - SRC_PCH_SHIFT))
-                begin
-                    da1_a <= 2'b00;
-                    da1_din <= ~g_data[7:0] + 8'd1;
-                end
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
-                begin
-						  if(flag_inversion == 1'b0) //column inversion  
-							begin
-								da1_a <= 2'b01;
-								da1_din <= g_data;
-							end
-							else if(flag_inversion == 1'b1) //frame inversion
-							begin
-								da1_a <= 2'b01;
-								da1_din <= ~g_data[7:0] + 8'd1;
-							end
-                end
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
-                begin
-                    da1_a <= 2'b00;
-                    da1_din <= ~b_data[7:0] + 8'd1;
-                end
-                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
-                begin
-						  if(flag_inversion == 1'b0) //column inversion  
-							begin
-								da1_a <= 2'b01;
-								da1_din <= b_data;
-							end
-							else if(flag_inversion == 1'b1) //frame inversion
-							begin
-								da1_a <= 2'b01;
-								da1_din <= ~b_data[7:0] + 8'd1;
-							end
-                end
-            end
-        end
-        else if (cs_ctrl == VFP)
-        begin
-            if (cnt_vblank == 12'd0)
-            begin
-                da1_a <= 2'b00;
-                da1_din <= DCODE_GND;
-            end
-            else if (cnt_vblank == 12'd1)
-            begin
-                da1_a <= 2'b01;
-                da1_din <= DCODE_GND;
-            end
-        end
-    end
+						end
+					end
+		end
+		else if (cs_ctrl == VFP)
+		begin
+			if (cnt_vblank == 12'd0)
+			begin
+				da1_a <= 2'b00;
+				da1_din <= DCODE_GND;
+			end
+			else if (cnt_vblank == 12'd1)
+			begin
+				 da2_a <= 2'b00;
+				 da2_din <= DCODE_GND;
+			end
+			da4_a <= 2'b00;
+			da4_din <= DCODE_GND;
+		end
+	end
 end
+
 endmodule

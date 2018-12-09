@@ -22,8 +22,8 @@ module switch(
     input                 sw2               ,
     input                 sw3               ,
     input                 sw4               ,
-    input                 Rx_Donesig        ,
-	 input  [47:0]         Rx_data           ,
+    input                 sw5               ,
+	 
     output reg  [6:0]     dis_sn            ,
 	 
 	 output reg            FPGA_LED_Test     ,
@@ -40,9 +40,6 @@ module switch(
 	 output reg            mux_en4           ,
 	 output reg            mux_en_Test1      ,
 	 output reg            mux_en_Test2      ,
-	 output reg            en_uart           ,
-	 output wire   [79:0]  read_data         ,
-	 output reg 	[5:0]	  nummax				  ,
 	 
     output reg            flag_black_on
 );
@@ -55,7 +52,7 @@ parameter       CNT1MS                      = 1000              ;  //1ms timer
 parameter       CNT1S                       = 1000              ;  //1s timer
 
 parameter       PATMIN                      = 7'd0              ;  //minimum pattern number
-parameter       PATNUM                      = 7'd10              ;
+parameter       PATNUM                      = 7'd12              ;
 parameter       PATMAX                      = PATMIN + PATNUM - 7'd1;
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -65,6 +62,7 @@ wire                            sw1_f                           ;
 wire                            sw2_f                           ;
 wire                            sw3_f                           ;
 wire                            sw4_f                           ;
+
 wire                            flag_up                         ;
 wire                            flag_down                       ;
 
@@ -82,10 +80,6 @@ wire                            flag_pwr_timer                  ;
 reg     [15:0]                  len_pwr_timer                   ;
 reg                             flag_pwr                        ;  //1'b0 - power off; 1'b1 - power on
 reg     [6:0]                   dis_sn_d1                       ;
-reg    [79:0]                   data_rty                        ;
-reg                             flag_ng                         ;
-
-
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // continuous assignment
@@ -94,7 +88,6 @@ assign flag_up = (sw1_f == 1'b0);
 assign flag_down = (sw2_f == 1'b0);
 //assign flag_dis_chg = ((flag_up_d2 == 1'b1) || (flag_down_d2 == 1'b1));
 assign flag_dis_chg = (dis_sn != dis_sn_d1);
-assign read_data = data_rty ;
 
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -147,6 +140,7 @@ glf #(
     .s_in                       ( sw4                           ),
     .s_out                      ( sw4_f                         )
 );
+
 
 
 //timer for display content lock
@@ -202,7 +196,7 @@ begin
         begin
             dis_sn <= PATMIN;
         end
-        else if ((sw4_f == 1'b0) || (flag_ng==1'b1) )
+        else if (sw4_f == 1'b0)
         begin
             dis_sn <= PATMAX;
         end
@@ -279,47 +273,6 @@ begin
 end
 
 //lock time length
-//always @(posedge clk or negedge rst_n)
-//begin
-//    if (rst_n == 1'b0)
-//    begin
-//        len_lock_timer <= 16'd300;
-//    end
-//    else
-//    begin
-//        if (flag_dis_chg == 1'b1)
-//        begin
-//            case (dis_sn[6:0])
-//                7'd0:
-//                begin
-//                    len_lock_timer <= 16'd300;
-//                end
-//                7'd1:
-//                begin
-//                    len_lock_timer <= 16'd2000;
-//                end
-//                7'd6, 7'd7, 7'd8:
-//                begin
-//                    len_lock_timer <= 16'd1000;
-//                end
-//					 7'd3, 7'd4, 7'd2, 7'd5:
-//                begin
-//                    len_lock_timer <= 16'd1000;
-//                end
-//                7'd9,7'd10:
-//                begin
-//                    len_lock_timer <= 16'd1000;
-//                end
-//                default:
-//                begin
-//                    len_lock_timer <= 16'd1000;
-//                end
-//            endcase
-//        end
-//    end
-//end
-
-//lock time length
 always @(posedge clk or negedge rst_n)
 begin
     if (rst_n == 1'b0)
@@ -337,76 +290,29 @@ begin
                 end
                 7'd1:
                 begin
-                    len_lock_timer <= 16'd3000;
+                    len_lock_timer <= 16'd300;
                 end
-                7'd2,7'd3, 7'd6:
+                7'd2, 7'd5:
                 begin
-                    len_lock_timer <= 16'd2000;
+                    len_lock_timer <= 16'd300;
                 end
-					 7'd4, 7'd5, 7'd7, 7'd8,7'd9:
+					 7'd3, 7'd4, 7'd6, 7'd7, 7'd8:
                 begin
-                    len_lock_timer <= 16'd1000;
+                    len_lock_timer <= 16'd300;
                 end
-//                7'd10,7'd11:
-//                begin
-//                    len_lock_timer <= 16'd1000;
-//                end
+                7'd9,7'd10:
+                begin
+                    len_lock_timer <= 16'd300;
+                end
                 default:
                 begin
-                    len_lock_timer <= 16'd1000;
+                    len_lock_timer <= 16'd300;
                 end
             endcase
         end
     end
 end
 
-
-//uart   //传输PC段信息更改
-always @(posedge clk or negedge rst_n)
-begin
-	if (rst_n == 1'b0)
-		begin
-		en_uart <= 0;
-		data_rty <=0;
-		flag_ng<=0;
-		nummax<=5'd0;
-		end
-	else
-		begin		    
-		  if (sw1_f == 1'b0)
-		  begin		  
-			  if(dis_sn==0)
-			  begin
-			  en_uart <= 1;
-			  data_rty <= "*A08-2_V4#";     //传输的数据
-			  nummax<=5'd10; 			   	  //传输的数据位数 
-			  end
-			  else if(dis_sn== PATMAX-1)
-		     begin
-			  nummax<=5'd3;
-		     en_uart <= 1;
-			  data_rty <= "*1#";			  
-		     end
-			  else
-			  begin
-			  en_uart <= 0;
-			  data_rty <= data_rty;
-			  end
-		 end			
-		 else if(sw4_f == 1'b0)
-		 begin
-		     en_uart <= 1;
-			  nummax<=5'd3;
-			  data_rty <= "*0#";
-			  
-		 end
-		 else
-	     begin
-		  en_uart <= 0;
-		  data_rty <= data_rty;
-       end		 
-		end		
-end
 //power on/off control
 always @(posedge clk or negedge rst_n)
 begin

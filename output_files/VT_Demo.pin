@@ -298,8 +298,8 @@ GND                          : 227       : gnd    :                   :         
 VCCINT                       : 228       : power  :                   : 1.2V    :           :                
 GND                          : 229       : gnd    :                   :         :           :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 230       :        :                   :         : 8         :                
-txd                          : 231       : output : 2.5 V             :         : 8         : Y              
-rxd                          : 232       : input  : 2.5 V             :         : 8         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 231       :        :                   :         : 8         :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : 232       :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 233       :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 234       :        :                   :         : 8         :                
 sw1                          : 235       : input  : 2.5 V             :         : 8         : Y              

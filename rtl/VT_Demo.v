@@ -28,10 +28,7 @@ module VT_Demo(
     input                 sw4               ,
 	 input                 sw5               ,
     input                 sw6               ,
-	 input	              rxd               ,
 	
-  
-	 output	              txd               , 	
     output                FPGA_LED_Test     ,	
     output                en_p14v           ,
     output                en_n14v           ,
@@ -93,7 +90,7 @@ module VT_Demo(
 // parameters
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 parameter       PATMIN                      = 7'd0              ;  //minimum pattern number
-parameter       PATNUM                      = 7'd11             ;
+parameter       PATNUM                      = 7'd12             ;
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // variable declaration
@@ -104,9 +101,16 @@ wire                            rst_n_sys                       ;
 wire    [6:0]                   dis_sn                          ;
 
 wire                            grst                            ;
+wire                            jdqi                            ;//jdqi
+
+wire                            VTCOMSW1                            ;
+wire                            VTCOMSW2                            ;
+
+
 wire                            u2d                             ;
 wire                            d2u                             ;
 wire                            stv                             ;
+//wire                            stv2                             ;
 wire                            ckv1                            ;
 wire                            ckv2                            ;
 wire                            ckv3                            ;
@@ -118,24 +122,13 @@ wire                            ckhb                            ;
 //wire                            xckhg                           ;
 //wire                            xckhb                           ;
 
-wire                            flag_black_on                    ;
-wire 									[7:0]uart_data								;
-wire                               uart_wr								;
-wire 											tx_rdy								;
-wire 											en_uart								;
-wire 								[79:0]read_data								;
-wire 										rx_en_sig								;
-wire 										Rx_Donesig								;
-wire 										[79:0]Rx_data							;
-wire 										switch_reset							;
-wire										BPS_clk									;
-wire 									[5:0]	DATASENDTIME							;
-wire 									[5:0]	nummax									;
+wire                            flag_black_on                   ;
+
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // continuous assignment
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-//assign FPGA_LED_Test = BPS_clk;
+
 
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -149,7 +142,7 @@ clkrst u_clkrst(
 );
 
 switch #(
-    .CNT1US                     ( 16'd130                       ),
+    .CNT1US                     ( 16'd33                       ),
     .PATMIN                     ( PATMIN                        ),
     .PATNUM                     ( PATNUM                        )
 ) u_switch (
@@ -159,20 +152,17 @@ switch #(
     .sw2                        ( sw2                           ),  //input
     .sw3                        ( sw3                           ),  //input
     .sw4                        ( sw4                           ),  //input
-	 //.sw5                        ( sw5                           ),  //input
-	 .Rx_Donesig                 ( Rx_Donesig_pos                           ),  //input
-    .Rx_data                    ( Rx_data                           ),  //input
+	 .sw5                        ( sw5                           ),  //input
 	 
     .dis_sn                     ( dis_sn                        ),  //output reg
-	 .read_data                  ( read_data                    ),  //output
+	 
 	 .FPGA_LED_Test				  ( FPGA_LED_Test                 ),  //output reg
     .en_p14v                    ( en_p14v                       ),  //output reg    
     .en_n14v                    ( en_n14v                       ),  //output reg
     .en_gvddp                   ( en_gvddp                      ),  //output reg    
     .en_gvddn                   ( en_gvddn                      ),  //output reg   	 
     .en_vgh                     ( en_vgh                        ),  //output reg    
-    .en_vgl                     ( en_vgl                        ),  //output reg  
-    .nummax							  (nummax   		   		       ),	//output reg
+    .en_vgl                     ( en_vgl                        ),  //output reg    
   
     .mux_en1                    ( mux_en1                       ),  //output reg     
     .mux_en2                    ( mux_en2                       ),  //output reg       
@@ -180,75 +170,37 @@ switch #(
     .mux_en4                    ( mux_en4                       ),  //output reg   
     .mux_en_Test1               ( mux_en_Test1                  ),  //output reg   	 
     .mux_en_Test2               ( mux_en_Test2                  ),  //output reg   
-    .en_uart	                 ( en_uart                  		 ),  //      
-    .flag_black_on              ( flag_black_on                 )  //output reg  
-	 
+    
+    .flag_black_on              ( flag_black_on                 )   //output reg       
 );                                                                                     
-//uart
-tx_module u_tx_module(
-         .clk						 (	clk_sys						       ),
-			.rst_n					 (	rst_n_sys						    ),
-			.tx_data			       (	uart_data		                ),
-			.rx_flag			       (	uart_wr		                   ),
-			.tx_rdy			       (	tx_rdy								 ),
-			
-			
-			.txd						 (	txd						          )
-);
-uart u_uart(
-         .clk						 (	clk_sys						       ),
-			.rst_n					 (	rst_n_sys						    ),
-			.en_uart              ( en_uart                       ),  //input
-         .serial_data          ( read_data                    ),  //input   read_data 
-			.tx_rdy			       (	tx_rdy								 ),   //input tx_rdy
-			.DATASENDTIME         (nummax                        ),
-			.uart_data            ( uart_data                      ),  //output
-			.uart_wr              ( uart_wr                        ),  //output  uart_wr
-);
-
-rx_module #(
-			.DATASENDTIME_rx		    (3'd1                           )
-		)
-u_rx_module(
-         .clk						 (	clk_sys						       ),
-			.rst_n					 (	rst_n_sys						    ),
-			.rxd						 (	rxd						          ),
-			.rx_en_sig				 (	tx_rdy						       ),
-			.Rx_data					 (	Rx_data						       ),
-			.Rx_Donesig			    (	Rx_Donesig						    ),
-			.Rx_Donesig_pos		 ( Rx_Donesig_pos                 )
-);
-
 
 //tgen generatie timing
 tgen u_tgen(
     .clk                        ( clk_sys                       ),  //input
     .rst_n                      ( rst_n_sys                     ),  //input
-	
     .grst                       ( grst                          ),  //output
+	 .jdqi                       ( jdqi                          ),  //output
+	 
     .u2d                        ( u2d                           ),  //output
     .d2u                        ( d2u                           ),  //output
-
-	 .stv1                       ( stv1                          ),  //output
-    .stv2                       ( stv2                          ),  //output
-	 
+    .stv                        ( stv                           ),  //output
+	 //.stv2                        ( stv2                           ),  //output
     .ckv1                       ( ckv1                          ),  //output
     .ckv2                       ( ckv2                          ),  //output
-    .ckv3                       ( ckv3                          ),  //output
-    .ckv4                       ( ckv4                          ),  //output
-    .ckhr                       ( ckhr                          ),  //output
-    .ckhg                       ( ckhg                          ),  //output
-    .ckhb                       ( ckhb                          ),  //output
-//    .xckhr                      ( xckhr                         ),  //output
-//    .xckhg                      ( xckhg                         ),  //output
-//    .xckhb                      ( xckhb                         ),  //output
+//    .ckv3                       ( ckv3                          ),  //output
+//    .ckv4                       ( ckv4                          ),  //output
+    .ckh1                       ( ckh1                          ),  //output
+    .ckh2                       ( ckh2                          ),  //output
+    .ckh3                       ( ckh3                          ),  //output
+	 .ckh4                       ( ckh4                          ),  //output
+    .ckh5                       ( ckh5                          ),  //output
+    .ckh6                       ( ckh6                          ),  //output
     .dis_sn                     ( dis_sn                        ),  //input
 	 
     .da1_wr                     ( da1_wr                        ),  //output reg
     .da2_wr                     ( da2_wr                        ),  //output reg
 	 .da3_wr                     ( da3_wr                        ),  //output reg
 	 .da4_wr                     ( da4_wr                        ),  //output reg
-//	 .en_uart                    ( en_uart                        ),  //output reg
 	 
 	 .da1_a                      ( da1_a                         ),  //output reg [1:0]
 	 .da2_a                      ( da2_a                         ),  //output reg [1:0]
@@ -265,56 +217,56 @@ tgen u_tgen(
 
 mux_decode u1_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( stv1                           ),  //input
-    .db                         ( stv2                           ),  //input
+    .da                         ( stv                           ),  //input
+    .db                         ( stv                           ),  //input
     .a                          ( mux_1                         )   //output
 );
 
 mux_decode u2_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv3                          ),  //input
-    .db                         ( ckv3                          ),  //input
+    .da                         ( ckv1                          ),  //input
+    .db                         ( ckv1                          ),  //input
     .a                          ( mux_2                         )   //output
 );
 
 mux_decode u3_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv4                          ),  //input
-    .db                         ( ckv4                          ),  //input
+    .da                         ( 1'b0                          ),  //input
+    .db                         ( 1'b0                          ),  //input
     .a                          ( mux_3                         )   //output
 );
 
 mux_decode u4_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv1                          ),  //input
-    .db                         ( ckv1                          ),  //input
+    .da                         ( ckv2                          ),  //input
+    .db                         ( ckv2                          ),  //input
     .a                          ( mux_4                         )   //output
 );
 
 mux_decode u5_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv2                          ),  //input
-    .db                         ( ckv2                          ),  //input
+    .da                         ( ckh1                          ),  //input
+    .db                         ( 1'b0                          ),  //input
     .a                          ( mux_5                         )   //output
 );
 
 mux_decode u6_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckhr                          ),  //input
-    .db                         ( 1'b0                          ),  //input
+    .da                         ( ckh2                          ),  //input
+    .db                         ( ckh3                          ),  //input
     .a                          ( mux_6                         )   //output
 );
 
 mux_decode u7_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckhg                          ),  //input
-    .db                         ( 1'b0                          ),  //input
+    .da                         ( ckh4                          ),  //input
+    .db                         ( ckh5                          ),  //input
     .a                          ( mux_7                         )   //output
 );
 
 mux_decode u8_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckhb                          ),  //input
+    .da                         ( ckh6                          ),  //input
     .db                         ( 1'b0                          ),  //input
     .a                          ( mux_8                         )   //output
 );
@@ -336,7 +288,7 @@ mux_decode u10_mux_decode(
 mux_decode u11_mux_decode(
     .clk                        ( clk_sys                       ),  //input
     .da                         ( grst                          ),  //input
-    .db                         ( grst                          ),  //input
+    .db                         ( grst                         ),  //input
     .a                          ( mux_11                        )   //output
 );
 
@@ -347,17 +299,30 @@ mux_decode u12_mux_decode(
     .a                          ( mux_12                        )   //output
 );
 
+//mux_decode u13_mux_decode(
+//    .clk                        ( clk_sys                       ),  //input
+//    .da                         ( 1'b1                          ),  //input
+//    .db                         ( 1'b1                          ),  //input
+//    .a                          ( mux_13                        )   //output
+//);
+
 mux_decode u13_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( 1'b1                          ),  //input
-    .db                         ( 1'b1                          ),  //input
+    .da                         ( gas                           ),  //input
+    .db                         ( gas                           ),  //input
     .a                          ( mux_13                        )   //output
 );
 
+//mux_decode u14_mux_decode(
+//    .clk                        ( clk_sys                       ),  //input
+//    .da                         ( 1'b1                          ),  //input
+//    .db                         ( 1'b1                          ),  //input
+//    .a                          ( mux_14                        )   //output
+//);
 mux_decode u14_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( 1'b1                          ),  //input
-    .db                         ( 1'b1                          ),  //input
+    .da                         ( jdqi                          ),  //input
+    .db                         ( 1'b0                          ),  //input
     .a                          ( mux_14                        )   //output
 );
 

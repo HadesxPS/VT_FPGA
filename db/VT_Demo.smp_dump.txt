@@ -30,15 +30,3 @@ cs_ctrl.VBP 0 0 0 1 0 1
 cs_ctrl.PCH 0 0 1 0 0 1 
 cs_ctrl.DISPLAY 0 1 0 0 0 1 
 cs_ctrl.VFP 1 0 0 0 0 1 
-
-State Machine - |VT_Demo|uart:u_uart|cstate
-Name cstate.WAIT_TX_TEST5 cstate.WAIT_TX_TEST4 cstate.WAIT_TX_TEST3 cstate.WAIT_TX_TEST2 cstate.WAIT_TX_TEST1 cstate.SENDDELAY cstate.DATADIVE cstate.RECIEVE cstate.IDLE 
-cstate.IDLE 0 0 0 0 0 0 0 0 0 
-cstate.RECIEVE 0 0 0 0 0 0 0 1 1 
-cstate.DATADIVE 0 0 0 0 0 0 1 0 1 
-cstate.SENDDELAY 0 0 0 0 0 1 0 0 1 
-cstate.WAIT_TX_TEST1 0 0 0 0 1 0 0 0 1 
-cstate.WAIT_TX_TEST2 0 0 0 1 0 0 0 0 1 
-cstate.WAIT_TX_TEST3 0 0 1 0 0 0 0 0 1 
-cstate.WAIT_TX_TEST4 0 1 0 0 0 0 0 0 1 
-cstate.WAIT_TX_TEST5 1 0 0 0 0 0 0 0 1 
