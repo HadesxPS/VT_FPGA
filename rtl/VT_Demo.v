@@ -92,8 +92,8 @@ module VT_Demo(
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // parameters
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-parameter       PATMIN                      = 7'd0              ;  //minimum pattern number
-parameter       PATNUM                      = 7'd11             ;
+parameter      PATMIN                     = 7'd0            ;  //minimum pattern number
+parameter      PATNUM                     = 7'd11           ;
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // variable declaration
@@ -118,9 +118,9 @@ wire                            ckv4_R                          ;
 wire                            ckh1                            ;
 wire                            ckh2                            ;
 wire                            ckh3                            ;
-//wire                            xckhr                           ;
-//wire                            xckhg                           ;
-//wire                            xckhb                           ;
+wire                            ckh4                           ;
+wire                            ckh5                           ;
+wire                            ckh6                           ;
 
 wire                            flag_black_on                    ;
 wire 									[7:0]uart_data								;
@@ -248,6 +248,9 @@ tgen u_tgen(
     .ckh1                       ( ckh1                          ),  //output
     .ckh2                       ( ckh2                          ),  //output
     .ckh3                       ( ckh3                          ),  //output
+    .ckh4                       ( ckh1                          ),  //output
+    .ckh5                       ( ckh2                          ),  //output
+    .ckh6                       ( ckh3                          ),  //output
 	 
     .dis_sn                     ( dis_sn                        ),  //input
 	 
@@ -307,21 +310,21 @@ mux_decode u5_mux_decode(
 mux_decode u6_mux_decode(
     .clk                        ( clk_sys                       ),  //input
     .da                         ( ckh1                          ),  //input
-    .db                         ( ckh1                          ),  //input
+    .db                         ( ckh2                          ),  //input
     .a                          ( mux_6                         )   //output
 );
 
 mux_decode u7_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckh2                          ),  //input
-    .db                         ( ckh2                          ),  //input
+    .da                         ( ckh3                          ),  //input
+    .db                         ( ckh4                          ),  //input
     .a                          ( mux_7                         )   //output
 );
 
 mux_decode u8_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckh3                          ),  //input
-    .db                         ( ckh3                          ),  //input
+    .da                         ( ckh5                          ),  //input
+    .db                         ( ckh6                          ),  //input
     .a                          ( mux_8                         )   //output
 );
 

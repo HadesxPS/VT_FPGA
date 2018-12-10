@@ -39,6 +39,9 @@ module tgen(
     output reg            ckh1              ,
     output reg            ckh2              ,
     output reg            ckh3              ,
+	 output reg            ckh4              ,
+    output reg            ckh5              ,
+    output reg            ckh6              ,
 
     input      [6:0]      dis_sn            ,
 	 
@@ -81,7 +84,7 @@ parameter       H_FP                = 12'd45                    ;  //           
 parameter       V_BP                = 12'd12                    ;  //including VPW
 parameter       V_FP                = 12'd7                     ;
 parameter       V_ACT               = 12'd2520                  ;
-parameter       V_PCH               = 12'd8                     ;//10
+parameter       V_PCH               = 12'd8                     ;  //10
 
 parameter       H_ABGN              = H_BP                      ;
 parameter       H_AEND              = H_BP + H_ACT              ;
@@ -124,14 +127,14 @@ parameter       DCODE_GRAY64        = 8'd182                    ;   //DA input f
 parameter       DCODE_VCOMA       	= 8'd132                    ;   //DA input for VCOMA
 parameter       DCODE_VCOMB        	= 8'd170                    ;   //DA input for VCOMB
 
-parameter       SRC_PCH_SHIFT       = 8'd80                    ;   //source precharge time
+parameter       SRC_PCH_SHIFT       = 8'd80                     ;   //source precharge time
                                                                     //DA output tansition time: 1.4us, about 120 clk_sys period
                                                                     //constraint: 
                                                                     //1. (CKV1_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT) > SRC_PCH_SHIFT
                                                                     //2. (CKH_RISE_SHIFT + CKH_FALL_SHIFT) > SRC_PCH_SHIFT
 parameter       ODD_EVEN_TGAP       = 8'd5                      ;   //DA transition gap for odd and even source output
 
-
+parameter		 RGBRGB					= 1'b0							 ;	  //switch for RGBRGB and RGBBGR timings
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // variable declaration
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1115,18 +1118,20 @@ begin
     end
 end
 
-//ckh1
+//ckh1&ckh2
 always @(posedge clk or negedge rst_n)
 begin
     if (rst_n == 1'b0)
     begin
         ckh1 <= 1'b0;
+		  ckh2 <= 1'b0;
     end
     else
     begin
         if (is_demux_all_on == 1'b1)
         begin
 				ckh1 <= 1'b0;
+				ckh2 <= 1'b0;
         end
         else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
         begin
@@ -1134,79 +1139,92 @@ begin
             if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_WIDTH)))
             begin
                 ckh1 <= 1'b1;
+					 ckh2 <= 1'b1;
             end
             else
             begin
                 ckh1 <= 1'b0;
+					 ckh2 <= 1'b0;
             end
         end
         else
         begin
             ckh1 <= 1'b0;
-        end
-    end
-end
-
-//ckh2
-always @(posedge clk or negedge rst_n)
-begin
-    if (rst_n == 1'b0)
-    begin
-        ckh2 <= 1'b0;
-    end
-    else
-    begin
-        if (is_demux_all_on == 1'b1)
-        begin
 				ckh2 <= 1'b0;
         end
-        else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
-        begin
-            if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT))
-             && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + CKH_FALL_SHIFT)))
-            begin
-                ckh2 <= 1'b1;
-            end
-            else
-            begin
-                ckh2 <= 1'b0;
-            end
-        end
-        else
-        begin
-            ckh2 <= 1'b0;
-        end
     end
 end
 
-//ckh3
+//ckh3&ckh4
 always @(posedge clk or negedge rst_n)
 begin
     if (rst_n == 1'b0)
     begin
         ckh3 <= 1'b0;
+		  ckh4 <= 1'b0;
     end
     else
     begin
         if (is_demux_all_on == 1'b1)
         begin
 				ckh3 <= 1'b0;
+				ckh4 <= 1'b0;
+        end
+        else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
+        begin
+            if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT))
+             && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + CKH_FALL_SHIFT)))
+            begin
+                ckh3 <= 1'b1;
+					 ckh4 <= 1'b1;
+            end
+            else
+            begin
+                ckh3 <= 1'b0;
+					 ckh4 <= 1'b0;
+            end
+        end
+        else
+        begin
+            ckh3 <= 1'b0;
+				ckh4 <= 1'b0;
+        end
+    end
+end
+
+//ckh5&ckh6
+always @(posedge clk or negedge rst_n)
+begin
+    if (rst_n == 1'b0)
+    begin
+        ckh5 <= 1'b0;
+		  ckh6 <= 1'b0;
+    end
+    else
+    begin
+        if (is_demux_all_on == 1'b1)
+        begin
+				ckh5 <= 1'b0;
+				ckh6 <= 1'b0;
         end
         else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
         begin
             if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT))
              && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 3 * CKH_WIDTH + 2 * CKH_FALL_SHIFT)))
             begin
-                ckh3 <= 1'b1;
+                ckh5 <= 1'b1;
+					 ckh6 <= 1'b1;
             end
             else
             begin
-                ckh3 <= 1'b0;
+                ckh5 <= 1'b0;
+					 ckh6 <= 1'b0;
             end
         end
         else
         begin
-            ckh3 <= 1'b0;
+            ckh5 <= 1'b0;
+				ckh6 <= 1'b0;
         end
     end
 end
