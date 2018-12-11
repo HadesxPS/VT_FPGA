@@ -1,3 +1,5 @@
 
 *.flock
 *.bak
+db/VT_Demo.db_info
+VT_Demo.qws
