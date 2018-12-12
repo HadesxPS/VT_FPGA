@@ -248,9 +248,9 @@ tgen u_tgen(
     .ckh1                       ( ckh1                          ),  //output
     .ckh2                       ( ckh2                          ),  //output
     .ckh3                       ( ckh3                          ),  //output
-    .ckh4                       ( ckh1                          ),  //output
-    .ckh5                       ( ckh2                          ),  //output
-    .ckh6                       ( ckh3                          ),  //output
+    .ckh4                       ( ckh4                          ),  //output
+    .ckh5                       ( ckh5                          ),  //output
+    .ckh6                       ( ckh6                          ),  //output
 	 
     .dis_sn                     ( dis_sn                        ),  //input
 	 

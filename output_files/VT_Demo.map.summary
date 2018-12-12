@@ -1,12 +1,12 @@
-Analysis & Synthesis Status : Successful - Sun Dec 09 21:30:41 2018
+Analysis & Synthesis Status : Successful - Wed Dec 12 16:00:39 2018
 Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
 Revision Name : VT_Demo
 Top-level Entity Name : VT_Demo
 Family : Cyclone III
-Total logic elements : 1,803
-    Total combinational functions : 1,745
-    Dedicated logic registers : 667
-Total registers : 667
+Total logic elements : 1,794
+    Total combinational functions : 1,737
+    Dedicated logic registers : 673
+Total registers : 673
 Total pins : 103
 Total virtual pins : 0
 Total memory bits : 0
