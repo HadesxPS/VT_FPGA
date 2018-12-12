@@ -3,8 +3,8 @@ JedecChain;
 	FileRevision(JESD32A);
 	DefaultMfr(6E);
 
-	P ActionCode(Ign)
-		Device PartName(EPCS4) MfrSpec(OpMask(0) Child_OpMask(1 1) FullPath("D:/2.6VT/VT_FPGA/output_files/VT_Demo.pof"));
+	P ActionCode(Cfg)
+		Device PartName(EPCS4) Path("D:/2.6VT/VT_FPGA/output_files/") File("VT_Demo.pof") MfrSpec(OpMask(1) Child_OpMask(1 1));
 
 ChainEnd;
 
