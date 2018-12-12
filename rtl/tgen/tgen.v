@@ -1120,20 +1120,20 @@ begin
     end
 end
 
-//ckh1&ckh2
+//ckh1&ckh4
 always @(posedge clk or negedge rst_n)
 begin
 	if (rst_n == 1'b0)
 	begin
 		ckh1 <= 1'b0;
-		ckh2 <= 1'b0;
+		ckh4 <= 1'b0;
 	end
 	else
 	begin
 		if (is_demux_all_on == 1'b1)
 		begin
 			ckh1 <= 1'b0;
-			ckh2 <= 1'b0;
+			ckh4 <= 1'b0;
 		end
 		else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
 		begin
@@ -1142,12 +1142,12 @@ begin
 				if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_WIDTH)))
 				begin
 					ckh1 <= 1'b1;
-					ckh2 <= 1'b1;
+					ckh4 <= 1'b1;
 				end
 				else
 				begin
 					ckh1 <= 1'b0;
-					ckh2 <= 1'b0;
+					ckh4 <= 1'b0;
 				end
 			end
 			else//RGBBGR
@@ -1157,17 +1157,17 @@ begin
 					if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_HALF_WIDTH)))
 					begin
 						ckh1 <= 1'b1;
-						ckh2 <= 1'b0;
+						ckh4 <= 1'b0;
 					end
 					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + CKH_HALF_WIDTH + CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + 2*CKH_HALF_WIDTH + CKH_FALL_SHIFT)))
 					begin
 						ckh1 <= 1'b0;
-						ckh2 <= 1'b1;
+						ckh4 <= 1'b1;
 					end
 					else
 					begin
 						ckh1 <= 1'b0;
-						ckh2 <= 1'b0;
+						ckh4 <= 1'b0;
 					end
 				end
 				else//EVEN LINE
@@ -1175,17 +1175,17 @@ begin
 					if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 4*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT))&&(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT)))
 					begin
 						ckh1 <= 1'b1;
-						ckh2 <= 1'b0;
+						ckh4 <= 1'b0;
 					end
 					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP +6*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 6*CKH_RISE_SHIFT + 6*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)))
 					begin
 						ckh1 <= 1'b0;
-						ckh2 <= 1'b1;
+						ckh4 <= 1'b1;
 					end
 					else
 					begin
 						ckh1 <= 1'b0;
-						ckh2 <= 1'b0;
+						ckh4 <= 1'b0;
 					end
 				end
 			end
@@ -1198,20 +1198,20 @@ begin
 	end
 end
 
-//ckh3&ckh4
+//ckh3&ckh6
 always @(posedge clk or negedge rst_n)
 begin
 	if (rst_n == 1'b0)
 	begin
 		ckh3 <= 1'b0;
-		ckh4 <= 1'b0;
+		ckh6 <= 1'b0;
 	end
 	else
 	begin
 		if(is_demux_all_on == 1'b1)
 		begin
 			ckh3 <= 1'b0;
-			ckh4 <= 1'b0;
+			ckh6 <= 1'b0;
 		end
 		else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
 		begin
@@ -1220,12 +1220,12 @@ begin
 				if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT))&&(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + CKH_FALL_SHIFT)))
             begin
 					ckh3 <= 1'b1;
-					ckh4 <= 1'b1;
+					ckh6 <= 1'b1;
             end
             else
             begin
 					ckh3 <= 1'b0;
-					ckh4 <= 1'b0;
+					ckh6 <= 1'b0;
 				end
 			end
 			else//RGBBGR
@@ -1233,42 +1233,42 @@ begin
 				if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3*CKH_RISE_SHIFT + 2*CKH_HALF_WIDTH + 2*CKH_FALL_SHIFT))&&(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3*CKH_RISE_SHIFT + 3*CKH_HALF_WIDTH + 2*CKH_FALL_SHIFT)))
 				begin
 					ckh3 <= 1'b1;
-					ckh4 <= 1'b0;
+					ckh6 <= 1'b0;
 				end
 				else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 4*CKH_RISE_SHIFT + 3*CKH_HALF_WIDTH + 3*CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 4*CKH_RISE_SHIFT + 4*CKH_HALF_WIDTH + 3*CKH_FALL_SHIFT)))
 				begin
 					ckh3 <= 1'b0;
-					ckh4 <= 1'b1;
+					ckh6 <= 1'b1;
 				end
 				else
 				begin
 					ckh3 <= 1'b0;
-					ckh4 <= 1'b0;
+					ckh6 <= 1'b0;
 				end
 			end
 		end
 		else
 		begin
 			ckh3 <= 1'b0;
-			ckh4 <= 1'b0;
+			ckh6 <= 1'b0;
 		end
 	end
 end
 
-//ckh5&ckh6
+//ckh2&ckh5
 always @(posedge clk or negedge rst_n)
 begin
 	if (rst_n == 1'b0)
 	begin
+		ckh2 <= 1'b0;
 		ckh5 <= 1'b0;
-		ckh6 <= 1'b0;
 	end
 	else
 	begin
 		if (is_demux_all_on == 1'b1)
 		begin
+			ckh2 <= 1'b0;
 			ckh5 <= 1'b0;
-			ckh6 <= 1'b0;
 		end
 		else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
 		begin
@@ -1276,13 +1276,13 @@ begin
 			begin
 				if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT))&& (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 3 * CKH_WIDTH + 2 * CKH_FALL_SHIFT)))
 				begin
+					ckh2 <= 1'b1;
 					ckh5 <= 1'b1;
-					ckh6 <= 1'b1;
 				end
 				else
 				begin
+					ckh2 <= 1'b0;
 					ckh5 <= 1'b0;
-					ckh6 <= 1'b0;
 				end
 			end
 			else//RGBBGR
@@ -1291,44 +1291,44 @@ begin
 				begin
 					if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 4*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT))&&(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT)))
 					begin
-						ckh5 <= 1'b1;
-						ckh6 <= 1'b0;
+						ckh2 <= 1'b1;
+						ckh5 <= 1'b0;
 					end
 					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP +6*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 6*CKH_RISE_SHIFT + 6*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)))
 					begin
-						ckh5 <= 1'b0;
-						ckh6 <= 1'b1;
+						ckh2 <= 1'b0;
+						ckh5 <= 1'b1;
 					end
 					else
 					begin
+						ckh2 <= 1'b0;
 						ckh5 <= 1'b0;
-						ckh6 <= 1'b0;
 					end
 				end
 				else//EVEN LINE
 				begin
 					if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_HALF_WIDTH)))
 					begin
-						ckh5 <= 1'b1;
-						ckh6 <= 1'b0;
+						ckh2 <= 1'b1;
+						ckh5 <= 1'b0;
 					end
 					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + CKH_HALF_WIDTH + CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + 2*CKH_HALF_WIDTH + CKH_FALL_SHIFT)))
 					begin
-						ckh5 <= 1'b0;
-						ckh6 <= 1'b1;
+						ckh2 <= 1'b0;
+						ckh5 <= 1'b1;
 					end
 					else
 					begin
+						ckh2 <= 1'b0;
 						ckh5 <= 1'b0;
-						ckh6 <= 1'b0;
 					end
 				end
 			end
 		end
 		else
 		begin
+			ckh2 <= 1'b0;
 			ckh5 <= 1'b0;
-			ckh6 <= 1'b0;
 		end
 	end
 end
@@ -1641,36 +1641,168 @@ begin
 					da3_a <= 2'b00;
 					da3_din <= DCODE_VCOMA;//VCOMA
 				end	
-			end 
-			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_WIDTH - SRC_PCH_SHIFT))
-			begin
-				da1_a <= 2'b00;
-				da1_din <= r_data;
 			end
-			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_WIDTH - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+			else if(RGBRGB==1'b1)
 			begin
-				da1_a <= 2'b01;
-				da1_din <= ~r_data[7:0] + 8'd1;
+				if 		(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_WIDTH + 0 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+				begin
+					da1_a <= 2'b00;
+					da1_din <= r_data;
+				end
+				else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_WIDTH + 0 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+				begin
+					da1_a <= 2'b01;
+					da1_din <= ~r_data[7:0] + 8'd1;
+				end
+				else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+				begin
+					da1_a <= 2'b00;
+					da1_din <= g_data;
+				end
+				else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+				begin
+					da1_a <= 2'b01;
+					da1_din <= ~g_data[7:0] + 8'd1;
+				end
+				else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+				begin
+					da1_a <= 2'b00;
+					da1_din <= b_data;
+				end
+				else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+				begin
+					da1_a <= 2'b01;
+					da1_din <= ~b_data[7:0] + 8'd1;
+				end
 			end
-			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+			else//RGBBGR
 			begin
-				da1_a <= 2'b00;
-				da1_din <= g_data;
-			end
-			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
-			begin
-				da1_a <= 2'b01;
-				da1_din <= ~g_data[7:0] + 8'd1;
-			end
-			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
-			begin
-				da1_a <= 2'b00;
-				da1_din <= b_data;
-			end
-			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
-			begin
-				da1_a <= 2'b01;
-				da1_din <= ~b_data[7:0] + 8'd1;
+				if(cnt_vact%2== 12'd0)
+				begin
+					if 		(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_HALF_WIDTH + 0 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= r_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_HALF_WIDTH + 0 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da1_a <= 2'b01;
+						da1_din <= ~r_data[7:0] + 8'd1;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_HALF_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= r_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_HALF_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da1_a <= 2'b01;
+						da1_din <= ~r_data[7:0] + 8'd1;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_HALF_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= b_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_HALF_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da1_a <= 2'b01;
+						da1_din <= ~b_data[7:0] + 8'd1;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 4 * CKH_RISE_SHIFT + 3 * CKH_HALF_WIDTH + 3 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= b_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 4 * CKH_RISE_SHIFT + 3 * CKH_HALF_WIDTH + 3 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da1_a <= 2'b01;
+						da1_din <= ~b_data[7:0] + 8'd1;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 5 * CKH_RISE_SHIFT + 4 * CKH_HALF_WIDTH + 4 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= g_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 5 * CKH_RISE_SHIFT + 4 * CKH_HALF_WIDTH + 4 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da1_a <= 2'b01;
+						da1_din <= ~g_data[7:0] + 8'd1;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 6 * CKH_RISE_SHIFT + 5 * CKH_HALF_WIDTH + 5 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= g_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 6 * CKH_RISE_SHIFT + 5 * CKH_HALF_WIDTH + 5 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da1_a <= 2'b01;
+						da1_din <= ~g_data[7:0] + 8'd1;
+					end
+				end
+				else
+				begin
+					if 		(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_HALF_WIDTH + 0 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= g_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_HALF_WIDTH + 0 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da1_a <= 2'b01;
+						da1_din <= ~g_data[7:0] + 8'd1;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_HALF_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= g_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_HALF_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da1_a <= 2'b01;
+						da1_din <= ~g_data[7:0] + 8'd1;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_HALF_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= b_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_HALF_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da1_a <= 2'b01;
+						da1_din <= ~b_data[7:0] + 8'd1;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 4 * CKH_RISE_SHIFT + 3 * CKH_HALF_WIDTH + 3 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= b_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 4 * CKH_RISE_SHIFT + 3 * CKH_HALF_WIDTH + 3 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da1_a <= 2'b01;
+						da1_din <= ~b_data[7:0] + 8'd1;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 5 * CKH_RISE_SHIFT + 4 * CKH_HALF_WIDTH + 4 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= r_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 5 * CKH_RISE_SHIFT + 4 * CKH_HALF_WIDTH + 4 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da1_a <= 2'b01;
+						da1_din <= ~r_data[7:0] + 8'd1;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 6 * CKH_RISE_SHIFT + 5 * CKH_HALF_WIDTH + 5 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= r_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 6 * CKH_RISE_SHIFT + 5 * CKH_HALF_WIDTH + 5 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))	
+					begin
+						da1_a <= 2'b01;
+						da1_din <= ~r_data[7:0] + 8'd1;
+					end
+				end
 			end
 ////////////////////////////////////////////////////////		
 		end
