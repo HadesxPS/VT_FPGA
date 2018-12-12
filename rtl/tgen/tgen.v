@@ -1497,8 +1497,6 @@ end
 //-----------------------------------------------------------------------------
 // D/A processing - source data generation
 //-----------------------------------------------------------------------------
-
-
 always @(posedge clk or negedge rst_n)
 begin
     if (rst_n == 1'b0)
@@ -1516,9 +1514,6 @@ begin
 		  da4_wr <= 1'b0;
     end
 end
-
-
-
 
 always @(posedge clk or negedge rst_n)
 begin
@@ -1654,16 +1649,8 @@ begin
 			end
 			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_WIDTH - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
 			begin
-				if(flag_inversion == 1'b0) //column inversion  
-				begin
-					da1_a <= 2'b01;
-					da1_din <= ~r_data[7:0] + 8'd1;
-				end
-				else if(flag_inversion == 1'b1) //frame inversion
-				begin
-					da1_a <= 2'b01;
-					da1_din <= r_data;
-				end
+				da1_a <= 2'b01;
+				da1_din <= ~r_data[7:0] + 8'd1;
 			end
 			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
 			begin
@@ -1672,16 +1659,8 @@ begin
 			end
 			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
 			begin
-				if(flag_inversion == 1'b0) //column inversion  
-				begin
-					da1_a <= 2'b01;
-					da1_din <= ~g_data[7:0] + 8'd1;
-				end
-				else if(flag_inversion == 1'b1) //frame inversion
-				begin
-					da1_a <= 2'b01;
-					da1_din <= g_data;
-				end
+				da1_a <= 2'b01;
+				da1_din <= ~g_data[7:0] + 8'd1;
 			end
 			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
 			begin
@@ -1690,16 +1669,8 @@ begin
 			end
 			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
 			begin
-				if(flag_inversion == 1'b0) //column inversion  
-				begin
-					da1_a <= 2'b01;
-					da1_din <= ~b_data[7:0] + 8'd1;
-				end
-				else if(flag_inversion == 1'b1) //frame inversion
-				begin
-					da1_a <= 2'b01;
-					da1_din <= b_data;
-				end
+				da1_a <= 2'b01;
+				da1_din <= ~b_data[7:0] + 8'd1;
 			end
 ////////////////////////////////////////////////////////		
 		end
