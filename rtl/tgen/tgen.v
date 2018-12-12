@@ -214,6 +214,8 @@ assign flag_rev_scan = 1'b0;
 //assign flag_inversion = (smp_dis_sn == 7'd9);  //1'b1 - frame inversion ;  1'b0 - column inversion           
 assign flag_inversion = 1'b0;  
 
+assign CKH_HALF_WIDTH = CKH_WIDTH/2;
+
 assign ckv1_L = (flag_rev_scan == 1'b0) ? ckv1_L_pre : ckv2_R_pre;
 assign ckv1_R = (flag_rev_scan == 1'b0) ? ckv1_R_pre : ckv2_L_pre;
 assign ckv2_L = (flag_rev_scan == 1'b0) ? ckv2_L_pre : ckv1_R_pre;
@@ -1121,112 +1123,214 @@ end
 //ckh1&ckh2
 always @(posedge clk or negedge rst_n)
 begin
-    if (rst_n == 1'b0)
-    begin
-        ckh1 <= 1'b0;
-		  ckh2 <= 1'b0;
-    end
-    else
-    begin
-        if (is_demux_all_on == 1'b1)
-        begin
-				ckh1 <= 1'b0;
-				ckh2 <= 1'b0;
-        end
-        else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
-        begin
-            
-            if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_WIDTH)))
-            begin
-                ckh1 <= 1'b1;
-					 ckh2 <= 1'b1;
-            end
-            else
-            begin
-                ckh1 <= 1'b0;
-					 ckh2 <= 1'b0;
-            end
-        end
-        else
-        begin
-            ckh1 <= 1'b0;
-				ckh2 <= 1'b0;
-        end
-    end
+	if (rst_n == 1'b0)
+	begin
+		ckh1 <= 1'b0;
+		ckh2 <= 1'b0;
+	end
+	else
+	begin
+		if (is_demux_all_on == 1'b1)
+		begin
+			ckh1 <= 1'b0;
+			ckh2 <= 1'b0;
+		end
+		else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
+		begin
+			if(RGBRGB==1'b1)
+			begin
+				if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_WIDTH)))
+				begin
+					ckh1 <= 1'b1;
+					ckh2 <= 1'b1;
+				end
+				else
+				begin
+					ckh1 <= 1'b0;
+					ckh2 <= 1'b0;
+				end
+			end
+			else//RGBBGR
+			begin
+				if(cnt_vact%2== 12'd0)
+				begin
+					if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_HALF_WIDTH)))
+					begin
+						ckh1 <= 1'b1;
+						ckh2 <= 1'b0;
+					end
+					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + CKH_HALF_WIDTH + CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + 2*CKH_HALF_WIDTH + CKH_FALL_SHIFT)))
+					begin
+						ckh1 <= 1'b0;
+						ckh2 <= 1'b1;
+					end
+					else
+					begin
+						ckh1 <= 1'b0;
+						ckh2 <= 1'b0;
+					end
+				end
+				else//EVEN LINE
+				begin
+					if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 4*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT))&&(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT)))
+					begin
+						ckh1 <= 1'b1;
+						ckh2 <= 1'b0;
+					end
+					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP +6*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 6*CKH_RISE_SHIFT + 6*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)))
+					begin
+						ckh1 <= 1'b0;
+						ckh2 <= 1'b1;
+					end
+					else
+					begin
+						ckh1 <= 1'b0;
+						ckh2 <= 1'b0;
+					end
+				end
+			end
+		end
+		else
+		begin
+			ckh1 <= 1'b0;
+			ckh2 <= 1'b0;
+		end
+	end
 end
 
 //ckh3&ckh4
 always @(posedge clk or negedge rst_n)
 begin
-    if (rst_n == 1'b0)
-    begin
-        ckh3 <= 1'b0;
-		  ckh4 <= 1'b0;
-    end
-    else
-    begin
-        if (is_demux_all_on == 1'b1)
-        begin
-				ckh3 <= 1'b0;
-				ckh4 <= 1'b0;
-        end
-        else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
-        begin
-            if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT))
-             && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + CKH_FALL_SHIFT)))
+	if (rst_n == 1'b0)
+	begin
+		ckh3 <= 1'b0;
+		ckh4 <= 1'b0;
+	end
+	else
+	begin
+		if(is_demux_all_on == 1'b1)
+		begin
+			ckh3 <= 1'b0;
+			ckh4 <= 1'b0;
+		end
+		else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
+		begin
+			if(RGBRGB==1'b1)
+			begin
+				if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT))&&(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + CKH_FALL_SHIFT)))
             begin
-                ckh3 <= 1'b1;
-					 ckh4 <= 1'b1;
+					ckh3 <= 1'b1;
+					ckh4 <= 1'b1;
             end
             else
             begin
-                ckh3 <= 1'b0;
-					 ckh4 <= 1'b0;
-            end
-        end
-        else
-        begin
-            ckh3 <= 1'b0;
-				ckh4 <= 1'b0;
-        end
-    end
+					ckh3 <= 1'b0;
+					ckh4 <= 1'b0;
+				end
+			end
+			else//RGBBGR
+			begin
+				if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3*CKH_RISE_SHIFT + 2*CKH_HALF_WIDTH + 2*CKH_FALL_SHIFT))&&(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3*CKH_RISE_SHIFT + 3*CKH_HALF_WIDTH + 2*CKH_FALL_SHIFT)))
+				begin
+					ckh3 <= 1'b1;
+					ckh4 <= 1'b0;
+				end
+				else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 4*CKH_RISE_SHIFT + 3*CKH_HALF_WIDTH + 3*CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 4*CKH_RISE_SHIFT + 4*CKH_HALF_WIDTH + 3*CKH_FALL_SHIFT)))
+				begin
+					ckh3 <= 1'b0;
+					ckh4 <= 1'b1;
+				end
+				else
+				begin
+					ckh3 <= 1'b0;
+					ckh4 <= 1'b0;
+				end
+			end
+		end
+		else
+		begin
+			ckh3 <= 1'b0;
+			ckh4 <= 1'b0;
+		end
+	end
 end
 
 //ckh5&ckh6
 always @(posedge clk or negedge rst_n)
 begin
-    if (rst_n == 1'b0)
-    begin
-        ckh5 <= 1'b0;
-		  ckh6 <= 1'b0;
-    end
-    else
-    begin
-        if (is_demux_all_on == 1'b1)
-        begin
-				ckh5 <= 1'b0;
-				ckh6 <= 1'b0;
-        end
-        else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
-        begin
-            if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT))
-             && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 3 * CKH_WIDTH + 2 * CKH_FALL_SHIFT)))
-            begin
-                ckh5 <= 1'b1;
-					 ckh6 <= 1'b1;
-            end
-            else
-            begin
-                ckh5 <= 1'b0;
-					 ckh6 <= 1'b0;
-            end
-        end
-        else
-        begin
-            ckh5 <= 1'b0;
-				ckh6 <= 1'b0;
-        end
-    end
+	if (rst_n == 1'b0)
+	begin
+		ckh5 <= 1'b0;
+		ckh6 <= 1'b0;
+	end
+	else
+	begin
+		if (is_demux_all_on == 1'b1)
+		begin
+			ckh5 <= 1'b0;
+			ckh6 <= 1'b0;
+		end
+		else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
+		begin
+			if(RGBRGB==1'b1)
+			begin
+				if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT))&& (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 3 * CKH_WIDTH + 2 * CKH_FALL_SHIFT)))
+				begin
+					ckh5 <= 1'b1;
+					ckh6 <= 1'b1;
+				end
+				else
+				begin
+					ckh5 <= 1'b0;
+					ckh6 <= 1'b0;
+				end
+			end
+			else//RGBBGR
+			begin
+				if(cnt_vact%2== 12'd0)
+				begin
+					if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 4*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT))&&(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT)))
+					begin
+						ckh5 <= 1'b1;
+						ckh6 <= 1'b0;
+					end
+					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP +6*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 6*CKH_RISE_SHIFT + 6*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)))
+					begin
+						ckh5 <= 1'b0;
+						ckh6 <= 1'b1;
+					end
+					else
+					begin
+						ckh5 <= 1'b0;
+						ckh6 <= 1'b0;
+					end
+				end
+				else//EVEN LINE
+				begin
+					if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_HALF_WIDTH)))
+					begin
+						ckh5 <= 1'b1;
+						ckh6 <= 1'b0;
+					end
+					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + CKH_HALF_WIDTH + CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + 2*CKH_HALF_WIDTH + CKH_FALL_SHIFT)))
+					begin
+						ckh5 <= 1'b0;
+						ckh6 <= 1'b1;
+					end
+					else
+					begin
+						ckh5 <= 1'b0;
+						ckh6 <= 1'b0;
+					end
+				end
+			end
+		end
+		else
+		begin
+			ckh5 <= 1'b0;
+			ckh6 <= 1'b0;
+		end
+	end
 end
 
 //-----------------------------------------------------------------------------
