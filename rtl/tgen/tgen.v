@@ -1499,16 +1499,6 @@ end
 //-----------------------------------------------------------------------------
 always @(posedge clk or negedge rst_n)
 begin
-        if ((cs_ctrl == VFP) && ((flag_hend == 1'b1) && (cnt_vblank == V_FP - 12'd1)))
-        begin
-            r_data<= ~r_data[7:0] + 8'd1;
-				g_data<= ~g_data[7:0] + 8'd1;
-				b_data<= ~r_data[7:0] + 8'd1;
-        end
-end
-
-always @(posedge clk or negedge rst_n)
-begin
     if (rst_n == 1'b0)
     begin
 		  da1_wr <= 1'b1;
@@ -1524,9 +1514,6 @@ begin
 		  da4_wr <= 1'b0;
     end
 end
-
-
-
 
 always @(posedge clk or negedge rst_n)
 begin
