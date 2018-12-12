@@ -1497,6 +1497,8 @@ end
 //-----------------------------------------------------------------------------
 // D/A processing - source data generation
 //-----------------------------------------------------------------------------
+
+
 always @(posedge clk or negedge rst_n)
 begin
     if (rst_n == 1'b0)
@@ -1514,6 +1516,9 @@ begin
 		  da4_wr <= 1'b0;
     end
 end
+
+
+
 
 always @(posedge clk or negedge rst_n)
 begin
@@ -1618,161 +1623,82 @@ begin
 		else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
 		begin
 ////////////////////////////////////////////////////////		
-				if (hcnt == 1)
+			if (hcnt == 1)
+			begin
+				if((flag_TP_test_a == 1'b0)&&(flag_TP_test_b == 1'b0))//normal pattern VCOM
 				begin
-					if((flag_TP_test_a == 1'b0)&&(flag_TP_test_b == 1'b0))//normal pattern VCOM
-					begin
-						da2_a <= 2'b00;
-						da2_din <= DCODE_VCOM;
-						da3_a <= 2'b00;
-						da3_din <= DCODE_VCOM;
-					end
-					else if(flag_TP_test_a == 1'b1)//TP_test_pattern VCOMA 
-					begin
-						da2_a <= 2'b00;
-						da2_din <= DCODE_VCOMA;//VCOMA
-						da3_a <= 2'b00;
-						da3_din <= DCODE_VCOMB;//VCOMB
-					end
-					else if(flag_TP_test_b == 1'b1)//TP_test_pattern VCOMB 
-					begin
-						da2_a <= 2'b00;
-						da2_din <= DCODE_VCOMB;//VCOMB
-						da3_a <= 2'b00;
-						da3_din <= DCODE_VCOMA;//VCOMA
-					end	
-				end 
-				else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT))
-				begin
-					da1_a <= 2'b00;
-					da1_din <= r_data;
+					da2_a <= 2'b00;
+					da2_din <= DCODE_VCOM;
+					da3_a <= 2'b00;
+					da3_din <= DCODE_VCOM;
 				end
-				else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+				else if(flag_TP_test_a == 1'b1)//TP_test_pattern VCOMA 
 				begin
-					if(flag_inversion == 1'b0) //column inversion  
-					begin
-						da1_a <= 2'b01;
-						da1_din <= ~r_data[7:0] + 8'd1;
-					end
-					else if(flag_inversion == 1'b1) //frame inversion
-					begin
-						da1_a <= 2'b01;
-						da1_din <= r_data;
-					end
+					da2_a <= 2'b00;
+					da2_din <= DCODE_VCOMA;//VCOMA
+					da3_a <= 2'b00;
+					da3_din <= DCODE_VCOMB;//VCOMB
 				end
-				else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+				else if(flag_TP_test_b == 1'b1)//TP_test_pattern VCOMB 
 				begin
-					da1_a <= 2'b00;
-					da1_din <= g_data;
-				end
-				else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					da2_a <= 2'b00;
+					da2_din <= DCODE_VCOMB;//VCOMB
+					da3_a <= 2'b00;
+					da3_din <= DCODE_VCOMA;//VCOMA
+				end	
+			end 
+			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_WIDTH - SRC_PCH_SHIFT))
+			begin
+				da1_a <= 2'b00;
+				da1_din <= r_data;
+			end
+			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_WIDTH - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+			begin
+				if(flag_inversion == 1'b0) //column inversion  
 				begin
-					if(flag_inversion == 1'b0) //column inversion  
-					begin
-						da1_a <= 2'b01;
-						da1_din <= ~g_data[7:0] + 8'd1;
-					end
-					else if(flag_inversion == 1'b1) //frame inversion
-					begin
-						da1_a <= 2'b01;
-						da1_din <= g_data;
-					end
-				end
-				else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
-				begin
-					da1_a <= 2'b00;
-					da1_din <= b_data;
-				end
-				else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
-				begin
-					if(flag_inversion == 1'b0) //column inversion  
-					begin
-						da1_a <= 2'b01;
-						da1_din <= ~b_data[7:0] + 8'd1;
-					end
-					else if(flag_inversion == 1'b1) //frame inversion
-					begin
-						da1_a <= 2'b01;
-						da1_din <= b_data;
-					end
-				end		
-				if (hcnt == 1)
-				begin
-					if((flag_TP_test_a == 1'b0)&&(flag_TP_test_b == 1'b0))//normal pattern VCOM
-					begin
-						da2_a <= 2'b00;
-						da2_din <= DCODE_VCOM;
-						da3_a <= 2'b00;
-						da3_din <= DCODE_VCOM;
-					end
-					else if(flag_TP_test_a == 1'b1)//TP_test_pattern VCOMA 
-					begin
-						da2_a <= 2'b00;
-						da2_din <= ~DCODE_VCOMA[7:0]+8'd1;//~VCOMA
-						da3_a <= 2'b00;
-						da3_din <= ~DCODE_VCOMB[7:0]+8'd1;//~VCOMB
-					end
-					else if(flag_TP_test_b == 1'b1)//TP_test_pattern VCOMB 
-					begin
-						da2_a <= 2'b00;
-						da2_din <= ~DCODE_VCOMB[7:0]+8'd1;//~VCOMB
-						da3_a <= 2'b00;
-						da3_din <= ~DCODE_VCOMA[7:0]+8'd1;//~VCOMA
-					end
-				end 
-				else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT))
-				begin
-					da1_a <= 2'b00;
+					da1_a <= 2'b01;
 					da1_din <= ~r_data[7:0] + 8'd1;
 				end
-				else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+				else if(flag_inversion == 1'b1) //frame inversion
 				begin
-					if(flag_inversion == 1'b0) //column inversion  
-					begin
-						da1_a <= 2'b01;
-						da1_din <= r_data;
-					end
-					else if(flag_inversion == 1'b1) //frame inversion
-					begin
-						da1_a <= 2'b01;
-						da1_din <= ~r_data[7:0] + 8'd1;
-					end
+					da1_a <= 2'b01;
+					da1_din <= r_data;
 				end
-				else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+			end
+			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+			begin
+				da1_a <= 2'b00;
+				da1_din <= g_data;
+			end
+			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+			begin
+				if(flag_inversion == 1'b0) //column inversion  
 				begin
-					da1_a <= 2'b00;
+					da1_a <= 2'b01;
 					da1_din <= ~g_data[7:0] + 8'd1;
 				end
-				else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+				else if(flag_inversion == 1'b1) //frame inversion
 				begin
-					if(flag_inversion == 1'b0) //column inversion  
-					begin
-						da1_a <= 2'b01;
-						da1_din <= g_data;
-					end
-					else if(flag_inversion == 1'b1) //frame inversion
-					begin
-						da1_a <= 2'b01;
-						da1_din <= ~g_data[7:0] + 8'd1;
-					end
+					da1_a <= 2'b01;
+					da1_din <= g_data;
 				end
-				else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+			end
+			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+			begin
+				da1_a <= 2'b00;
+				da1_din <= b_data;
+			end
+			else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+			begin
+				if(flag_inversion == 1'b0) //column inversion  
 				begin
-					da1_a <= 2'b00;
+					da1_a <= 2'b01;
 					da1_din <= ~b_data[7:0] + 8'd1;
 				end
-				else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+				else if(flag_inversion == 1'b1) //frame inversion
 				begin
-					if(flag_inversion == 1'b0) //column inversion  
-					begin
-						da1_a <= 2'b01;
-						da1_din <= b_data;
-					end
-					else if(flag_inversion == 1'b1) //frame inversion
-					begin
-						da1_a <= 2'b01;
-						da1_din <= ~b_data[7:0] + 8'd1;
-					end
+					da1_a <= 2'b01;
+					da1_din <= b_data;
 				end
 			end
 ////////////////////////////////////////////////////////		
