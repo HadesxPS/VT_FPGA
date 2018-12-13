@@ -1,0 +1,68 @@
+library verilog;
+use verilog.vl_types.all;
+entity VT_Demo is
+    generic(
+        PATMIN          : vl_logic_vector(0 to 6) := (Hi0, Hi0, Hi0, Hi0, Hi0, Hi0, Hi0);
+        PATNUM          : vl_logic_vector(0 to 6) := (Hi0, Hi0, Hi0, Hi1, Hi0, Hi1, Hi1)
+    );
+    port(
+        clk_in          : in     vl_logic;
+        sw1             : in     vl_logic;
+        sw2             : in     vl_logic;
+        sw3             : in     vl_logic;
+        sw4             : in     vl_logic;
+        sw5             : in     vl_logic;
+        sw6             : in     vl_logic;
+        rxd             : in     vl_logic;
+        txd             : out    vl_logic;
+        FPGA_LED_Test   : out    vl_logic;
+        en_p14v         : out    vl_logic;
+        en_n14v         : out    vl_logic;
+        en_gvddp        : out    vl_logic;
+        en_gvddn        : out    vl_logic;
+        en_vgh          : out    vl_logic;
+        en_vgl          : out    vl_logic;
+        mux_en_Test1    : out    vl_logic;
+        mux_en_Test2    : out    vl_logic;
+        mux_en1         : out    vl_logic;
+        mux_en2         : out    vl_logic;
+        mux_en3         : out    vl_logic;
+        mux_en4         : out    vl_logic;
+        mux_1           : out    vl_logic_vector(1 downto 0);
+        mux_2           : out    vl_logic_vector(1 downto 0);
+        mux_3           : out    vl_logic_vector(1 downto 0);
+        mux_4           : out    vl_logic_vector(1 downto 0);
+        mux_5           : out    vl_logic_vector(1 downto 0);
+        mux_6           : out    vl_logic_vector(1 downto 0);
+        mux_7           : out    vl_logic_vector(1 downto 0);
+        mux_8           : out    vl_logic_vector(1 downto 0);
+        mux_9           : out    vl_logic_vector(1 downto 0);
+        mux_10          : out    vl_logic_vector(1 downto 0);
+        mux_11          : out    vl_logic_vector(1 downto 0);
+        mux_12          : out    vl_logic_vector(1 downto 0);
+        mux_13          : out    vl_logic_vector(1 downto 0);
+        mux_14          : out    vl_logic_vector(1 downto 0);
+        mux_Test1       : out    vl_logic_vector(1 downto 0);
+        mux_Test2       : out    vl_logic_vector(1 downto 0);
+        da1_wr          : out    vl_logic;
+        da2_wr          : out    vl_logic;
+        da3_wr          : out    vl_logic;
+        da4_wr          : out    vl_logic;
+        da1_a           : out    vl_logic_vector(1 downto 0);
+        da2_a           : out    vl_logic_vector(1 downto 0);
+        da3_a           : out    vl_logic_vector(1 downto 0);
+        da4_a           : out    vl_logic_vector(1 downto 0);
+        da1_din         : out    vl_logic_vector(7 downto 0);
+        da2_din         : out    vl_logic_vector(7 downto 0);
+        da3_din         : out    vl_logic_vector(7 downto 0);
+        da4_din         : out    vl_logic_vector(7 downto 0);
+        L_RST           : out    vl_logic;
+        L_CE            : out    vl_logic;
+        L_DC            : out    vl_logic;
+        L_DIN           : out    vl_logic;
+        L_CLK           : out    vl_logic
+    );
+    attribute mti_svvh_generic_type : integer;
+    attribute mti_svvh_generic_type of PATMIN : constant is 1;
+    attribute mti_svvh_generic_type of PATNUM : constant is 1;
+end VT_Demo;

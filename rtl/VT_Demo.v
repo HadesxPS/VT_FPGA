@@ -30,7 +30,6 @@ module VT_Demo(
     input                 sw6               ,
 	 input	              rxd               ,
 	
-  
 	 output	              txd               , 	
     output                FPGA_LED_Test     ,	
     output                en_p14v           ,
@@ -195,19 +194,17 @@ tx_module u_tx_module(
 			.tx_data			       (	uart_data		                ),
 			.rx_flag			       (	uart_wr		                   ),
 			.tx_rdy			       (	tx_rdy								 ),
-			
-			
 			.txd						 (	txd						          )
 );
 uart u_uart(
          .clk						 (	clk_sys						       ),
 			.rst_n					 (	rst_n_sys						    ),
-			.en_uart              ( en_uart                       ),  //input
-         .serial_data          ( read_data                    ),  //input   read_data 
+			.en_uart              ( en_uart                        ),  //input
+         .serial_data          ( read_data                    	 ),  //input   read_data 
 			.tx_rdy			       (	tx_rdy								 ),   //input tx_rdy
-			.DATASENDTIME         (nummax                        ),
+			.DATASENDTIME         (	nummax                         ),
 			.uart_data            ( uart_data                      ),  //output
-			.uart_wr              ( uart_wr                        ),  //output  uart_wr
+			.uart_wr              ( uart_wr                        )  //output  uart_wr
 );
 
 rx_module #(
@@ -245,12 +242,12 @@ tgen u_tgen(
     .ckv3_R                     ( ckv3_R                        ),  //output
     .ckv4_L                     ( ckv4_L                        ),  //output
     .ckv4_R                     ( ckv4_R                        ),  //output
-    .ckh1                       ( ckh1                          ),  //output
-    .ckh2                       ( ckh2                          ),  //output
-    .ckh3                       ( ckh3                          ),  //output
-    .ckh4                       ( ckh4                          ),  //output
-    .ckh5                       ( ckh5                          ),  //output
-    .ckh6                       ( ckh6                          ),  //output
+    .ckh1_out                   ( ckh1                          ),  //output
+    .ckh2_out                   ( ckh2                          ),  //output
+    .ckh3_out                   ( ckh3                          ),  //output
+    .ckh4_out                   ( ckh4                          ),  //output
+    .ckh5_out                   ( ckh5                          ),  //output
+    .ckh6_out                   ( ckh6                          ),  //output
 	 
     .dis_sn                     ( dis_sn                        ),  //input
 	 
