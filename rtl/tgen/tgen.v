@@ -26,8 +26,7 @@ module tgen(
     output reg            grst              ,
     output reg            u2d               ,
     output reg            d2u               ,
-    output reg            stv1              ,
-	 output reg            stv2              ,
+    output reg            stv               ,
     output                ckv1_L            ,
     output                ckv1_R            ,
     output                ckv2_L            ,
@@ -92,21 +91,13 @@ parameter       H_TOTAL             = H_BP + H_ACT + H_FP       ;
 
 parameter       GAP_VDIV64          = 8'd30                     ;
 
-parameter       STV1_WIDTH           = 12'd1                     ;   //stv width. unit: line
-parameter       STV1_TOTAL_DIRE      = 1'b1                      ;   //1'b1 - stv shift left; 1'b0 - stv shift right
-parameter       STV1_TOTAL_SHIFT     = 12'd6                     ;   //stv shift offset, unit: lines
-parameter       STV1_RISE_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
-parameter       STV1_RISE_SHIFT      = 12'd76                    ;   //stv rising edge shift offset. unit: pclk
-parameter       STV1_FALL_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
-parameter       STV1_FALL_SHIFT      = 12'd1                     ;   //stv rising edge shift offset. unit: pclk
-
-parameter       STV2_WIDTH           = 12'd1                     ;   //stv width. unit: line
-parameter       STV2_TOTAL_DIRE      = 1'b1                      ;   //1'b1 - stv shift left; 1'b0 - stv shift right
-parameter       STV2_TOTAL_SHIFT     = 12'd6                     ;   //stv shift offset, unit: lines
-parameter       STV2_RISE_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
-parameter       STV2_RISE_SHIFT      = 12'd76                    ;   //stv rising edge shift offset. unit: pclk
-parameter       STV2_FALL_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
-parameter       STV2_FALL_SHIFT      = 12'd1                     ;   //stv rising edge shift offset. unit: pclk
+parameter       STV_WIDTH           = 12'd1                     ;   //stv width. unit: line
+parameter       STV_TOTAL_DIRE      = 1'b1                      ;   //1'b1 - stv shift left; 1'b0 - stv shift right
+parameter       STV_TOTAL_SHIFT     = 12'd6                     ;   //stv shift offset, unit: lines
+parameter       STV_RISE_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
+parameter       STV_RISE_SHIFT      = 12'd76                    ;   //stv rising edge shift offset. unit: pclk
+parameter       STV_FALL_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
+parameter       STV_FALL_SHIFT      = 12'd1                     ;   //stv rising edge shift offset. unit: pclk
 
 parameter       CKV_RISE_SHIFT     = 12'd57                     ;   //ckv rising edge shift offset. unit: pclk. shift right
 parameter       CKV_FALL_SHIFT     = 12'd57                     ;   //ckv falling edge shift offset. unit: pclk. shift left
@@ -518,7 +509,6 @@ begin
 	// for NMOS
 	 else if ((flag_black_on == 1'b1)|| (is_demux_all_on == 1'b1))
     begin
-       // stv1 <= 1'b1;
 		  grst <= 1'b1;
     end
     else
@@ -576,242 +566,121 @@ begin
 end
 
 
-//stv1
+//stv
 //referce point: end of VBP (start of DISPLAY)
 always @(posedge clk or negedge rst_n)
 begin
     if (rst_n == 1'b0)
     begin
-        stv1 <= 1'b0;
+        stv <= 1'b0;
     end
     else if ((flag_black_on == 1'b1)|| (is_demux_all_on == 1'b1))
     begin
-        stv1 <= 1'b0;
+        stv <= 1'b0;
     end
     else
     begin
-        if (STV1_TOTAL_DIRE == 1'b1)  //stv shift left
+        if (STV_TOTAL_DIRE == 1'b1)  //stv shift left
         begin
-            if (STV1_RISE_DIRE == 1'b1)  //rising edge shift left
+            if (STV_RISE_DIRE == 1'b1)  //rising edge shift left
             begin
-                if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV1_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV1_RISE_SHIFT))
+                if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV_RISE_SHIFT))
                 begin
-                    stv1 <= 1'b1;
+                    stv <= 1'b1;
                 end
             end
             else  //rising edge shift right
             begin
-                if (STV1_TOTAL_SHIFT == 0)
+                if (STV_TOTAL_SHIFT == 0)
                 begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == 12'd0) && (hcnt == STV1_RISE_SHIFT))
+                    if ((cs_ctrl == DISPLAY) && (cnt_vact == 12'd0) && (hcnt == STV_RISE_SHIFT))
                     begin
-                        stv1 <= 1'b1;
+                        stv <= 1'b1;
                     end
                 end
                 else
                 begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV1_TOTAL_SHIFT) && (hcnt == STV1_RISE_SHIFT))
+                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV_TOTAL_SHIFT) && (hcnt == STV_RISE_SHIFT))
                     begin
-                        stv1 <= 1'b1;
+                        stv <= 1'b1;
                     end
                 end
             end
             
-            if (STV1_FALL_DIRE == 1'b1)  //falling edge shift left
+            if (STV_FALL_DIRE == 1'b1)  //falling edge shift left
             begin
-                if (STV1_WIDTH <= STV1_TOTAL_SHIFT)
+                if (STV_WIDTH <= STV_TOTAL_SHIFT)
                 begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV1_TOTAL_SHIFT - 12'd1 + STV1_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV1_FALL_SHIFT))
+                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV_TOTAL_SHIFT - 12'd1 + STV_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV_FALL_SHIFT))
                     begin
-                        stv1 <= 1'b0;
+                        stv <= 1'b0;
                     end
                 end
                 else
                 begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_WIDTH - STV1_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV1_FALL_SHIFT))
+                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV_WIDTH - STV_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV_FALL_SHIFT))
                     begin
-                        stv1 <= 1'b1;
+                        stv <= 1'b1;
                     end
                 end
             end
             else  //falling edge shift right
             begin
-                if (STV1_WIDTH < STV1_TOTAL_SHIFT)
+                if (STV_WIDTH < STV_TOTAL_SHIFT)
                 begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV1_TOTAL_SHIFT + STV1_WIDTH) && (hcnt == STV1_FALL_SHIFT))
+                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV_TOTAL_SHIFT + STV_WIDTH) && (hcnt == STV_FALL_SHIFT))
                     begin
-                        stv1 <= 1'b0;
+                        stv <= 1'b0;
                     end
                 end
                 else
                 begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_WIDTH - STV1_TOTAL_SHIFT) && (hcnt == STV1_FALL_SHIFT))
+                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV_WIDTH - STV_TOTAL_SHIFT) && (hcnt == STV_FALL_SHIFT))
                     begin
-                        stv1 <= 1'b0;
+                        stv <= 1'b0;
                     end
                 end
             end
         end
         else  //stv shift right
         begin
-            if (STV1_RISE_DIRE == 1'b1)  //rising edge shift left
+            if (STV_RISE_DIRE == 1'b1)  //rising edge shift left
             begin
-                if (STV1_TOTAL_SHIFT == 0)
+                if (STV_TOTAL_SHIFT == 0)
                 begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank -12'd1) && (hcnt == H_TOTAL - 12'd1 - STV1_RISE_SHIFT))
+                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank -12'd1) && (hcnt == H_TOTAL - 12'd1 - STV_RISE_SHIFT))
                     begin
-                        stv1 <= 1'b1;
+                        stv <= 1'b1;
                     end
                 end
                 else
                 begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV1_RISE_SHIFT))
+                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV_RISE_SHIFT))
                     begin
-                        stv1 <= 1'b1;
+                        stv <= 1'b1;
                     end
                 end
             end
             else  //rising edge shift right
             begin
-                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_TOTAL_SHIFT) && (hcnt == STV1_RISE_SHIFT))
+                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV_TOTAL_SHIFT) && (hcnt == STV_RISE_SHIFT))
                 begin
-                    stv1 <= 1'b1;
+                    stv <= 1'b1;
                 end
             end
             
-            if (STV1_FALL_DIRE == 1'b1)  //falling edge shift left
+            if (STV_FALL_DIRE == 1'b1)  //falling edge shift left
             begin
-                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_TOTAL_SHIFT - 12'd1 + STV1_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV1_FALL_SHIFT))
+                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV_TOTAL_SHIFT - 12'd1 + STV_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV_FALL_SHIFT))
                 begin
-                    stv1 <= 1'b0;
+                    stv <= 1'b0;
                 end
             end
             else  //falling edge shift right
             begin
-                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV1_TOTAL_SHIFT - 12'd1 + STV1_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV1_FALL_SHIFT))
+                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV_TOTAL_SHIFT - 12'd1 + STV_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV_FALL_SHIFT))
                 begin
-                    stv1 <= 1'b0;
-                end
-            end
-        end
-    end
-end
-
-//stv2
-//referce point: end of VBP (start of DISPLAY)
-always @(posedge clk or negedge rst_n)
-begin
-    if (rst_n == 1'b0)
-    begin
-        stv2 <= 1'b0;
-    end
-    else if ((flag_black_on == 1'b1)|| (is_demux_all_on == 1'b1))
-    begin
-        stv2 <= 1'b0;
-    end
-    else
-    begin
-        if (STV2_TOTAL_DIRE == 1'b1)  //stv shift left
-        begin
-            if (STV2_RISE_DIRE == 1'b1)  //rising edge shift left
-            begin
-                if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV2_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV2_RISE_SHIFT))
-                begin
-                    stv2 <= 1'b1;
-                end
-            end
-            else  //rising edge shift right
-            begin
-                if (STV2_TOTAL_SHIFT == 0)
-                begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == 12'd0) && (hcnt == STV2_RISE_SHIFT))
-                    begin
-                        stv2 <= 1'b1;
-                    end
-                end
-                else
-                begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV2_TOTAL_SHIFT) && (hcnt == STV2_RISE_SHIFT))
-                    begin
-                        stv2 <= 1'b1;
-                    end
-                end
-            end
-            
-            if (STV2_FALL_DIRE == 1'b1)  //falling edge shift left
-            begin
-                if (STV2_WIDTH <= STV2_TOTAL_SHIFT)
-                begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV2_TOTAL_SHIFT - 12'd1 + STV2_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV2_FALL_SHIFT))
-                    begin
-                        stv2 <= 1'b0;
-                    end
-                end
-                else
-                begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_WIDTH - STV2_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV2_FALL_SHIFT))
-                    begin
-                        stv2 <= 1'b1;
-                    end
-                end
-            end
-            else  //falling edge shift right
-            begin
-                if (STV2_WIDTH < STV2_TOTAL_SHIFT)
-                begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank - STV2_TOTAL_SHIFT + STV2_WIDTH) && (hcnt == STV2_FALL_SHIFT))
-                    begin
-                        stv2 <= 1'b0;
-                    end
-                end
-                else
-                begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_WIDTH - STV2_TOTAL_SHIFT) && (hcnt == STV2_FALL_SHIFT))
-                    begin
-                        stv2 <= 1'b0;
-                    end
-                end
-            end
-        end
-        else  //stv shift right
-        begin
-            if (STV2_RISE_DIRE == 1'b1)  //rising edge shift left
-            begin
-                if (STV2_TOTAL_SHIFT == 0)
-                begin
-                    if ((is_sof_vblank == 1'b1) && (cnt_vblank == num_vblank -12'd1) && (hcnt == H_TOTAL - 12'd1 - STV2_RISE_SHIFT))
-                    begin
-                        stv2 <= 1'b1;
-                    end
-                end
-                else
-                begin
-                    if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_TOTAL_SHIFT - 12'd1) && (hcnt == H_TOTAL - 12'd1 - STV2_RISE_SHIFT))
-                    begin
-                        stv2 <= 1'b1;
-                    end
-                end
-            end
-            else  //rising edge shift right
-            begin
-                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_TOTAL_SHIFT) && (hcnt == STV2_RISE_SHIFT))
-                begin
-                    stv2 <= 1'b1;
-                end
-            end
-            
-            if (STV2_FALL_DIRE == 1'b1)  //falling edge shift left
-            begin
-                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_TOTAL_SHIFT - 12'd1 + STV2_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV2_FALL_SHIFT))
-                begin
-                    stv2 <= 1'b0;
-                end
-            end
-            else  //falling edge shift right
-            begin
-                if ((cs_ctrl == DISPLAY) && (cnt_vact == STV2_TOTAL_SHIFT - 12'd1 + STV2_WIDTH) && (hcnt == H_TOTAL - 12'd1 - STV2_FALL_SHIFT))
-                begin
-                    stv2 <= 1'b0;
+                    stv <= 1'b0;
                 end
             end
         end

@@ -231,8 +231,7 @@ tgen u_tgen(
     .u2d                        ( u2d                           ),  //output
     .d2u                        ( d2u                           ),  //output
 
-	 .stv1                       ( stv1                          ),  //output
-    .stv2                       ( stv2                          ),  //output
+	 .stv                        ( stv                           ),  //output
 	 
     .ckv1_L                     ( ckv1_L                        ),  //output
     .ckv1_R                     ( ckv1_R                        ),  //output
@@ -271,8 +270,8 @@ tgen u_tgen(
 
 mux_decode u1_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( stv1                          ),  //input
-    .db                         ( stv1                          ),  //input
+    .da                         ( stv                          ),  //input
+    .db                         ( stv                          ),  //input
     .a                          ( mux_1                         )   //output
 );
 

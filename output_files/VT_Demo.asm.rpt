@@ -1,5 +1,5 @@
 Assembler report for VT_Demo
-Wed Dec 12 16:01:04 2018
+Mon Dec 17 11:49:52 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -10,8 +10,8 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: D:/2.6VT/VT_FPGA/output_files/VT_Demo.sof
-  6. Assembler Device Options: D:/2.6VT/VT_FPGA/output_files/VT_Demo.pof
+  5. Assembler Device Options: D:/2.6VT_SIM/VT_FPGA/output_files/VT_Demo.sof
+  6. Assembler Device Options: D:/2.6VT_SIM/VT_FPGA/output_files/VT_Demo.pof
   7. Assembler Messages
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Wed Dec 12 16:01:04 2018 ;
+; Assembler Status      ; Successful - Mon Dec 17 11:49:52 2018 ;
 ; Revision Name         ; VT_Demo                               ;
 ; Top-level Entity Name ; VT_Demo                               ;
 ; Family                ; Cyclone III                           ;
@@ -78,37 +78,37 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+-------------------------------------------+
-; Assembler Generated Files                 ;
-+-------------------------------------------+
-; File Name                                 ;
-+-------------------------------------------+
-; D:/2.6VT/VT_FPGA/output_files/VT_Demo.sof ;
-; D:/2.6VT/VT_FPGA/output_files/VT_Demo.pof ;
-+-------------------------------------------+
++-----------------------------------------------+
+; Assembler Generated Files                     ;
++-----------------------------------------------+
+; File Name                                     ;
++-----------------------------------------------+
+; D:/2.6VT_SIM/VT_FPGA/output_files/VT_Demo.sof ;
+; D:/2.6VT_SIM/VT_FPGA/output_files/VT_Demo.pof ;
++-----------------------------------------------+
 
 
-+---------------------------------------------------------------------+
-; Assembler Device Options: D:/2.6VT/VT_FPGA/output_files/VT_Demo.sof ;
-+----------------+----------------------------------------------------+
-; Option         ; Setting                                            ;
-+----------------+----------------------------------------------------+
-; Device         ; EP3C16Q240C8                                       ;
-; JTAG usercode  ; 0x001E0EF7                                         ;
-; Checksum       ; 0x001E0EF7                                         ;
-+----------------+----------------------------------------------------+
++-------------------------------------------------------------------------+
+; Assembler Device Options: D:/2.6VT_SIM/VT_FPGA/output_files/VT_Demo.sof ;
++----------------+--------------------------------------------------------+
+; Option         ; Setting                                                ;
++----------------+--------------------------------------------------------+
+; Device         ; EP3C16Q240C8                                           ;
+; JTAG usercode  ; 0x001D00C1                                             ;
+; Checksum       ; 0x001D00C1                                             ;
++----------------+--------------------------------------------------------+
 
 
-+---------------------------------------------------------------------+
-; Assembler Device Options: D:/2.6VT/VT_FPGA/output_files/VT_Demo.pof ;
-+--------------------+------------------------------------------------+
-; Option             ; Setting                                        ;
-+--------------------+------------------------------------------------+
-; Device             ; EPCS4                                          ;
-; JTAG usercode      ; 0x00000000                                     ;
-; Checksum           ; 0x05BFA1D2                                     ;
-; Compression Ratio  ; 3                                              ;
-+--------------------+------------------------------------------------+
++-------------------------------------------------------------------------+
+; Assembler Device Options: D:/2.6VT_SIM/VT_FPGA/output_files/VT_Demo.pof ;
++--------------------+----------------------------------------------------+
+; Option             ; Setting                                            ;
++--------------------+----------------------------------------------------+
+; Device             ; EPCS4                                              ;
+; JTAG usercode      ; 0x00000000                                         ;
+; Checksum           ; 0x05C29003                                         ;
+; Compression Ratio  ; 3                                                  ;
++--------------------+----------------------------------------------------+
 
 
 +--------------------+
@@ -117,13 +117,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Wed Dec 12 16:01:02 2018
+    Info: Processing started: Mon Dec 17 11:49:50 2018
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off VT_Demo -c VT_Demo
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 408 megabytes
-    Info: Processing ended: Wed Dec 12 16:01:04 2018
+    Info: Processing ended: Mon Dec 17 11:49:52 2018
     Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:02
 
