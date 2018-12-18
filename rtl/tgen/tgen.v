@@ -103,8 +103,8 @@ parameter       CKV_RISE_SHIFT     = 12'd57                     ;   //ckv rising
 parameter       CKV_FALL_SHIFT     = 12'd57                     ;   //ckv falling edge shift offset. unit: pclk. shift left
 
 parameter       CKH_PRE_GAP         = 12'd10                    ;   //gap befor CKH processing.
-parameter       CKH_WIDTH           = 12'd265                   ;   //ckh width. unit: pclk
-parameter		 CKH_HALF_WIDTH 		= 12'd128;
+parameter       CKH_WIDTH           = 12'd256                   ;   //ckh width. unit: pclk
+parameter		 CKH_HALF_WIDTH 		= 12'd128						 ;
 parameter       CKH_RISE_SHIFT      = 12'd45                    ;   //gap before rising edge of ckh. reference point: rising edge of ckv
 parameter       CKH_FALL_SHIFT      = 12'd45                    ;   //gap after falling edge of ckh
 
@@ -1282,9 +1282,10 @@ begin
 	end
 	else if ((cs_ctrl == VFP) && ((flag_hend == 1'b1) && (cnt_vblank == V_FP - 12'd1)))
 	begin
-		r_data<= ~r_data[7:0] + 8'd1;
-		g_data<= ~g_data[7:0] + 8'd1;
-		b_data<= ~r_data[7:0] + 8'd1;
+//		r_data<= ~r_data[7:0] + 8'd1;
+//		g_data<= ~g_data[7:0] + 8'd1;
+//		b_data<= ~r_data[7:0] + 8'd1;
+		flag_frm_pol<=~flag_frm_pol;
 	end
 	else
 	begin
@@ -1484,35 +1485,71 @@ begin
 			end
 			else if(RGBRGB==1'b1)
 			begin
-				if 		(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_WIDTH + 0 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+				if (flag_frm_pol==1'b0)
 				begin
-					da1_a <= 2'b00;
-					da1_din <= r_data;
+					if 		(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_WIDTH + 0 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= r_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_WIDTH + 0 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da4_a <= 2'b00;
+						da4_din <= ~r_data[7:0] + 8'd1;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= g_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da4_a <= 2'b00;
+						da4_din <= ~g_data[7:0] + 8'd1;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= b_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da4_a <= 2'b00;
+						da4_din <= ~b_data[7:0] + 8'd1;
+					end
 				end
-				else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_WIDTH + 0 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+				else
 				begin
-					da1_a <= 2'b01;
-					da1_din <= ~r_data[7:0] + 8'd1;
-				end
-				else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
-				begin
-					da1_a <= 2'b00;
-					da1_din <= g_data;
-				end
-				else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
-				begin
-					da1_a <= 2'b01;
-					da1_din <= ~g_data[7:0] + 8'd1;
-				end
-				else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
-				begin
-					da1_a <= 2'b00;
-					da1_din <= b_data;
-				end
-				else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
-				begin
-					da1_a <= 2'b01;
-					da1_din <= ~b_data[7:0] + 8'd1;
+					if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_WIDTH + 0 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= ~r_data[7:0] + 8'd1;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_WIDTH + 0 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da4_a <= 2'b00;
+						da4_din <= r_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= ~g_data[7:0] + 8'd1;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da4_a <= 2'b00;
+						da4_din <= g_data;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
+					begin
+						da1_a <= 2'b00;
+						da1_din <= ~b_data[7:0] + 8'd1;
+					end
+					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
+					begin
+						da4_a <= 2'b00;
+						da4_din <= b_data;
+					end
 				end
 			end
 			else//RGBBGR
@@ -1526,8 +1563,8 @@ begin
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_HALF_WIDTH + 0 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
 					begin
-						da1_a <= 2'b01;
-						da1_din <= ~r_data[7:0] + 8'd1;
+						da4_a <= 2'b00;
+						da4_din <= ~r_data[7:0] + 8'd1;
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_HALF_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
 					begin
@@ -1536,8 +1573,8 @@ begin
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_HALF_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
 					begin
-						da1_a <= 2'b01;
-						da1_din <= ~r_data[7:0] + 8'd1;
+						da4_a <= 2'b00;
+						da4_din <= ~r_data[7:0] + 8'd1;
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_HALF_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
 					begin
@@ -1546,8 +1583,8 @@ begin
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_HALF_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
 					begin
-						da1_a <= 2'b01;
-						da1_din <= ~b_data[7:0] + 8'd1;
+						da4_a <= 2'b00;
+						da4_din <= ~b_data[7:0] + 8'd1;
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 4 * CKH_RISE_SHIFT + 3 * CKH_HALF_WIDTH + 3 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
 					begin
@@ -1556,8 +1593,8 @@ begin
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 4 * CKH_RISE_SHIFT + 3 * CKH_HALF_WIDTH + 3 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
 					begin
-						da1_a <= 2'b01;
-						da1_din <= ~b_data[7:0] + 8'd1;
+						da4_a <= 2'b00;
+						da4_din <= ~b_data[7:0] + 8'd1;
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 5 * CKH_RISE_SHIFT + 4 * CKH_HALF_WIDTH + 4 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
 					begin
@@ -1566,8 +1603,8 @@ begin
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 5 * CKH_RISE_SHIFT + 4 * CKH_HALF_WIDTH + 4 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
 					begin
-						da1_a <= 2'b01;
-						da1_din <= ~g_data[7:0] + 8'd1;
+						da4_a <= 2'b00;
+						da4_din <= ~g_data[7:0] + 8'd1;
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 6 * CKH_RISE_SHIFT + 5 * CKH_HALF_WIDTH + 5 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
 					begin
@@ -1576,8 +1613,8 @@ begin
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 6 * CKH_RISE_SHIFT + 5 * CKH_HALF_WIDTH + 5 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
 					begin
-						da1_a <= 2'b01;
-						da1_din <= ~g_data[7:0] + 8'd1;
+						da4_a <= 2'b00;
+						da4_din <= ~g_data[7:0] + 8'd1;
 					end
 				end
 				else
@@ -1589,8 +1626,8 @@ begin
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 1 * CKH_RISE_SHIFT + 0 * CKH_HALF_WIDTH + 0 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
 					begin
-						da1_a <= 2'b01;
-						da1_din <= ~g_data[7:0] + 8'd1;
+						da4_a <= 2'b00;
+						da4_din <= ~g_data[7:0] + 8'd1;
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_HALF_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
 					begin
@@ -1599,8 +1636,8 @@ begin
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 1 * CKH_HALF_WIDTH + 1 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
 					begin
-						da1_a <= 2'b01;
-						da1_din <= ~g_data[7:0] + 8'd1;
+						da4_a <= 2'b00;
+						da4_din <= ~g_data[7:0] + 8'd1;
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_HALF_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
 					begin
@@ -1609,8 +1646,8 @@ begin
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_HALF_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
 					begin
-						da1_a <= 2'b01;
-						da1_din <= ~b_data[7:0] + 8'd1;
+						da4_a <= 2'b00;
+						da4_din <= ~b_data[7:0] + 8'd1;
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 4 * CKH_RISE_SHIFT + 3 * CKH_HALF_WIDTH + 3 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
 					begin
@@ -1619,8 +1656,8 @@ begin
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 4 * CKH_RISE_SHIFT + 3 * CKH_HALF_WIDTH + 3 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
 					begin
-						da1_a <= 2'b01;
-						da1_din <= ~b_data[7:0] + 8'd1;
+						da4_a <= 2'b00;
+						da4_din <= ~b_data[7:0] + 8'd1;
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 5 * CKH_RISE_SHIFT + 4 * CKH_HALF_WIDTH + 4 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
 					begin
@@ -1629,8 +1666,8 @@ begin
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 5 * CKH_RISE_SHIFT + 4 * CKH_HALF_WIDTH + 4 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))
 					begin
-						da1_a <= 2'b01;
-						da1_din <= ~r_data[7:0] + 8'd1;
+						da4_a <= 2'b00;
+						da4_din <= ~r_data[7:0] + 8'd1;
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 6 * CKH_RISE_SHIFT + 5 * CKH_HALF_WIDTH + 5 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))
 					begin
@@ -1639,8 +1676,8 @@ begin
 					end
 					else if	(hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 6 * CKH_RISE_SHIFT + 5 * CKH_HALF_WIDTH + 5 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))	
 					begin
-						da1_a <= 2'b01;
-						da1_din <= ~r_data[7:0] + 8'd1;
+						da4_a <= 2'b00;
+						da4_din <= ~r_data[7:0] + 8'd1;
 					end
 				end
 			end
@@ -1656,8 +1693,8 @@ begin
 			end
 			else if (cnt_vblank == 12'd1)
 			begin
-				da1_a <= 2'b01;
-				da1_din <= DCODE_GND;
+				da4_a <= 2'b00;
+				da4_din <= DCODE_GND;
 			end
 		end
 	end

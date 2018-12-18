@@ -279,47 +279,6 @@ begin
 end
 
 //lock time length
-//always @(posedge clk or negedge rst_n)
-//begin
-//    if (rst_n == 1'b0)
-//    begin
-//        len_lock_timer <= 16'd300;
-//    end
-//    else
-//    begin
-//        if (flag_dis_chg == 1'b1)
-//        begin
-//            case (dis_sn[6:0])
-//                7'd0:
-//                begin
-//                    len_lock_timer <= 16'd300;
-//                end
-//                7'd1:
-//                begin
-//                    len_lock_timer <= 16'd2000;
-//                end
-//                7'd6, 7'd7, 7'd8:
-//                begin
-//                    len_lock_timer <= 16'd1000;
-//                end
-//					 7'd3, 7'd4, 7'd2, 7'd5:
-//                begin
-//                    len_lock_timer <= 16'd1000;
-//                end
-//                7'd9,7'd10:
-//                begin
-//                    len_lock_timer <= 16'd1000;
-//                end
-//                default:
-//                begin
-//                    len_lock_timer <= 16'd1000;
-//                end
-//            endcase
-//        end
-//    end
-//end
-
-//lock time length
 always @(posedge clk or negedge rst_n)
 begin
     if (rst_n == 1'b0)

@@ -306,21 +306,21 @@ mux_decode u5_mux_decode(
 mux_decode u6_mux_decode(
     .clk                        ( clk_sys                       ),  //input
     .da                         ( ckh1                          ),  //input
-    .db                         ( ckh2                          ),  //input
+    .db                         ( ckh3                          ),  //input
     .a                          ( mux_6                         )   //output
 );
 
 mux_decode u7_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckh3                          ),  //input
-    .db                         ( ckh4                          ),  //input
+    .da                         ( ckh5                          ),  //input
+    .db                         ( 1'b0                          ),  //input
     .a                          ( mux_7                         )   //output
 );
 
 mux_decode u8_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckh5                          ),  //input
-    .db                         ( ckh6                          ),  //input
+    .da                         ( 1'b0                          ),  //input
+    .db                         ( 1'b0                          ),  //input
     .a                          ( mux_8                         )   //output
 );
 
