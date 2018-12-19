@@ -126,7 +126,7 @@ parameter       SRC_PCH_SHIFT       = 8'd80                     ;   //source pre
                                                                     //2. (CKH_RISE_SHIFT + CKH_FALL_SHIFT) > SRC_PCH_SHIFT
 parameter       ODD_EVEN_TGAP       = 8'd5                      ;   //DA transition gap for odd and even source output
 
-parameter		 RGBRGB					= 1'b0							 ;	  //switch for RGBRGB and RGBBGR timings
+parameter		 RGBRGB					= 1'b1							 ;	  //switch for RGBRGB and RGBBGR timings
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // variable declaration
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -224,11 +224,11 @@ assign ckv3_R		= (flag_rev_scan	== 1'b0) ? ckv3_R_pre	: ckv4_L_pre;
 assign ckv4_L		= (flag_rev_scan	== 1'b0) ? ckv4_L_pre	: ckv3_R_pre;
 assign ckv4_R		= (flag_rev_scan	== 1'b0) ? ckv4_R_pre	: ckv3_L_pre;
 assign ckh1_out	= (RGBRGB 			== 1'b1) ? ckh1			: ckh1;
-assign ckh2_out	= (RGBRGB 			== 1'b1) ? ckh2			: ckh5;
-assign ckh3_out	= (RGBRGB 			== 1'b1) ? ckh3			: ckh3;
-assign ckh4_out	= (RGBRGB 			== 1'b1) ? ckh4			: ckh2;
-assign ckh5_out	= (RGBRGB 			== 1'b1) ? ckh5			: ckh6;
-assign ckh6_out	= (RGBRGB 			== 1'b1) ? ckh6			: ckh4;
+assign ckh2_out	= (RGBRGB 			== 1'b1) ? ckh3			: ckh5;
+assign ckh3_out	= (RGBRGB 			== 1'b1) ? ckh5			: ckh3;
+assign ckh4_out	= (RGBRGB 			== 1'b1) ? 1'b0			: ckh2;
+assign ckh5_out	= (RGBRGB 			== 1'b1) ? 1'b0			: ckh6;
+assign ckh6_out	= (RGBRGB 			== 1'b1) ? 1'b0			: ckh4;
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // module instantiation
