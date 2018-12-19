@@ -1,5 +1,5 @@
 Analysis & Synthesis report for VT_Demo
-Tue Dec 18 15:51:56 2018
+Wed Dec 19 10:04:55 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -49,23 +49,20 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
  41. Port Connectivity Checks: "mux_decode:u14_mux_decode"
  42. Port Connectivity Checks: "mux_decode:u13_mux_decode"
  43. Port Connectivity Checks: "mux_decode:u12_mux_decode"
- 44. Port Connectivity Checks: "mux_decode:u8_mux_decode"
- 45. Port Connectivity Checks: "mux_decode:u7_mux_decode"
- 46. Port Connectivity Checks: "tgen:u_tgen"
- 47. Port Connectivity Checks: "rx_module:u_rx_module"
- 48. Port Connectivity Checks: "uart:u_uart|glf:u1_glf|timer:u1_timer"
- 49. Port Connectivity Checks: "uart:u_uart|glf:u1_glf"
- 50. Port Connectivity Checks: "uart:u_uart"
- 51. Port Connectivity Checks: "switch:u_switch|timer:u1_timer"
- 52. Port Connectivity Checks: "switch:u_switch|timer:u0_timer"
- 53. Port Connectivity Checks: "switch:u_switch|glf:u3_glf"
- 54. Port Connectivity Checks: "switch:u_switch|glf:u2_glf"
- 55. Port Connectivity Checks: "switch:u_switch|glf:u0_glf|timer:u1_timer"
- 56. Port Connectivity Checks: "switch:u_switch"
- 57. Port Connectivity Checks: "clkrst:u_clkrst|mypll:u_mypll"
- 58. Elapsed Time Per Partition
- 59. Analysis & Synthesis Messages
- 60. Analysis & Synthesis Suppressed Messages
+ 44. Port Connectivity Checks: "rx_module:u_rx_module"
+ 45. Port Connectivity Checks: "uart:u_uart|glf:u1_glf|timer:u1_timer"
+ 46. Port Connectivity Checks: "uart:u_uart|glf:u1_glf"
+ 47. Port Connectivity Checks: "uart:u_uart"
+ 48. Port Connectivity Checks: "switch:u_switch|timer:u1_timer"
+ 49. Port Connectivity Checks: "switch:u_switch|timer:u0_timer"
+ 50. Port Connectivity Checks: "switch:u_switch|glf:u3_glf"
+ 51. Port Connectivity Checks: "switch:u_switch|glf:u2_glf"
+ 52. Port Connectivity Checks: "switch:u_switch|glf:u0_glf|timer:u1_timer"
+ 53. Port Connectivity Checks: "switch:u_switch"
+ 54. Port Connectivity Checks: "clkrst:u_clkrst|mypll:u_mypll"
+ 55. Elapsed Time Per Partition
+ 56. Analysis & Synthesis Messages
+ 57. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -91,15 +88,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Dec 18 15:51:56 2018           ;
+; Analysis & Synthesis Status        ; Successful - Wed Dec 19 10:04:55 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; VT_Demo                                         ;
 ; Top-level Entity Name              ; VT_Demo                                         ;
 ; Family                             ; Cyclone III                                     ;
-; Total logic elements               ; 1,818                                           ;
-;     Total combinational functions  ; 1,757                                           ;
-;     Dedicated logic registers      ; 673                                             ;
-; Total registers                    ; 673                                             ;
+; Total logic elements               ; 1,909                                           ;
+;     Total combinational functions  ; 1,849                                           ;
+;     Dedicated logic registers      ; 678                                             ;
+; Total registers                    ; 678                                             ;
 ; Total pins                         ; 103                                             ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
@@ -237,20 +234,20 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+----------------------------------------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                                              ;
 +---------------------------------------------+----------------------------------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 1,818                                                                                              ;
+; Estimated Total logic elements              ; 1,909                                                                                              ;
 ;                                             ;                                                                                                    ;
-; Total combinational functions               ; 1757                                                                                               ;
+; Total combinational functions               ; 1849                                                                                               ;
 ; Logic element usage by number of LUT inputs ;                                                                                                    ;
-;     -- 4 input functions                    ; 989                                                                                                ;
-;     -- 3 input functions                    ; 209                                                                                                ;
-;     -- <=2 input functions                  ; 559                                                                                                ;
+;     -- 4 input functions                    ; 1041                                                                                               ;
+;     -- 3 input functions                    ; 248                                                                                                ;
+;     -- <=2 input functions                  ; 560                                                                                                ;
 ;                                             ;                                                                                                    ;
 ; Logic elements by mode                      ;                                                                                                    ;
-;     -- normal mode                          ; 1344                                                                                               ;
+;     -- normal mode                          ; 1436                                                                                               ;
 ;     -- arithmetic mode                      ; 413                                                                                                ;
 ;                                             ;                                                                                                    ;
-; Total registers                             ; 673                                                                                                ;
-;     -- Dedicated logic registers            ; 673                                                                                                ;
+; Total registers                             ; 678                                                                                                ;
+;     -- Dedicated logic registers            ; 678                                                                                                ;
 ;     -- I/O registers                        ; 0                                                                                                  ;
 ;                                             ;                                                                                                    ;
 ; I/O pins                                    ; 103                                                                                                ;
@@ -259,8 +256,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;     -- PLLs                                 ; 1                                                                                                  ;
 ;                                             ;                                                                                                    ;
 ; Maximum fan-out node                        ; clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypll_altpll:auto_generated|wire_pll1_clk[0] ;
-; Maximum fan-out                             ; 673                                                                                                ;
-; Total fan-out                               ; 8532                                                                                               ;
+; Maximum fan-out                             ; 678                                                                                                ;
+; Total fan-out                               ; 8863                                                                                               ;
 ; Average fan-out                             ; 3.24                                                                                               ;
 +---------------------------------------------+----------------------------------------------------------------------------------------------------+
 
@@ -270,12 +267,12 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                        ; Library Name ;
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
-; |VT_Demo                                  ; 1757 (1)          ; 673 (0)      ; 0           ; 0            ; 0       ; 0         ; 103  ; 0            ; |VT_Demo                                                                                   ; work         ;
+; |VT_Demo                                  ; 1849 (1)          ; 678 (0)      ; 0           ; 0            ; 0       ; 0         ; 103  ; 0            ; |VT_Demo                                                                                   ; work         ;
 ;    |clkrst:u_clkrst|                      ; 0 (0)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst                                                                   ; work         ;
 ;       |mypll:u_mypll|                     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst|mypll:u_mypll                                                     ; work         ;
 ;          |altpll:altpll_component|        ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component                             ; work         ;
 ;             |mypll_altpll:auto_generated| ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypll_altpll:auto_generated ; work         ;
-;    |lcd_display:u_lcd_display|            ; 542 (542)         ; 71 (71)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|lcd_display:u_lcd_display                                                         ; work         ;
+;    |lcd_display:u_lcd_display|            ; 536 (536)         ; 71 (71)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|lcd_display:u_lcd_display                                                         ; work         ;
 ;    |mux_decode:u10_mux_decode|            ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u10_mux_decode                                                         ; work         ;
 ;    |mux_decode:u1_mux_decode|             ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u1_mux_decode                                                          ; work         ;
 ;    |mux_decode:u2_mux_decode|             ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u2_mux_decode                                                          ; work         ;
@@ -283,21 +280,22 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;    |mux_decode:u4_mux_decode|             ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u4_mux_decode                                                          ; work         ;
 ;    |mux_decode:u5_mux_decode|             ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u5_mux_decode                                                          ; work         ;
 ;    |mux_decode:u6_mux_decode|             ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u6_mux_decode                                                          ; work         ;
-;    |mux_decode:u7_mux_decode|             ; 1 (1)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u7_mux_decode                                                          ; work         ;
-;    |switch:u_switch|                      ; 612 (56)          ; 363 (35)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch                                                                   ; work         ;
-;       |glf:u0_glf|                        ; 93 (1)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u0_glf                                                        ; work         ;
-;          |timer:u1_timer|                 ; 92 (92)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer                                         ; work         ;
+;    |mux_decode:u7_mux_decode|             ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u7_mux_decode                                                          ; work         ;
+;    |mux_decode:u8_mux_decode|             ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|mux_decode:u8_mux_decode                                                          ; work         ;
+;    |switch:u_switch|                      ; 613 (56)          ; 363 (35)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch                                                                   ; work         ;
+;       |glf:u0_glf|                        ; 94 (1)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u0_glf                                                        ; work         ;
+;          |timer:u1_timer|                 ; 93 (93)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer                                         ; work         ;
 ;       |glf:u1_glf|                        ; 93 (1)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u1_glf                                                        ; work         ;
 ;          |timer:u1_timer|                 ; 92 (92)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer                                         ; work         ;
-;       |glf:u2_glf|                        ; 94 (2)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u2_glf                                                        ; work         ;
-;          |timer:u1_timer|                 ; 92 (92)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer                                         ; work         ;
-;       |glf:u3_glf|                        ; 94 (1)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u3_glf                                                        ; work         ;
-;          |timer:u1_timer|                 ; 93 (93)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer                                         ; work         ;
-;       |timer:u0_timer|                    ; 92 (92)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|timer:u0_timer                                                    ; work         ;
-;       |timer:u1_timer|                    ; 90 (90)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|timer:u1_timer                                                    ; work         ;
-;    |tgen:u_tgen|                          ; 399 (399)         ; 156 (156)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|tgen:u_tgen                                                                       ; work         ;
+;       |glf:u2_glf|                        ; 95 (2)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u2_glf                                                        ; work         ;
+;          |timer:u1_timer|                 ; 93 (93)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer                                         ; work         ;
+;       |glf:u3_glf|                        ; 93 (1)            ; 56 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u3_glf                                                        ; work         ;
+;          |timer:u1_timer|                 ; 92 (92)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer                                         ; work         ;
+;       |timer:u0_timer|                    ; 93 (93)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|timer:u0_timer                                                    ; work         ;
+;       |timer:u1_timer|                    ; 89 (89)           ; 52 (52)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|timer:u1_timer                                                    ; work         ;
+;    |tgen:u_tgen|                          ; 492 (492)         ; 159 (159)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|tgen:u_tgen                                                                       ; work         ;
 ;    |tx_module:u_tx_module|                ; 58 (58)           ; 35 (35)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|tx_module:u_tx_module                                                             ; work         ;
-;    |uart:u_uart|                          ; 132 (132)         ; 31 (31)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|uart:u_uart                                                                       ; work         ;
+;    |uart:u_uart|                          ; 133 (133)         ; 31 (31)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|uart:u_uart                                                                       ; work         ;
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -396,7 +394,6 @@ Encoding Type:  One-Hot
 ; mux_decode:u13_mux_decode|a[0]                                ; Stuck at GND due to stuck port data_in         ;
 ; mux_decode:u12_mux_decode|a[0]                                ; Stuck at GND due to stuck port data_in         ;
 ; mux_decode:u11_mux_decode|a[0]                                ; Stuck at VCC due to stuck port data_in         ;
-; mux_decode:u8_mux_decode|a[0]                                 ; Stuck at VCC due to stuck port data_in         ;
 ; tgen:u_tgen|u2d                                               ; Stuck at VCC due to stuck port data_in         ;
 ; tgen:u_tgen|d2u                                               ; Stuck at GND due to stuck port data_in         ;
 ; mux_decode:u16_mux_decode|a[1]                                ; Stuck at GND due to stuck port data_in         ;
@@ -406,7 +403,6 @@ Encoding Type:  One-Hot
 ; mux_decode:u12_mux_decode|a[1]                                ; Stuck at GND due to stuck port data_in         ;
 ; mux_decode:u11_mux_decode|a[1]                                ; Stuck at GND due to stuck port data_in         ;
 ; mux_decode:u9_mux_decode|a[0]                                 ; Stuck at GND due to stuck port data_in         ;
-; mux_decode:u8_mux_decode|a[1]                                 ; Stuck at GND due to stuck port data_in         ;
 ; mux_decode:u9_mux_decode|a[1]                                 ; Stuck at VCC due to stuck port data_in         ;
 ; switch:u_switch|timer:u1_timer|cnt_s[0]                       ; Lost fanout                                    ;
 ; switch:u_switch|timer:u1_timer|pulse_1s                       ; Lost fanout                                    ;
@@ -522,7 +518,7 @@ Encoding Type:  One-Hot
 ; uart:u_uart|cstate~6                                          ; Lost fanout                                    ;
 ; uart:u_uart|cstate~7                                          ; Lost fanout                                    ;
 ; tgen:u_tgen|cnt_vdiv64[0]                                     ; Merged with tgen:u_tgen|cnt_vact[0]            ;
-; Total Number of Removed Registers = 358                       ;                                                ;
+; Total Number of Removed Registers = 356                       ;                                                ;
 +---------------------------------------------------------------+------------------------------------------------+
 
 
@@ -549,10 +545,10 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 673   ;
-; Number of registers using Synchronous Clear  ; 307   ;
-; Number of registers using Synchronous Load   ; 46    ;
-; Number of registers using Asynchronous Clear ; 527   ;
+; Total registers                              ; 678   ;
+; Number of registers using Synchronous Clear  ; 305   ;
+; Number of registers using Synchronous Load   ; 42    ;
+; Number of registers using Asynchronous Clear ; 530   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 459   ;
 ; Number of registers using Preset             ; 0     ;
@@ -590,42 +586,44 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|hcnt[1]                                   ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt[5]                      ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt3[5]                     ;
-; 4:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|cnt_vblank[4]                             ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |VT_Demo|tx_module:u_tx_module|temp_data[3]                    ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |VT_Demo|switch:u_switch|flag_pwr                              ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|tx_module:u_tx_module|bps_cnt[1]                      ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u0_timer|cnt_clk[14]            ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|hcnt[9]                                   ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt[0]                      ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; Yes        ; |VT_Demo|tgen:u_tgen|ckh6                                      ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt3[11]                    ;
+; 4:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|cnt_vblank[7]                             ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |VT_Demo|tx_module:u_tx_module|temp_data[6]                    ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |VT_Demo|switch:u_switch|len_pwr_timer[3]                      ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|tx_module:u_tx_module|bps_cnt[12]                     ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u0_timer|cnt_clk[12]            ;
 ; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u1_timer|cnt_clk[1]             ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_clk[10] ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[12] ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[2]  ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_clk[8]  ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_clk[15] ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[10] ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[6]  ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_clk[9]  ;
 ; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |VT_Demo|tx_module:u_tx_module|tx_bit[3]                       ;
 ; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u0_timer|cnt_ms[10]             ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u0_timer|cnt_us[8]              ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u0_timer|cnt_us[6]              ;
 ; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u1_timer|cnt_ms[10]             ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u1_timer|cnt_us[10]             ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_ms[3]   ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_us[13]  ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[6]   ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[1]   ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[8]   ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[13]  ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_ms[6]   ;
-; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_us[15]  ;
-; 5:1                ; 5 bits    ; 15 LEs        ; 10 LEs               ; 5 LEs                  ; Yes        ; |VT_Demo|switch:u_switch|data_rty[12]                          ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|timer:u1_timer|cnt_us[0]              ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_ms[4]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u3_glf|timer:u1_timer|cnt_us[10]  ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[9]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[3]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[7]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[9]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_ms[4]   ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u2_glf|timer:u1_timer|cnt_us[11]  ;
+; 5:1                ; 5 bits    ; 15 LEs        ; 10 LEs               ; 5 LEs                  ; Yes        ; |VT_Demo|switch:u_switch|data_rty[21]                          ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |VT_Demo|tx_module:u_tx_module|tx_rdy                          ;
-; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt2[3]                     ;
-; 7:1                ; 7 bits    ; 28 LEs        ; 21 LEs               ; 7 LEs                  ; Yes        ; |VT_Demo|switch:u_switch|dis_sn[4]                             ;
-; 7:1                ; 9 bits    ; 36 LEs        ; 9 LEs                ; 27 LEs                 ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt4[1]                     ;
-; 128:1              ; 15 bits   ; 1275 LEs      ; 105 LEs              ; 1170 LEs               ; Yes        ; |VT_Demo|tgen:u_tgen|r_data[2]                                 ;
-; 16:1               ; 6 bits    ; 60 LEs        ; 24 LEs               ; 36 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|da1_din[6]                                ;
-; 519:1              ; 3 bits    ; 1038 LEs      ; 18 LEs               ; 1020 LEs               ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|data_reg[5]                 ;
-; 19:1               ; 6 bits    ; 72 LEs        ; 24 LEs               ; 48 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|da4_din[1]                                ;
-; 28:1               ; 3 bits    ; 54 LEs        ; 18 LEs               ; 36 LEs                 ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|data_reg[6]                 ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt2[0]                     ;
+; 7:1                ; 7 bits    ; 28 LEs        ; 21 LEs               ; 7 LEs                  ; Yes        ; |VT_Demo|switch:u_switch|dis_sn[5]                             ;
+; 7:1                ; 9 bits    ; 36 LEs        ; 9 LEs                ; 27 LEs                 ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|cnt4[0]                     ;
+; 128:1              ; 15 bits   ; 1275 LEs      ; 105 LEs              ; 1170 LEs               ; Yes        ; |VT_Demo|tgen:u_tgen|g_data[4]                                 ;
+; 519:1              ; 3 bits    ; 1038 LEs      ; 18 LEs               ; 1020 LEs               ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|data_reg[4]                 ;
+; 28:1               ; 3 bits    ; 54 LEs        ; 18 LEs               ; 36 LEs                 ; Yes        ; |VT_Demo|lcd_display:u_lcd_display|data_reg[2]                 ;
+; 51:1               ; 2 bits    ; 68 LEs        ; 10 LEs               ; 58 LEs                 ; Yes        ; |VT_Demo|tgen:u_tgen|da1_din[5]                                ;
+; 52:1               ; 4 bits    ; 136 LEs       ; 16 LEs               ; 120 LEs                ; Yes        ; |VT_Demo|tgen:u_tgen|da1_din[1]                                ;
+; 55:1               ; 6 bits    ; 216 LEs       ; 24 LEs               ; 192 LEs                ; Yes        ; |VT_Demo|tgen:u_tgen|da4_din[1]                                ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |VT_Demo|lcd_display:u_lcd_display|p_back                      ;
 ; 8:1                ; 3 bits    ; 15 LEs        ; 12 LEs               ; 3 LEs                  ; No         ; |VT_Demo|lcd_display:u_lcd_display|p2                          ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
@@ -1251,7 +1249,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; DCODE_VCOMB     ; 10101010                         ; Unsigned Binary ;
 ; SRC_PCH_SHIFT   ; 01010000                         ; Unsigned Binary ;
 ; ODD_EVEN_TGAP   ; 00000101                         ; Unsigned Binary ;
-; RGBRGB          ; 1                                ; Unsigned Binary ;
+; RGBRGB          ; 0                                ; Unsigned Binary ;
 +-----------------+----------------------------------+-----------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -1344,36 +1342,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; da   ; Input ; Info     ; Stuck at VCC                ;
 ; db   ; Input ; Info     ; Stuck at VCC                ;
 +------+-------+----------+-----------------------------+
-
-
-+------------------------------------------------------+
-; Port Connectivity Checks: "mux_decode:u8_mux_decode" ;
-+------+-------+----------+----------------------------+
-; Port ; Type  ; Severity ; Details                    ;
-+------+-------+----------+----------------------------+
-; da   ; Input ; Info     ; Stuck at GND               ;
-; db   ; Input ; Info     ; Stuck at GND               ;
-+------+-------+----------+----------------------------+
-
-
-+------------------------------------------------------+
-; Port Connectivity Checks: "mux_decode:u7_mux_decode" ;
-+------+-------+----------+----------------------------+
-; Port ; Type  ; Severity ; Details                    ;
-+------+-------+----------+----------------------------+
-; db   ; Input ; Info     ; Stuck at GND               ;
-+------+-------+----------+----------------------------+
-
-
-+--------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "tgen:u_tgen"                                                                            ;
-+----------+--------+----------+-------------------------------------------------------------------------------------+
-; Port     ; Type   ; Severity ; Details                                                                             ;
-+----------+--------+----------+-------------------------------------------------------------------------------------+
-; ckh2_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; ckh4_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; ckh6_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+----------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1498,7 +1466,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:13     ;
+; Top            ; 00:00:14     ;
 +----------------+--------------+
 
 
@@ -1508,7 +1476,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Tue Dec 18 15:51:41 2018
+    Info: Processing started: Wed Dec 19 10:04:38 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off VT_Demo -c VT_Demo
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/tgen/tgen.v
@@ -1706,8 +1674,6 @@ Info (13000): Registers with preset signals will power-up high
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "mux_1[1]" is stuck at GND
-    Warning (13410): Pin "mux_8[0]" is stuck at VCC
-    Warning (13410): Pin "mux_8[1]" is stuck at GND
     Warning (13410): Pin "mux_9[0]" is stuck at GND
     Warning (13410): Pin "mux_9[1]" is stuck at VCC
     Warning (13410): Pin "mux_10[1]" is stuck at GND
@@ -1745,15 +1711,15 @@ Warning (15899): PLL "clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypl
 Warning (21074): Design contains 2 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "sw5"
     Warning (15610): No output dependent on input pin "rxd"
-Info (21057): Implemented 1941 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 2032 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 8 input pins
     Info (21059): Implemented 95 output pins
-    Info (21061): Implemented 1837 logic cells
+    Info (21061): Implemented 1928 logic cells
     Info (21065): Implemented 1 PLLs
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 124 warnings
-    Info: Peak virtual memory: 455 megabytes
-    Info: Processing ended: Tue Dec 18 15:51:56 2018
-    Info: Elapsed time: 00:00:15
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 122 warnings
+    Info: Peak virtual memory: 463 megabytes
+    Info: Processing ended: Wed Dec 19 10:04:55 2018
+    Info: Elapsed time: 00:00:17
     Info: Total CPU time (on all processors): 00:00:15
 
 
