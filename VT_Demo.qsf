@@ -159,8 +159,8 @@ set_location_assignment PIN_201 -to L_DIN
 set_location_assignment PIN_200 -to L_DC
 set_location_assignment PIN_202 -to L_CLK
 set_location_assignment PIN_199 -to L_CE
-set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
-set_global_assignment -name EDA_TIME_SCALE "10 ns" -section_id eda_simulation
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim (Verilog)"
+set_global_assignment -name EDA_TIME_SCALE "1 ns" -section_id eda_simulation
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
 set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH VT_Demo_vlg -section_id eda_simulation
@@ -169,14 +169,10 @@ set_global_assignment -name EDA_DESIGN_INSTANCE_NAME i1 -section_id VT_Demo_vlg
 set_global_assignment -name EDA_TEST_BENCH_RUN_SIM_FOR "1 ms" -section_id VT_Demo_vlg
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME VT_Demo_vlg_tst -section_id VT_Demo_vlg
 set_global_assignment -name EDA_RUN_TOOL_AUTOMATICALLY OFF -section_id eda_simulation
+set_global_assignment -name EDA_TEST_BENCH_FILE simulation/modelsim/VT_Demo.vt -section_id VT_Demo_vlg
 set_location_assignment PIN_232 -to rxd
 set_location_assignment PIN_231 -to txd
 set_global_assignment -name VERILOG_FILE rtl/tgen/tgen.v
-set_global_assignment -name VERILOG_FILE rtl/uart/rx_module.v
-set_global_assignment -name VERILOG_FILE rtl/uart/uart.v
-set_global_assignment -name VERILOG_FILE rtl/uart/tx_module.v
-set_global_assignment -name VERILOG_FILE rtl/lcd_display/lcd_display.v
-set_global_assignment -name VERILOG_FILE rtl/mux_decode/mux_decode.v
 set_global_assignment -name VERILOG_FILE rtl/switch/timer.v
 set_global_assignment -name VERILOG_FILE rtl/switch/switch.v
 set_global_assignment -name VERILOG_FILE rtl/switch/glf.v
@@ -186,5 +182,4 @@ set_global_assignment -name QIP_FILE rtl/megafunc/mypll.qip
 set_global_assignment -name CDF_FILE output_files/VT_Demo.cdf
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_global_assignment -name EDA_TEST_BENCH_FILE simulation/modelsim/VT_Demo.vt -section_id VT_Demo_vlg
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
