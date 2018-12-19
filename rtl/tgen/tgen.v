@@ -66,67 +66,67 @@ module tgen(
 // parameters
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //FSM
-parameter       IDLE                = 3'd0                      ;
-parameter       GRST                = 3'd1                      ;
-parameter       VBP                 = 3'd2                      ;
-parameter       PCH                 = 3'd3                      ;  //pre-charge
-parameter       DISPLAY             = 3'd4                      ;
-parameter       VFP                 = 3'd5                      ;
+parameter			IDLE                = 3'd0                      ;
+parameter			GRST                = 3'd1                      ;
+parameter			VBP                 = 3'd2                      ;
+parameter			PCH                 = 3'd3                      ;  //pre-charge
+parameter			DISPLAY             = 3'd4                      ;
+parameter			VFP                 = 3'd5                      ;
 
 //for timing control
-parameter       NUM_CLK_GRST        = 32'd5                     ;  //number of clocks during reset
+parameter			NUM_CLK_GRST        = 32'd5                     ;  //number of clocks during reset
 
-parameter       H_ACT               = 12'd1080                  ;
-parameter       H_BP                = 12'd45                    ;  //including HPW  95
-parameter       H_FP                = 12'd45                    ;  //               50
+parameter			H_ACT               = 12'd1080                  ;
+parameter			H_BP                = 12'd45                    ;  //including HPW  95
+parameter			H_FP                = 12'd45                    ;  //               50
 
-parameter       V_BP                = 12'd12                    ;  //including VPW
-parameter       V_FP                = 12'd7                     ;
-parameter       V_ACT               = 12'd2520                  ;
-parameter       V_PCH               = 12'd8                     ;  //10
+parameter			V_BP                = 12'd12                    ;  //including VPW
+parameter			V_FP                = 12'd7                     ;
+parameter			V_ACT               = 12'd2520                  ;
+parameter			V_PCH               = 12'd8                     ;  //10
 
-parameter       H_ABGN              = H_BP                      ;
-parameter       H_AEND              = H_BP + H_ACT              ;
-parameter       H_TOTAL             = H_BP + H_ACT + H_FP       ;
+parameter			H_ABGN              = H_BP                      ;
+parameter			H_AEND              = H_BP + H_ACT              ;
+parameter			H_TOTAL             = H_BP + H_ACT + H_FP       ;
 
-parameter       GAP_VDIV64          = 8'd30                     ;
+parameter			GAP_VDIV64          = 8'd30                     ;
 
-parameter       STV_WIDTH           = 12'd1                     ;   //stv width. unit: line
-parameter       STV_TOTAL_DIRE      = 1'b1                      ;   //1'b1 - stv shift left; 1'b0 - stv shift right
-parameter       STV_TOTAL_SHIFT     = 12'd6                     ;   //stv shift offset, unit: lines
-parameter       STV_RISE_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
-parameter       STV_RISE_SHIFT      = 12'd76                    ;   //stv rising edge shift offset. unit: pclk
-parameter       STV_FALL_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
-parameter       STV_FALL_SHIFT      = 12'd1                     ;   //stv rising edge shift offset. unit: pclk
+parameter			STV_WIDTH           = 12'd1                     ;   //stv width. unit: line
+parameter			STV_TOTAL_DIRE      = 1'b1                      ;   //1'b1 - stv shift left; 1'b0 - stv shift right
+parameter			STV_TOTAL_SHIFT     = 12'd6                     ;   //stv shift offset, unit: lines
+parameter			STV_RISE_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
+parameter			STV_RISE_SHIFT      = 12'd76                    ;   //stv rising edge shift offset. unit: pclk
+parameter			STV_FALL_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
+parameter			STV_FALL_SHIFT      = 12'd1                     ;   //stv rising edge shift offset. unit: pclk
 
-parameter       CKV_RISE_SHIFT     = 12'd57                     ;   //ckv rising edge shift offset. unit: pclk. shift right
-parameter       CKV_FALL_SHIFT     = 12'd57                     ;   //ckv falling edge shift offset. unit: pclk. shift left
+parameter			CKV_RISE_SHIFT     = 12'd57                     ;   //ckv rising edge shift offset. unit: pclk. shift right
+parameter			CKV_FALL_SHIFT     = 12'd57                     ;   //ckv falling edge shift offset. unit: pclk. shift left
 
-parameter       CKH_PRE_GAP         = 12'd10                    ;   //gap befor CKH processing.
-parameter       CKH_WIDTH           = 12'd256                   ;   //ckh width. unit: pclk
-parameter		 CKH_HALF_WIDTH 		= 12'd128						 ;
-parameter       CKH_RISE_SHIFT      = 12'd45                    ;   //gap before rising edge of ckh. reference point: rising edge of ckv
-parameter       CKH_FALL_SHIFT      = 12'd45                    ;   //gap after falling edge of ckh
+parameter			CKH_PRE_GAP         = 12'd10                    ;   //gap befor CKH processing.
+parameter			CKH_WIDTH			= 12'd256                   ;   //ckh width. unit: pclk
+parameter			CKH_HALF_WIDTH		= 12'd128						 ;
+parameter			CKH_RISE_SHIFT      = 12'd45                    ;   //gap before rising edge of ckh. reference point: rising edge of ckv
+parameter			CKH_FALL_SHIFT      = 12'd45                    ;   //gap after falling edge of ckh
 
 //for pattern generation
-parameter       DCODE_WHITE         = 8'd242                    ;   //DA input for white (grayscale=255)
-parameter       DCODE_BLACK         = 8'd133                    ;   //DA input for black (grayscale=0)
-parameter       DCODE_VCOM          = 8'd124                    ;   //DA input for vcom
-parameter       DCODE_GND           = 8'd128                    ;   //DA input for GND
-parameter       DCODE_GRAY128       = 8'd195                    ;   //DA input for gray pattern
-parameter       DCODE_GRAY64        = 8'd182                    ;   //DA input for gray pattern
+parameter			DCODE_WHITE         = 8'd242                    ;   //DA input for white (grayscale=255)
+parameter			DCODE_BLACK         = 8'd133                    ;   //DA input for black (grayscale=0)
+parameter			DCODE_VCOM          = 8'd124                    ;   //DA input for vcom
+parameter			DCODE_GND           = 8'd128                    ;   //DA input for GND
+parameter			DCODE_GRAY128       = 8'd195                    ;   //DA input for gray pattern
+parameter			DCODE_GRAY64        = 8'd182                    ;   //DA input for gray pattern
 
-parameter       DCODE_VCOMA       	= 8'd132                    ;   //DA input for VCOMA
-parameter       DCODE_VCOMB        	= 8'd170                    ;   //DA input for VCOMB
+parameter			DCODE_VCOMA			= 8'd132                    ;   //DA input for VCOMA
+parameter			DCODE_VCOMB			= 8'd170                    ;   //DA input for VCOMB
 
-parameter       SRC_PCH_SHIFT       = 8'd80                     ;   //source precharge time
-                                                                    //DA output tansition time: 1.4us, about 120 clk_sys period
-                                                                    //constraint: 
-                                                                    //1. (CKV1_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT) > SRC_PCH_SHIFT
-                                                                    //2. (CKH_RISE_SHIFT + CKH_FALL_SHIFT) > SRC_PCH_SHIFT
-parameter       ODD_EVEN_TGAP       = 8'd5                      ;   //DA transition gap for odd and even source output
+parameter			SRC_PCH_SHIFT		= 8'd80                     ;   //source precharge time
+																							//DA output tansition time: 1.4us, about 120 clk_sys period
+																							//constraint: 
+																							//1. (CKV1_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT) > SRC_PCH_SHIFT
+																							//2. (CKH_RISE_SHIFT + CKH_FALL_SHIFT) > SRC_PCH_SHIFT
+parameter			ODD_EVEN_TGAP       = 8'd5                      ;   //DA transition gap for odd and even source output
 
-parameter		 RGBRGB					= 1'b1							 ;	  //switch for RGBRGB and RGBBGR timings
+parameter			RGBRGB					= 1'b1							 ;	  //switch for RGBRGB and RGBBGR timings
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // variable declaration
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
