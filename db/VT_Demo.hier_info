@@ -2,6 +2,11 @@
 clk_in => clk_in.IN1
 sw1 => sw1.IN1
 sw2 => sw2.IN1
+sw6 => sw6.IN1
+en_p14v <= switch:u_switch.en_p14v
+en_n14v <= switch:u_switch.en_n14v
+en_gvddp <= <GND>
+en_gvddn <= <GND>
 da1_wr <= tgen:u_tgen.da1_wr
 da1_a[0] <= tgen:u_tgen.da1_a
 da1_a[1] <= tgen:u_tgen.da1_a
@@ -99,6 +104,10 @@ inclk[1] => pll1.CLK1
 
 
 |VT_Demo|switch:u_switch
+en_p14v <= en_p14v~reg0.DB_MAX_OUTPUT_PORT_TYPE
+en_n14v <= en_n14v~reg0.DB_MAX_OUTPUT_PORT_TYPE
+en_gvddp <= en_gvddp~reg0.DB_MAX_OUTPUT_PORT_TYPE
+en_gvddn <= en_gvddn~reg0.DB_MAX_OUTPUT_PORT_TYPE
 clk => clk.IN2
 rst_n => rst_n.IN2
 sw1 => sw1.IN1
@@ -110,6 +119,7 @@ dis_sn[3] <= dis_sn[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 dis_sn[4] <= dis_sn[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 dis_sn[5] <= dis_sn[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 dis_sn[6] <= dis_sn[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+dis_sn[7] <= dis_sn[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |VT_Demo|switch:u_switch|glf:u0_glf

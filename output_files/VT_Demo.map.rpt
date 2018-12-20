@@ -1,5 +1,5 @@
 Analysis & Synthesis report for VT_Demo
-Thu Dec 20 02:26:20 2018
+Thu Dec 20 12:14:05 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -17,21 +17,23 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   9. Registers Removed During Synthesis
  10. Removed Registers Triggering Further Register Optimizations
  11. General Register Statistics
- 12. Parameter Settings for User Entity Instance: clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component
- 13. Parameter Settings for User Entity Instance: switch:u_switch
- 14. Parameter Settings for User Entity Instance: switch:u_switch|glf:u0_glf
- 15. Parameter Settings for User Entity Instance: switch:u_switch|glf:u0_glf|timer:u1_timer
- 16. Parameter Settings for User Entity Instance: switch:u_switch|glf:u1_glf
- 17. Parameter Settings for User Entity Instance: switch:u_switch|glf:u1_glf|timer:u1_timer
- 18. Parameter Settings for User Entity Instance: tgen:u_tgen
- 19. altpll Parameter Settings by Entity Instance
- 20. Port Connectivity Checks: "switch:u_switch|glf:u1_glf"
- 21. Port Connectivity Checks: "switch:u_switch|glf:u0_glf|timer:u1_timer"
- 22. Port Connectivity Checks: "switch:u_switch|glf:u0_glf"
- 23. Port Connectivity Checks: "switch:u_switch"
- 24. Port Connectivity Checks: "clkrst:u_clkrst|mypll:u_mypll"
- 25. Elapsed Time Per Partition
- 26. Analysis & Synthesis Messages
+ 12. Inverted Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Parameter Settings for User Entity Instance: clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component
+ 15. Parameter Settings for User Entity Instance: switch:u_switch
+ 16. Parameter Settings for User Entity Instance: switch:u_switch|glf:u0_glf
+ 17. Parameter Settings for User Entity Instance: switch:u_switch|glf:u0_glf|timer:u1_timer
+ 18. Parameter Settings for User Entity Instance: switch:u_switch|glf:u1_glf
+ 19. Parameter Settings for User Entity Instance: switch:u_switch|glf:u1_glf|timer:u1_timer
+ 20. Parameter Settings for User Entity Instance: tgen:u_tgen
+ 21. altpll Parameter Settings by Entity Instance
+ 22. Port Connectivity Checks: "switch:u_switch|glf:u1_glf"
+ 23. Port Connectivity Checks: "switch:u_switch|glf:u0_glf|timer:u1_timer"
+ 24. Port Connectivity Checks: "switch:u_switch|glf:u0_glf"
+ 25. Port Connectivity Checks: "switch:u_switch"
+ 26. Port Connectivity Checks: "clkrst:u_clkrst|mypll:u_mypll"
+ 27. Elapsed Time Per Partition
+ 28. Analysis & Synthesis Messages
 
 
 
@@ -57,20 +59,20 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Dec 20 02:26:20 2018           ;
+; Analysis & Synthesis Status        ; Successful - Thu Dec 20 12:14:05 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; VT_Demo                                         ;
 ; Top-level Entity Name              ; VT_Demo                                         ;
 ; Family                             ; Cyclone III                                     ;
-; Total logic elements               ; 0                                               ;
-;     Total combinational functions  ; 0                                               ;
-;     Dedicated logic registers      ; 0                                               ;
-; Total registers                    ; 0                                               ;
-; Total pins                         ; 14                                              ;
+; Total logic elements               ; 192                                             ;
+;     Total combinational functions  ; 182                                             ;
+;     Dedicated logic registers      ; 98                                              ;
+; Total registers                    ; 98                                              ;
+; Total pins                         ; 19                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
 ; Embedded Multiplier 9-bit elements ; 0                                               ;
-; Total PLLs                         ; 0                                               ;
+; Total PLLs                         ; 1                                               ;
 +------------------------------------+-------------------------------------------------+
 
 
@@ -193,42 +195,56 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------+---------+
 
 
-+------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary          ;
-+---------------------------------------------+--------+
-; Resource                                    ; Usage  ;
-+---------------------------------------------+--------+
-;                                             ;        ;
-; Total combinational functions               ; 0      ;
-; Logic element usage by number of LUT inputs ;        ;
-;     -- 4 input functions                    ; 0      ;
-;     -- 3 input functions                    ; 0      ;
-;     -- <=2 input functions                  ; 0      ;
-;                                             ;        ;
-; Logic elements by mode                      ;        ;
-;     -- normal mode                          ; 0      ;
-;     -- arithmetic mode                      ; 0      ;
-;                                             ;        ;
-; Total registers                             ; 0      ;
-;     -- Dedicated logic registers            ; 0      ;
-;     -- I/O registers                        ; 0      ;
-;                                             ;        ;
-; I/O pins                                    ; 14     ;
-; Embedded Multiplier 9-bit elements          ; 0      ;
-; Maximum fan-out node                        ; clk_in ;
-; Maximum fan-out                             ; 1      ;
-; Total fan-out                               ; 14     ;
-; Average fan-out                             ; 0.50   ;
-+---------------------------------------------+--------+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                                                                                      ;
++---------------------------------------------+----------------------------------------------------------------------------------------------------+
+; Resource                                    ; Usage                                                                                              ;
++---------------------------------------------+----------------------------------------------------------------------------------------------------+
+; Estimated Total logic elements              ; 192                                                                                                ;
+;                                             ;                                                                                                    ;
+; Total combinational functions               ; 182                                                                                                ;
+; Logic element usage by number of LUT inputs ;                                                                                                    ;
+;     -- 4 input functions                    ; 80                                                                                                 ;
+;     -- 3 input functions                    ; 8                                                                                                  ;
+;     -- <=2 input functions                  ; 94                                                                                                 ;
+;                                             ;                                                                                                    ;
+; Logic elements by mode                      ;                                                                                                    ;
+;     -- normal mode                          ; 108                                                                                                ;
+;     -- arithmetic mode                      ; 74                                                                                                 ;
+;                                             ;                                                                                                    ;
+; Total registers                             ; 98                                                                                                 ;
+;     -- Dedicated logic registers            ; 98                                                                                                 ;
+;     -- I/O registers                        ; 0                                                                                                  ;
+;                                             ;                                                                                                    ;
+; I/O pins                                    ; 19                                                                                                 ;
+; Embedded Multiplier 9-bit elements          ; 0                                                                                                  ;
+; Total PLLs                                  ; 1                                                                                                  ;
+;     -- PLLs                                 ; 1                                                                                                  ;
+;                                             ;                                                                                                    ;
+; Maximum fan-out node                        ; clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypll_altpll:auto_generated|wire_pll1_clk[0] ;
+; Maximum fan-out                             ; 98                                                                                                 ;
+; Total fan-out                               ; 911                                                                                                ;
+; Average fan-out                             ; 2.86                                                                                               ;
++---------------------------------------------+----------------------------------------------------------------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                         ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; |VT_Demo                   ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 14   ; 0            ; |VT_Demo            ; work         ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                               ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                        ; Library Name ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
+; |VT_Demo                                  ; 182 (0)           ; 98 (0)       ; 0           ; 0            ; 0       ; 0         ; 19   ; 0            ; |VT_Demo                                                                                   ; work         ;
+;    |clkrst:u_clkrst|                      ; 0 (0)             ; 3 (3)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst                                                                   ; work         ;
+;       |mypll:u_mypll|                     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst|mypll:u_mypll                                                     ; work         ;
+;          |altpll:altpll_component|        ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component                             ; work         ;
+;             |mypll_altpll:auto_generated| ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypll_altpll:auto_generated ; work         ;
+;    |switch:u_switch|                      ; 174 (36)          ; 86 (8)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch                                                                   ; work         ;
+;       |glf:u0_glf|                        ; 69 (1)            ; 39 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u0_glf                                                        ; work         ;
+;          |timer:u1_timer|                 ; 68 (68)           ; 35 (35)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer                                         ; work         ;
+;       |glf:u1_glf|                        ; 69 (1)            ; 39 (4)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u1_glf                                                        ; work         ;
+;          |timer:u1_timer|                 ; 68 (68)           ; 35 (35)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer                                         ; work         ;
+;    |tgen:u_tgen|                          ; 8 (8)             ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |VT_Demo|tgen:u_tgen                                                                       ; work         ;
++-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -241,205 +257,35 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------+--------------+---------+--------------+--------------+----------------------------------------+------------------------------------+
 
 
-+---------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                ;
-+----------------------------------------------------------+----------------------------------------+
-; Register name                                            ; Reason for Removal                     ;
-+----------------------------------------------------------+----------------------------------------+
-; clkrst:u_clkrst|rst_n_inclk                              ; Stuck at GND due to stuck port data_in ;
-; clkrst:u_clkrst|rst_n_sys_p1                             ; Stuck at GND due to stuck port clear   ;
-; clkrst:u_clkrst|rst_n_sys                                ; Stuck at GND due to stuck port clear   ;
-; tgen:u_tgen|da1_din[0]                                   ; Stuck at GND due to stuck port clear   ;
-; tgen:u_tgen|da1_din[7]                                   ; Stuck at VCC due to stuck port preset  ;
-; tgen:u_tgen|da1_din[1..6]                                ; Stuck at GND due to stuck port clear   ;
-; tgen:u_tgen|da1_wr                                       ; Stuck at VCC due to stuck port preset  ;
-; switch:u_switch|dis_sn[0..6]                             ; Stuck at VCC due to stuck port preset  ;
-; switch:u_switch|glf:u1_glf|s_out                         ; Lost fanout                            ;
-; switch:u_switch|glf:u1_glf|timer:u1_timer|tpulse         ; Lost fanout                            ;
-; switch:u_switch|glf:u0_glf|s_out                         ; Lost fanout                            ;
-; switch:u_switch|glf:u0_glf|timer:u1_timer|tpulse         ; Lost fanout                            ;
-; switch:u_switch|glf:u1_glf|s_in_d1                       ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u1_glf|s_in_d2                       ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u1_glf|s_in_d3                       ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u1_glf|timer:u1_timer|t_cnt_en       ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[0..15] ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u1_glf|timer:u1_timer|pulse_1us      ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[0..15]  ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u1_glf|timer:u1_timer|pulse_1ms      ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[0..15]  ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[0]       ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u1_glf|timer:u1_timer|pulse_1s       ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[1..15]   ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u0_glf|s_in_d1                       ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u0_glf|s_in_d2                       ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u0_glf|s_in_d3                       ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u0_glf|timer:u1_timer|t_cnt_en       ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[0..15] ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u0_glf|timer:u1_timer|pulse_1us      ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[0..15]  ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u0_glf|timer:u1_timer|pulse_1ms      ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[0..15]  ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[0]       ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u0_glf|timer:u1_timer|pulse_1s       ; Stuck at GND due to stuck port clear   ;
-; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[1..15]   ; Stuck at GND due to stuck port clear   ;
-; Total Number of Removed Registers = 165                  ;                                        ;
-+----------------------------------------------------------+----------------------------------------+
++--------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                               ;
++---------------------------------------------------------+----------------------------------------+
+; Register name                                           ; Reason for Removal                     ;
++---------------------------------------------------------+----------------------------------------+
+; switch:u_switch|en_p14v                                 ; Stuck at VCC due to stuck port data_in ;
+; switch:u_switch|en_n14v                                 ; Stuck at VCC due to stuck port data_in ;
+; switch:u_switch|glf:u1_glf|timer:u1_timer|pulse_1ms     ; Lost fanout                            ;
+; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[0..15] ; Lost fanout                            ;
+; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[0]      ; Lost fanout                            ;
+; switch:u_switch|glf:u1_glf|timer:u1_timer|pulse_1s      ; Lost fanout                            ;
+; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[1..15]  ; Lost fanout                            ;
+; switch:u_switch|glf:u0_glf|timer:u1_timer|pulse_1ms     ; Lost fanout                            ;
+; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[0..15] ; Lost fanout                            ;
+; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[0]      ; Lost fanout                            ;
+; switch:u_switch|glf:u0_glf|timer:u1_timer|pulse_1s      ; Lost fanout                            ;
+; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[1..15]  ; Lost fanout                            ;
+; Total Number of Removed Registers = 70                  ;                                        ;
++---------------------------------------------------------+----------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                                   ;
-+-----------------------------+---------------------------+-------------------------------------------------------------------------------------+
-; Register name               ; Reason for Removal        ; Registers Removed due to This Register                                              ;
-+-----------------------------+---------------------------+-------------------------------------------------------------------------------------+
-; clkrst:u_clkrst|rst_n_inclk ; Stuck at GND              ; clkrst:u_clkrst|rst_n_sys_p1, clkrst:u_clkrst|rst_n_sys, tgen:u_tgen|da1_din[0],    ;
-;                             ; due to stuck port data_in ; tgen:u_tgen|da1_din[7], tgen:u_tgen|da1_din[6], tgen:u_tgen|da1_din[5],             ;
-;                             ;                           ; tgen:u_tgen|da1_din[4], tgen:u_tgen|da1_din[3], tgen:u_tgen|da1_din[2],             ;
-;                             ;                           ; tgen:u_tgen|da1_din[1], tgen:u_tgen|da1_wr, switch:u_switch|dis_sn[0],              ;
-;                             ;                           ; switch:u_switch|dis_sn[6], switch:u_switch|dis_sn[5], switch:u_switch|dis_sn[4],    ;
-;                             ;                           ; switch:u_switch|dis_sn[3], switch:u_switch|dis_sn[2], switch:u_switch|dis_sn[1],    ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|s_out, switch:u_switch|glf:u1_glf|timer:u1_timer|tpulse, ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|s_out, switch:u_switch|glf:u0_glf|timer:u1_timer|tpulse, ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|s_in_d1, switch:u_switch|glf:u1_glf|s_in_d2,             ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|s_in_d3,                                                 ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|t_cnt_en,                                 ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[15],                              ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[14],                              ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[13],                              ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[12],                              ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[11],                              ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[10],                              ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[9],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[8],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[7],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[6],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[5],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[4],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[3],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[2],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[1],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[0],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|pulse_1us,                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[15],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[14],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[13],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[12],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[11],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[10],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[9],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[8],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[7],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[6],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[5],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[4],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[3],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[2],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[1],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[0],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|pulse_1ms,                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[15],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[14],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[13],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[12],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[11],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[10],                               ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[9],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[8],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[7],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[6],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[5],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[4],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[3],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[2],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[1],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_ms[0],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[0],                                 ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|pulse_1s,                                 ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[15],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[14],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[13],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[12],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[11],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[10],                                ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[9],                                 ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[8],                                 ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[7],                                 ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[6],                                 ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[5],                                 ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[4],                                 ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[3],                                 ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[2],                                 ;
-;                             ;                           ; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[1],                                 ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|s_in_d1, switch:u_switch|glf:u0_glf|s_in_d2,             ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|s_in_d3,                                                 ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|t_cnt_en,                                 ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[15],                              ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[14],                              ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[13],                              ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[12],                              ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[11],                              ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[10],                              ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[9],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[8],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[7],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[6],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[5],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[4],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[3],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[2],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[1],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[0],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|pulse_1us,                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[15],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[14],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[13],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[12],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[11],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[10],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[9],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[8],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[7],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[6],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[5],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[4],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[3],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[2],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[1],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[0],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|pulse_1ms,                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[15],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[14],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[13],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[12],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[11],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[10],                               ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[9],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[8],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[7],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[6],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[5],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[4],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[3],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[2],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[1],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_ms[0],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[0],                                 ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|pulse_1s,                                 ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[15],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[14],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[13],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[12],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[11],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[10],                                ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[9],                                 ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[8],                                 ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[7],                                 ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[6],                                 ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[5],                                 ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[4],                                 ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[3],                                 ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[2],                                 ;
-;                             ;                           ; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[1]                                  ;
-+-----------------------------+---------------------------+-------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                  ;
++----------------------------------------------------+--------------------+----------------------------------------------------+
+; Register name                                      ; Reason for Removal ; Registers Removed due to This Register             ;
++----------------------------------------------------+--------------------+----------------------------------------------------+
+; switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_s[0] ; Lost Fanouts       ; switch:u_switch|glf:u1_glf|timer:u1_timer|pulse_1s ;
+; switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_s[0] ; Lost Fanouts       ; switch:u_switch|glf:u0_glf|timer:u1_timer|pulse_1s ;
++----------------------------------------------------+--------------------+----------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -447,14 +293,47 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 0     ;
-; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 0     ;
+; Total registers                              ; 98    ;
+; Number of registers using Synchronous Clear  ; 32    ;
+; Number of registers using Synchronous Load   ; 1     ;
+; Number of registers using Asynchronous Clear ; 97    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Clock Enable       ; 38    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++---------------------------------------------------+
+; Inverted Register Statistics                      ;
++-----------------------------------------+---------+
+; Inverted Register                       ; Fan out ;
++-----------------------------------------+---------+
+; tgen:u_tgen|da1_wr                      ; 1       ;
+; tgen:u_tgen|da1_din[7]                  ; 1       ;
+; switch:u_switch|dis_sn[0]               ; 5       ;
+; switch:u_switch|dis_sn[1]               ; 5       ;
+; switch:u_switch|dis_sn[2]               ; 5       ;
+; switch:u_switch|dis_sn[3]               ; 5       ;
+; switch:u_switch|dis_sn[4]               ; 5       ;
+; switch:u_switch|dis_sn[5]               ; 5       ;
+; switch:u_switch|dis_sn[6]               ; 5       ;
+; switch:u_switch|glf:u0_glf|s_out        ; 15      ;
+; switch:u_switch|glf:u1_glf|s_out        ; 1       ;
+; Total number of inverted registers = 11 ;         ;
++-----------------------------------------+---------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_clk[15] ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_clk[4]  ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u1_glf|timer:u1_timer|cnt_us[15]  ;
+; 5:1                ; 16 bits   ; 48 LEs        ; 16 LEs               ; 32 LEs                 ; Yes        ; |VT_Demo|switch:u_switch|glf:u0_glf|timer:u1_timer|cnt_us[5]   ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 14 LEs               ; 7 LEs                  ; Yes        ; |VT_Demo|switch:u_switch|dis_sn[6]                             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------+
@@ -941,8 +820,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------+-------+----------+--------------------------------------+
 ; Port        ; Type  ; Severity ; Details                              ;
 +-------------+-------+----------+--------------------------------------+
-; tunit[1]    ; Input ; Info     ; Stuck at GND                         ;
-; tunit[0]    ; Input ; Info     ; Stuck at VCC                         ;
+; tunit       ; Input ; Info     ; Stuck at GND                         ;
 ; tlen[15..4] ; Input ; Info     ; Stuck at GND                         ;
 ; tlen[3]     ; Input ; Info     ; Stuck at VCC                         ;
 ; tlen[2]     ; Input ; Info     ; Stuck at GND                         ;
@@ -960,13 +838,14 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------+-------+----------+------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "switch:u_switch"                                                                                                                                                        ;
-+--------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port   ; Type   ; Severity ; Details                                                                                                                                                               ;
-+--------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; dis_sn ; Output ; Warning  ; Output or bidir port (7 bits) is smaller than the port expression (8 bits) it drives.  The 1 most-significant bit(s) in the port expression will be connected to GND. ;
-+--------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "switch:u_switch"                                                                        ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                             ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
+; en_gvddp ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; en_gvddn ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------+
@@ -993,7 +872,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Dec 20 02:26:18 2018
+    Info: Processing started: Thu Dec 20 12:14:02 2018
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off VT_Demo -c VT_Demo
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/tgen/tgen.v
@@ -1006,14 +885,15 @@ Info (12021): Found 1 design units, including 1 entities, in source file rtl/swi
     Info (12023): Found entity 1: glf
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/clkrst/clkrst.v
     Info (12023): Found entity 1: clkrst
-Warning (10275): Verilog HDL Module Instantiation warning at VT_Demo.v(59): ignored dangling comma in List of Port Connections
-Warning (10275): Verilog HDL Module Instantiation warning at VT_Demo.v(69): ignored dangling comma in List of Port Connections
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/vt_demo.v
     Info (12023): Found entity 1: VT_Demo
 Info (12021): Found 1 design units, including 1 entities, in source file rtl/megafunc/mypll.v
     Info (12023): Found entity 1: mypll
-Warning (10236): Verilog HDL Implicit Net warning at VT_Demo.v(48): created implicit net for "sw6"
+Warning (10236): Verilog HDL Implicit Net warning at VT_Demo.v(61): created implicit net for "gvddp"
+Warning (10236): Verilog HDL Implicit Net warning at VT_Demo.v(62): created implicit net for "gvddn"
 Info (12127): Elaborating entity "VT_Demo" for the top level hierarchy
+Warning (10034): Output port "en_gvddp" at VT_Demo.v(30) has no driver
+Warning (10034): Output port "en_gvddn" at VT_Demo.v(31) has no driver
 Info (12128): Elaborating entity "clkrst" for hierarchy "clkrst:u_clkrst"
 Info (12128): Elaborating entity "mypll" for hierarchy "clkrst:u_clkrst|mypll:u_mypll"
 Info (12128): Elaborating entity "altpll" for hierarchy "clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component"
@@ -1081,52 +961,39 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/mypl
     Info (12023): Found entity 1: mypll_altpll
 Info (12128): Elaborating entity "mypll_altpll" for hierarchy "clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypll_altpll:auto_generated"
 Info (12128): Elaborating entity "switch" for hierarchy "switch:u_switch"
-Warning (10036): Verilog HDL or VHDL warning at switch.v(43): object "flag_dis_chg" assigned a value but never read
-Warning (10230): Verilog HDL assignment warning at switch.v(98): truncated value with size 8 to match size of target (7)
-Warning (10230): Verilog HDL assignment warning at switch.v(110): truncated value with size 8 to match size of target (7)
-Warning (10230): Verilog HDL assignment warning at switch.v(121): truncated value with size 8 to match size of target (7)
-Warning (10240): Verilog HDL Always Construct warning at switch.v(131): inferring latch(es) for variable "igr_sw", which holds its previous value in one or more paths through the always construct
-Info (10041): Inferred latch for "igr_sw" at switch.v(131)
+Warning (10036): Verilog HDL or VHDL warning at switch.v(48): object "flag_dis_chg" assigned a value but never read
+Warning (10240): Verilog HDL Always Construct warning at switch.v(136): inferring latch(es) for variable "igr_sw", which holds its previous value in one or more paths through the always construct
+Info (10041): Inferred latch for "igr_sw" at switch.v(136)
 Info (12128): Elaborating entity "glf" for hierarchy "switch:u_switch|glf:u0_glf"
 Info (12128): Elaborating entity "timer" for hierarchy "switch:u_switch|glf:u0_glf|timer:u1_timer"
 Info (12128): Elaborating entity "tgen" for hierarchy "tgen:u_tgen"
 Warning (10240): Verilog HDL Always Construct warning at tgen.v(60): inferring latch(es) for variable "da1_a", which holds its previous value in one or more paths through the always construct
 Info (10041): Inferred latch for "da1_a[0]" at tgen.v(60)
 Info (10041): Inferred latch for "da1_a[1]" at tgen.v(60)
-Warning (12011): Net is missing source, defaulting to GND
-    Warning (12110): Net "dis_sn[7]" is missing source, defaulting to GND
-Warning (12011): Net is missing source, defaulting to GND
-    Warning (12110): Net "dis_sn[7]" is missing source, defaulting to GND
-Warning (14284): Synthesized away the following node(s):
-    Warning (14285): Synthesized away the following PLL node(s):
-        Warning (14320): Synthesized away node "clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypll_altpll:auto_generated|wire_pll1_clk[0]"
-Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Info (13000): Registers with preset signals will power-up high
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "da1_wr" is stuck at VCC
+    Warning (13410): Pin "en_p14v" is stuck at VCC
+    Warning (13410): Pin "en_n14v" is stuck at VCC
+    Warning (13410): Pin "en_gvddp" is stuck at GND
+    Warning (13410): Pin "en_gvddn" is stuck at GND
     Warning (13410): Pin "da1_a[0]" is stuck at GND
     Warning (13410): Pin "da1_a[1]" is stuck at GND
-    Warning (13410): Pin "da1_din[0]" is stuck at GND
-    Warning (13410): Pin "da1_din[1]" is stuck at GND
-    Warning (13410): Pin "da1_din[2]" is stuck at GND
-    Warning (13410): Pin "da1_din[3]" is stuck at GND
-    Warning (13410): Pin "da1_din[4]" is stuck at GND
-    Warning (13410): Pin "da1_din[5]" is stuck at GND
-    Warning (13410): Pin "da1_din[6]" is stuck at GND
-    Warning (13410): Pin "da1_din[7]" is stuck at VCC
-Info (17049): 4 registers lost all their fanouts during netlist optimizations.
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 68 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
-    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 3 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "clk_in"
-    Warning (15610): No output dependent on input pin "sw1"
-    Warning (15610): No output dependent on input pin "sw2"
-Info (21057): Implemented 14 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 3 input pins
-    Info (21059): Implemented 11 output pins
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 34 warnings
-    Info: Peak virtual memory: 448 megabytes
-    Info: Processing ended: Thu Dec 20 02:26:20 2018
-    Info: Elapsed time: 00:00:02
+    Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
+Warning (15899): PLL "clkrst:u_clkrst|mypll:u_mypll|altpll:altpll_component|mypll_altpll:auto_generated|pll1" has parameters clk1_multiply_by and clk1_divide_by specified but port CLK[1] is not connected
+Info (21057): Implemented 214 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 4 input pins
+    Info (21059): Implemented 15 output pins
+    Info (21061): Implemented 194 logic cells
+    Info (21065): Implemented 1 PLLs
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 17 warnings
+    Info: Peak virtual memory: 441 megabytes
+    Info: Processing ended: Thu Dec 20 12:14:05 2018
+    Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:02
 
 

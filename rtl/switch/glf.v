@@ -56,7 +56,7 @@ timer #(
     .clk                        ( clk                           ),  //input
     .rst_n                      ( rst_n                         ),  //input
     .start                      ( s_in_neg                      ),  //input
-    .tunit                      ( 2'b01                         ),  //input       [1:0]
+    .tunit                      ( 2'b00                         ),  //input       [1:0]
     .tlen                       ( 16'd10                        ),  //input       [15:0]
     .tpulse                     ( flag_judge                    )   //output reg
 );

@@ -1,5 +1,5 @@
 Flow report for VT_Demo
-Thu Dec 20 02:26:35 2018
+Thu Dec 20 12:14:22 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -40,22 +40,22 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Flow Summary                                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Flow Status                        ; Successful - Thu Dec 20 02:26:35 2018           ;
+; Flow Status                        ; Successful - Thu Dec 20 12:14:22 2018           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; VT_Demo                                         ;
 ; Top-level Entity Name              ; VT_Demo                                         ;
 ; Family                             ; Cyclone III                                     ;
 ; Device                             ; EP3C16Q240C8                                    ;
 ; Timing Models                      ; Final                                           ;
-; Total logic elements               ; 0 / 15,408 ( 0 % )                              ;
-;     Total combinational functions  ; 0 / 15,408 ( 0 % )                              ;
-;     Dedicated logic registers      ; 0 / 15,408 ( 0 % )                              ;
-; Total registers                    ; 0                                               ;
-; Total pins                         ; 14 / 161 ( 9 % )                                ;
+; Total logic elements               ; 194 / 15,408 ( 1 % )                            ;
+;     Total combinational functions  ; 184 / 15,408 ( 1 % )                            ;
+;     Dedicated logic registers      ; 98 / 15,408 ( < 1 % )                           ;
+; Total registers                    ; 98                                              ;
+; Total pins                         ; 19 / 161 ( 12 % )                               ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0 / 516,096 ( 0 % )                             ;
 ; Embedded Multiplier 9-bit elements ; 0 / 112 ( 0 % )                                 ;
-; Total PLLs                         ; 0 / 4 ( 0 % )                                   ;
+; Total PLLs                         ; 1 / 4 ( 25 % )                                  ;
 +------------------------------------+-------------------------------------------------+
 
 
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 12/20/2018 02:26:19 ;
+; Start date & time ; 12/20/2018 12:14:03 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; VT_Demo             ;
 +-------------------+---------------------+
@@ -75,18 +75,18 @@ applicable agreement for further details.
 +--------------------------------------+---------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                      ; Value                                 ; Default Value ; Entity Name ; Section Id     ;
 +--------------------------------------+---------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID                ; 150935011708.154524397807092          ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                ; 150935011708.154527924208140          ; --            ; --          ; --             ;
 ; EDA_DESIGN_INSTANCE_NAME             ; i1                                    ; --            ; --          ; VT_Demo_vlg    ;
 ; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; VT_Demo_vlg                           ; --            ; --          ; eda_simulation ;
 ; EDA_OUTPUT_DATA_FORMAT               ; Verilog Hdl                           ; --            ; --          ; eda_simulation ;
 ; EDA_RUN_TOOL_AUTOMATICALLY           ; Off                                   ; --            ; --          ; eda_simulation ;
-; EDA_SIMULATION_TOOL                  ; ModelSim (Verilog)                    ; <None>        ; --          ; --             ;
+; EDA_SIMULATION_TOOL                  ; ModelSim-Altera (Verilog)             ; <None>        ; --          ; --             ;
 ; EDA_TEST_BENCH_ENABLE_STATUS         ; TEST_BENCH_MODE                       ; --            ; --          ; eda_simulation ;
 ; EDA_TEST_BENCH_FILE                  ; simulation/modelsim/VT_Demo.vt        ; --            ; --          ; VT_Demo_vlg    ;
 ; EDA_TEST_BENCH_MODULE_NAME           ; VT_Demo_vlg_tst                       ; --            ; --          ; VT_Demo_vlg    ;
 ; EDA_TEST_BENCH_NAME                  ; VT_Demo_vlg                           ; --            ; --          ; eda_simulation ;
 ; EDA_TEST_BENCH_RUN_SIM_FOR           ; 1 ms                                  ; --            ; --          ; VT_Demo_vlg    ;
-; EDA_TIME_SCALE                       ; 1 ns                                  ; --            ; --          ; eda_simulation ;
+; EDA_TIME_SCALE                       ; 1 us                                  ; --            ; --          ; eda_simulation ;
 ; IP_TOOL_NAME                         ; ALTPLL                                ; --            ; --          ; --             ;
 ; IP_TOOL_VERSION                      ; 13.0                                  ; --            ; --          ; --             ;
 ; MAX_CORE_JUNCTION_TEMP               ; 85                                    ; --            ; --          ; --             ;
@@ -110,12 +110,12 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:02     ; 1.0                     ; 437 MB              ; 00:00:01                           ;
-; Fitter                    ; 00:00:06     ; 1.0                     ; 607 MB              ; 00:00:06                           ;
-; Assembler                 ; 00:00:02     ; 1.0                     ; 399 MB              ; 00:00:02                           ;
-; TimeQuest Timing Analyzer ; 00:00:02     ; 1.0                     ; 436 MB              ; 00:00:02                           ;
-; EDA Netlist Writer        ; 00:00:00     ; 1.0                     ; 365 MB              ; 00:00:01                           ;
-; Total                     ; 00:00:12     ; --                      ; --                  ; 00:00:12                           ;
+; Analysis & Synthesis      ; 00:00:02     ; 1.0                     ; 437 MB              ; 00:00:02                           ;
+; Fitter                    ; 00:00:08     ; 1.0                     ; 689 MB              ; 00:00:07                           ;
+; Assembler                 ; 00:00:02     ; 1.0                     ; 403 MB              ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:03     ; 1.0                     ; 437 MB              ; 00:00:02                           ;
+; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 360 MB              ; 00:00:01                           ;
+; Total                     ; 00:00:16     ; --                      ; --                  ; 00:00:14                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

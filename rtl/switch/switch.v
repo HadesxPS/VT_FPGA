@@ -16,11 +16,16 @@
 // 2012-05-29    :  create file
 //*****************************************************************************
 module switch(
+    output reg            en_p14v           ,
+    output reg            en_n14v           ,
+    output reg            en_gvddp          ,
+    output reg            en_gvddn          ,
+
     input                 clk               ,
     input                 rst_n             ,
     input                 sw1               ,
     input                 sw2               ,
-    output reg  [6:0]     dis_sn            
+    output reg  [7:0]     dis_sn            
 );
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -138,6 +143,24 @@ begin
 	begin
 		igr_sw <= igr_sw;
 	end
+end
+
+always @(posedge clk or negedge rst_n)
+begin
+    if (rst_n == 1'b0)
+    begin
+				en_p14v       <= 1'b1;
+				en_n14v       <= 1'b1;
+				en_gvddp      <= 1'b1;
+				en_gvddn      <= 1'b1;
+    end
+    else
+    begin
+				en_p14v       <= 1'b1;
+				en_n14v       <= 1'b1;
+				en_gvddp      <= 1'b1;
+				en_gvddn      <= 1'b1;
+    end
 end
 
 endmodule

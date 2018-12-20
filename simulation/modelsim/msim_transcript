@@ -1,0 +1,48 @@
+# Reading C:/altera/13.0sp1/modelsim_ase/tcl/vsim/pref.tcl 
+# do VT_Demo_run_msim_rtl_verilog.do 
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Copying C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+# 
+# vlog -vlog01compat -work work +incdir+D:/VS/VT_FPGA/rtl/tgen {D:/VS/VT_FPGA/rtl/tgen/tgen.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module tgen
+# 
+# Top level modules:
+# 	tgen
+# vlog -vlog01compat -work work +incdir+D:/VS/VT_FPGA/rtl/switch {D:/VS/VT_FPGA/rtl/switch/timer.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module timer
+# 
+# Top level modules:
+# 	timer
+# vlog -vlog01compat -work work +incdir+D:/VS/VT_FPGA/rtl/switch {D:/VS/VT_FPGA/rtl/switch/switch.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module switch
+# 
+# Top level modules:
+# 	switch
+# vlog -vlog01compat -work work +incdir+D:/VS/VT_FPGA/rtl/switch {D:/VS/VT_FPGA/rtl/switch/glf.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module glf
+# 
+# Top level modules:
+# 	glf
+# vlog -vlog01compat -work work +incdir+D:/VS/VT_FPGA/rtl/clkrst {D:/VS/VT_FPGA/rtl/clkrst/clkrst.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module clkrst
+# 
+# Top level modules:
+# 	clkrst
+# vlog -vlog01compat -work work +incdir+D:/VS/VT_FPGA/rtl {D:/VS/VT_FPGA/rtl/VT_Demo.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module VT_Demo
+# 
+# Top level modules:
+# 	VT_Demo

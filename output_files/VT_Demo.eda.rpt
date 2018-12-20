@@ -1,5 +1,5 @@
 EDA Netlist Writer report for VT_Demo
-Thu Dec 20 02:26:35 2018
+Thu Dec 20 12:14:22 2018
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Thu Dec 20 02:26:35 2018 ;
+; EDA Netlist Writer Status ; Successful - Thu Dec 20 12:14:22 2018 ;
 ; Revision Name             ; VT_Demo                               ;
 ; Top-level Entity Name     ; VT_Demo                               ;
 ; Family                    ; Cyclone III                           ;
@@ -44,26 +44,26 @@ applicable agreement for further details.
 +---------------------------+---------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------+
-; Simulation Settings                                                                                                    ;
-+---------------------------------------------------------------------------------------------------+--------------------+
-; Option                                                                                            ; Setting            ;
-+---------------------------------------------------------------------------------------------------+--------------------+
-; Tool Name                                                                                         ; ModelSim (Verilog) ;
-; Generate netlist for functional simulation only                                                   ; Off                ;
-; Time scale                                                                                        ; 1 ns               ;
-; Truncate long hierarchy paths                                                                     ; Off                ;
-; Map illegal HDL characters                                                                        ; Off                ;
-; Flatten buses into individual nodes                                                               ; Off                ;
-; Maintain hierarchy                                                                                ; Off                ;
-; Bring out device-wide set/reset signals as ports                                                  ; Off                ;
-; Enable glitch filtering                                                                           ; Off                ;
-; Do not write top level VHDL entity                                                                ; Off                ;
-; Disable detection of setup and hold time violations in the input registers of bi-directional pins ; Off                ;
-; Architecture name in VHDL output netlist                                                          ; structure          ;
-; Generate third-party EDA tool command script for RTL functional simulation                        ; Off                ;
-; Generate third-party EDA tool command script for gate-level simulation                            ; Off                ;
-+---------------------------------------------------------------------------------------------------+--------------------+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Simulation Settings                                                                                                           ;
++---------------------------------------------------------------------------------------------------+---------------------------+
+; Option                                                                                            ; Setting                   ;
++---------------------------------------------------------------------------------------------------+---------------------------+
+; Tool Name                                                                                         ; ModelSim-Altera (Verilog) ;
+; Generate netlist for functional simulation only                                                   ; Off                       ;
+; Time scale                                                                                        ; 1 us                      ;
+; Truncate long hierarchy paths                                                                     ; Off                       ;
+; Map illegal HDL characters                                                                        ; Off                       ;
+; Flatten buses into individual nodes                                                               ; Off                       ;
+; Maintain hierarchy                                                                                ; Off                       ;
+; Bring out device-wide set/reset signals as ports                                                  ; Off                       ;
+; Enable glitch filtering                                                                           ; Off                       ;
+; Do not write top level VHDL entity                                                                ; Off                       ;
+; Disable detection of setup and hold time violations in the input registers of bi-directional pins ; Off                       ;
+; Architecture name in VHDL output netlist                                                          ; structure                 ;
+; Generate third-party EDA tool command script for RTL functional simulation                        ; Off                       ;
+; Generate third-party EDA tool command script for gate-level simulation                            ; Off                       ;
++---------------------------------------------------------------------------------------------------+---------------------------+
 
 
 +--------------------------------------------------------------------+
@@ -88,7 +88,7 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit EDA Netlist Writer
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Dec 20 02:26:35 2018
+    Info: Processing started: Thu Dec 20 12:14:21 2018
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off VT_Demo -c VT_Demo
 Warning (202000): An incorrect timescale is selected for the Verilog Output (.VO) file of this PLL design. It's required that the timescale should be 1 ps when simulating a PLL design in a third party EDA tool.
 Info (204019): Generated file VT_Demo_8_1200mv_85c_slow.vo in folder "D:/VS/VT_FPGA/simulation/modelsim/" for EDA simulation tool
@@ -103,9 +103,9 @@ Info (204019): Generated file VT_Demo_8_1200mv_0c_v_slow.sdo in folder "D:/VS/VT
 Info (204019): Generated file VT_Demo_min_1200mv_0c_v_fast.sdo in folder "D:/VS/VT_FPGA/simulation/modelsim/" for EDA simulation tool
 Info (204019): Generated file VT_Demo_v.sdo in folder "D:/VS/VT_FPGA/simulation/modelsim/" for EDA simulation tool
 Info: Quartus II 64-Bit EDA Netlist Writer was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 377 megabytes
-    Info: Processing ended: Thu Dec 20 02:26:35 2018
-    Info: Elapsed time: 00:00:00
+    Info: Peak virtual memory: 372 megabytes
+    Info: Processing ended: Thu Dec 20 12:14:22 2018
+    Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 
 
