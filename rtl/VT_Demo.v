@@ -92,7 +92,7 @@ module VT_Demo(
 // parameters
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 parameter      PATMIN                     = 7'd0            ;  //minimum pattern number
-parameter      PATNUM                     = 7'd11           ;
+parameter      PATNUM                     = 7'd9           ;
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // variable declaration
