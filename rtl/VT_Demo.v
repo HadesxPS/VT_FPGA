@@ -30,8 +30,8 @@ module VT_Demo(
     input                 sw6               ,
 	 input	              rxd               ,
 	
-	 output	              txd               , 	
-    output                FPGA_LED_Test     ,	
+	 output	              txd               ,
+    output                FPGA_LED_Test     ,
     output                en_p14v           ,
     output                en_n14v           ,
     output                en_gvddp          ,
@@ -44,7 +44,7 @@ module VT_Demo(
     output                mux_en1           ,
     output                mux_en2           ,
     output                mux_en3           ,
-    output                mux_en4           ,	 
+    output                mux_en4           ,
 	 
     output [1:0]          mux_1             ,
     output [1:0]          mux_2             ,

@@ -66,6 +66,7 @@ module tgen(
 // parameters
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //FSM
+parameter		 RGBRGB					= 1'b1							 ;	  //switch for RGBRGB and RGBBGR timings
 parameter       IDLE                = 3'd0                      ;
 parameter       GRST                = 3'd1                      ;
 parameter       VBP                 = 3'd2                      ;
@@ -76,20 +77,20 @@ parameter       VFP                 = 3'd5                      ;
 //for timing control
 parameter       NUM_CLK_GRST        = 32'd5                     ;  //number of clocks during reset
 
-parameter       H_ACT               = 12'd1080                  ;
-parameter       H_BP                = 12'd45                    ;  //including HPW  95
-parameter       H_FP                = 12'd45                    ;  //               50
+parameter       H_ACT               = 12'd1080						;
+parameter       H_BP                = 12'd45							;  //including HPW  95
+parameter       H_FP                = 12'd45							;  //               50
 
-parameter       V_BP                = 12'd12                    ;  //including VPW
-parameter       V_FP                = 12'd7                     ;
-parameter       V_ACT               = 12'd2520                  ;
-parameter       V_PCH               = 12'd8                     ;  //10
+parameter       V_BP                = 12'd12							;  //including VPW
+parameter       V_FP                = 12'd7							;
+parameter       V_ACT               = 12'd2520						;
+parameter       V_PCH               = 12'd20							;  //10
 
-parameter       H_ABGN              = H_BP                      ;
-parameter       H_AEND              = H_BP + H_ACT              ;
-parameter       H_TOTAL             = H_BP + H_ACT + H_FP       ;
+parameter       H_ABGN              = H_BP							;
+parameter       H_AEND              = H_BP + H_ACT					;
+parameter       H_TOTAL             = H_BP + H_ACT + H_FP		;
 
-parameter       GAP_VDIV64          = 8'd39                     ;
+parameter       GAP_VDIV64          = V_ACT/64                     ;
 
 parameter       STV_WIDTH           = 12'd1                     ;   //stv width. unit: line
 parameter       STV_TOTAL_DIRE      = 1'b1                      ;   //1'b1 - stv shift left; 1'b0 - stv shift right
@@ -99,8 +100,8 @@ parameter       STV_RISE_SHIFT      = 12'd76                    ;   //stv rising
 parameter       STV_FALL_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
 parameter       STV_FALL_SHIFT      = 12'd1                     ;   //stv rising edge shift offset. unit: pclk
 
-parameter       CKV_RISE_SHIFT     = 12'd57                     ;   //ckv rising edge shift offset. unit: pclk. shift right
-parameter       CKV_FALL_SHIFT     = 12'd57                     ;   //ckv falling edge shift offset. unit: pclk. shift left
+parameter       CKV_RISE_SHIFT     	= 12'd57                     ;   //ckv rising edge shift offset. unit: pclk. shift right
+parameter       CKV_FALL_SHIFT     	= 12'd57                     ;   //ckv falling edge shift offset. unit: pclk. shift left
 
 parameter       CKH_PRE_GAP         = 12'd10                    ;   //gap befor CKH processing.
 parameter       CKH_WIDTH           = 12'd256                   ;   //ckh width. unit: pclk
@@ -113,20 +114,17 @@ parameter       DCODE_WHITE         = 8'd242                    ;   //DA input f
 parameter       DCODE_BLACK         = 8'd133                    ;   //DA input for black (grayscale=0)
 parameter       DCODE_VCOM          = 8'd124                    ;   //DA input for vcom
 parameter       DCODE_GND           = 8'd128                    ;   //DA input for GND
-parameter       DCODE_GRAY128       = 8'd195                    ;   //DA input for gray pattern
-parameter       DCODE_GRAY64        = 8'd182                    ;   //DA input for gray pattern
+parameter       DCODE_GRAY128       = 8'd187                    ;   //DA input for gray pattern
+parameter       DCODE_GRAY64        = 8'd172                    ;   //DA input for gray pattern
 
-parameter       DCODE_VCOMA       	= 8'd132                    ;   //DA input for VCOMA
-parameter       DCODE_VCOMB        	= 8'd170                    ;   //DA input for VCOMB
-
+parameter       DCODE_VCOMA			= 8'd124                    ;   //DA input for VCOMA
+parameter       DCODE_VCOMB			= 8'd124                    ;   //DA input for VCOMB
 parameter       SRC_PCH_SHIFT       = 8'd80                     ;   //source precharge time
                                                                     //DA output tansition time: 1.4us, about 120 clk_sys period
                                                                     //constraint: 
                                                                     //1. (CKV1_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT) > SRC_PCH_SHIFT
                                                                     //2. (CKH_RISE_SHIFT + CKH_FALL_SHIFT) > SRC_PCH_SHIFT
 parameter       ODD_EVEN_TGAP       = 8'd5                      ;   //DA transition gap for odd and even source output
-
-parameter		 RGBRGB					= 1'b0							 ;	  //switch for RGBRGB and RGBBGR timings
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // variable declaration
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -175,7 +173,6 @@ reg     [7:0]                   b_data                          ;
 
 reg                             flag_frm_pol                    ;  //frame is odd or even. 1'b0 - odd; 1'b1 - even
 
-
 wire                            flag_rev_scan                   ;  //1'b1 - reverse scan ;  1'b0 - normal scan 
 wire                            flag_TP_test_a                    ;  //1'b1 - TP_test_pattern ;  1'b0 - normal pattern
 wire                            flag_TP_test_b                    ;  //1'b1 - TP_test_pattern ;  1'b0 - normal pattern
@@ -184,9 +181,6 @@ wire                            flag_inversion                  ;  //1'b1 - fram
 wire                            is_demux_all_on                 ;
 wire                            is_sof_vblank                   ;
 
-//wire                            flag_pat_r                      ;
-//wire                            flag_pat_g                      ;
-//wire                            flag_pat_b                      ;
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // continuous assignment
@@ -198,18 +192,15 @@ assign en_hcnt = (cs_ctrl == VBP) || (cs_ctrl == PCH) || (cs_ctrl == DISPLAY) ||
 assign en_vblank = (cs_ctrl == VBP) || (cs_ctrl == PCH) || (cs_ctrl == VFP);
 assign en_vact = (cs_ctrl == DISPLAY);
 assign flag_hend = (hcnt == H_TOTAL - 12'd1);
-assign flag_pch = (((smp_dis_sn == 7'd4) || (smp_dis_sn == 7'd5)) && (num_vdiv64 == 6'd31)&& (cnt_vdiv64 == GAP_VDIV64 - 8'd1) && (flag_hend == 1'b1));
-
+//assign flag_pch = (((smp_dis_sn == 7'd2) || (smp_dis_sn == 7'd3)) && (num_vdiv64 == 6'd31)&& (cnt_vdiv64 == GAP_VDIV64 - 8'd1) && (flag_hend == 1'b1));
+assign flag_pch = (((smp_dis_sn == 7'd2) || (smp_dis_sn == 7'd3)) && (cnt_vact<=V_ACT/2) && (flag_hend == 1'b1));
 //assign flag_pch = 1'b0;
 assign is_sof_vblank = (cs_ctrl == PCH) && (cnt_vact == 12'd0);
 
 //assign is_demux_all_on = (smp_dis_sn == 7'd2);
 assign is_demux_all_on = 1'b0;
 
-assign flag_rev_scan = (smp_dis_sn == 7'd6) ;  //1'b1 - reverse scan ;  1'b0 - normal scan
-//assign flag_TP_test_a = (smp_dis_sn == 7'd10) ;  //1'b1 - TP_test_pattern ;  1'b0 - normal pattern
-//assign flag_TP_test_b = (smp_dis_sn == 7'd11) ;  //1'b1 - TP_test_pattern ;  1'b0 - normal pattern
-//assign flag_inversion = (smp_dis_sn == 7'd9);  //1'b1 - frame inversion ;  1'b0 - column inversion           
+assign flag_rev_scan = (smp_dis_sn == 7'd6) ;  //1'b1 - reverse scan ;  1'b0 - normal scan    
 assign flag_inversion = 1'b0;  
 
 assign ckv1_L		= (flag_rev_scan	== 1'b0) ? ckv1_L_pre	: ckv2_R_pre;
@@ -221,11 +212,11 @@ assign ckv3_R		= (flag_rev_scan	== 1'b0) ? ckv3_R_pre	: ckv4_L_pre;
 assign ckv4_L		= (flag_rev_scan	== 1'b0) ? ckv4_L_pre	: ckv3_R_pre;
 assign ckv4_R		= (flag_rev_scan	== 1'b0) ? ckv4_R_pre	: ckv3_L_pre;
 assign ckh1_out	= (RGBRGB 			== 1'b1) ? ckh1			: ckh1;
-assign ckh2_out	= (RGBRGB 			== 1'b1) ? ckh3			: ckh5;
-assign ckh3_out	= (RGBRGB 			== 1'b1) ? ckh5			: ckh3;
-assign ckh4_out	= (RGBRGB 			== 1'b1) ? 1'b0			: ckh2;
-assign ckh5_out	= (RGBRGB 			== 1'b1) ? 1'b0			: ckh6;
-assign ckh6_out	= (RGBRGB 			== 1'b1) ? 1'b0			: ckh4;
+assign ckh2_out	= (RGBRGB 			== 1'b1) ? ckh3			: ckh3;
+assign ckh3_out	= (RGBRGB 			== 1'b1) ? ckh5			: ckh5;
+assign ckh4_out	= (RGBRGB 			== 1'b1) ? 1'b0			: ckh1;
+assign ckh5_out	= (RGBRGB 			== 1'b1) ? 1'b0			: ckh3;
+assign ckh6_out	= (RGBRGB 			== 1'b1) ? 1'b0			: ckh5;
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // module instantiation
@@ -272,14 +263,6 @@ begin
         begin
             if ((flag_hend == 1'b1) && (cnt_vblank == V_BP - 12'd1))
             begin
-//                if (flag_pch == 1'b1)
-//                begin
-//                    ns_ctrl = PCH;
-//                end
-//                else
-//                begin
-//                    ns_ctrl = DISPLAY;
-//                end
                 ns_ctrl = PCH;
             end
             else
@@ -1044,8 +1027,8 @@ begin
 		end
 		else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
 		begin
-			if(RGBRGB==1'b1)
-			begin
+//			if(RGBRGB==1'b1)
+//			begin
 				if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_WIDTH)))
 				begin
 					ckh1 <= 1'b1;
@@ -1056,46 +1039,46 @@ begin
 					ckh1 <= 1'b0;
 					ckh2 <= 1'b0;
 				end
-			end
-			else//RGBBGR
-			begin
-				if(cnt_vact%2== 12'd0)
-				begin
-					if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_HALF_WIDTH)))
-					begin
-						ckh1 <= 1'b1;
-						ckh2 <= 1'b0;
-					end
-					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + CKH_HALF_WIDTH + CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + 2*CKH_HALF_WIDTH + CKH_FALL_SHIFT)))
-					begin
-						ckh1 <= 1'b0;
-						ckh2 <= 1'b1;
-					end
-					else
-					begin
-						ckh1 <= 1'b0;
-						ckh2 <= 1'b0;
-					end
-				end
-				else//EVEN LINE
-				begin
-					if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 4*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT))&&(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT)))
-					begin
-						ckh1 <= 1'b1;
-						ckh2 <= 1'b0;
-					end
-					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP +6*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 6*CKH_RISE_SHIFT + 6*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)))
-					begin
-						ckh1 <= 1'b0;
-						ckh2 <= 1'b1;
-					end
-					else
-					begin
-						ckh1 <= 1'b0;
-						ckh2 <= 1'b0;
-					end
-				end
-			end
+//			end
+//			else//RGBBGR
+//			begin
+//				if(cnt_vact%2== 12'd0)
+//				begin
+//					if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_HALF_WIDTH)))
+//					begin
+//						ckh1 <= 1'b1;
+//						ckh2 <= 1'b0;
+//					end
+//					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + CKH_HALF_WIDTH + CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + 2*CKH_HALF_WIDTH + CKH_FALL_SHIFT)))
+//					begin
+//						ckh1 <= 1'b0;
+//						ckh2 <= 1'b1;
+//					end
+//					else
+//					begin
+//						ckh1 <= 1'b0;
+//						ckh2 <= 1'b0;
+//					end
+//				end
+//				else//EVEN LINE
+//				begin
+//					if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 4*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT))&&(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT)))
+//					begin
+//						ckh1 <= 1'b1;
+//						ckh2 <= 1'b0;
+//					end
+//					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP +6*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 6*CKH_RISE_SHIFT + 6*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)))
+//					begin
+//						ckh1 <= 1'b0;
+//						ckh2 <= 1'b1;
+//					end
+//					else
+//					begin
+//						ckh1 <= 1'b0;
+//						ckh2 <= 1'b0;
+//					end
+//				end
+//			end
 		end
 		else
 		begin
@@ -1122,8 +1105,8 @@ begin
 		end
 		else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
 		begin
-			if(RGBRGB==1'b1)
-			begin
+//			if(RGBRGB==1'b1)
+//			begin
 				if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT))&&(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + CKH_FALL_SHIFT)))
             begin
 					ckh3 <= 1'b1;
@@ -1134,25 +1117,25 @@ begin
 					ckh3 <= 1'b0;
 					ckh4 <= 1'b0;
 				end
-			end
-			else//RGBBGR
-			begin
-				if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3*CKH_RISE_SHIFT + 2*CKH_HALF_WIDTH + 2*CKH_FALL_SHIFT))&&(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3*CKH_RISE_SHIFT + 3*CKH_HALF_WIDTH + 2*CKH_FALL_SHIFT)))
-				begin
-					ckh3 <= 1'b1;
-					ckh4 <= 1'b0;
-				end
-				else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 4*CKH_RISE_SHIFT + 3*CKH_HALF_WIDTH + 3*CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 4*CKH_RISE_SHIFT + 4*CKH_HALF_WIDTH + 3*CKH_FALL_SHIFT)))
-				begin
-					ckh3 <= 1'b0;
-					ckh4 <= 1'b1;
-				end
-				else
-				begin
-					ckh3 <= 1'b0;
-					ckh4 <= 1'b0;
-				end
-			end
+//			end
+//			else//RGBBGR
+//			begin
+//				if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3*CKH_RISE_SHIFT + 2*CKH_HALF_WIDTH + 2*CKH_FALL_SHIFT))&&(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3*CKH_RISE_SHIFT + 3*CKH_HALF_WIDTH + 2*CKH_FALL_SHIFT)))
+//				begin
+//					ckh3 <= 1'b1;
+//					ckh4 <= 1'b0;
+//				end
+//				else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 4*CKH_RISE_SHIFT + 3*CKH_HALF_WIDTH + 3*CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 4*CKH_RISE_SHIFT + 4*CKH_HALF_WIDTH + 3*CKH_FALL_SHIFT)))
+//				begin
+//					ckh3 <= 1'b0;
+//					ckh4 <= 1'b1;
+//				end
+//				else
+//				begin
+//					ckh3 <= 1'b0;
+//					ckh4 <= 1'b0;
+//				end
+//			end
 		end
 		else
 		begin
@@ -1179,8 +1162,8 @@ begin
 		end
 		else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
 		begin
-			if(RGBRGB==1'b1)
-			begin
+//			if(RGBRGB==1'b1)
+//			begin
 				if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT))&& (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 3 * CKH_WIDTH + 2 * CKH_FALL_SHIFT)))
 				begin
 					ckh5 <= 1'b1;
@@ -1191,46 +1174,46 @@ begin
 					ckh5 <= 1'b0;
 					ckh6 <= 1'b0;
 				end
-			end
-			else//RGBBGR
-			begin
-				if(cnt_vact%2== 12'd0)
-				begin
-					if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 4*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT))&&(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT)))
-					begin
-						ckh5 <= 1'b1;
-						ckh6 <= 1'b0;
-					end
-					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP +6*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 6*CKH_RISE_SHIFT + 6*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)))
-					begin
-						ckh5 <= 1'b0;
-						ckh6 <= 1'b1;
-					end
-					else
-					begin
-						ckh5 <= 1'b0;
-						ckh6 <= 1'b0;
-					end
-				end
-				else//EVEN LINE
-				begin
-					if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_HALF_WIDTH)))
-					begin
-						ckh5 <= 1'b1;
-						ckh6 <= 1'b0;
-					end
-					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + CKH_HALF_WIDTH + CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + 2*CKH_HALF_WIDTH + CKH_FALL_SHIFT)))
-					begin
-						ckh5 <= 1'b0;
-						ckh6 <= 1'b1;
-					end
-					else
-					begin
-						ckh5 <= 1'b0;
-						ckh6 <= 1'b0;
-					end
-				end
-			end
+//			end
+//			else//RGBBGR
+//			begin
+//				if(cnt_vact%2== 12'd0)
+//				begin
+//					if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 4*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT))&&(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 5*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 4*CKH_FALL_SHIFT)))
+//					begin
+//						ckh5 <= 1'b1;
+//						ckh6 <= 1'b0;
+//					end
+//					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP +6*CKH_RISE_SHIFT + 5*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 6*CKH_RISE_SHIFT + 6*CKH_HALF_WIDTH + 5*CKH_FALL_SHIFT)))
+//					begin
+//						ckh5 <= 1'b0;
+//						ckh6 <= 1'b1;
+//					end
+//					else
+//					begin
+//						ckh5 <= 1'b0;
+//						ckh6 <= 1'b0;
+//					end
+//				end
+//				else//EVEN LINE
+//				begin
+//					if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_HALF_WIDTH)))
+//					begin
+//						ckh5 <= 1'b1;
+//						ckh6 <= 1'b0;
+//					end
+//					else if((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + CKH_HALF_WIDTH + CKH_FALL_SHIFT)) && (hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + 2*CKH_RISE_SHIFT + 2*CKH_HALF_WIDTH + CKH_FALL_SHIFT)))
+//					begin
+//						ckh5 <= 1'b0;
+//						ckh6 <= 1'b1;
+//					end
+//					else
+//					begin
+//						ckh5 <= 1'b0;
+//						ckh6 <= 1'b0;
+//					end
+//				end
+//			end
 		end
 		else
 		begin
