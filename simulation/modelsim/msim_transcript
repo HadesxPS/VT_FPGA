@@ -10,172 +10,46 @@
 # ** Warning: Copied C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
 #          Updated modelsim.ini.
 # 
-# vlog -vlog01compat -work work +incdir+D:/2.6VT/VT_FPGA/rtl/tgen {D:/2.6VT/VT_FPGA/rtl/tgen/tgen.v}
+# vlog -vlog01compat -work work +incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG\ 2.4/rtl/tgen {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/tgen/tgen.v}
 # Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 # -- Compiling module tgen
 # 
 # Top level modules:
 # 	tgen
-# vlog -vlog01compat -work work +incdir+D:/2.6VT/VT_FPGA/rtl/uart {D:/2.6VT/VT_FPGA/rtl/uart/rx_module.v}
+# vlog -vlog01compat -work work +incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG\ 2.4/rtl/uart {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/uart/rx_module.v}
 # Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 # -- Compiling module rx_module
 # 
 # Top level modules:
 # 	rx_module
-# vlog -vlog01compat -work work +incdir+D:/2.6VT/VT_FPGA/rtl/uart {D:/2.6VT/VT_FPGA/rtl/uart/uart.v}
+# vlog -vlog01compat -work work +incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG\ 2.4/rtl/uart {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/uart/uart.v}
 # Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 # -- Compiling module uart
 # 
 # Top level modules:
 # 	uart
-# vlog -vlog01compat -work work +incdir+D:/2.6VT/VT_FPGA/rtl/uart {D:/2.6VT/VT_FPGA/rtl/uart/tx_module.v}
+# vlog -vlog01compat -work work +incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG\ 2.4/rtl/uart {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/uart/tx_module.v}
 # Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 # -- Compiling module tx_module
 # 
 # Top level modules:
 # 	tx_module
-# vlog -vlog01compat -work work +incdir+D:/2.6VT/VT_FPGA/rtl/lcd_display {D:/2.6VT/VT_FPGA/rtl/lcd_display/lcd_display.v}
+# vlog -vlog01compat -work work +incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG\ 2.4/rtl/lcd_display {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/lcd_display/lcd_display.v}
 # Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 # -- Compiling module lcd_display
 # 
 # Top level modules:
 # 	lcd_display
-# vlog -vlog01compat -work work +incdir+D:/2.6VT/VT_FPGA/rtl/mux_decode {D:/2.6VT/VT_FPGA/rtl/mux_decode/mux_decode.v}
+# vlog -vlog01compat -work work +incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG\ 2.4/rtl/mux_decode {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/mux_decode/mux_decode.v}
 # Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 # -- Compiling module mux_decode
 # 
 # Top level modules:
 # 	mux_decode
-# vlog -vlog01compat -work work +incdir+D:/2.6VT/VT_FPGA/rtl/switch {D:/2.6VT/VT_FPGA/rtl/switch/timer.v}
+# vlog -vlog01compat -work work +incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG\ 2.4/rtl/switch {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch/timer.v}
 # Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 # -- Compiling module timer
 # 
 # Top level modules:
 # 	timer
-# vlog -vlog01compat -work work +incdir+D:/2.6VT/VT_FPGA/rtl/switch {D:/2.6VT/VT_FPGA/rtl/switch/switch.v}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module switch
-# 
-# Top level modules:
-# 	switch
-# vlog -vlog01compat -work work +incdir+D:/2.6VT/VT_FPGA/rtl/switch {D:/2.6VT/VT_FPGA/rtl/switch/glf.v}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module glf
-# 
-# Top level modules:
-# 	glf
-# vlog -vlog01compat -work work +incdir+D:/2.6VT/VT_FPGA/rtl/clkrst {D:/2.6VT/VT_FPGA/rtl/clkrst/clkrst.v}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module clkrst
-# 
-# Top level modules:
-# 	clkrst
-# vlog -vlog01compat -work work +incdir+D:/2.6VT/VT_FPGA/rtl {D:/2.6VT/VT_FPGA/rtl/VT_Demo.v}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module VT_Demo
-# 
-# Top level modules:
-# 	VT_Demo
-# vlog -vlog01compat -work work +incdir+D:/2.6VT/VT_FPGA/rtl/megafunc {D:/2.6VT/VT_FPGA/rtl/megafunc/mypll.v}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module mypll
-# 
-# Top level modules:
-# 	mypll
-# vlog -vlog01compat -work work +incdir+D:/2.6VT/VT_FPGA/db {D:/2.6VT/VT_FPGA/db/mypll_altpll.v}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module mypll_altpll
-# 
-# Top level modules:
-# 	mypll_altpll
-# 
-# vlog -vlog01compat -work work +incdir+D:/2.6VT/VT_FPGA/simulation/modelsim {D:/2.6VT/VT_FPGA/simulation/modelsim/VT_Demo.vt}
-# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
-# -- Compiling module VT_Demo_vlg_tst
-# 
-# Top level modules:
-# 	VT_Demo_vlg_tst
-# 
-# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneiii_ver -L rtl_work -L work -voptargs="+acc"  VT_Demo_vlg_tst
-# vsim -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneiii_ver -L rtl_work -L work -voptargs=\"+acc\" -t 1ps VT_Demo_vlg_tst 
-# Loading work.VT_Demo_vlg_tst
-# Loading work.VT_Demo
-# Loading work.clkrst
-# Loading work.mypll
-# Loading altera_mf_ver.altpll
-# Loading altera_mf_ver.ALTERA_DEVICE_FAMILIES
-# Loading altera_mf_ver.pll_iobuf
-# Loading work.switch
-# Loading work.glf
-# Loading work.timer
-# Loading work.tx_module
-# Loading work.uart
-# Loading work.rx_module
-# Loading work.tgen
-# Loading work.mux_decode
-# Loading work.lcd_display
-# Loading altera_mf_ver.MF_cycloneiii_pll
-# Loading altera_mf_ver.cda_m_cntr
-# Loading altera_mf_ver.cda_n_cntr
-# Loading altera_mf_ver.cda_scale_cntr
-# ** Warning: (vsim-3017) D:/2.6VT/VT_FPGA/rtl/clkrst/clkrst.v(45): [TFMPC] - Too few port connections. Expected 3, found 2.
-# 
-#         Region: /VT_Demo_vlg_tst/i1/u_clkrst/u_mypll
-# ** Warning: (vsim-3722) D:/2.6VT/VT_FPGA/rtl/clkrst/clkrst.v(45): [TFMPC] - Missing connection for port 'c1'.
-# 
-# ** Warning: (vsim-3015) D:/2.6VT/VT_FPGA/rtl/VT_Demo.v(189): [PCDPC] - Port size (48 or 48) does not match connection size (80) for port 'Rx_data'. The port definition is at: D:/2.6VT/VT_FPGA/rtl/switch/switch.v(26).
-# 
-#         Region: /VT_Demo_vlg_tst/i1/u_switch
-# ** Warning: (vsim-3017) D:/2.6VT/VT_FPGA/rtl/VT_Demo.v(208): [TFMPC] - Too few port connections. Expected 10, found 8.
-# 
-#         Region: /VT_Demo_vlg_tst/i1/u_uart
-# ** Warning: (vsim-3722) D:/2.6VT/VT_FPGA/rtl/VT_Demo.v(208): [TFMPC] - Missing connection for port 'sw1'.
-# 
-# ** Warning: (vsim-3722) D:/2.6VT/VT_FPGA/rtl/VT_Demo.v(208): [TFMPC] - Missing connection for port 'FPGA_LED_Test'.
-# 
-# ** Warning: (vsim-3017) D:/2.6VT/VT_FPGA/rtl/VT_Demo.v(221): [TFMPC] - Too few port connections. Expected 8, found 7.
-# 
-#         Region: /VT_Demo_vlg_tst/i1/u_rx_module
-# ** Warning: (vsim-3015) D:/2.6VT/VT_FPGA/rtl/VT_Demo.v(221): [PCDPC] - Port size (48 or 48) does not match connection size (80) for port 'Rx_data'. The port definition is at: D:/2.6VT/VT_FPGA/rtl/uart/rx_module.v(6).
-# 
-#         Region: /VT_Demo_vlg_tst/i1/u_rx_module
-# ** Warning: (vsim-3722) D:/2.6VT/VT_FPGA/rtl/VT_Demo.v(221): [TFMPC] - Missing connection for port 'BPS_clk'.
-# 
-# 
-# add wave *
-# view structure
-# .main_pane.structure.interior.cs.body.struct
-# view signals
-# .main_pane.objects.interior.cs.body.tree
-# run 1 ms
-# Running testbench
-#  Note : Cyclone III PLL locked to incoming clock
-# Time: 90000  Instance: VT_Demo_vlg_tst.i1.u_clkrst.u_mypll.altpll_component.cycloneiii_pll.pll3
-restart
-# ** Warning: (vsim-3017) D:/2.6VT/VT_FPGA/rtl/clkrst/clkrst.v(45): [TFMPC] - Too few port connections. Expected 3, found 2.
-# 
-#         Region: /VT_Demo_vlg_tst/i1/u_clkrst/u_mypll
-# ** Warning: (vsim-3722) D:/2.6VT/VT_FPGA/rtl/clkrst/clkrst.v(45): [TFMPC] - Missing connection for port 'c1'.
-# 
-# ** Warning: (vsim-3015) D:/2.6VT/VT_FPGA/rtl/VT_Demo.v(189): [PCDPC] - Port size (48 or 48) does not match connection size (80) for port 'Rx_data'. The port definition is at: D:/2.6VT/VT_FPGA/rtl/switch/switch.v(26).
-# 
-#         Region: /VT_Demo_vlg_tst/i1/u_switch
-# ** Warning: (vsim-3017) D:/2.6VT/VT_FPGA/rtl/VT_Demo.v(208): [TFMPC] - Too few port connections. Expected 10, found 8.
-# 
-#         Region: /VT_Demo_vlg_tst/i1/u_uart
-# ** Warning: (vsim-3722) D:/2.6VT/VT_FPGA/rtl/VT_Demo.v(208): [TFMPC] - Missing connection for port 'sw1'.
-# 
-# ** Warning: (vsim-3722) D:/2.6VT/VT_FPGA/rtl/VT_Demo.v(208): [TFMPC] - Missing connection for port 'FPGA_LED_Test'.
-# 
-# ** Warning: (vsim-3017) D:/2.6VT/VT_FPGA/rtl/VT_Demo.v(221): [TFMPC] - Too few port connections. Expected 8, found 7.
-# 
-#         Region: /VT_Demo_vlg_tst/i1/u_rx_module
-# ** Warning: (vsim-3015) D:/2.6VT/VT_FPGA/rtl/VT_Demo.v(221): [PCDPC] - Port size (48 or 48) does not match connection size (80) for port 'Rx_data'. The port definition is at: D:/2.6VT/VT_FPGA/rtl/uart/rx_module.v(6).
-# 
-#         Region: /VT_Demo_vlg_tst/i1/u_rx_module
-# ** Warning: (vsim-3722) D:/2.6VT/VT_FPGA/rtl/VT_Demo.v(221): [TFMPC] - Missing connection for port 'BPS_clk'.
-# 
-run -continue
-# Running testbench
-#  Note : Cyclone III PLL locked to incoming clock
-# Time: 90000  Instance: VT_Demo_vlg_tst.i1.u_clkrst.u_mypll.altpll_component.cycloneiii_pll.pll3
+# Loading project COG2.4

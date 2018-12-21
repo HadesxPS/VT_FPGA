@@ -52,7 +52,7 @@ begin
 	begin
 		BPS_cnt<=0;
 	end
-	else if(BPS_cnt==582)//434	50M	( 9600/108M----bps_cnt=108,000,000/9600=11250 )
+	else if(BPS_cnt==1432)//434	50M	( 9600/108M----bps_cnt=108,000,000/9600=11250 )
 	begin
 		BPS_cnt<=0;
 	end
@@ -67,7 +67,7 @@ begin
 	begin
 		BPS_clk <= 1'b0;
 	end
-	else if(BPS_cnt == 291)//中点拉高bps_clk   传送的时间为1/2 BPS_cnt TOTAL
+	else if(BPS_cnt == 716)//中点拉高bps_clk   传送的时间为1/2 BPS_cnt TOTAL
 	begin
 		BPS_clk <= 1'b1;
 	end

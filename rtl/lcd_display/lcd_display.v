@@ -68,8 +68,8 @@ initial
   begin
 		p=0;
    
-	mem[32]= {8'h00, 8'h00, 8'h00, 8'h00, 8'h00, 8'h00};   // 32  sp 
-	mem[33]= {8'h00, 8'h00, 8'h00, 8'h2f, 8'h00, 8'h00};   // 33  !  
+	 mem[32]= {8'h00, 8'h00, 8'h00, 8'h00, 8'h00, 8'h00};   // 32  sp 
+	 mem[33]= {8'h00, 8'h00, 8'h00, 8'h2f, 8'h00, 8'h00};   // 33  !  
 	 mem[34]= {8'h00, 8'h00, 8'h07, 8'h00, 8'h07, 8'h00};   // 34  ''
     mem[35]= {8'h00, 8'h14, 8'h7f, 8'h14, 8'h7f, 8'h14};   // 35  #
     mem[36]= {8'h00, 8'h24, 8'h2a, 8'h7f, 8'h2a, 8'h12};   // 36  $
@@ -128,7 +128,7 @@ initial
     mem[89]= {8'h00, 8'h07, 8'h08, 8'h70, 8'h08, 8'h07};   // 89 Y
     mem[90]= {8'h00, 8'h61, 8'h51, 8'h49, 8'h45, 8'h43};   // 90 Z
     mem[91]= {8'h00, 8'h00, 8'h7F, 8'h41, 8'h41, 8'h00};   // 91 [
-	mem[93]= {8'h00, 8'h00, 8'h41, 8'h41, 8'h7F, 8'h00};   // 93 ]
+	 mem[93]= {8'h00, 8'h00, 8'h41, 8'h41, 8'h7F, 8'h00};   // 93 ]
     mem[94]= {8'h00, 8'h04, 8'h02, 8'h01, 8'h02, 8'h04};   // 94 ^
     mem[95]= {8'h00, 8'h40, 8'h40, 8'h40, 8'h40, 8'h40};   // 95 _
 	 mem[96]= {8'h00, 8'h00, 8'h01, 8'h02, 8'h04, 8'h00};   // 96 `
@@ -232,8 +232,8 @@ begin
     idle: begin
 	      lcd_ce<=OFF;
           cnt3 <= cnt3 + 16'd1;
-          case(cnt3)
-			0:  begin data_reg<=8'h21;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+          case(cnt3) //VT1
+	      0:  begin data_reg<=8'h21;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
 	      1:  begin data_reg<=8'hc8;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
 	      2:  begin data_reg<=8'h06;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
 	      3:  begin data_reg<=8'h13;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
@@ -241,47 +241,231 @@ begin
 	      5:  begin p2<=clear_screen;p_back<=clear_screen; end
 	      6:  begin data_reg<=8'h0c;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
 	      7:  begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b000; x_reg<=7'b0000110; end
-			
-			//*******************fxl******************************//
-			8: begin p2<=disp_char;p_back<=disp_char;char_reg="T";  end
-	      9: begin p2<=disp_char;p_back<=disp_char;char_reg="E"; 	end
-			10: begin p2<=disp_char;p_back<=disp_char;char_reg="0";  end
-	      11: begin p2<=disp_char;p_back<=disp_char;char_reg="6"; 	end
-			12: begin p2<=disp_char;p_back<=disp_char;char_reg="3";  end
-			13: begin p2<=disp_char;p_back<=disp_char;char_reg="X";  end
-			14: begin p2<=disp_char;p_back<=disp_char;char_reg="V";  end
-			15: begin p2<=disp_char;p_back<=disp_char;char_reg="X"; 	end
-			16: begin p2<=disp_char;p_back<=disp_char;char_reg="S";  end
-			17: begin p2<=disp_char;p_back<=disp_char;char_reg="0"; 	end
+	      8:  begin p2<=disp_char;p_back<=disp_char;char_reg="T";  end
+	      9:  begin p2<=disp_char;p_back<=disp_char;char_reg="E";  end
+	      10: begin p2<=disp_char;p_back<=disp_char;char_reg="0"; 	end
+	      11: begin p2<=disp_char;p_back<=disp_char;char_reg="6";  end
+	      12: begin p2<=disp_char;p_back<=disp_char;char_reg="3"; 	end
+	      13: begin p2<=disp_char;p_back<=disp_char;char_reg="X";	end
+	      14: begin p2<=disp_char;p_back<=disp_char;char_reg="V";  end
+	      15: begin p2<=disp_char;p_back<=disp_char;char_reg="X";	end
+	      16: begin p2<=disp_char;p_back<=disp_char;char_reg="S"; 	end
+	      17: begin p2<=disp_char;p_back<=disp_char;char_reg="0";	end
 	      18: begin p2<=disp_char;p_back<=disp_char;char_reg="4"; 	end
-	      //*******************fxl******************************//
-	      19: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b011;x_reg<=7'b0000111; end		
-
+			19: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b001; x_reg<=7'b0000110; end
+//	      17: begin p2<=disp_char;p_back<=disp_char;char_reg="_"; 	end
 	      20: begin p2<=disp_char;p_back<=disp_char;char_reg="1"; 	end
-	      21: begin p2<=disp_char;p_back<=disp_char;char_reg="9"; 	end
-	      22: begin p2<=disp_char;p_back<=disp_char;char_reg="D";  end
-			23: begin p2<=disp_char;p_back<=disp_char;char_reg="O";  end
-	      24: begin p2<=disp_char;p_back<=disp_char;char_reg="E"; 	end
-	      25: begin p2<=disp_char;p_back<=disp_char;char_reg="-"; 	end
-	      26: begin p2<=disp_char;p_back<=disp_char;char_reg="6";  end
-			27: begin p2<=disp_char;p_back<=disp_char;char_reg="M"; 	end
-	      28: begin p2<=disp_char;p_back<=disp_char;char_reg="U";  end
-			29: begin p2<=disp_char;p_back<=disp_char;char_reg="X";  end
-			30: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b011;x_reg<=7'b0000111; end		
-			
-	      31: begin p2<=disp_char;p_back<=disp_char;char_reg="V"; 	end
-	      32: begin p2<=disp_char;p_back<=disp_char;char_reg="T"; 	end
-	      33: begin p2<=disp_char;p_back<=disp_char;char_reg="2";  end
-			34: begin p2<=disp_char;p_back<=disp_char;char_reg="_";  end
-	      35: begin p2<=disp_char;p_back<=disp_char;char_reg="V"; 	end
-	      36: begin p2<=disp_char;p_back<=disp_char;char_reg="1"; 	end
-	      37: begin p2<=disp_char;p_back<=disp_char;char_reg="P";  end
-			37: begin p2<=disp_char;p_back<=disp_char;char_reg="0";  end
-	      38: begin cnt3 <= 16'd39; end
-			 
+	      21: begin p2<=disp_char;p_back<=disp_char;char_reg="9";  end
+			22: begin p2<=disp_char;p_back<=disp_char;char_reg="D";  end
+	      23: begin p2<=disp_char;p_back<=disp_char;char_reg="O";  end
+	      24: begin p2<=disp_char;p_back<=disp_char;char_reg="E";  end	
+	      20: begin p2<=disp_char;p_back<=disp_char;char_reg="-"; 	end
+	      21: begin p2<=disp_char;p_back<=disp_char;char_reg="3";  end
+			22: begin p2<=disp_char;p_back<=disp_char;char_reg="M";  end
+	      23: begin p2<=disp_char;p_back<=disp_char;char_reg="U";  end
+	      24: begin p2<=disp_char;p_back<=disp_char;char_reg="X";  end	
+			25: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b010; x_reg<=7'b0000110; end
+//	      23: begin p2<=disp_char;p_back<=disp_char;char_reg="_";  end
+	      26: begin p2<=disp_char;p_back<=disp_char;char_reg="V"; 	end
+	      27: begin p2<=disp_char;p_back<=disp_char;char_reg="T"; 	end
+			28: begin p2<=disp_char;p_back<=disp_char;char_reg="2"; 	end
+	      29: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b011;x_reg<=7'b0000111; end
+			30: begin p2<=disp_char;p_back<=disp_char;char_reg="V";  end
+	      31: begin p2<=disp_char;p_back<=disp_char;char_reg="1"; 	end
+			32: begin p2<=disp_char;p_back<=disp_char;char_reg="P";  end
+	      33: begin p2<=disp_char;p_back<=disp_char;char_reg="0"; 	end
+	      34: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b100;x_reg<=7'b0000111; end		
+	      35: begin cnt3 <= 16'd395; end
 	      default;
 	      endcase
 	      end
+
+//
+//          case(cnt3) //VT2
+//	      0:  begin data_reg<=8'h21;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      1:  begin data_reg<=8'hc8;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      2:  begin data_reg<=8'h06;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      3:  begin data_reg<=8'h13;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      4:  begin data_reg<=8'h20;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      5:  begin p2<=clear_screen;p_back<=clear_screen; end
+//	      6:  begin data_reg<=8'h0c;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      7:  begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b000; x_reg<=7'b0000110; end
+//	      8:  begin p2<=disp_char;p_back<=disp_char;char_reg="T";  end
+//	      9:  begin p2<=disp_char;p_back<=disp_char;char_reg="L";  end
+//	      10: begin p2<=disp_char;p_back<=disp_char;char_reg="6"; 	end
+//	      11: begin p2<=disp_char;p_back<=disp_char;char_reg="4";  end
+//	      12: begin p2<=disp_char;p_back<=disp_char;char_reg="0"; 	end
+//	      13: begin p2<=disp_char;p_back<=disp_char;char_reg="F";	end
+//	      14: begin p2<=disp_char;p_back<=disp_char;char_reg="Y";  end
+//	      15: begin p2<=disp_char;p_back<=disp_char;char_reg="M";	end
+//	      16: begin p2<=disp_char;p_back<=disp_char;char_reg="H"; 	end
+//	      17: begin p2<=disp_char;p_back<=disp_char;char_reg="0";	end
+//	      18: begin p2<=disp_char;p_back<=disp_char;char_reg="2"; 	end
+//			19: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b001; x_reg<=7'b0000110; end
+////	      17: begin p2<=disp_char;p_back<=disp_char;char_reg="_"; 	end
+//	      20: begin p2<=disp_char;p_back<=disp_char;char_reg="A"; 	end
+//	      21: begin p2<=disp_char;p_back<=disp_char;char_reg="2";  end
+//			22: begin p2<=disp_char;p_back<=disp_char;char_reg="5";  end
+//	      23: begin p2<=disp_char;p_back<=disp_char;char_reg="-";  end
+//	      24: begin p2<=disp_char;p_back<=disp_char;char_reg="3";  end
+//			25: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b010; x_reg<=7'b0000110; end
+////	      23: begin p2<=disp_char;p_back<=disp_char;char_reg="_";  end
+//	      26: begin p2<=disp_char;p_back<=disp_char;char_reg="V"; 	end
+//	      27: begin p2<=disp_char;p_back<=disp_char;char_reg="T"; 	end
+//			28: begin p2<=disp_char;p_back<=disp_char;char_reg="2"; 	end
+//	      29: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b011;x_reg<=7'b0000111; end
+//			30: begin p2<=disp_char;p_back<=disp_char;char_reg="V";  end
+//	      31: begin p2<=disp_char;p_back<=disp_char;char_reg="2"; 	end
+//			32: begin p2<=disp_char;p_back<=disp_char;char_reg="P";  end
+//	      33: begin p2<=disp_char;p_back<=disp_char;char_reg="0"; 	end
+//	      34: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b100;x_reg<=7'b0000111; end		
+//	      35: begin cnt3 <= 16'd35; end
+//	      default;
+//	      endcase
+//	      end
+
+
+//          case(cnt3) //Laser
+//	      0:  begin data_reg<=8'h21;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      1:  begin data_reg<=8'hc8;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      2:  begin data_reg<=8'h06;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      3:  begin data_reg<=8'h13;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      4:  begin data_reg<=8'h20;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      5:  begin p2<=clear_screen;p_back<=clear_screen; end
+//	      6:  begin data_reg<=8'h0c;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      7:  begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b000; x_reg<=7'b0000110; end
+//	      8:  begin p2<=disp_char;p_back<=disp_char;char_reg="T";  end
+//	      9:  begin p2<=disp_char;p_back<=disp_char;char_reg="L";  end
+//	      10: begin p2<=disp_char;p_back<=disp_char;char_reg="6"; 	end
+//	      11: begin p2<=disp_char;p_back<=disp_char;char_reg="4";  end
+//	      12: begin p2<=disp_char;p_back<=disp_char;char_reg="0"; 	end
+//	      13: begin p2<=disp_char;p_back<=disp_char;char_reg="F";	end
+//	      14: begin p2<=disp_char;p_back<=disp_char;char_reg="Y";  end
+//	      15: begin p2<=disp_char;p_back<=disp_char;char_reg="M";	end
+//	      16: begin p2<=disp_char;p_back<=disp_char;char_reg="H"; 	end
+//	      17: begin p2<=disp_char;p_back<=disp_char;char_reg="0";	end
+//	      18: begin p2<=disp_char;p_back<=disp_char;char_reg="2"; 	end
+//			19: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b001; x_reg<=7'b0000110; end
+////	      17: begin p2<=disp_char;p_back<=disp_char;char_reg="_"; 	end
+//	      20: begin p2<=disp_char;p_back<=disp_char;char_reg="A"; 	end
+//	      21: begin p2<=disp_char;p_back<=disp_char;char_reg="2";  end
+//			22: begin p2<=disp_char;p_back<=disp_char;char_reg="5";  end
+//	      23: begin p2<=disp_char;p_back<=disp_char;char_reg="-";  end
+//	      24: begin p2<=disp_char;p_back<=disp_char;char_reg="3";  end
+//			25: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b010; x_reg<=7'b0000110; end
+////	      23: begin p2<=disp_char;p_back<=disp_char;char_reg="_";  end
+//	      26: begin p2<=disp_char;p_back<=disp_char;char_reg="L"; 	end
+//	      27: begin p2<=disp_char;p_back<=disp_char;char_reg="a"; 	end
+//			28: begin p2<=disp_char;p_back<=disp_char;char_reg="s"; 	end
+//	      29: begin p2<=disp_char;p_back<=disp_char;char_reg="e"; 	end
+//			30: begin p2<=disp_char;p_back<=disp_char;char_reg="r"; 	end
+//	      31: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b011;x_reg<=7'b0000111; end
+//			32: begin p2<=disp_char;p_back<=disp_char;char_reg="V";  end
+//	      33: begin p2<=disp_char;p_back<=disp_char;char_reg="1"; 	end
+//			34: begin p2<=disp_char;p_back<=disp_char;char_reg="P";  end
+//	      35: begin p2<=disp_char;p_back<=disp_char;char_reg="0"; 	end
+//	      36: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b100;x_reg<=7'b0000111; end		
+//	      37: begin cnt3 <= 16'd37; end
+//	      default;
+//	      endcase
+//	      end
+
+//          case(cnt3) //AOI
+//	      0:  begin data_reg<=8'h21;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      1:  begin data_reg<=8'hc8;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      2:  begin data_reg<=8'h06;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      3:  begin data_reg<=8'h13;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      4:  begin data_reg<=8'h20;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      5:  begin p2<=clear_screen;p_back<=clear_screen; end
+//	      6:  begin data_reg<=8'h0c;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      7:  begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b000; x_reg<=7'b0000110; end
+//	      8:  begin p2<=disp_char;p_back<=disp_char;char_reg="T";  end
+//	      9:  begin p2<=disp_char;p_back<=disp_char;char_reg="L";  end
+//	      10: begin p2<=disp_char;p_back<=disp_char;char_reg="6"; 	end
+//	      11: begin p2<=disp_char;p_back<=disp_char;char_reg="4";  end
+//	      12: begin p2<=disp_char;p_back<=disp_char;char_reg="0"; 	end
+//	      13: begin p2<=disp_char;p_back<=disp_char;char_reg="F";	end
+//	      14: begin p2<=disp_char;p_back<=disp_char;char_reg="Y";  end
+//	      15: begin p2<=disp_char;p_back<=disp_char;char_reg="M";	end
+//	      16: begin p2<=disp_char;p_back<=disp_char;char_reg="H"; 	end
+//	      17: begin p2<=disp_char;p_back<=disp_char;char_reg="0";	end
+//	      18: begin p2<=disp_char;p_back<=disp_char;char_reg="2"; 	end
+//			19: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b001; x_reg<=7'b0000110; end
+////	      17: begin p2<=disp_char;p_back<=disp_char;char_reg="_"; 	end
+//	      20: begin p2<=disp_char;p_back<=disp_char;char_reg="A"; 	end
+//	      21: begin p2<=disp_char;p_back<=disp_char;char_reg="2";  end
+//			22: begin p2<=disp_char;p_back<=disp_char;char_reg="5";  end
+//	      23: begin p2<=disp_char;p_back<=disp_char;char_reg="-";  end
+//	      24: begin p2<=disp_char;p_back<=disp_char;char_reg="3";  end
+//			25: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b010; x_reg<=7'b0000110; end
+////	      23: begin p2<=disp_char;p_back<=disp_char;char_reg="_";  end
+//	      26: begin p2<=disp_char;p_back<=disp_char;char_reg="A"; 	end
+//	      27: begin p2<=disp_char;p_back<=disp_char;char_reg="O"; 	end
+//			28: begin p2<=disp_char;p_back<=disp_char;char_reg="I"; 	end
+//	      29: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b011;x_reg<=7'b0000111; end
+//			30: begin p2<=disp_char;p_back<=disp_char;char_reg="V";  end
+//	      31: begin p2<=disp_char;p_back<=disp_char;char_reg="1"; 	end
+//			32: begin p2<=disp_char;p_back<=disp_char;char_reg="P";  end
+//	      33: begin p2<=disp_char;p_back<=disp_char;char_reg="0"; 	end
+//	      34: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b100;x_reg<=7'b0000111; end		
+//	      35: begin cnt3 <= 16'd35; end
+//	      default;
+//	      endcase
+//	      end
+
+
+
+//          case(cnt3) //VT2_jingjian
+//	      0:  begin data_reg<=8'h21;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      1:  begin data_reg<=8'hc8;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      2:  begin data_reg<=8'h06;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      3:  begin data_reg<=8'h13;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      4:  begin data_reg<=8'h20;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      5:  begin p2<=clear_screen;p_back<=clear_screen; end
+//	      6:  begin data_reg<=8'h0c;lcd_dc<=CMD;p2<=shift_data;p_back<=idle; end
+//	      7:  begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b000; x_reg<=7'b0000110; end
+//	      8:  begin p2<=disp_char;p_back<=disp_char;char_reg="T";  end
+//	      9:  begin p2<=disp_char;p_back<=disp_char;char_reg="L";  end
+//	      10: begin p2<=disp_char;p_back<=disp_char;char_reg="6"; 	end
+//	      11: begin p2<=disp_char;p_back<=disp_char;char_reg="4";  end
+//	      12: begin p2<=disp_char;p_back<=disp_char;char_reg="0"; 	end
+//	      13: begin p2<=disp_char;p_back<=disp_char;char_reg="F";	end
+//	      14: begin p2<=disp_char;p_back<=disp_char;char_reg="Y";  end
+//	      15: begin p2<=disp_char;p_back<=disp_char;char_reg="M";	end
+//	      16: begin p2<=disp_char;p_back<=disp_char;char_reg="H"; 	end
+//	      17: begin p2<=disp_char;p_back<=disp_char;char_reg="0";	end
+//	      18: begin p2<=disp_char;p_back<=disp_char;char_reg="2"; 	end
+//			19: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b001; x_reg<=7'b0000110; end
+////	      17: begin p2<=disp_char;p_back<=disp_char;char_reg="_"; 	end
+//	      20: begin p2<=disp_char;p_back<=disp_char;char_reg="A"; 	end
+//	      21: begin p2<=disp_char;p_back<=disp_char;char_reg="2";  end
+//			22: begin p2<=disp_char;p_back<=disp_char;char_reg="5";  end
+//	      23: begin p2<=disp_char;p_back<=disp_char;char_reg="-";  end
+//	      24: begin p2<=disp_char;p_back<=disp_char;char_reg="3";  end
+//			25: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b010; x_reg<=7'b0000110; end
+////	      23: begin p2<=disp_char;p_back<=disp_char;char_reg="_";  end
+//	      26: begin p2<=disp_char;p_back<=disp_char;char_reg="V"; 	end
+//	      27: begin p2<=disp_char;p_back<=disp_char;char_reg="T"; 	end
+//			28: begin p2<=disp_char;p_back<=disp_char;char_reg="2"; 	end
+//	      29: begin p2<=disp_char;p_back<=disp_char;char_reg="_"; 	end
+//			30: begin p2<=disp_char;p_back<=disp_char;char_reg="j"; 	end
+//			31: begin p2<=disp_char;p_back<=disp_char;char_reg="i"; 	end
+//	      32: begin p2<=disp_char;p_back<=disp_char;char_reg="n"; 	end
+//			33: begin p2<=disp_char;p_back<=disp_char;char_reg="g"; 	end
+//	      34: begin p2<=disp_char;p_back<=disp_char;char_reg="j"; 	end
+//			35: begin p2<=disp_char;p_back<=disp_char;char_reg="i"; 	end
+//			36: begin p2<=disp_char;p_back<=disp_char;char_reg="a"; 	end
+//	      37: begin p2<=disp_char;p_back<=disp_char;char_reg="n"; 	end
+//	      38: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b011;x_reg<=7'b0000111; end
+//			39: begin p2<=disp_char;p_back<=disp_char;char_reg="V";  end
+//	      40: begin p2<=disp_char;p_back<=disp_char;char_reg="1"; 	end
+//			41: begin p2<=disp_char;p_back<=disp_char;char_reg="P";  end
+//	      42: begin p2<=disp_char;p_back<=disp_char;char_reg="0"; 	end
+//	      43: begin p2<=set_xy;p_back<=set_xy;y_reg<=3'b100;x_reg<=7'b0000111; end		
+//	      44: begin cnt3 <= 16'd44; end
+//	      default;
+//	      endcase
+//	      end
 	      
     shift_data :     //下降沿数据输出
                 begin

@@ -20,6 +20,13 @@ module switch(
     input                 rst_n             ,
     input                 sw1               ,
     input                 sw2               ,
+	 
+//	/***************************防错pin****************************/ 
+//    input               display_en_L      ,
+//    input                display_en_R      ,
+//	 output reg          display_en_led    ,
+//	/***************************防错pin****************************/
+	 
     input                 sw3               ,
     input                 sw4               ,
     input                 Rx_Donesig        ,
@@ -55,7 +62,7 @@ parameter       CNT1MS                      = 1000              ;  //1ms timer
 parameter       CNT1S                       = 1000              ;  //1s timer
 
 parameter       PATMIN                      = 7'd0              ;  //minimum pattern number
-parameter       PATNUM                      = 7'd9              ;
+parameter       PATNUM                      = 7'd10             ;
 parameter       PATMAX                      = PATMIN + PATNUM - 7'd1;
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -68,6 +75,10 @@ wire                            sw4_f                           ;
 wire                            flag_up                         ;
 wire                            flag_down                       ;
 
+//reg                             flag_up_d1                      ;
+//reg                             flag_up_d2                      ;
+//reg                             flag_down_d1                    ;
+//reg                             flag_down_d2                    ;
 wire                            flag_dis_chg                    ;  //display content change
 reg                             igr_sw                          ;  //when display content lock, ignore button sw1/sw2
 reg                             trig_lock_timer                 ;
@@ -81,17 +92,22 @@ reg     [6:0]                   dis_sn_d1                       ;
 reg    [79:0]                   data_rty                        ;
 reg                             flag_ng                         ;
 
-
-
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // continuous assignment
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 assign flag_up = (sw1_f == 1'b0);
 assign flag_down = (sw2_f == 1'b0);
+
+///***************************防错pin****************************/
+//assign display_en = (display_en_L == 1'b0)&&(display_en_R== 1'b0);//两边接地，可以切换画面
+///***************************防错pin****************************/
+
 //assign flag_dis_chg = ((flag_up_d2 == 1'b1) || (flag_down_d2 == 1'b1));
 assign flag_dis_chg = (dis_sn != dis_sn_d1);
 assign read_data = data_rty ;
 
+//assign display_en =( Rx_data == 10'b100000000); //串口检测到低时可以显示，串口检测到低高时不能显示
+//assign display_en =1'b1; //串口检测到低时可以显示，串口检测到低高时不能显示
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // module instantiation
@@ -144,7 +160,6 @@ glf #(
     .s_out                      ( sw4_f                         )
 );
 
-
 //timer for display content lock
 timer #(
     .CNT1US                     ( CNT1US                        ),
@@ -186,6 +201,74 @@ begin
     end
 end
 
+
+//always @(posedge clk or negedge rst_n)
+//begin
+//    if (rst_n == 1'b0)
+//    begin
+//        dis_sn <= 7'd0;
+//        display_en_led <= 1'b0;
+//    end
+//    else
+//    begin
+//        if (sw3_f == 1'b0)
+//        begin
+//            dis_sn <= PATMIN;
+//        end
+//        else if ((sw4_f == 1'b0) || (flag_ng==1'b1) )
+//        begin
+//            dis_sn <= PATMAX;
+//        end
+//		  
+//        else if (flag_up == 1'b1)
+//        begin
+//		      if (display_en == 1'b1)
+//					begin
+//						if (dis_sn == PATMAX)
+//						begin
+//							 dis_sn <= PATMAX;
+//							 display_en_led <= 1'b0;
+//						end
+//						else
+//						begin
+//							 dis_sn <= dis_sn + 7'd1;
+//							 display_en_led <= 1'b0;
+//						end
+//					end
+//				else
+//					begin
+//						dis_sn <= PATMIN;
+//						display_en_led <= 1'b1;
+//					end
+//		  end
+//        else if (flag_down == 1'b1)
+//        begin
+//		      if (display_en == 1'b1)
+//				begin
+//					if ((dis_sn == PATMIN) || (dis_sn == PATMAX))
+//					begin
+//						 dis_sn <= dis_sn;
+//						 display_en_led <= 1'b0;
+//					end
+//					else
+//					begin
+//						 dis_sn <= dis_sn - 7'd1;
+//						 display_en_led <= 1'b0;
+//					end
+//				end
+//				else
+//				begin
+//					dis_sn <= PATMIN;
+//					display_en_led <= 1'b1;
+//				end
+//        end
+//        else
+//        begin
+//            dis_sn <= dis_sn;
+//        end
+//    end
+//end
+
 always @(posedge clk or negedge rst_n)
 begin
     if (rst_n == 1'b0)
@@ -198,7 +281,7 @@ begin
         begin
             dis_sn <= PATMIN;
         end
-        else if ((sw4_f == 1'b0) || (flag_ng==1'b1) )
+        else if (sw4_f == 1'b0)
         begin
             dis_sn <= PATMAX;
         end
@@ -206,7 +289,7 @@ begin
         begin
             if (dis_sn == PATMAX)
             begin
-                dis_sn <= PATMAX;//for loop test
+                dis_sn <= PATMAX;
             end
             else
             begin
@@ -230,6 +313,7 @@ begin
         end
     end
 end
+
 
 //button filter process: when button is pressed, ignore button status until time T is reached
 always @(posedge clk or negedge rst_n)
@@ -288,13 +372,25 @@ begin
             case (dis_sn[6:0])
                 7'd0:
                 begin
+                    len_lock_timer <= 16'd300;
+                end
+                7'd1:
+                begin
                     len_lock_timer <= 16'd3000;
                 end
-                7'd1,7'd4,:
+                7'd2,7'd5:
                 begin
                     len_lock_timer <= 16'd2000;
                 end
-                7'd2,7'd3,7'd5,7'd6,7'd7:
+                7'd6, 7'd7, 7'd8:
+                begin
+                    len_lock_timer <= 16'd1000;
+                end
+					 7'd3, 7'd4:
+                begin
+                    len_lock_timer <= 16'd1000;
+                end
+                7'd9,7'd10:
                 begin
                     len_lock_timer <= 16'd1000;
                 end
@@ -306,7 +402,6 @@ begin
         end
     end
 end
-
 
 //uart   //传输PC段信息更改
 always @(posedge clk or negedge rst_n)

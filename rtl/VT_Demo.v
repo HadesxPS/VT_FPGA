@@ -24,14 +24,22 @@ module VT_Demo(
     input                 clk_in            ,
     input                 sw1               ,
     input                 sw2               ,
+	 
+	/***************************防错pin****************************/ 
+    input                 display_en_L      ,
+    input                 display_en_R      ,
+    output                display_en_led     ,	
+	/***************************防错pin****************************/
+	
     input                 sw3               ,
     input                 sw4               ,
 	 input                 sw5               ,
     input                 sw6               ,
 	 input	              rxd               ,
 	
-	 output	              txd               ,
-    output                FPGA_LED_Test     ,
+  
+	 output	              txd               , 	
+    output                FPGA_LED_Test     ,	
     output                en_p14v           ,
     output                en_n14v           ,
     output                en_gvddp          ,
@@ -44,7 +52,7 @@ module VT_Demo(
     output                mux_en1           ,
     output                mux_en2           ,
     output                mux_en3           ,
-    output                mux_en4           ,
+    output                mux_en4           ,	 
 	 
     output [1:0]          mux_1             ,
     output [1:0]          mux_2             ,
@@ -91,8 +99,8 @@ module VT_Demo(
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // parameters
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-parameter      PATMIN                     = 7'd0            ;  //minimum pattern number
-parameter      PATNUM                     = 7'd9           ;
+parameter       PATMIN                      = 7'd0              ;  //minimum pattern number
+parameter       PATNUM                      = 7'd10             ;
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // variable declaration
@@ -103,23 +111,35 @@ wire                            rst_n_sys                       ;
 wire    [6:0]                   dis_sn                          ;
 
 wire                            grst                            ;
+wire                            gas                             ;
+wire                            jdqi                            ;//jdqi
+
+
+wire                            VTCOMSW1                            ;
+wire                            VTCOMSW2                            ;
+
+
+
 wire                            u2d                             ;
 wire                            d2u                             ;
 wire                            stv                             ;
-wire                            ckv1_L                          ;
-wire                            ckv2_L                          ;
-wire                            ckv3_L                          ;
-wire                            ckv4_L                          ;
-wire                            ckv1_R                          ;
-wire                            ckv2_R                          ;
-wire                            ckv3_R                          ;
-wire                            ckv4_R                          ;
+wire                            ckv1                            ;
+wire                            ckv2                            ;
+wire                            ckv3                            ;
+wire                            ckv4                            ;
+wire                            ckv5                            ;
+wire                            ckv6                            ;
+wire                            ckv7                            ;
+wire                            ckv8                            ;
 wire                            ckh1                            ;
 wire                            ckh2                            ;
 wire                            ckh3                            ;
-wire                            ckh4                           ;
-wire                            ckh5                           ;
-wire                            ckh6                           ;
+wire                            ckh4                            ;
+wire                            ckh5                            ;
+wire                            ckh6                            ;
+//wire                            xckhr                           ;
+//wire                            xckhg                           ;
+//wire                            xckhb                           ;
 
 wire                            flag_black_on                    ;
 wire 									[7:0]uart_data								;
@@ -139,8 +159,6 @@ wire 									[5:0]	nummax									;
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //assign FPGA_LED_Test = BPS_clk;
-
-
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // module instantiation
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -152,7 +170,7 @@ clkrst u_clkrst(
 );
 
 switch #(
-    .CNT1US                     ( 16'd130                       ),
+    .CNT1US                     ( 16'd180                       ),
     .PATMIN                     ( PATMIN                        ),
     .PATNUM                     ( PATNUM                        )
 ) u_switch (
@@ -160,6 +178,13 @@ switch #(
     .rst_n                      ( rst_n_sys                     ),  //input
     .sw1                        ( sw1                           ),  //input
     .sw2                        ( sw2                           ),  //input
+	 
+//	 	/***************************防错pin****************************/  
+//    .display_en_L               ( display_en_L                  ),  //input
+//    .display_en_R               ( display_en_R                  ),  //input
+//	 .display_en_led				  ( display_en_led                ),  //output reg
+//	/***************************防错pin****************************/  
+	
     .sw3                        ( sw3                           ),  //input
     .sw4                        ( sw4                           ),  //input
 	 //.sw5                        ( sw5                           ),  //input
@@ -194,15 +219,17 @@ tx_module u_tx_module(
 			.tx_data			       (	uart_data		                ),
 			.rx_flag			       (	uart_wr		                   ),
 			.tx_rdy			       (	tx_rdy								 ),
+			
+			
 			.txd						 (	txd						          )
 );
 uart u_uart(
          .clk						 (	clk_sys						       ),
 			.rst_n					 (	rst_n_sys						    ),
-			.en_uart              ( en_uart                        ),  //input
-         .serial_data          ( read_data                    	 ),  //input   read_data 
+			.en_uart              ( en_uart                       ),  //input
+         .serial_data          ( read_data                    ),  //input   read_data 
 			.tx_rdy			       (	tx_rdy								 ),   //input tx_rdy
-			.DATASENDTIME         (	nummax                         ),
+			.DATASENDTIME         (nummax                        ),
 			.uart_data            ( uart_data                      ),  //output
 			.uart_wr              ( uart_wr                        )  //output  uart_wr
 );
@@ -226,34 +253,43 @@ tgen u_tgen(
     .clk                        ( clk_sys                       ),  //input
     .rst_n                      ( rst_n_sys                     ),  //input
 	
-	 .gas                        ( gas                           ),
     .grst                       ( grst                          ),  //output
+    .gas                        ( gas                           ),  //output
+	 .jdqi                       ( jdqi                          ),  //output	 
+	 
+	 .VTCOMSW1                   ( VTCOMSW1                      ),  //output
+	 .VTCOMSW2                   ( VTCOMSW2                      ),  //output
+	 
     .u2d                        ( u2d                           ),  //output
     .d2u                        ( d2u                           ),  //output
 
-	 .stv                        ( stv                           ),  //output
+	 .stv1                       ( stv1                          ),  //output
+    .stv2                       ( stv2                          ),  //output
 	 
-    .ckv1_L                     ( ckv1_L                        ),  //output
-    .ckv1_R                     ( ckv1_R                        ),  //output
-    .ckv2_L                     ( ckv2_L                        ),  //output
-    .ckv2_R                     ( ckv2_R                        ),  //output
-    .ckv3_L                     ( ckv3_L                        ),  //output
-    .ckv3_R                     ( ckv3_R                        ),  //output
-    .ckv4_L                     ( ckv4_L                        ),  //output
-    .ckv4_R                     ( ckv4_R                        ),  //output
-    .ckh1_out                   ( ckh1                          ),  //output
-    .ckh2_out                   ( ckh2                          ),  //output
-    .ckh3_out                   ( ckh3                          ),  //output
-    .ckh4_out                   ( ckh4                          ),  //output
-    .ckh5_out                   ( ckh5                          ),  //output
-    .ckh6_out                   ( ckh6                          ),  //output
-	 
+    .ckv1                       ( ckv1                          ),  //output
+    .ckv2                       ( ckv2                          ),  //output
+    .ckv3                       ( ckv3                          ),  //output
+    .ckv4                       ( ckv4                          ),  //output
+    .ckv5                       ( ckv5                          ),  //output
+    .ckv6                       ( ckv6                          ),  //output
+    .ckv7                       ( ckv7                          ),  //output
+    .ckv8                       ( ckv8                          ),  //output
+    .ckh1                       ( ckh1                          ),  //output
+    .ckh2                       ( ckh2                          ),  //output
+    .ckh3                       ( ckh3                          ),  //output
+    .ckh4                       ( ckh4                          ),  //output
+    .ckh5                       ( ckh5                          ),  //output
+    .ckh6                       ( ckh6                          ),  //output
+//    .xckhr                      ( xckhr                         ),  //output
+//    .xckhg                      ( xckhg                         ),  //output
+//    .xckhb                      ( xckhb                         ),  //output
     .dis_sn                     ( dis_sn                        ),  //input
 	 
     .da1_wr                     ( da1_wr                        ),  //output reg
     .da2_wr                     ( da2_wr                        ),  //output reg
 	 .da3_wr                     ( da3_wr                        ),  //output reg
 	 .da4_wr                     ( da4_wr                        ),  //output reg
+//	 .en_uart                    ( en_uart                        ),  //output reg
 	 
 	 .da1_a                      ( da1_a                         ),  //output reg [1:0]
 	 .da2_a                      ( da2_a                         ),  //output reg [1:0]
@@ -270,36 +306,36 @@ tgen u_tgen(
 
 mux_decode u1_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( stv                          ),  //input
-    .db                         ( stv                          ),  //input
+    .da                         ( stv1                           ),  //input
+    .db                         ( stv1                           ),  //input
     .a                          ( mux_1                         )   //output
 );
 
 mux_decode u2_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv1_L                        ),  //input
-    .db                         ( ckv1_R                        ),  //input
+    .da                         ( ckv1                          ),  //input
+    .db                         ( ckv2                          ),  //input
     .a                          ( mux_2                         )   //output
 );
 
 mux_decode u3_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv2_L                        ),  //input
-    .db                         ( ckv2_R                        ),  //input
+    .da                         ( ckv3                          ),  //input
+    .db                         ( ckv4                          ),  //input
     .a                          ( mux_3                         )   //output
 );
 
 mux_decode u4_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv3_L                        ),  //input
-    .db                         ( ckv3_R                        ),  //input
+    .da                         ( ckv5                          ),  //input
+    .db                         ( ckv6                          ),  //input
     .a                          ( mux_4                         )   //output
 );
 
 mux_decode u5_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckv4_L                        ),  //input
-    .db                         ( ckv4_R                        ),  //input
+    .da                         ( ckv7                          ),  //input
+    .db                         ( ckv8                          ),  //input
     .a                          ( mux_5                         )   //output
 );
 
@@ -313,14 +349,14 @@ mux_decode u6_mux_decode(
 mux_decode u7_mux_decode(
     .clk                        ( clk_sys                       ),  //input
     .da                         ( ckh3                          ),  //input
-    .db                         ( ckh4                          ),  //input
+    .db                         ( 1'b0                          ),  //input
     .a                          ( mux_7                         )   //output
 );
 
 mux_decode u8_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( ckh5                          ),  //input
-    .db                         ( ckh6                          ),  //input
+    .da                         ( 1'b0                          ),  //input
+    .db                         ( 1'b0                          ),  //input
     .a                          ( mux_8                         )   //output
 );
 
@@ -352,16 +388,25 @@ mux_decode u12_mux_decode(
     .a                          ( mux_12                        )   //output
 );
 
+//mux_decode u13_mux_decode(
+//    .clk                        ( clk_sys                       ),  //input
+//    .da                         ( 1'b1                          ),  //input
+//    .db                         ( 1'b0                          ),  //input
+//    .a                          ( mux_13                        )   //output
+//);
+
 mux_decode u13_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( 1'b1                          ),  //input
-    .db                         ( 1'b1                          ),  //input
+    .da                         ( VTCOMSW1                      ),  //input
+//    .da                         ( 1'b1                          ),  //input
+	 .db                         ( 1'b1                          ),  //input
+//    .db                         ( VTCOMSW2                          ),  //input
     .a                          ( mux_13                        )   //output
 );
 
 mux_decode u14_mux_decode(
     .clk                        ( clk_sys                       ),  //input
-    .da                         ( 1'b1                          ),  //input
+    .da                         ( jdqi                         ),  //input
     .db                         ( 1'b1                          ),  //input
     .a                          ( mux_14                        )   //output
 );

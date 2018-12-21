@@ -1,0 +1,264 @@
+# vlog -vlog01compat -work work +incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG\ 2.4/rtl/switch {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch/switch.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module switch
+# 
+# Top level modules:
+# 	switch
+# vlog -vlog01compat -work work +incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG\ 2.4/rtl/switch {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch/glf.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module glf
+# 
+# Top level modules:
+# 	glf
+# vlog -vlog01compat -work work +incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG\ 2.4/rtl/clkrst {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/clkrst/clkrst.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module clkrst
+# 
+# Top level modules:
+# 	clkrst
+# vlog -vlog01compat -work work +incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG\ 2.4/rtl {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module VT_Demo
+# 
+# Top level modules:
+# 	VT_Demo
+# vlog -vlog01compat -work work +incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG\ 2.4/rtl/megafunc {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/megafunc/mypll.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module mypll
+# 
+# Top level modules:
+# 	mypll
+# vlog -vlog01compat -work work +incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG\ 2.4/db {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/db/mypll_altpll.v}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module mypll_altpll
+# 
+# Top level modules:
+# 	mypll_altpll
+# 
+# vlog -vlog01compat -work work +incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG\ 2.4/simulation/modelsim {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/VT_Demo.vt}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module VT_Demo_vlg_tst
+# 
+# Top level modules:
+# 	VT_Demo_vlg_tst
+# 
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneiii_ver -L rtl_work -L work -voptargs="+acc"  VT_Demo_vlg_tst
+# vsim -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneiii_ver -L rtl_work -L work -voptargs=\"+acc\" -t 1ps VT_Demo_vlg_tst 
+# Loading work.VT_Demo_vlg_tst
+# Loading work.VT_Demo
+# Loading work.clkrst
+# Loading work.mypll
+# Loading altera_mf_ver.altpll
+# Loading altera_mf_ver.ALTERA_DEVICE_FAMILIES
+# Loading altera_mf_ver.pll_iobuf
+# Loading work.switch
+# Loading work.glf
+# Loading rtl_work.timer
+# Loading rtl_work.tx_module
+# Loading rtl_work.uart
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/uart/uart.v(59): Instantiation of 'glf' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1/u_uart
+#         Searched libraries:
+#             C:/altera/13.0sp1/modelsim_ase/altera/verilog/altera
+#             C:/altera/13.0sp1/modelsim_ase/altera/verilog/220model
+#             C:/altera/13.0sp1/modelsim_ase/altera/verilog/sgate
+#             C:/altera/13.0sp1/modelsim_ase/altera/verilog/altera_mf
+#             C:/altera/13.0sp1/modelsim_ase/altera/verilog/altera_lnsim
+#             C:/altera/13.0sp1/modelsim_ase/altera/verilog/cycloneiii
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/rtl_work
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/rtl_work
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/rtl_work
+# Loading rtl_work.rx_module
+# Loading rtl_work.tgen
+# Loading rtl_work.mux_decode
+# Loading rtl_work.lcd_display
+# Error loading design
+# Error: Error loading design 
+#        Pausing macro execution 
+# MACRO ./VT_Demo_run_msim_rtl_verilog.do PAUSED at line 24
+# Compile of VT_Demo.vt was successful.
+# Compile of VT_Demo.v was successful.
+# 2 compiles, 0 failed with no errors. 
+# Compile of VT_Demo.vt was successful.
+# Compile of VT_Demo.v was successful.
+# 2 compiles, 0 failed with no errors. 
+vsim work.VT_Demo_vlg_tst
+# vsim work.VT_Demo_vlg_tst 
+# Loading work.VT_Demo_vlg_tst
+# Loading work.VT_Demo
+# Loading work.clkrst
+# Loading work.mypll
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/megafunc/mypll.v(94): Instantiation of 'altpll' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1/u_clkrst/u_mypll
+#         Searched libraries:
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/work
+# Loading work.switch
+# Loading work.glf
+# Loading work.timer
+# Loading work.tx_module
+# Loading work.uart
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v(248): Instantiation of 'rx_module' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1
+#         Searched libraries:
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/work
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v(305): Instantiation of 'tgen' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1
+#         Searched libraries:
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/work
+# Loading work.mux_decode
+# Loading work.lcd_display
+# Error loading design
+# Error: Error loading design 
+#        Pausing macro execution 
+# MACRO ./VT_Demo_run_msim_rtl_verilog.do PAUSED at line 24
+# ERROR: No extended dataflow license exists
+vlog -work rtl_work -refresh -force_refresh
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Refreshing module lcd_display
+# -- Refreshing module mux_decode
+# -- Refreshing module rx_module
+# -- Refreshing module tgen
+# -- Refreshing module timer
+# -- Refreshing module tx_module
+# -- Refreshing module uart
+vcom -work rtl_work -refresh -force_refresh
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Skipping module lcd_display
+# -- Skipping module mux_decode
+# -- Skipping module rx_module
+# -- Skipping module tgen
+# -- Skipping module timer
+# -- Skipping module tx_module
+# -- Skipping module uart
+vsim -novopt work.VT_Demo_vlg_tst
+# vsim -novopt work.VT_Demo_vlg_tst 
+# Loading work.VT_Demo_vlg_tst
+# Loading work.VT_Demo
+# Loading work.clkrst
+# Loading work.mypll
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/megafunc/mypll.v(94): Instantiation of 'altpll' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1/u_clkrst/u_mypll
+#         Searched libraries:
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/work
+# Loading work.switch
+# Loading work.glf
+# Loading work.timer
+# Loading work.tx_module
+# Loading work.uart
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v(248): Instantiation of 'rx_module' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1
+#         Searched libraries:
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/work
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v(305): Instantiation of 'tgen' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1
+#         Searched libraries:
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/work
+# Loading work.mux_decode
+# Loading work.lcd_display
+# Error loading design
+# Error: Error loading design 
+#        Pausing macro execution 
+# MACRO ./VT_Demo_run_msim_rtl_verilog.do PAUSED at line 24
+vsim -voptargs=+acc work.VT_Demo_vlg_tst
+# vsim -voptargs=+acc work.VT_Demo_vlg_tst 
+# Loading work.VT_Demo_vlg_tst
+# Loading work.VT_Demo
+# Loading work.clkrst
+# Loading work.mypll
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/megafunc/mypll.v(94): Instantiation of 'altpll' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1/u_clkrst/u_mypll
+#         Searched libraries:
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/work
+# Loading work.switch
+# Loading work.glf
+# Loading work.timer
+# Loading work.tx_module
+# Loading work.uart
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v(248): Instantiation of 'rx_module' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1
+#         Searched libraries:
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/work
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v(305): Instantiation of 'tgen' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1
+#         Searched libraries:
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/work
+# Loading work.mux_decode
+# Loading work.lcd_display
+# Error loading design
+# Error: Error loading design 
+#        Pausing macro execution 
+# MACRO ./VT_Demo_run_msim_rtl_verilog.do PAUSED at line 24
+vsim -voptargs=+acc work.VT_Demo_vlg_tst
+# vsim -voptargs=+acc work.VT_Demo_vlg_tst 
+# Loading work.VT_Demo_vlg_tst
+# Loading work.VT_Demo
+# Loading work.clkrst
+# Loading work.mypll
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/megafunc/mypll.v(94): Instantiation of 'altpll' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1/u_clkrst/u_mypll
+#         Searched libraries:
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/work
+# Loading work.switch
+# Loading work.glf
+# Loading work.timer
+# Loading work.tx_module
+# Loading work.uart
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v(248): Instantiation of 'rx_module' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1
+#         Searched libraries:
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/work
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v(305): Instantiation of 'tgen' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1
+#         Searched libraries:
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/work
+# Loading work.mux_decode
+# Loading work.lcd_display
+# Error loading design
+# Error: Error loading design 
+#        Pausing macro execution 
+# MACRO ./VT_Demo_run_msim_rtl_verilog.do PAUSED at line 24
+vsim -voptargs=+acc work.VT_Demo_vlg_tst
+# vsim -voptargs=+acc work.VT_Demo_vlg_tst 
+# Loading work.VT_Demo_vlg_tst
+# Loading work.VT_Demo
+# Loading work.clkrst
+# Loading work.mypll
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/megafunc/mypll.v(94): Instantiation of 'altpll' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1/u_clkrst/u_mypll
+#         Searched libraries:
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/work
+# Loading work.switch
+# Loading work.glf
+# Loading work.timer
+# Loading work.tx_module
+# Loading work.uart
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v(248): Instantiation of 'rx_module' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1
+#         Searched libraries:
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/work
+# ** Error: (vsim-3033) D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v(305): Instantiation of 'tgen' failed. The design unit was not found.
+# 
+#         Region: /VT_Demo_vlg_tst/i1
+#         Searched libraries:
+#             D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/work
+# Loading work.mux_decode
+# Loading work.lcd_display
+# Error loading design
+# Error: Error loading design 
+#        Pausing macro execution 
+# MACRO ./VT_Demo_run_msim_rtl_verilog.do PAUSED at line 24
