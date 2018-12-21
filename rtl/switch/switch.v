@@ -206,7 +206,7 @@ begin
         begin
             if (dis_sn == PATMAX)
             begin
-                dis_sn <= PATMIN;//for loop test
+                dis_sn <= PATMAX;//for loop test
             end
             else
             begin
