@@ -30,8 +30,8 @@ module VT_Demo(
     input                 sw6               ,
 	 input	              rxd               ,
 	
-	 output	              txd               , 	
-    output                FPGA_LED_Test     ,	
+	 output	              txd               ,
+    output                FPGA_LED_Test     ,
     output                en_p14v           ,
     output                en_n14v           ,
     output                en_gvddp          ,
@@ -44,7 +44,7 @@ module VT_Demo(
     output                mux_en1           ,
     output                mux_en2           ,
     output                mux_en3           ,
-    output                mux_en4           ,	 
+    output                mux_en4           ,
 	 
     output [1:0]          mux_1             ,
     output [1:0]          mux_2             ,
@@ -92,47 +92,48 @@ module VT_Demo(
 // parameters
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 parameter      PATMIN                     = 7'd0            ;  //minimum pattern number
-parameter      PATNUM                     = 7'd11           ;
+parameter      PATNUM                     = 7'd9           ;
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // variable declaration
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-wire										clk_sys									;
-wire										rst_n_sys								;
-wire										[6:0]dis_sn								;
+wire                            clk_sys                         ;
+wire                            rst_n_sys                       ;
 
-wire										grst										;
-wire										u2d										;
-wire										d2u										;
-wire										stv										;
-wire										ckv1_L									;
-wire										ckv2_L									;
-wire										ckv3_L									;
-wire										ckv4_L									;
-wire										ckv1_R									;
-wire										ckv2_R									;
-wire										ckv3_R									;
-wire										ckv4_R									;
-wire										ckh1										;
-wire										ckh2										;
-wire										ckh3										;
-wire										ckh4										;
-wire										ckh5										;
-wire										ckh6										;
+wire    [6:0]                   dis_sn                          ;
 
-wire										flag_black_on							;
-wire										[7:0]uart_data							;
-wire										uart_wr									;
-wire										tx_rdy									;
-wire										en_uart									;
-wire										[79:0]read_data						;
-wire										rx_en_sig								;
-wire										Rx_Donesig								;
-wire										[79:0]Rx_data							;
-wire										switch_reset							;
+wire                            grst                            ;
+wire                            u2d                             ;
+wire                            d2u                             ;
+wire                            stv                             ;
+wire                            ckv1_L                          ;
+wire                            ckv2_L                          ;
+wire                            ckv3_L                          ;
+wire                            ckv4_L                          ;
+wire                            ckv1_R                          ;
+wire                            ckv2_R                          ;
+wire                            ckv3_R                          ;
+wire                            ckv4_R                          ;
+wire                            ckh1                            ;
+wire                            ckh2                            ;
+wire                            ckh3                            ;
+wire                            ckh4                           ;
+wire                            ckh5                           ;
+wire                            ckh6                           ;
+
+wire                            flag_black_on                    ;
+wire 									[7:0]uart_data								;
+wire                               uart_wr								;
+wire 											tx_rdy								;
+wire 											en_uart								;
+wire 								[79:0]read_data								;
+wire 										rx_en_sig								;
+wire 										Rx_Donesig								;
+wire 										[79:0]Rx_data							;
+wire 										switch_reset							;
 wire										BPS_clk									;
-wire										[5:0]	DATASENDTIME					;
-wire										[5:0]	nummax							;
+wire 									[5:0]	DATASENDTIME							;
+wire 									[5:0]	nummax									;
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // continuous assignment
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

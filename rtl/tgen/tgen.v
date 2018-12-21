@@ -66,67 +66,67 @@ module tgen(
 // parameters
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //FSM
-parameter			IDLE                = 3'd0                      ;
-parameter			GRST                = 3'd1                      ;
-parameter			VBP                 = 3'd2                      ;
-parameter			PCH                 = 3'd3                      ;  //pre-charge
-parameter			DISPLAY             = 3'd4                      ;
-parameter			VFP                 = 3'd5                      ;
+parameter       IDLE                = 3'd0                      ;
+parameter       GRST                = 3'd1                      ;
+parameter       VBP                 = 3'd2                      ;
+parameter       PCH                 = 3'd3                      ;  //pre-charge
+parameter       DISPLAY             = 3'd4                      ;
+parameter       VFP                 = 3'd5                      ;
 
 //for timing control
-parameter			NUM_CLK_GRST        = 32'd5                     ;  //number of clocks during reset
+parameter       NUM_CLK_GRST        = 32'd5                     ;  //number of clocks during reset
 
-parameter			H_ACT               = 12'd1080                  ;
-parameter			H_BP                = 12'd45                    ;  //including HPW  95
-parameter			H_FP                = 12'd45                    ;  //               50
+parameter       H_ACT               = 12'd1080                  ;
+parameter       H_BP                = 12'd45                    ;  //including HPW  95
+parameter       H_FP                = 12'd45                    ;  //               50
 
-parameter			V_BP                = 12'd12                    ;  //including VPW
-parameter			V_FP                = 12'd7                     ;
-parameter			V_ACT               = 12'd2520                  ;
-parameter			V_PCH               = 12'd8                     ;  //10
+parameter       V_BP                = 12'd12                    ;  //including VPW
+parameter       V_FP                = 12'd7                     ;
+parameter       V_ACT               = 12'd2520                  ;
+parameter       V_PCH               = 12'd8                     ;  //10
 
-parameter			H_ABGN              = H_BP                      ;
-parameter			H_AEND              = H_BP + H_ACT              ;
-parameter			H_TOTAL             = H_BP + H_ACT + H_FP       ;
+parameter       H_ABGN              = H_BP                      ;
+parameter       H_AEND              = H_BP + H_ACT              ;
+parameter       H_TOTAL             = H_BP + H_ACT + H_FP       ;
 
-parameter			GAP_VDIV64          = 8'd30                     ;
+parameter       GAP_VDIV64          = 8'd39                     ;
 
-parameter			STV_WIDTH           = 12'd1                     ;   //stv width. unit: line
-parameter			STV_TOTAL_DIRE      = 1'b1                      ;   //1'b1 - stv shift left; 1'b0 - stv shift right
-parameter			STV_TOTAL_SHIFT     = 12'd6                     ;   //stv shift offset, unit: lines
-parameter			STV_RISE_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
-parameter			STV_RISE_SHIFT      = 12'd76                    ;   //stv rising edge shift offset. unit: pclk
-parameter			STV_FALL_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
-parameter			STV_FALL_SHIFT      = 12'd1                     ;   //stv rising edge shift offset. unit: pclk
+parameter       STV_WIDTH           = 12'd1                     ;   //stv width. unit: line
+parameter       STV_TOTAL_DIRE      = 1'b1                      ;   //1'b1 - stv shift left; 1'b0 - stv shift right
+parameter       STV_TOTAL_SHIFT     = 12'd6                     ;   //stv shift offset, unit: lines
+parameter       STV_RISE_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
+parameter       STV_RISE_SHIFT      = 12'd76                    ;   //stv rising edge shift offset. unit: pclk
+parameter       STV_FALL_DIRE       = 1'b1                      ;   //stv rising edge shift direction. 1'b1 - left; 1'b0 - right
+parameter       STV_FALL_SHIFT      = 12'd1                     ;   //stv rising edge shift offset. unit: pclk
 
-parameter			CKV_RISE_SHIFT     = 12'd57                     ;   //ckv rising edge shift offset. unit: pclk. shift right
-parameter			CKV_FALL_SHIFT     = 12'd57                     ;   //ckv falling edge shift offset. unit: pclk. shift left
+parameter       CKV_RISE_SHIFT     = 12'd57                     ;   //ckv rising edge shift offset. unit: pclk. shift right
+parameter       CKV_FALL_SHIFT     = 12'd57                     ;   //ckv falling edge shift offset. unit: pclk. shift left
 
-parameter			CKH_PRE_GAP         = 12'd10                    ;   //gap befor CKH processing.
-parameter			CKH_WIDTH			= 12'd256                   ;   //ckh width. unit: pclk
-parameter			CKH_HALF_WIDTH		= 12'd128						 ;
-parameter			CKH_RISE_SHIFT      = 12'd45                    ;   //gap before rising edge of ckh. reference point: rising edge of ckv
-parameter			CKH_FALL_SHIFT      = 12'd45                    ;   //gap after falling edge of ckh
+parameter       CKH_PRE_GAP         = 12'd10                    ;   //gap befor CKH processing.
+parameter       CKH_WIDTH           = 12'd256                   ;   //ckh width. unit: pclk
+parameter		 CKH_HALF_WIDTH 		= 12'd128						 ;
+parameter       CKH_RISE_SHIFT      = 12'd45                    ;   //gap before rising edge of ckh. reference point: rising edge of ckv
+parameter       CKH_FALL_SHIFT      = 12'd45                    ;   //gap after falling edge of ckh
 
 //for pattern generation
-parameter			DCODE_WHITE         = 8'd242                    ;   //DA input for white (grayscale=255)
-parameter			DCODE_BLACK         = 8'd133                    ;   //DA input for black (grayscale=0)
-parameter			DCODE_VCOM          = 8'd124                    ;   //DA input for vcom
-parameter			DCODE_GND           = 8'd128                    ;   //DA input for GND
-parameter			DCODE_GRAY128       = 8'd195                    ;   //DA input for gray pattern
-parameter			DCODE_GRAY64        = 8'd182                    ;   //DA input for gray pattern
+parameter       DCODE_WHITE         = 8'd242                    ;   //DA input for white (grayscale=255)
+parameter       DCODE_BLACK         = 8'd133                    ;   //DA input for black (grayscale=0)
+parameter       DCODE_VCOM          = 8'd124                    ;   //DA input for vcom
+parameter       DCODE_GND           = 8'd128                    ;   //DA input for GND
+parameter       DCODE_GRAY128       = 8'd195                    ;   //DA input for gray pattern
+parameter       DCODE_GRAY64        = 8'd182                    ;   //DA input for gray pattern
 
-parameter			DCODE_VCOMA			= 8'd132                    ;   //DA input for VCOMA
-parameter			DCODE_VCOMB			= 8'd170                    ;   //DA input for VCOMB
+parameter       DCODE_VCOMA       	= 8'd132                    ;   //DA input for VCOMA
+parameter       DCODE_VCOMB        	= 8'd170                    ;   //DA input for VCOMB
 
-parameter			SRC_PCH_SHIFT		= 8'd80                     ;   //source precharge time
-																							//DA output tansition time: 1.4us, about 120 clk_sys period
-																							//constraint: 
-																							//1. (CKV1_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT) > SRC_PCH_SHIFT
-																							//2. (CKH_RISE_SHIFT + CKH_FALL_SHIFT) > SRC_PCH_SHIFT
-parameter			ODD_EVEN_TGAP       = 8'd5                      ;   //DA transition gap for odd and even source output
+parameter       SRC_PCH_SHIFT       = 8'd80                     ;   //source precharge time
+                                                                    //DA output tansition time: 1.4us, about 120 clk_sys period
+                                                                    //constraint: 
+                                                                    //1. (CKV1_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT) > SRC_PCH_SHIFT
+                                                                    //2. (CKH_RISE_SHIFT + CKH_FALL_SHIFT) > SRC_PCH_SHIFT
+parameter       ODD_EVEN_TGAP       = 8'd5                      ;   //DA transition gap for odd and even source output
 
-parameter			RGBRGB					= 1'b1							 ;	  //switch for RGBRGB and RGBBGR timings
+parameter		 RGBRGB					= 1'b0							 ;	  //switch for RGBRGB and RGBBGR timings
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // variable declaration
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -206,14 +206,11 @@ assign is_sof_vblank = (cs_ctrl == PCH) && (cnt_vact == 12'd0);
 //assign is_demux_all_on = (smp_dis_sn == 7'd2);
 assign is_demux_all_on = 1'b0;
 
-//assign flag_rev_scan = (smp_dis_sn == 7'd2) ;  //1'b1 - reverse scan ;  1'b0 - normal scan
-assign flag_rev_scan = 1'b0; 
+assign flag_rev_scan = (smp_dis_sn == 7'd6) ;  //1'b1 - reverse scan ;  1'b0 - normal scan
 //assign flag_TP_test_a = (smp_dis_sn == 7'd10) ;  //1'b1 - TP_test_pattern ;  1'b0 - normal pattern
 //assign flag_TP_test_b = (smp_dis_sn == 7'd11) ;  //1'b1 - TP_test_pattern ;  1'b0 - normal pattern
 //assign flag_inversion = (smp_dis_sn == 7'd9);  //1'b1 - frame inversion ;  1'b0 - column inversion           
 assign flag_inversion = 1'b0;  
-
-
 
 assign ckv1_L		= (flag_rev_scan	== 1'b0) ? ckv1_L_pre	: ckv2_R_pre;
 assign ckv1_R		= (flag_rev_scan	== 1'b0) ? ckv1_R_pre	: ckv2_L_pre;
@@ -509,7 +506,7 @@ begin
 	// for NMOS
 	 else if ((flag_black_on == 1'b1)|| (is_demux_all_on == 1'b1))
     begin
-		  grst <= 1'b1;
+		  grst <= 1'b0;
     end
     else
     begin
@@ -524,6 +521,25 @@ begin
     end
 end
 
+//gas
+always @(posedge clk or negedge rst_n)
+begin
+    if (rst_n == 1'b0)
+    begin
+        gas <= 1'b0;
+    end
+    else
+    begin
+      if ((flag_black_on == 1'b1)||(is_demux_all_on == 1'b1))
+        begin
+            gas <= 1'b1;
+        end
+        else
+        begin
+            gas <= 1'b0;
+        end
+    end
+end
 
 //u2d
 always @(posedge clk or negedge rst_n)
@@ -538,6 +554,10 @@ begin
         begin
             u2d <= 1'b0;
         end
+		  else if((flag_black_on == 1'b1)|| (is_demux_all_on == 1'b1))
+		  begin
+			u2d <= 1'b0;
+		  end
         else
         begin
             u2d <= 1'b1;
@@ -558,6 +578,10 @@ begin
         begin
             d2u <= 1'b1;
         end
+		  else if((flag_black_on == 1'b1)|| (is_demux_all_on == 1'b1))
+		  begin
+			d2u <= 1'b0;
+		  end
         else
         begin
             d2u <= 1'b0;
@@ -1013,10 +1037,10 @@ begin
 	end
 	else
 	begin
-		if (is_demux_all_on == 1'b1)
+		if ((flag_black_on == 1'b1)||(is_demux_all_on == 1'b1))
 		begin
-			ckh1 <= 1'b0;
-			ckh2 <= 1'b0;
+			ckh1 <= 1'b1;
+			ckh2 <= 1'b1;
 		end
 		else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
 		begin
@@ -1091,10 +1115,10 @@ begin
 	end
 	else
 	begin
-		if(is_demux_all_on == 1'b1)
+		if ((flag_black_on == 1'b1)||(is_demux_all_on == 1'b1))
 		begin
-			ckh3 <= 1'b0;
-			ckh4 <= 1'b0;
+			ckh3 <= 1'b1;
+			ckh4 <= 1'b1;
 		end
 		else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
 		begin
@@ -1148,10 +1172,10 @@ begin
 	end
 	else
 	begin
-		if (is_demux_all_on == 1'b1)
+		if ((flag_black_on == 1'b1)||(is_demux_all_on == 1'b1))
 		begin
-			ckh5 <= 1'b0;
-			ckh6 <= 1'b0;
+			ckh5 <= 1'b1;
+			ckh6 <= 1'b1;
 		end
 		else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
 		begin
@@ -1242,7 +1266,7 @@ begin
     end
     else
     begin
-        if (num_vdiv64[5] == 1'b0)  //top half
+        if (cnt_vact>=0&&cnt_vact<=1260)  //top half
         begin
             pat_blc_wht_h <= {DCODE_BLACK, DCODE_BLACK, DCODE_BLACK};
         end
@@ -1261,7 +1285,7 @@ begin
     end
     else
     begin
-        if (num_vdiv64[5] == 1'b0)  //top half
+        if (cnt_vact>=0&&cnt_vact<=1260)  //top half
         begin
             pat_wht_blc_h <= {DCODE_WHITE, DCODE_WHITE, DCODE_WHITE};
         end
@@ -1282,9 +1306,6 @@ begin
 	end
 	else if ((cs_ctrl == VFP) && ((flag_hend == 1'b1) && (cnt_vblank == V_FP - 12'd1)))
 	begin
-//		r_data<= ~r_data[7:0] + 8'd1;
-//		g_data<= ~g_data[7:0] + 8'd1;
-//		b_data<= ~r_data[7:0] + 8'd1;
 		flag_frm_pol<=~flag_frm_pol;
 	end
 	else
@@ -1292,83 +1313,53 @@ begin
 		case (smp_dis_sn)
 			7'd0:
 			begin
-				r_data <= 8'd128;
-				g_data <= 8'd128;
-				b_data <= 8'd128;
+				r_data <= DCODE_BLACK;
+				g_data <= DCODE_BLACK;
+				b_data <= DCODE_BLACK;
 			end
 			7'd1:  //black
-			begin
-				r_data <= DCODE_WHITE;
-				g_data <= DCODE_BLACK;
-				b_data <= DCODE_BLACK;
-			end
-			7'd2:  //gray
-			begin
-				r_data <= DCODE_BLACK;
-				g_data <= DCODE_WHITE;
-				b_data <= DCODE_BLACK;
-			end
-			7'd3:  //gray
-			begin
-				r_data <= DCODE_BLACK;
-				g_data <= DCODE_BLACK;
-				b_data <= DCODE_WHITE;
-			end
-			7'd4:
-			begin
-				r_data <= DCODE_WHITE;
-				g_data <= DCODE_WHITE;
-				b_data <= DCODE_BLACK;
-			end
-			7'd5:
-			begin
-				r_data <= DCODE_WHITE;
-				g_data <= DCODE_BLACK;
-				b_data <= DCODE_WHITE;
-			end
-			7'd6:  //white
-			begin
-				r_data <= DCODE_BLACK;
-				g_data <= DCODE_WHITE;
-				b_data <= DCODE_WHITE;
-			end
-			7'd7:  //red
-			begin
-				r_data <= DCODE_WHITE;
-				g_data <= DCODE_WHITE;
-				b_data <= DCODE_WHITE;
-			end
-			7'd8:  //green
 			begin
 				r_data <= DCODE_GRAY128;
 				g_data <= DCODE_GRAY128;
 				b_data <= DCODE_GRAY128;
 			end
-			7'd9:  //blue
+			7'd2:  //gray
 			begin
-				r_data <= DCODE_GRAY64;
-				g_data <= DCODE_GRAY64;
-				b_data <= DCODE_GRAY64;
+				r_data <= pat_wht_blc_h[23:16];
+				g_data <= pat_wht_blc_h[15:8];
+				b_data <= pat_wht_blc_h[7:0];
 			end
-	//				7'd9:  //frame inversion 
-	//            begin
-	//                r_data <= DCODE_GRAY128;
-	//                g_data <= DCODE_GRAY128;
-	//                b_data <= DCODE_GRAY128;
-	//            end
-	//				7'd10:  //TP senson short test VCOMA
-	//            begin
-	//                r_data <= DCODE_GND;
-	//                g_data <= DCODE_GND;
-	//                b_data <= DCODE_GND;
-	//            end
-	//				7'd11:  //TP senson short test VCOMB
-	//            begin
-	//                r_data <= DCODE_GND;
-	//                g_data <= DCODE_GND;
-	//                b_data <= DCODE_GND;
-	//            end
-			7'd10:
+			7'd3:  //gray
+			begin
+				r_data <= pat_blc_wht_h[23:16];
+				g_data <= pat_blc_wht_h[15:8];
+				b_data <= pat_blc_wht_h[7:0];
+			end
+			7'd4:
+			begin
+				r_data <= DCODE_WHITE;
+				g_data <= DCODE_WHITE;
+				b_data <= DCODE_WHITE;
+			end
+			7'd5:
+			begin
+				r_data <= DCODE_WHITE;
+				g_data <= DCODE_BLACK;
+				b_data <= DCODE_BLACK;
+			end
+			7'd6:
+			begin
+				r_data <= DCODE_BLACK;
+				g_data <= DCODE_WHITE;
+				b_data <= DCODE_BLACK;
+			end
+			7'd7:
+			begin
+				r_data <= DCODE_BLACK;
+				g_data <= DCODE_BLACK;
+				b_data <= DCODE_WHITE;
+			end
+			7'd8:
 			begin
 				r_data <= DCODE_BLACK;
 				g_data <= DCODE_BLACK;

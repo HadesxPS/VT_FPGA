@@ -55,7 +55,7 @@ parameter       CNT1MS                      = 1000              ;  //1ms timer
 parameter       CNT1S                       = 1000              ;  //1s timer
 
 parameter       PATMIN                      = 7'd0              ;  //minimum pattern number
-parameter       PATNUM                      = 7'd10              ;
+parameter       PATNUM                      = 7'd9              ;
 parameter       PATMAX                      = PATMIN + PATNUM - 7'd1;
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -68,10 +68,6 @@ wire                            sw4_f                           ;
 wire                            flag_up                         ;
 wire                            flag_down                       ;
 
-//reg                             flag_up_d1                      ;
-//reg                             flag_up_d2                      ;
-//reg                             flag_down_d1                    ;
-//reg                             flag_down_d2                    ;
 wire                            flag_dis_chg                    ;  //display content change
 reg                             igr_sw                          ;  //when display content lock, ignore button sw1/sw2
 reg                             trig_lock_timer                 ;
@@ -210,7 +206,7 @@ begin
         begin
             if (dis_sn == PATMAX)
             begin
-                dis_sn <= PATMAX;
+                dis_sn <= PATMIN;//for loop test
             end
             else
             begin
@@ -292,24 +288,16 @@ begin
             case (dis_sn[6:0])
                 7'd0:
                 begin
-                    len_lock_timer <= 16'd300;
-                end
-                7'd1:
-                begin
                     len_lock_timer <= 16'd3000;
                 end
-                7'd2,7'd3, 7'd6:
+                7'd1,7'd4,:
                 begin
                     len_lock_timer <= 16'd2000;
                 end
-					 7'd4, 7'd5, 7'd7, 7'd8,7'd9:
+                7'd2,7'd3,7'd5,7'd6,7'd7:
                 begin
                     len_lock_timer <= 16'd1000;
                 end
-//                7'd10,7'd11:
-//                begin
-//                    len_lock_timer <= 16'd1000;
-//                end
                 default:
                 begin
                     len_lock_timer <= 16'd1000;
