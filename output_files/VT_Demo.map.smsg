@@ -1,2 +1,0 @@
-Info (10281): Verilog HDL Declaration information at tgen.v(26): object "grst" differs only in case from object "GRST" in the same scope
-Warning (10268): Verilog HDL information at lcd_display.v(222): always construct contains both blocking and non-blocking assignments

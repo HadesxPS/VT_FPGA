@@ -1,0 +1,245 @@
+m255
+K3
+13
+cModel Technology
+Z0 dD:\Mission\VT\2019-DOE\COG2.4-TE063XVXS01-00-pengshuai\TE063XVXS01-00-VT-COG 2.4\simulation\modelsim
+vclkrst
+Z1 !s100 9G`B5Cj^hKDJfeLc5PdW51
+Z2 IKcDEGHL2Y:>2]JQ7RS1S=2
+Z3 V@cWz1TS0mdV8n?Pl?cm[l2
+Z4 dD:\Mission\VT\2019-DOE\COG2.4-TE063XVXS01-00-pengshuai\TE063XVXS01-00-VT-COG 2.4\simulation\modelsim
+Z5 w1434521104
+Z6 8D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/clkrst/clkrst.v
+Z7 FD:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/clkrst/clkrst.v
+L0 18
+Z8 OV;L;10.1d;51
+r1
+31
+Z9 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/clkrst|D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/clkrst/clkrst.v|
+Z10 o-vlog01compat -work work -O0
+Z11 !s92 -vlog01compat -work work {+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/clkrst} -O0
+Z12 !s108 1545102186.375000
+Z13 !s107 D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/clkrst/clkrst.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vglf
+Z14 !s100 0W@TgYj0`Kld<YHeS<TB50
+Z15 IF:?<LPT4>I;4GZUC5jN?k1
+Z16 V?DO>VH:FML4P=Sh8DkaU12
+R4
+Z17 w1438167757
+Z18 8D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch/glf.v
+Z19 FD:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch/glf.v
+L0 18
+R8
+r1
+31
+Z20 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch|D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch/glf.v|
+R10
+Z21 !s92 -vlog01compat -work work {+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch} -O0
+Z22 !s108 1545102186.042000
+Z23 !s107 D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch/glf.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vlcd_display
+Z24 I_NlcKYS:VTnVGhlJD^a1E0
+Z25 VOV0]mJnUOZj^k_5h90?@[0
+R4
+Z26 w1543575140
+Z27 8D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/lcd_display/lcd_display.v
+Z28 FD:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/lcd_display/lcd_display.v
+L0 18
+R8
+r1
+31
+R10
+Z29 !s100 k7FV71ND1Q6g;H<jQlUeU2
+Z30 !s108 1545100870.608000
+Z31 !s107 D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/lcd_display/lcd_display.v|
+Z32 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/lcd_display|D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/lcd_display/lcd_display.v|
+Z33 !s92 -vlog01compat -work work {+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/lcd_display} -O0
+!i10b 1
+!s85 0
+!s101 -O0
+vmux_decode
+Z34 IC?YWU5eY7?eliLOl_5M;o0
+Z35 VD?cBFiKgW2Fb2ikgFnBB10
+R4
+Z36 w1407315044
+Z37 8D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/mux_decode/mux_decode.v
+Z38 FD:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/mux_decode/mux_decode.v
+L0 18
+R8
+r1
+31
+R10
+Z39 !s100 aYaf_iCYgZJPT`fXi^<R_3
+Z40 !s108 1545100871.126000
+Z41 !s107 D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/mux_decode/mux_decode.v|
+Z42 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/mux_decode|D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/mux_decode/mux_decode.v|
+Z43 !s92 -vlog01compat -work work {+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/mux_decode} -O0
+!i10b 1
+!s85 0
+!s101 -O0
+vmypll
+Z44 !s100 @LhO^6N4`f`oO:XT6KNdB0
+Z45 IbeP5j`m?EOgC>P=VDXHUG2
+Z46 VTScXFBn=@Vm=7oI3XDT<H2
+R4
+Z47 w1545047702
+Z48 8D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/megafunc/mypll.v
+Z49 FD:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/megafunc/mypll.v
+L0 39
+R8
+r1
+31
+Z50 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/megafunc|D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/megafunc/mypll.v|
+R10
+Z51 !s92 -vlog01compat -work work {+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/megafunc} -O0
+Z52 !s108 1545102187.433000
+Z53 !s107 D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/megafunc/mypll.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vmypll_altpll
+Z54 !s100 Cj?bb7lffeQzRaF7EE^dS3
+Z55 IoNoVQ4X<Oa?hoVLe7@9OX2
+Z56 Vkn6j]8P45jHm_F`b7@@cI0
+R4
+Z57 w1545047706
+Z58 8D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/db/mypll_altpll.v
+Z59 FD:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/db/mypll_altpll.v
+L0 29
+R8
+r1
+31
+Z60 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/db|D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/db/mypll_altpll.v|
+R10
+Z61 !s92 -vlog01compat -work work {+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/db} -O0
+Z62 !s108 1545102187.845000
+Z63 !s107 D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/db/mypll_altpll.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vswitch
+Z64 !s100 ^If^oWJ;Ig`K553Ied7NV1
+Z65 IMa6TKVjPViXJ_9Q@c24280
+Z66 VCQjZCXC74Pj8`T>j]^DQ:1
+R4
+Z67 w1545047632
+Z68 8D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch/switch.v
+Z69 FD:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch/switch.v
+L0 18
+R8
+r1
+31
+Z70 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch|D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch/switch.v|
+R10
+R21
+Z71 !s108 1545102185.507000
+Z72 !s107 D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch/switch.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vtimer
+Z73 I@9TKKfMGi201NjNk786<E1
+Z74 VRk;S=cE?C[3V?KC2YhJXA0
+R4
+Z75 w1447295069
+Z76 8D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch/timer.v
+Z77 FD:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch/timer.v
+L0 2
+R8
+r1
+31
+R10
+Z78 !s100 99eTKV21JkGRW@7HLjn2?3
+Z79 !s108 1545100871.456000
+Z80 !s107 D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch/timer.v|
+Z81 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch|D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/switch/timer.v|
+R21
+!i10b 1
+!s85 0
+!s101 -O0
+vtx_module
+Z82 I;VdablAg?FXl>FJSaGc`e2
+Z83 VKkY^TON<aaK5fBiP=o8hI1
+R4
+Z84 w1537440739
+Z85 8D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/uart/tx_module.v
+Z86 FD:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/uart/tx_module.v
+L0 1
+R8
+r1
+31
+R10
+Z87 !s92 -vlog01compat -work work {+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/uart} -O0
+Z88 !s100 1a2EIA2nBTHI<95Yni8K80
+Z89 !s108 1545100870.218000
+Z90 !s107 D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/uart/tx_module.v|
+Z91 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/uart|D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/uart/tx_module.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vuart
+Z92 IozSE5Imb[;;mEEQcGgh9;2
+Z93 V[k>GJ>;bhN^>;VeI5_LGm3
+R4
+Z94 w1470985898
+Z95 8D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/uart/uart.v
+Z96 FD:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/uart/uart.v
+L0 18
+R8
+r1
+31
+R10
+Z97 !s100 bbjm94[aK5lIk2H^m;d:l0
+Z98 !s108 1545100869.576000
+Z99 !s107 D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/uart/uart.v|
+Z100 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/uart|D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/uart/uart.v|
+R87
+!i10b 1
+!s85 0
+!s101 -O0
+vVT_Demo
+!i10b 1
+Z101 !s100 TMm_=GmI]hV@agUFkI`7N0
+Z102 I9J[IF<^UPC;:2=kbkfz>V1
+Z103 V<Pm[_HQe>O<WbMMjm^Aa01
+R4
+Z104 w1545100548
+Z105 8D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v
+Z106 FD:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v
+L0 23
+R8
+r1
+!s85 0
+31
+!s108 1545102192.105000
+!s107 D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v|
+Z107 !s90 -reportprogress|300|-work|work|D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v|
+!s101 -O0
+Z108 o-work work -O0
+Z109 n@v@t_@demo
+vVT_Demo_vlg_tst
+Z110 !s100 ^LRcL3dXU^PBWO3V4`i=T3
+Z111 I5hG99bFnP?B[7n>EEgW@Z2
+Z112 VAW_PC3gEk_;:WSog538O[2
+R4
+Z113 w1545098364
+Z114 8D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/VT_Demo.vt
+Z115 FD:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/VT_Demo.vt
+L0 28
+R8
+r1
+31
+Z116 !s90 -reportprogress|300|-work|work|D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/VT_Demo.vt|
+R108
+Z117 n@v@t_@demo_vlg_tst
+!i10b 1
+!s85 0
+Z118 !s108 1545102191.903000
+Z119 !s107 D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/VT_Demo.vt|
+!s101 -O0

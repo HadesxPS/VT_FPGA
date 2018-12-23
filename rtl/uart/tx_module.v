@@ -30,13 +30,13 @@ begin
 		if(tx_flag)//tx处于空闲状态
 			begin
 				//if(bps_cnt==582)//434	50M	( 115200/67M----bps_cnt=67,000,000/115200=582 )//波特率传输，更改PCLK需动这里
-				if(bps_cnt==1215)//434	50M	( 115200/67M----bps_cnt=67,000,000/115200=582 )//波特率传输，更改PCLK需动这里
+				if(bps_cnt==1432)//434	50M	( 115200/67M----bps_cnt=67,000,000/115200=582 )//波特率传输，更改PCLK需动这里
 						bps_cnt<=0;
 				else
 						bps_cnt<=bps_cnt+1'b1;
 			end
 		else	bps_cnt<=0;
-		if(bps_cnt==291)
+		if(bps_cnt==716)
 				bps_clk<=1;
 		else
 				bps_clk<=0;

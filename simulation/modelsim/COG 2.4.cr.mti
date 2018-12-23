@@ -1,0 +1,15 @@
+{D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/VT_Demo.vt} {1 {vlog -work work {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/simulation/modelsim/VT_Demo.vt}
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module VT_Demo_vlg_tst
+
+Top level modules:
+	VT_Demo_vlg_tst
+
+} {} {}} {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v} {1 {vlog -work work {D:/Mission/VT/2019-DOE/COG2.4-TE063XVXS01-00-pengshuai/TE063XVXS01-00-VT-COG 2.4/rtl/VT_Demo.v}
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module VT_Demo
+
+Top level modules:
+	VT_Demo
+
+} {} {}}
