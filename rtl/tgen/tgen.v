@@ -1179,8 +1179,8 @@ begin
         end
         else if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
         begin
-            if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT+100)) && 
-				(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_WIDTH+50)))
+            if ((hcnt >= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT)) && 
+				(hcnt <= (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT + CKH_WIDTH)))
             begin
                 ckh1 <= 1'b1;
             end
@@ -1409,292 +1409,6 @@ begin
     end
 end
 
-////-----------------------------------------------------------------------------
-//// D/A processing - source data generation
-////-----------------------------------------------------------------------------
-//always @(posedge clk or negedge rst_n)
-//begin
-//    if (rst_n == 1'b0)
-//    begin
-//        flag_frm_pol <= 1'b0;
-//    end
-//    else
-//    begin
-//        if ((cs_ctrl == VFP) && ((flag_hend == 1'b1) && (cnt_vblank == V_FP - 12'd1)))
-//        begin
-//            flag_frm_pol <= ~ flag_frm_pol;
-//        end
-//    end
-//end
-//
-//always @(posedge clk or negedge rst_n)
-//begin
-//    if (rst_n == 1'b0)
-//    begin
-//		  da1_wr <= 1'b1;
-//        da2_wr <= 1'b1;
-//		  da3_wr <= 1'b1;
-//		  da4_wr <= 1'b1;
-//    end
-//    else
-//    begin
-//		  da1_wr <= 1'b0;
-//        da2_wr <= 1'b0;
-//		  da3_wr <= 1'b0;
-//		  da4_wr <= 1'b0;
-//    end
-//end
-//
-//
-//always @(posedge clk or negedge rst_n)
-//begin
-//    if (rst_n == 1'b0)
-//    begin
-//		  da1_a <= 2'b00;//VCOMA
-//        da1_din <= DCODE_GND;
-//		  da1_a <= 2'b01;//VCOMB
-//        da1_din <= DCODE_GND;
-//		  da1_a <= 2'b10;//VCOMC
-//        da1_din <= DCODE_GND;
-//		  da2_a <= 2'b00;//DO
-//        da2_din <= DCODE_GND;
-//		  da3_a <= 2'b00;
-//        da3_din <= DCODE_GND;	  
-//		  da3_a <= 2'b01;//DE
-//        da3_din <= DCODE_GND;	  
-//    end
-//    else
-//    begin
-////***********************************new vcom(VCOMA-VCOMB-VCOMC) for 6.3 NMOS TED******************************//	  
-//        if ((cs_ctrl == PCH) || (cs_ctrl == DISPLAY))
-//        begin
-//            if (flag_frm_pol == 1'b0)  //odd frame
-//            begin
-//					if (hcnt == 1)
-//						 begin
-//							if((flag_TP_test_a == 1'b0)&&(flag_TP_test_b == 1'b0))
-//							begin
-//								da1_a <= 2'b00;//VCOMA
-//								da1_din <= DCODE_VCOM;
-//							end
-//							else if(flag_TP_test_a == 1'b1)
-//							begin
-//								da1_a <= 2'b00;//VCOMA
-//								da1_din <= DCODE_VCOM;
-//							end
-//							else if(flag_TP_test_b == 1'b1)
-//							begin
-//								da1_a <= 2'b00;//VCOMA
-//								da1_din <= DCODE_VCOM;
-//							end	
-//						 end 
-//					else if (hcnt == 5)
-//					 begin
-//						if((flag_TP_test_a == 1'b0)&&(flag_TP_test_b == 1'b0))
-//						begin
-//							da1_a <= 2'b01;
-//							da1_din <= DCODE_VCOM;
-//						 end
-//						 else if(flag_TP_test_a == 1'b1)
-//						 begin
-//							da1_a <= 2'b01;
-//							da1_din <= DCODE_VCOMB;
-//						 end
-//						else if(flag_TP_test_b == 1'b1)
-//						 begin
-//							da1_a <= 2'b01;
-//							da1_din <= DCODE_VCOMA;
-//						 end		 
-//					 end
-//					else if (hcnt == 10)
-//					 begin
-//						if((flag_TP_test_a == 1'b0)&&(flag_TP_test_b == 1'b0))
-//						begin
-//							da1_a <= 2'b10;
-//							da1_din <= DCODE_VCOM;
-//						 end
-//						 else if(flag_TP_test_a == 1'b1)
-//						 begin
-//							da1_a <= 2'b10;
-//							da1_din <= DCODE_VCOMA;
-//						 end
-//						else if(flag_TP_test_b == 1'b1)
-//						 begin
-//							da1_a <= 2'b10;
-//							da1_din <= DCODE_VCOMB;
-//						 end		 
-//					 end
-//					
-//                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT))//ckh1
-//                begin
-//                    da2_a <= 2'b00;
-//                    da2_din <= r_data;
-//                end
-//                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))//ckh1
-//                begin
-//						  da3_a <= 2'b00;
-//						  da3_din <= ~r_data[7:0] + 8'd1;
-//                end
-//
-//                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT - SRC_PCH_SHIFT))//ckh2
-//                begin
-//                    da2_a <= 2'b00;
-//                    da2_din <= g_data;
-//                end
-//                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))//ckh2
-//                begin
-//						  da3_a <= 2'b00;
-//						  da3_din <= ~g_data[7:0] + 8'd1;
-//                end
-//					 
-//                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))//ckh3
-//                begin
-//                    da2_a <= 2'b00;
-//                    da2_din <= b_data;
-//                end
-//                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))//ckh3
-//                begin
-//						  da3_a <= 2'b00;
-//						  da3_din <= ~b_data[7:0] + 8'd1;
-//                end
-//            end
-//				
-//            else  //even frame
-//            begin
-//					if (hcnt == 1)
-//						 begin
-//							if((flag_TP_test_a == 1'b0)&&(flag_TP_test_b == 1'b0))
-//							begin
-//								da1_a <= 2'b00;//VCOMA
-//								da1_din <= DCODE_VCOM;
-//							end
-//							else if(flag_TP_test_a == 1'b1)
-//							begin
-//								da1_a <= 2'b00;//VCOMA
-//								da1_din <= DCODE_VCOM;
-//							end
-//							else if(flag_TP_test_b == 1'b1)
-//							begin
-//								da1_a <= 2'b00;//VCOMA
-//								da1_din <= DCODE_VCOM;
-//							end	
-//						 end 
-//					else if (hcnt == 5)
-//					 begin
-//						if((flag_TP_test_a == 1'b0)&&(flag_TP_test_b == 1'b0))
-//						begin
-//							da1_a <= 2'b01;
-//							da1_din <= DCODE_VCOM;
-//						 end
-//						 else if(flag_TP_test_a == 1'b1)
-//						 begin
-//							da1_a <= 2'b01;
-//							da1_din <= ~DCODE_VCOMB[7:0]+8'd1;;
-//						 end
-//						else if(flag_TP_test_b == 1'b1)
-//						 begin
-//							da1_a <= 2'b01;
-//							da1_din <= ~DCODE_VCOMA[7:0]+8'd1;;
-//						 end		 
-//					 end
-//					else if (hcnt == 10)
-//					 begin
-//						if((flag_TP_test_a == 1'b0)&&(flag_TP_test_b == 1'b0))
-//						begin
-//							da1_a <= 2'b10;
-//							da1_din <= DCODE_VCOM;
-//						 end
-//						 else if(flag_TP_test_a == 1'b1)
-//						 begin
-//							da1_a <= 2'b10;
-//							da1_din <= ~DCODE_VCOMA[7:0]+8'd1;;
-//						 end
-//						else if(flag_TP_test_b == 1'b1)
-//						 begin
-//							da1_a <= 2'b10;
-//							da1_din <= ~DCODE_VCOMB[7:0]+8'd1;;
-//						 end		 
-//					 end
-////					else if (hcnt == 10)
-////					 begin
-////						if((flag_TP_test_a == 1'b0)&&(flag_TP_test_b == 1'b0))//normal pattern VCOM
-////						begin
-////							da3_a <= 2'b01;
-////							da3_din <= DCODE_VCOM;
-////						 end
-////						 else if(flag_TP_test_a == 1'b1)//TP_test_pattern VCOMA 
-////						 begin
-////							da3_a <= 2'b01;
-////							da3_din <= ~DCODE_VCOMA[7:0]+8'd1;//~VCOMA
-////						 end
-////						else if(flag_TP_test_b == 1'b1)//TP_test_pattern VCOMB 
-////						 begin
-////							da3_a <= 2'b01;
-////							da3_din <= ~DCODE_VCOMB[7:0]+8'd1;//~VCOMB
-////						 end		 
-////					 end 
-//				 
-//                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT))//ckh1
-//                begin
-//                    da2_a <= 2'b00;
-//                    da2_din <= ~r_data[7:0] + 8'd1;
-//                end
-//                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))//ckh1
-//                begin
-//						  da3_a <= 2'b00;
-//						  da3_din <= r_data;
-//                end
-//					  
-//                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT - SRC_PCH_SHIFT))//ckh2
-//                begin
-//                    da2_a <= 2'b00;
-//                    da2_din <= ~g_data[7:0] + 8'd1;
-//                end
-//                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 2 * CKH_RISE_SHIFT + CKH_WIDTH + CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))//ckh2
-//                begin
-//						  da3_a <= 2'b00;
-//						  da3_din <= g_data;
-//                end
-//
-//                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT))//ckh3
-//                begin
-//                    da2_a <= 2'b00;
-//                    da2_din <= ~b_data[7:0] + 8'd1;
-//                end
-//                else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + 3 * CKH_RISE_SHIFT + 2 * CKH_WIDTH + 2 * CKH_FALL_SHIFT - SRC_PCH_SHIFT + ODD_EVEN_TGAP))//ckh3
-//                begin
-//						  da3_a <= 2'b00;
-//						  da3_din <= b_data;
-//                end
-//            end
-//        end
-//		  
-//        else if (cs_ctrl == VFP)
-//        begin
-//            if (cnt_vblank == 12'd0)
-//            begin
-//                da1_a <= 2'b00;
-//                da1_din <= DCODE_GND;
-//                da2_a <= 2'b00;
-//                da2_din <= DCODE_GND;
-//            end
-//            else if (cnt_vblank == 12'd1)
-//            begin
-//                da1_a <= 2'b01;
-//                da1_din <= DCODE_GND;
-//                da3_a <= 2'b00;
-//                da3_din <= DCODE_GND;
-//            end
-//            else if (cnt_vblank == 12'd2)
-//            begin
-//                da1_a <= 2'b10;
-//                da1_din <= DCODE_GND;
-//            end		
-//        end
-//    end
-//end
-//endmodule
-
 //-----------------------------------------------------------------------------
 // D/A processing - source data generation
 //-----------------------------------------------------------------------------
@@ -1757,16 +1471,6 @@ begin
 								da2_a <= 2'b00;//VCOMA
 								da2_din <= DCODE_VCOM;
 							end
-//							else if(flag_TP_test_a == 1'b1)
-//							begin
-//								da1_a <= 2'b00;//VCOMA
-//								da1_din <= DCODE_VCOM;
-//							end
-//							else if(flag_TP_test_b == 1'b1)
-//							begin
-//								da1_a <= 2'b00;//VCOMA
-//								da1_din <= DCODE_VCOM;
-//							end	
 						 end 
 					else if (hcnt == 5)
 					 begin
@@ -1775,16 +1479,6 @@ begin
 							da2_a <= 2'b00;
 							da2_din <= DCODE_VCOM;
 						 end
-//						 else if(flag_TP_test_a == 1'b1)
-//						 begin
-//							da1_a <= 2'b01;
-//							da1_din <= DCODE_VCOMB;
-//						 end
-//						else if(flag_TP_test_b == 1'b1)
-//						 begin
-//							da1_a <= 2'b01;
-//							da1_din <= DCODE_VCOMA;
-//						 end		 
 					 end
 					else if (hcnt == 10)
 					 begin
@@ -1793,16 +1487,6 @@ begin
 							da2_a <= 2'b00;
 							da2_din <= DCODE_VCOM;
 						 end
-//						 else if(flag_TP_test_a == 1'b1)
-//						 begin
-//							da1_a <= 2'b10;
-//							da1_din <= DCODE_VCOMA;
-//						 end
-//						else if(flag_TP_test_b == 1'b1)
-//						 begin
-//							da1_a <= 2'b10;
-//							da1_din <= DCODE_VCOMB;
-//						 end		 
 					 end
 					
                 else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT))//ckh1
@@ -1848,16 +1532,6 @@ begin
 								da2_a <= 2'b00;//VCOMA
 								da2_din <= DCODE_VCOM;
 							end
-//							else if(flag_TP_test_a == 1'b1)
-//							begin
-//								da1_a <= 2'b00;//VCOMA
-//								da1_din <= DCODE_VCOM;
-//							end
-//							else if(flag_TP_test_b == 1'b1)
-//							begin
-//								da1_a <= 2'b00;//VCOMA
-//								da1_din <= DCODE_VCOM;
-//							end	
 						 end 
 					else if (hcnt == 5)
 					 begin
@@ -1866,16 +1540,6 @@ begin
 							da2_a <= 2'b00;
 							da2_din <= DCODE_VCOM;
 						 end
-//						 else if(flag_TP_test_a == 1'b1)
-//						 begin
-//							da1_a <= 2'b01;
-//							da1_din <= ~DCODE_VCOMB[7:0]+8'd1;;
-//						 end
-//						else if(flag_TP_test_b == 1'b1)
-//						 begin
-//							da1_a <= 2'b01;
-//							da1_din <= ~DCODE_VCOMA[7:0]+8'd1;;
-//						 end		 
 					 end
 					else if (hcnt == 10)
 					 begin
@@ -1884,36 +1548,7 @@ begin
 							da2_a <= 2'b00;
 							da2_din <= DCODE_VCOM;
 						 end
-//						 else if(flag_TP_test_a == 1'b1)
-//						 begin
-//							da1_a <= 2'b10;
-//							da1_din <= ~DCODE_VCOMA[7:0]+8'd1;;
-//						 end
-//						else if(flag_TP_test_b == 1'b1)
-//						 begin
-//							da1_a <= 2'b10;
-//							da1_din <= ~DCODE_VCOMB[7:0]+8'd1;;
-//						 end		 
 					 end
-//					else if (hcnt == 10)
-//					 begin
-//						if((flag_TP_test_a == 1'b0)&&(flag_TP_test_b == 1'b0))//normal pattern VCOM
-//						begin
-//							da3_a <= 2'b01;
-//							da3_din <= DCODE_VCOM;
-//						 end
-//						 else if(flag_TP_test_a == 1'b1)//TP_test_pattern VCOMA 
-//						 begin
-//							da3_a <= 2'b01;
-//							da3_din <= ~DCODE_VCOMA[7:0]+8'd1;//~VCOMA
-//						 end
-//						else if(flag_TP_test_b == 1'b1)//TP_test_pattern VCOMB 
-//						 begin
-//							da3_a <= 2'b01;
-//							da3_din <= ~DCODE_VCOMB[7:0]+8'd1;//~VCOMB
-//						 end		 
-//					 end 
-				 
                 else if (hcnt == (CKV_RISE_SHIFT + CKH_PRE_GAP + CKH_RISE_SHIFT - SRC_PCH_SHIFT))//ckh1
                 begin
                     da1_a <= 2'b00;
